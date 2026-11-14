@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Trial and Judgment — SIP421</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 19, title: 'The Trial and Judgment', minutes: 10, language: 'en' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'The Trial and Judgment', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'SIP421 · Chapter 19', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'The Trial and Judgment', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    const rows = [["The primary onus never shifts", "onus"], ["Pillay v Krishna: who bears the onus", "pillay"], ["The evidentiary burden does shift", "evidentiary"], ["Three stages of examining a witness", "three"], ["Absolution: two stages, two tests", "absolution"], ["Variation and rescission: HCR 42, s 36", "variation"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 210 + i * 104, o: 0 });
+      mk('circle', { cx: 200, cy: -10, r: 24, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: 0, size: 28, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 258, size: 30, weight: 500 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-onus', prompt: ["The primary onus of proof..."],
+    build: choice(["Shifts between the parties as the trial progresses", "Is fixed at the start of the trial and never shifts", "Always rests on the plaintiff"], 1, "Correct: the primary onus is fixed by substantive law and does not shift; only the evidentiary burden shifts.", [null, "It is the evidentiary burden that shifts, not the primary onus.", "It usually rests on the plaintiff but not always."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    const rows = [["To sum up.", "w1"], ["The primary onus never shifts; only the evidentiary burden does.", "w2"], ["Absolution: prima facie at the end of the plaintiff's case, balance of probabilities at the end of the whole case.", "w3"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-absolution', prompt: ["Absolution from the instance at the close of the plaintiff's case requires a balance of probabilities. True or false?"],
+    build: choice(["True", "False"], 1, "Correct: at that stage the test is a prima facie case; the balance of probabilities applies at the close of the whole case.", [null, "Incorrect: the prima facie test applies at the close of the plaintiff's case."]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

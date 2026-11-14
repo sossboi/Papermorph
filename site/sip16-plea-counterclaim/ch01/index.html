@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Plea, Counterclaim and Close of Pleadings — SIP421</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 16, title: 'The Plea, Counterclaim and Close of Pleadings', minutes: 10, language: 'en' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'The Plea, Counterclaim and Close of Pleadings', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'SIP421 · Chapter 16', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'The Plea, Counterclaim and Close of Pleadings', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    const rows = [["A-D-N-C: admit, deny, not admit, confess", "adnc"], ["A denial must not be evasive", "deny"], ["Special pleas: declinatory or dilatory", "special"], ["Counterclaim = claim in reconvention", "counterclaim"], ["Replication: admit, qualify, nullify", "aqn"], ["Litis contestatio: close of pleadings", "litis"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 210 + i * 104, o: 0 });
+      mk('circle', { cx: 200, cy: -10, r: 24, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: 0, size: 28, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 258, size: 30, weight: 500 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-nonadmission', prompt: ["A defendant who has no knowledge of an allegation should plead..."],
+    build: choice(["A denial", "A non-admission", "An admission"], 1, "Correct: non-admission is the plea where the defendant has no knowledge of the allegation.", [null, "A denial places the allegation in issue; it is not the no-knowledge plea.", "An admission would make the fact deemed proved."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    const rows = [["To sum up.", "w1"], ["A-D-N-C: admit, deny, not admit, confess and avoid.", "w2"], ["Special pleas: declinatory destroys, dilatory delays.", "w3"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-confess', prompt: ["Confession and avoidance means the defendant denies the plaintiff's facts. True or false?"],
+    build: choice(["True", "False"], 1, "Correct: the defendant admits the substantial facts but raises new facts to avoid their consequences.", [null, "Incorrect: the facts are conceded, not denied."]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

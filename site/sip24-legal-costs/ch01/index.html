@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Legal Costs — SIP421</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 24, title: 'Legal Costs', minutes: 10, language: 'en' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Legal Costs', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'SIP421 · Chapter 24', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Legal Costs', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    const rows = [["Costs follow the event", "follow"], ["Three scales of costs", "scales"], ["A bill must meet five requirements", "five"], ["Twenty days to oppose", "oppose"], ["Allocatur: the bill becomes an order", "allocatur"], ["Contingency fee cap", "contingency"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 210 + i * 104, o: 0 });
+      mk('circle', { cx: 200, cy: -10, r: 24, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: 0, size: 28, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 258, size: 30, weight: 500 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-follow', prompt: ["Costs follow the event unless..."],
+    build: choice(["The losing party cannot pay", "There is good reason to depart from the rule", "The claim was for a small amount"], 1, "Correct: the default rule is costs follow the event, subject to good reason to depart.", [null, "Ability to pay is not the test.", "The size of the claim does not displace the rule."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    const rows = [["To sum up.", "w1"], ["Costs follow the event, judged by substance.", "w2"], ["Three scales: party-and-party, attorney-and-client, attorney-and-own-client.", "w3"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-scales', prompt: ["Attorney-and-own-client costs are lower than party-and-party costs. True or false?"],
+    build: choice(["True", "False"], 1, "Correct: attorney-and-own-client is the highest scale; party-and-party is the lowest.", [null, "Incorrect: the order is party-and-party, then attorney-and-client, then attorney-and-own-client."]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
