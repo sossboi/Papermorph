@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 20: a summons with a liquid claim, the debt quantified.
+    reset(P('M250 60h180v92H250z') + P('M270 84h140', 'a') + P('M270 106h140', 'a') +
+      P('M270 128h60v14h-60z') +
+      `<text class="t" style="--k:${k++}" x="330" y="140" font-size="26" text-anchor="start">R</text>` +
+      Tx(250, 40, 'provisional sentence summons', 22, 'a') +
+      Tx(400, 176, 'liquid document', 20, '', 'middle')),
   ];
 })();

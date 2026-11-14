@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 16: the plea and the counterclaim, two pleadings crossing.
+    reset(P('M250 70h130v56H250z') + P('M420 104h130v56H420z', 'a') +
+      P('M380 98h40', '') + P('M420 130h-40', 'a') +
+      `<circle class="t hop" r="6" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M315 98H485')"/>` +
+      Tx(250, 40, 'plea \u00b7 counterclaim \u00b7 close of pleadings', 22, 'a') +
+      Tx(400, 176, 'the pleadings close', 20, '', 'middle')),
   ];
 })();

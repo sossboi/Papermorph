@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="lib/contents.css">
 <script src="lib/units.js"></script>
 <script src="lib/contents.js"></script>
+<script src="unit-art.js"></script>
 <link rel="expect" href="#ch01" blocking="render">
 </head>
 <body>
@@ -43,11 +44,11 @@
 
 <script>
 Contents.book({
-  start: { unit: 1, chapter: 1 },
+  start: { unit: 20, chapter: 1 },
   units: [
     ['Chapter 20', [
       ['Provisional Sentence Summons', 10],
-    ]],
+    ], { unit: 20 }],
   ],
   hues: ['#f4a48c', '#86c9e8', '#f3c95c', '#e8a0c8', '#8fd6b0', '#bba8ee', '#f0b45a'],
 });

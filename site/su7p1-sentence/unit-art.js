@@ -15,9 +15,12 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // Study Unit 7 Part 1: the Zinn triad, three weights the court must hold at once.
+    reset(C(400, 96, 22, 'a') +
+      `<g class="t swap-a" style="--k:${k++}"><circle cx="316" cy="96" r="14" fill="currentColor" stroke="none"/></g>` +
+      `<g class="t swap-b" style="--k:${k++}"><circle cx="484" cy="96" r="14" fill="currentColor" stroke="none"/></g>` +
+      P('M316 96h168', 'a') + P('M400 74v-30', 'a') +
+      Tx(250, 40, 'crime \u00b7 offender \u00b7 society', 22, 'a') +
+      Tx(400, 176, 'S v Zinn', 22, '', 'middle')),
   ];
 })();

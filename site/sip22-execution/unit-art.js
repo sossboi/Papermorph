@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 22: execution, the sheriff's writ turning a judgment into property.
+    reset(P('M250 60h170v92H250z') + P('M270 84h130', 'a') + P('M270 106h130', 'a') +
+      P('M420 150l60 -18', '') + P('M480 132l-60 18', 'a') +
+      `<circle class="t" style="--k:${k++}" cx="290" cy="128" r="12" fill="currentColor" stroke="none" opacity=".55"/>` +
+      Tx(250, 40, 'writ of execution', 22, 'a') +
+      Tx(400, 176, 'judgment enforced', 20, '', 'middle')),
   ];
 })();

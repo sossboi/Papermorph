@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // Study Unit 5 Part 1: a scale settling on guilty, with the s 112 routes beneath.
+    reset(P('M400 44v96') + P('M316 66h168', 'a') + P('M400 140l-40 22h80z', 'a') +
+      P('M316 66l-26 44h52z') + P('M484 66l-26 44h52z') +
+      `<circle class="t hop" r="7" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M340 110Q400 60 460 110')"/>` +
+      Tx(250, 34, 'guilty plea: s 112', 22, 'a') +
+      Tx(400, 176, 'questioned by the court', 20, '', 'middle')),
   ];
 })();

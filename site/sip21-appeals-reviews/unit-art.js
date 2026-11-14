@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 21: appeal and review, two routes upward from the decision.
+    reset(P('M250 150h300', 'a') + P('M290 150V96h110v54') + P('M400 96V44h110v106', 'a') +
+      P('M290 96l55 -30', '') + P('M345 66l-55 30', 'a') +
+      `<circle class="t hop" r="7" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M290 150V96h110V44h110')"/>` +
+      Tx(250, 34, 'appeal \u00b7 review', 22, 'a') +
+      Tx(400, 176, 'from the lower court upward', 20, '', 'middle')),
   ];
 })();

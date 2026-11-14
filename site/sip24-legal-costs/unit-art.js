@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 24: costs following the result, scales of fees measured out.
+    reset(P('M400 44v96') + P('M316 66h168', 'a') + P('M400 140l-40 22h80z', 'a') +
+      P('M316 66l-26 44h52z') + P('M484 66l-26 44h52z') +
+      `<g class="t tilt" style="--k:${k++}"><path d="M316 66l-26 44h52z"/></g>` +
+      Tx(250, 34, 'costs follow the result', 22, 'a') +
+      Tx(400, 176, 'party-and-party \u00b7 attorney-and-client', 20, '', 'middle')),
   ];
 })();

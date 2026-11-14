@@ -15,9 +15,12 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // SIP421 ch 14: a pleading with a defect, struck through and cured.
+    reset(P('M250 60h180v92H250z') + P('M270 84h140', 'a') + P('M270 106h140', 'a') + P('M270 128h90', 'a') +
+      P('M250 60l180 92', 'a') +
+      `<path class="t cut" style="--k:${k++}" d="M250 60l180 92"/>` +
+      P('M470 96h60', '') + P('M500 66v60', 'a') +
+      Tx(250, 40, 'exception \u00b7 strike out \u00b7 irregular step', 22, 'a') +
+      Tx(400, 176, 'HCR 23 \u00b7 HCR 30 \u00b7 MCR 60A', 20, '', 'middle')),
   ];
 })();

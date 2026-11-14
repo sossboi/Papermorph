@@ -15,9 +15,12 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // Study Unit 5 Part 2: two doors, the not-guilty plea opening the trial door.
+    reset(P('M268 60h74v92h-74z') + P('M388 60h74v92h-74z', 'a') +
+      `<circle class="t" style="--k:${k++}" cx="330" cy="106" r="4" fill="currentColor" stroke="none"/>` +
+      `<circle class="t" style="--k:${k++}" cx="450" cy="106" r="4" fill="currentColor" stroke="none" opacity=".5"/>` +
+      P('M342 60l30 -22', 'a') + P('M372 38l-30 22', 'a') +
+      Tx(250, 30, 'not guilty: s 106(1)(b)', 22, 'a') +
+      Tx(400, 176, 'the trial begins', 20, '', 'middle')),
   ];
 })();

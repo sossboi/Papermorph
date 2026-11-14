@@ -15,9 +15,11 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    // 1 An example: a number line with a dot hopping along it.
-    reset(P('M228 130H572') + Array.from({ length: 7 }, (_, i) => P(`M${250 + i * 50} 122v16`, 'a')).join('') +
-      `<circle class="t hop" r="8" fill="currentColor" stroke="none" style="--k:${k++};offset-path:path('M250 116Q275 84 300 116Q325 84 350 116Q375 84 400 116')"/>` +
-      Tx(250, 60, 'a sketch of this unit', 26) + C(530, 70, 24, 'a')),
+    // Study Unit 7 Part 2: the sentence served, then supervised, then released.
+    reset(P('M250 140H550') + P('M250 140V70h70v70') + P('M320 140V96h110v44', 'a') + P('M430 140V118h120v22', 'a') +
+      `<circle class="t feed-in" style="--k:${k++}" cx="285" cy="105" r="10" fill="currentColor" stroke="none"/>` +
+      `<circle class="t feed-out" style="--k:${k++}" cx="485" cy="129" r="8" fill="currentColor" stroke="none"/>` +
+      Tx(250, 40, 'imprisonment \u2192 correctional supervision \u2192 parole', 22, 'a') +
+      Tx(400, 176, 's 276 \u00b7 s 276A', 20, '', 'middle')),
   ];
 })();
