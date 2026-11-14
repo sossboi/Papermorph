@@ -1,0 +1,19 @@
+services:
+
+  papermorph:
+    image: spr421-papermorph:latest
+    container_name: papermorph
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.spr421.rule=Host(`learn.hxhq.org.za`)"
+      - "traefik.http.routers.papermorph.entrypoints=websecure"
+      - "traefik.http.routers.papermorph.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.papermorph.middlewares=papermorph-auth"
+      - "traefik.http.middlewares.papermorph-auth.basicauth.users=admin:$$2y$$05$$rgXqoBTKa.bIluYW.ftiz.JsWqFNl.HMCDL3NuUK0wCB89kRV9B86"
+
+networks:
+  proxy:
+    external: true
