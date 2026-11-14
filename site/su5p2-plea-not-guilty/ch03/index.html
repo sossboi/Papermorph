@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questioning to Clarify: s 115(2)(a) — Study Unit 5 Part 2</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: 'Questioning to Clarify: s 115(2)(a)', minutes: 8, language: 'en', next: '../ch04/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Questioning to Clarify: s 115(2)(a)', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 5 Part 2', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Questioning to Clarify: s 115(2)(a)', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 's 115(2)(a): court may question', 800, 180, m('allow'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Only where it is unclear what is disputed', 800, 260, m('only'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Not about facts relied on to substantiate a denial', 800, 320, m('not'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'That would be cross-examination', 800, 380, m('cross'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Accused must be informed of right to silence', 800, 440, m('silent'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-s1152a', prompt: ['Under s 115(2)(a), the court may question only where...'],
+    build: choice(['It is unclear what is disputed', 'The accused denies the charge', 'The State requests it'], 0, 'Correct: questioning is permitted only where it is unclear what is disputed.', [null, 'A denial does not by itself permit questioning.', 'The State cannot trigger questioning.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 35(3): fair trial right', 'w1'],
+      ['Right to be informed of charge', 'w2'],
+      ['Sufficient detail to answer', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-s1152a', prompt: ['The court may question the accused about the facts relied on to substantiate a denial. True or false?'],
+    build: choice(['True', 'False'], 1, 'Correct: that would cross into cross-examination.', ['Incorrect: questioning about the facts of a denial is not permitted.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

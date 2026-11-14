@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plea Options: s 106 — Study Unit 5 Part 2</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: 'Plea Options: s 106', minutes: 8, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Plea Options: s 106', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 5 Part 2', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Plea Options: s 106', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 's 106(1): nine pleas', 800, 180, m('list'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Guilty, not guilty', 800, 260, m('notguilty'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Autrefois convict, autrefois acquit', 800, 320, m('autrefois'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Free pardon, no jurisdiction', 800, 380, m('jur'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Discharge under s 204', 800, 440, m('dis'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'No title to prosecute', 800, 500, m('title'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Prosecution may not be resumed', 800, 560, m('resume'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Not-guilty may be combined; guilty may not', 800, 620, m('combine'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-pleas', prompt: ['Which plea may be combined with a not-guilty plea?'],
+    build: choice(['A plea of autrefois acquit', 'A plea of guilty', 'No plea may be combined'], 0, 'Correct: a not-guilty plea may be combined with certain other pleas.', [null, 'A guilty plea may never be combined.', 'Certain pleas may be combined with not-guilty.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 35(3): fair trial right', 'w1'],
+      ['Right to be informed of charge', 'w2'],
+      ['Sufficient detail to answer', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-pleas', prompt: ['Section 106(1) lists nine pleas available to an accused. True or false?'],
+    build: choice(['True', 'False'], 0, 'Correct: s 106(1) lists nine pleas.', [null, 'Incorrect: the section lists nine pleas.']),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

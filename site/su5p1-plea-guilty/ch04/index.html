@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Committal for Sentence: s 114 — Study Unit 5 Part 1</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: 'Committal for Sentence: s 114', minutes: 8, language: 'en', next: '../ch05/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Committal for Sentence: s 114', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 5 Part 1', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Committal for Sentence: s 114', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 's 114: commit to regional court for sentence', 800, 180, m('commit'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Trigger 1: offence too serious', 800, 260, m('serious'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Trigger 2: previous convictions merit more than 3 years', 800, 320, m('previous'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Trigger 3: dangerous criminal (s 286A)', 800, 380, m('dangerous'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Regional court may not refer back', 800, 440, m('regional'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-s114', prompt: ['Under s 114, a district court may commit to a regional court when...'],
+    build: choice(['The offence is too serious for its jurisdiction', 'The accused pleads not guilty', 'The trial has already begun'], 0, 'Correct: s 114 triggers include the offence being too serious.', [null, 'A not-guilty plea does not trigger s 114.', 'Committal happens before trial, not after it begins.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 35(3): fair trial right', 'w1'],
+      ['Right to be informed of charge', 'w2'],
+      ['Sufficient detail to answer', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-s114', prompt: ['The regional court may refer the matter back to the district court for sentence. True or false?'],
+    build: choice(['True', 'False'], 1, 'Correct: the regional court may not refer the matter back.', ['Incorrect: s 114 does not allow referral back.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

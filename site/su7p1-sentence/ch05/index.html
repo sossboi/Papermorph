@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charge Sheet Reference to s 51 — Study Unit 7 Part 1</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 5, title: 'Charge Sheet Reference to s 51', minutes: 8, language: 'en', next: '../ch06/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Charge Sheet Reference to s 51', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 7 Part 1', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Charge Sheet Reference to s 51', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 'Charge sheet must reference correct s 51 subsection', 800, 180, m('reference'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Wrong subsection caps the court', 800, 260, m('wrong'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Ndlovu 2017 CC: conviction as charged is decisive', 800, 320, m('ndlovu'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Raath: ambiguous reference not automatically fatal', 800, 380, m('raath'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Outcome turns on actual prejudice', 800, 440, m('prejudice'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Court has duty to suggest amendment (s 86)', 800, 500, m('duty'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-ndlovu', prompt: ['Where the charge sheet cites the wrong s 51 subsection...'],
+    build: choice(['The court is capped at that jurisdiction', 'The court may ignore the reference', 'The conviction is automatically set aside'], 0, 'Correct: Ndlovu holds the court is capped at the jurisdiction cited.', [null, 'The reference is jurisdictionally decisive.', 'The outcome depends on prejudice, not automatic setting aside.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 35(3): fair trial right', 'w1'],
+      ['Right to be informed of charge', 'w2'],
+      ['Sufficient detail to answer', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-raath', prompt: ['An ambiguous s 51 reference is automatically fatal to the conviction. True or false?'],
+    build: choice(['True', 'False'], 1, 'Correct: Raath holds ambiguity is not automatically fatal; prejudice decides.', ['Incorrect: Raath confirms this approach.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

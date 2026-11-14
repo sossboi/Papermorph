@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multiple Accused and Co-Accused Issues — Study Unit 5 Part 2</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 5, title: 'Multiple Accused and Co-Accused Issues', minutes: 10, language: 'en', next: '../ch06/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Multiple Accused and Co-Accused Issues', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 5 Part 2', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Multiple Accused and Co-Accused Issues', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 'Question each accused separately', 800, 180, m('separate'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Alternating is irregular (Daniels)', 800, 260, m('alternate'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Plea explanation never used against co-accused', 800, 320, m('coaccused'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Unless repeated under oath', 800, 380, m('oath'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 's 219: no confession against another person', 800, 440, m('section219'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Whole statement considered (Valachia, Cloete)', 800, 500, m('whole'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-coaccused', prompt: ['A plea explanation may be used against a co-accused...'],
+    build: choice(['Never', 'Always', 'Only if it is under oath'], 0, 'Correct: a plea explanation can never be used against a co-accused.', [null, 'It is never admissible against a co-accused.', 'Only if repeated under oath, which is not use of the explanation itself.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 35(3): fair trial right', 'w1'],
+      ['Right to be informed of charge', 'w2'],
+      ['Sufficient detail to answer', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-s219', prompt: ['Section 219 makes a confession admissible against another person. True or false?'],
+    build: choice(['True', 'False'], 1, 'Correct: no confession is admissible against another person.', ['Incorrect: s 219 bars admissibility against another person.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

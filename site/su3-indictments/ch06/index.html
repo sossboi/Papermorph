@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minimum Sentences and the Charge Sheet — Study Unit 3</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 6, title: 'Minimum Sentences and the Charge Sheet', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Minimum Sentences and the Charge Sheet', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'Study Unit 3', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Minimum Sentences and the Charge Sheet', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+    ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    text(p, 's 51(1): LIFE imprisonment', 800, 180, m('life'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
+    text(p, 'Premeditated murder, murder of child/witness, gang rape', 800, 260, m('aggravated'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 's 51(2): 15 years minimum', 800, 320, m('fifteen'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Other rape and murder', 800, 380, m('other'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+    text(p, 'Charge sheet reference is JURISDICTIONALLY DECISIVE', 800, 440, m('jurisdiction'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-s51', prompt: ['Where the charge sheet cites s 51(2) but the facts support s 51(1), the court...'],
+    build: choice(['Is capped at the s 51(2) jurisdiction', 'May impose life imprisonment', 'Must amend the charge'], 0, 'Correct: Ndlovu 2017 CC holds the court is capped at what was charged.', [null, 'The court cannot exceed its jurisdiction as charged.', 'Amendment must happen before judgment.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    [
+      ['s 51(1): life for aggravated murder/rape', 'w1'],
+      ['s 51(2): 15 years for other murder/rape', 'w2'],
+      ['Wrong subsection caps the court (Ndlovu)', 'w3']
+    ].forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 300 + i * 120, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-s51', prompt: ['An ambiguous s 51 reference in the charge sheet is automatically fatal to the conviction. True or false?'],
+    build: choice(['True', 'False'], 1, 'Correct: Raath holds ambiguity is not automatically fatal; prejudice decides.', ['Incorrect: Raath confirms this approach.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
