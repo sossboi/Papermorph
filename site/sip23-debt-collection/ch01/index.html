@@ -45,7 +45,7 @@ const BEATS = [
   }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
-    const rows = [["To sum up.", "w1"], ["s 65: 10 days unpaid, then a registered letter and 10 more days.", "w2"], ["EAO: two stages, 25% cap, 10 days to oppose.", "w3"], ["Administration: debtor starts, under R50 000, 12.5% cap.", "w4"]];
+    const rows = [["To sum up.", "w1"], ["s 65: 10 days unpaid, then a registered letter and 10 more days.", "w2"], ["EAO: two stages, 25% cap, 10 days to oppose.", "w3"], ["Administration: debtor starts, under R50 000, 12.5% cap.", "end"]];
     rows.forEach(([str, mark], i) => {
       const g = G(p, { x: -16, y: 260 + i * 110, o: 0 });
       mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
