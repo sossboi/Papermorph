@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debt Collection and Administrations — SIP421</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 23, title: 'Debt Collection and Administrations', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Debt Collection and Administrations', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'SIP421 · Chapter 23', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Debt Collection and Administrations', { x: 800, y: 430, size: 60, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    const rows = [["s 55A: just and equitable", "just"], ["s 65A(1) notice: 10 + 10 days", "notice"], ["EAO: two stages, 25% cap", "eao"], ["Administration: debtor starts it", "admin"], ["Coetzee: no jail for a debt", "coetzee"], ["NCA debt review overrides", "nca"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 210 + i * 104, o: 0 });
+      mk('circle', { cx: 200, cy: -10, r: 24, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: 0, size: 28, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 258, size: 30, weight: 500 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-eao', prompt: ["An emoluments attachment order may take at most..."],
+    build: choice(["10% of the debtor's net salary", "25% of the debtor's basic salary", "50% of the debtor's gross salary"], 1, "Correct: an EAO is capped at 25% of the debtor's basic salary, and all EAOs combined may not exceed that.", [null, "The cap is 25% of basic salary, not 10% of net salary.", "The cap is 25% of basic salary, not 50% of gross salary."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    const rows = [["To sum up.", "w1"], ["s 65: 10 days unpaid, then a registered letter and 10 more days.", "w2"], ["EAO: two stages, 25% cap, 10 days to oppose.", "w3"], ["Administration: debtor starts, under R50 000, 12.5% cap.", "w4"]];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 260 + i * 110, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-admin', prompt: ["An administration order is started by the creditor, like a section 65 enquiry. True or false?"],
+    build: choice(["True", "False"], 1, "Correct: an administration order is applied for by the debtor under s 74; the section 65 enquiry is started by the creditor or the court.", [null, "Incorrect: the debtor starts administration; the creditor or court starts the s 65 enquiry."]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

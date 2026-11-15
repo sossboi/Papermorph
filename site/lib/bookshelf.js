@@ -41,6 +41,8 @@
       chapterBase: 'sip21-appeals-reviews/', chapters: 1 },
     { id: 'sip22-execution', key: 'animebook:progress:' + new URL('sip22-execution/', location.href).pathname,
       chapterBase: 'sip22-execution/', chapters: 1 },
+    { id: 'sip23-debt-collection', key: 'animebook:progress:' + new URL('sip23-debt-collection/', location.href).pathname,
+      chapterBase: 'sip23-debt-collection/', chapters: 1 },
     { id: 'sip24-legal-costs', key: 'animebook:progress:' + new URL('sip24-legal-costs/', location.href).pathname,
       chapterBase: 'sip24-legal-costs/', chapters: 1 },
   ];
