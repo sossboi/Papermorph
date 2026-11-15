@@ -33,6 +33,8 @@
       chapterBase: 'sip16-plea-counterclaim/', chapters: 1 },
     { id: 'sip17-amendment-pleadings', key: 'animebook:progress:' + new URL('sip17-amendment-pleadings/', location.href).pathname,
       chapterBase: 'sip17-amendment-pleadings/', chapters: 1 },
+    { id: 'sip18-preparation-trial', key: 'animebook:progress:' + new URL('sip18-preparation-trial/', location.href).pathname,
+      chapterBase: 'sip18-preparation-trial/', chapters: 1 },
     { id: 'sip19-trial-judgment', key: 'animebook:progress:' + new URL('sip19-trial-judgment/', location.href).pathname,
       chapterBase: 'sip19-trial-judgment/', chapters: 1 },
     { id: 'sip20-provisional-sentence', key: 'animebook:progress:' + new URL('sip20-provisional-sentence/', location.href).pathname,

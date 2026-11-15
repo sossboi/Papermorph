@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preparation for Trial — SIP421</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 18, title: 'Preparation for Trial', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
+const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', 'Preparation for Trial', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'SIP421 · Chapter 18', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Preparation for Trial', { x: 800, y: 430, size: 68, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Key idea', (m) => {
+    const p = panel(0);
+    const rows = [
+      ["Close of pleadings triggers it", "close"],
+      ["Discovery: 20 days, then 5 + 5", "disc"],
+      ["Experts: notice 30/60, summary 90/120", "expert"],
+      ["Pre-trial conference: HC compulsory", "conf"],
+      ["Case management: HCR 37A / MCR 25", "mgmt"],
+      ["Particulars: facts, not evidence", "facts"],
+    ];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 210 + i * 104, o: 0 });
+      mk('circle', { cx: 200, cy: -10, r: 24, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: 0, size: 28, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 258, size: 30, weight: 500 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-disc', prompt: ["Discovery of documents is compulsory in which court?"],
+    build: choice(["High Court only", "Magistrates' Court only", "Both courts equally"], 0, "Correct: HCR 37(1) compels discovery in the High Court once a trial date is noticed; the Magistrates' Court has no equivalent rule, so discovery there is voluntary unless requested.", [null, "Incorrect: the Magistrates' Court has no compulsory-discovery rule.", "Incorrect: only the High Court compels it."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    const rows = [
+      ["To sum up.", "w1"],
+      ["Close of pleadings triggers the preparation stage.", "w2"],
+      ["Discovery: 20 days, then 5 + 5 for inspection; compulsory in the HC only.", "w3"],
+      ["Pre-trial minutes are filed 25 days before trial.", "w4"],
+    ];
+    rows.forEach(([str, mark], i) => {
+      const g = G(p, { x: -16, y: 260 + i * 110, o: 0 });
+      mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+      T(g, String(i + 1), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+      T(g, str, { x: 260, size: 32, weight: 600 });
+      tw(g, { o: 1, x: 0 }, m(mark), .6);
+    });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-priv', prompt: ["A privileged document must still appear on the discovery list. True or false?"],
+    build: choice(["True", "False"], 0, "Correct: privileged documents are listed in Part Two of the First Schedule — only handing them over for inspection is excused, so the opponent can challenge the privilege claim.", [null, "Incorrect: privilege excuses production, not listing."]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
