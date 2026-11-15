@@ -50,6 +50,10 @@ const BEATS = [
     id: 'c-disc', prompt: ["Discovery of documents is compulsory in which court?"],
     build: choice(["High Court only", "Magistrates' Court only", "Both courts equally"], 0, "Correct: HCR 37(1) compels discovery in the High Court once a trial date is noticed; the Magistrates' Court has no equivalent rule, so discovery there is voluntary unless requested.", [null, "Incorrect: the Magistrates' Court has no compulsory-discovery rule.", "Incorrect: only the High Court compels it."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-particulars', prompt: ["Further particulars for trial are concerned with…"],
+    build: choice(["Facts, not evidence", "The evidence the opponent intends to lead", "The quantification of general damages"], 0, "Correct: further particulars are about facts, not evidence (Thompson v Barclays Bank DCO), and general damages can never be particularised.", ["Incorrect: demanding the opponent's evidence is not the purpose of particulars.", "Incorrect: general damages can never be particularised."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [

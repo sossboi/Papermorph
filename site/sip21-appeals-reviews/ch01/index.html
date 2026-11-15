@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-mcappeal', prompt: ["An appeal from a Magistrates' Court..."],
     build: choice(["Requires leave to appeal", "Lies as of right, without leave", "Is heard by the Constitutional Court"], 1, "Correct: an appeal from a Magistrates' Court lies as of right; no leave is required.", [null, "Leave is required for High Court appeals, not Magistrates' Court appeals.", "It is heard by the High Court, not the Constitutional Court."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-review', prompt: ["A review ground must be…"],
+    build: choice(["A gross irregularity that caused prejudice", "Any error of law or fact by the court", "A dissatisfaction with the court's exercise of discretion"], 0, "Correct: review lies for a gross irregularity, and it must have caused prejudice; an appeal, not a review, lies for a wrong answer.", ["Incorrect: a wrong answer is the object of appeal, not review.", "Incorrect: a discretionary decision is reviewed only on narrow grounds, and mere dissatisfaction is not one."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["Appeal is a wrong answer; review is a wrong route.", "w2"], ["MC appeals lie as of right: 10, 15, 20 court days, then 40 and 60.", "w3"]];

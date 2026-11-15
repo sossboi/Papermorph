@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-onus', prompt: ["The primary onus of proof..."],
     build: choice(["Shifts between the parties as the trial progresses", "Is fixed at the start of the trial and never shifts", "Always rests on the plaintiff"], 1, "Correct: the primary onus is fixed by substantive law and does not shift; only the evidentiary burden shifts.", [null, "It is the evidentiary burden that shifts, not the primary onus.", "It usually rests on the plaintiff but not always."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-absolution', prompt: ["Absolution from the instance at the close of the plaintiff's case is granted where…"],
+    build: choice(["No reasonable court could find for the plaintiff on the evidence led", "The plaintiff has not proved the claim on a balance of probabilities", "The defendant has closed its case first"], 0, "Correct: at the end of the plaintiff's case the test is whether a reasonable court could find for the plaintiff (Myburgh v Kelly); the balance of probabilities applies only at the end of the whole case.", ["Incorrect: the balance of probabilities is the stage-two test at the end of the whole case (Miller v Minister of Pensions).", "Incorrect: absolution is applied for at the close of the plaintiff's case, before the defendant leads evidence."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["The primary onus never shifts; only the evidentiary burden does.", "w2"], ["Absolution: prima facie at the end of the plaintiff's case, balance of probabilities at the end of the whole case.", "w3"]];

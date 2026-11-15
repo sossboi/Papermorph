@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-follow', prompt: ["Costs follow the event unless..."],
     build: choice(["The losing party cannot pay", "There is good reason to depart from the rule", "The claim was for a small amount"], 1, "Correct: the default rule is costs follow the event, subject to good reason to depart.", [null, "Ability to pay is not the test.", "The size of the claim does not displace the rule."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-scales', prompt: ["The three scales of costs, from lowest to highest, are…"],
+    build: choice(["Party-and-party, attorney-and-client, attorney-and-own-client", "Attorney-and-client, party-and-party, attorney-and-own-client", "Attorney-and-own-client, attorney-and-client, party-and-party"], 0, "Correct: party-and-party is the lowest scale, attorney-and-client is higher, and attorney-and-own-client is the highest.", ["Incorrect: party-and-party is the lowest of the three scales.", "Incorrect: attorney-and-own-client is the highest scale, not the lowest."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["Costs follow the event, judged by substance.", "w2"], ["Three scales: party-and-party, attorney-and-client, attorney-and-own-client.", "w3"]];

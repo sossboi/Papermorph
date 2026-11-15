@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-withoutprejudice', prompt: ["A without-prejudice offer may be disclosed to the court..."],
     build: choice(["At any time before judgment", "Only after judgment, and only on the question of costs", "Never, under any circumstances"], 1, "Correct: a without-prejudice offer is kept from the court until after judgment, then raised only on costs.", [null, "It may not be disclosed before judgment.", "It may be raised after judgment on costs."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-rule34', prompt: ["A formal offer of compromise under HCR 34 or MCR 18 differs from a common-law offer in that…"],
+    build: choice(["It is made in terms of the rules and carries a costs consequence", "It cannot be accepted after judgment", "It must be made before the summons is issued"], 0, "Correct: a rule-based offer is served under HCR 34 or MCR 18 and its consequence falls on costs; a common-law offer rests on the common law of compromise.", ["Incorrect: a rule-based offer may be accepted within the time it allows, and its effect is felt on costs after judgment.", "Incorrect: rule-based offers are made during litigation, not only before summons."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["Two tracks: common-law offers and HCR 34 or MCR 18 tenders.", "w2"], ["Without prejudice means hidden until after judgment, and only for costs.", "w3"]];

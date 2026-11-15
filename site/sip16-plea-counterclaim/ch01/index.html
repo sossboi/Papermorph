@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-nonadmission', prompt: ["A defendant who has no knowledge of an allegation should plead..."],
     build: choice(["A denial", "A non-admission", "An admission"], 1, "Correct: non-admission is the plea where the defendant has no knowledge of the allegation.", [null, "A denial places the allegation in issue; it is not the no-knowledge plea.", "An admission would make the fact deemed proved."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-special', prompt: ["A special plea differs from a denial in that it…"],
+    build: choice(["Attacks the claim's right to be heard rather than the facts alleged", "Admits the facts but disputes their legal effect", "May only be raised after the close of pleadings"], 0, "Correct: a special plea attacks the claim's right to be heard — declinatory pleas destroy the claim, dilatory pleas merely delay it.", ["Incorrect: that describes confession and avoidance, which concedes the facts and raises new ones.", "Incorrect: a special plea is raised before pleading to the merits, not after the close of pleadings."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["A-D-N-C: admit, deny, not admit, confess and avoid.", "w2"], ["Special pleas: declinatory destroys, dilatory delays.", "w3"]];

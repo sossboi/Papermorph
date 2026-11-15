@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-writ', prompt: ["A money judgment is enforced by..."],
     build: choice(["Committal to jail", "A writ or warrant of execution", "A garnishee order only"], 1, "Correct: a money judgment is enforced by a writ or warrant of execution, leading to attachment and sale.", [null, "Committal applies to ad factum praestandum judgments.", "A garnishee order is a side road, not the primary route."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-garnishee', prompt: ["A garnishee order attaches…"],
+    build: choice(["A debt owed to the debtor by a third party", "The debtor's movable property in the hands of the sheriff", "The debtor's primary residence"], 0, "Correct: a garnishee order attaches a debt owed to the debtor by a third party — it reaches the debt, not the property itself.", ["Incorrect: that is attachment of property under a writ of execution.", "Incorrect: a primary residence needs a court order under HCR 46A or MCR 43A."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["W-A-S: valid writ, attachment, sale. Movables first.", "w2"], ["A primary residence needs a court order under HCR 46A or MCR 43A.", "w3"]];

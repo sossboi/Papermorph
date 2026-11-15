@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-moolman', prompt: ["The Moolman formula provides that amendments will always be allowed unless..."],
     build: choice(["The party delays too long", "Mala fide, or the injustice cannot be compensated by costs", "The opposing party objects"], 1, "Correct: the two grounds are mala fides and prejudice that costs cannot cure.", [null, "Delay alone is never decisive.", "An objection triggers the court's discretion but is not itself a ground of refusal."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-affidavit', prompt: ["Affidavits are never amended; a mistake in a sworn affidavit is corrected by…"],
+    build: choice(["A further supplementary affidavit", "A notice of amendment under HCR 28", "A formal amendment with the court's leave"], 0, "Correct: an affidavit cannot be amended — the correction is made by a further supplementary affidavit (Commercial Union v Waymark).", ["Incorrect: HCR 28 governs pleadings, not affidavits.", "Incorrect: leave to amend under HCR 28 does not reach a sworn affidavit."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["B.P.C.: bona fide, prejudice, curable by costs or postponement.", "w2"], ["Affidavits are never amended, only supplemented.", "w3"]];

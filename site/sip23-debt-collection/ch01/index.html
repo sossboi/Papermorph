@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-eao', prompt: ["An emoluments attachment order may take at most..."],
     build: choice(["10% of the debtor's net salary", "25% of the debtor's basic salary", "50% of the debtor's gross salary"], 1, "Correct: an EAO is capped at 25% of the debtor's basic salary, and all EAOs combined may not exceed that.", [null, "The cap is 25% of basic salary, not 10% of net salary.", "The cap is 25% of basic salary, not 50% of gross salary."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-admin', prompt: ["An administration order is distinguished from a section 65 enquiry by the fact that…"],
+    build: choice(["It is started by the debtor, not the creditor or the court", "It can be made against a creditor who disputes the debt", "It requires the debtor to be employed"], 0, "Correct: the section 65 enquiry is started by the creditor or the court, while an administration order is started by the debtor.", ["Incorrect: an administration order is a debtor's remedy and does not depend on a disputed debt.", "Incorrect: an administration order requires debts under R50 000 and a statement of affairs, not employment."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["s 65: 10 days unpaid, then a registered letter and 10 more days.", "w2"], ["EAO: two stages, 25% cap, 10 days to oppose.", "w3"], ["Administration: debtor starts, under R50 000, 12.5% cap.", "end"]];

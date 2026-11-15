@@ -43,6 +43,10 @@ const BEATS = [
     id: 'c-exception', prompt: ["An exception may be taken to..."],
     build: choice(["A pleading, but not an affidavit", "An affidavit, but not a pleading", "Both a pleading and an affidavit"], 0, "Correct: an exception lies only to a pleading; an affidavit cannot be excepted to.", [null, "An affidavit cannot be excepted to; strike out is the remedy for an affidavit.", "An exception does not lie to an affidavit."]),
   }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-strikeout', prompt: ["Under Beinash v Wixley, strike out requires that the matter be scandalous, vexatious or irrelevant, and that…"],
+    build: choice(["The opponent would be prejudiced by it", "The pleading discloses no cause of action", "The defect goes to jurisdiction"], 0, "Correct: Beinash v Wixley requires two things — the matter is scandalous, vexatious or irrelevant, and the opponent would be prejudiced.", ["Incorrect: a pleading that discloses no cause of action is met by an exception, not strike out.", "Incorrect: a jurisdictional defect makes the process void, which is a different remedy altogether."]),
+  }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
     const rows = [["To sum up.", "w1"], ["Exception attacks the whole pleading; strike out attacks part.", "w2"], ["Irregular step: HCR 30 or MCR 60A, lost by a further step with knowledge.", "w3"]];
