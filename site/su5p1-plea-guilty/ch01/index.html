@@ -18,29 +18,44 @@ const CHAPTER = { number: 1, title: 'The Three Routes: s 112', minutes: 8, langu
 const mline = (p, parts, x, y, t0, fill = COL.chalk, size = 48, anchor = 'middle') => { const e = M(p, [].concat(parts), { x, y, size, fill, anchor, o: 0 }); show(e, t0); return e; };
 const text = (p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
 
+/* The courtroom: a photograph of a real courtroom (Osgoode Hall, CC-BY-4.0) laid over the board, darkened so the
+   chalk words read over it. Drawn in a backdrop() so it sits behind the text and comes up with the beat that names it.
+   The picture is a plate: it covers the whole stage, so nothing else is drawn behind the words. */
+const courtroom = (g, { wall = COL.faint, wood = COL.task, dim = COL.dim } = {}) => {
+  mk('rect', { x: 0, y: 0, width: 1600, height: 900, fill: COL.board }, g);          // the board, so the plate has a ground
+  const im = mk('image', { href: '../img/courtroom.jpg', x: 0, y: 0, width: 1600, height: 900 }, g);
+  im.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  mk('rect', { x: 0, y: 0, width: 1600, height: 900, fill: COL.board, opacity: .28 }, g);   // a scrim: the words keep their contrast
+  return g;
+};
+
 /* ---------- beats ---------- */
 const BEATS = [
   ['intro', 'The Three Routes: s 112', (m, D) => {
+    const bg = backdrop(0, courtroom);
     const g = G(scene, { o: 0, y: 24 });
     T(g, 'Study Unit 5 Part 1', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
     T(g, 'The Three Routes: s 112', { x: 800, y: 430, size: 72, weight: 600, anchor: 'middle' });
     tw(g, { o: 1, y: 0 }, .2, 1.1, out);
-    const r = text(scene, 'One line that says what this chapter is for.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    const r = text(scene, 'A guilty plea admits the charge and moves to sentence.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
     tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+    hide(bg, D - .9, .8);   // the courtroom goes with the title, so the key idea starts on a clean board
   }],
     ['idea', 'Key idea', (m) => {
     const p = panel(0);
+    backdrop(0, courtroom);   // the courtroom stays for the whole chapter: it is where the routes are decided
     text(p, 's 112: three routes to conviction', 800, 180, m('routes'), { size: 40, fill: COL.task, anchor: 'middle', weight: 700 });
     text(p, 's 112(1)(a): minor offence, no questions', 800, 260, m('minor'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
     text(p, 's 112(1)(b): serious offence, compulsory questioning', 800, 320, m('serious'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
     text(p, 's 112(2): written statement, discretionary questioning', 800, 380, m('written'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
   }],
-  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+  ['q1', 'Quick check', () => { panel(0); backdrop(0, courtroom); }, { ask: done => quiz(BAND, [{
     id: 'c-s112', prompt: ['Under s 112(1)(b), questioning of the accused is...'],
     build: choice(['Compulsory', 'Discretionary', 'Not permitted'], 0, 'Correct: s 112(1)(b) covers serious offences and questioning is compulsory.', [null, 'Discretionary questioning applies to s 112(2) written statements.', 'Questioning is required for serious offences.']),
   }], done) }],
   ['wrap', 'Summary', (m) => {
     const p = panel(0);
+    backdrop(0, courtroom);
     [
       ['s 35(3): fair trial right', 'w1'],
       ['Right to be informed of charge', 'w2'],
