@@ -1,7 +1,7 @@
 services:
 
   papermorph:
-    image: spr421-papermorph:latest
+    image: papermorph:latest
     container_name: papermorph
     restart: unless-stopped
     networks:

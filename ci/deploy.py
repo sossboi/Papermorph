@@ -24,7 +24,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IMAGE = "spr421-papermorph:latest"
+IMAGE = "papermorph:latest"
 REGISTRY_IMAGE = "registry:2"
 REGISTRY_NAME = "registry"
 REGISTRY_IP = os.environ["REGISTRY_IP"]
