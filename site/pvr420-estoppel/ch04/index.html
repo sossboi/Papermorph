@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Causation — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: 'Causation', minutes: 11, language: 'en', next: 5 };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+const BEATS = [
+  ['intro', 'Causation', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One · Chapter 4', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Causation', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'Did the representation cause the loss?', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The link', (m) => {
+    const p = panel(0);
+    head(p, 'Causation links representation to prejudice', 150, .2);
+    row(m, p, 1, 'The representation must have induced the reliance', 'link', 250);
+    row(m, p, 2, 'The reliance must have produced the prejudice', 'nofault', 350);
+  }],
+  ['levels', 'Two levels', (m) => {
+    const p = panel(0);
+    head(p, 'Causation on two levels', 150, .2);
+    row(m, p, 1, 'Factual nexus: a but-for link between the misrepresentation and the prejudice', 'factual', 250);
+    row(m, p, 2, 'Legal causation: was the representation a sufficiently direct and operative cause?', 'legal', 350);
+  }],
+  ['legal', 'Proximate and exclusive', (m) => {
+    const p = panel(0);
+    head(p, 'Legal causation: proximate and exclusive cause', 150, .2);
+    row(m, p, 1, 'Was the misrepresentation the proximate cause, rather than a distant factor?', 'proximate', 250);
+    row(m, p, 2, 'Must it be the sole cause, or is a contributing cause enough?', 'exclusive', 350);
+    text(m, p, 'The exclusive-cause question leaves the material open.', 800, 520, m('open'), { size: 28, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['cases', 'No prescribed case', (m) => {
+    const p = panel(0);
+    head(p, 'No case was prescribed for this chapter', 150, .2);
+    row(m, p, 1, 'The causal link is tested on the facts in the Fault chapter', 'fault', 250);
+    row(m, p, 2, 'And in the Prejudice chapter, where the same link decides the loss', 'prej', 350);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-caus-link', prompt: ['The first level of causation in estoppel is…'],
+    build: choice(['The objective leg of the two-pronged test', 'The factual nexus between misrepresentation and prejudice', 'The duty to mitigate', 'The subjective leg of the two-pronged test'], 1,
+      'Correct: the first level is the factual nexus, a but-for link between the misrepresentation and the prejudice.',
+      ['Incorrect: the objective leg belongs to misrepresentation, not causation.', 'Incorrect: mitigation is a prejudice-time duty.', 'Incorrect: the subjective leg is also a misrepresentation-time question.']),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-caus-legal', prompt: ['Legal causation asks whether the misrepresentation was…'],
+    build: choice(['The proximate cause, and possibly the sole cause', 'A mere contributor to the loss', 'The duty to mitigate', 'The subjective leg of the test'], 0,
+      'Correct: legal causation asks whether the misrepresentation was the proximate cause, and whether it must be the sole cause.',
+      [null, 'Incorrect: a mere contributor may not be sufficient where the law requires more than a contributing cause.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'Causation links the misrepresentation to the prejudice', 'w1', 240);
+    row(m, p, 2, 'First the factual nexus, then legal causation', 'w2', 340);
+    row(m, p, 3, 'Legal causation asks about proximate cause and exclusive cause', 'w3', 440);
+    row(m, p, 4, 'The exclusive-cause question stays open in our material', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-link', prompt: ['For estoppel, the misrepresentation and the prejudice must be linked by…'],
+    build: choice(['A but-for factual nexus, then legal causation', 'A contract, then a consideration', 'A duty to mitigate', 'A subjective belief only'], 0,
+      'Correct: the representation must have induced reliance and the reliance must have produced the prejudice.',
+      ['Incorrect: causation is the first element, not the last.', 'Incorrect: contract is not the link.', 'Incorrect: mitigation belongs to prejudice time.']),
+  }, {
+    id: 'p-prox', prompt: ['Legal causation asks whether the misrepresentation was…'],
+    build: choice(['The proximate cause, and possibly the sole cause', 'A mere contributor to the loss', 'The duty to mitigate', 'The subjective leg of the test'], 0,
+      'Correct: legal causation asks whether the misrepresentation was the proximate cause, and whether it must be the sole cause.',
+      [null, 'Incorrect: a mere contributor may not be sufficient.']),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

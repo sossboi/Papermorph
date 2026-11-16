@@ -1,0 +1,26 @@
+/* This book's own settings, imported by engine.css; the engine files next to it are shared and replaced on update.
+   Overrides come before the engine's rules, so their selectors must be more specific (e.g. ':root .card.band'). */
+:root {
+  --math-font: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;   /* one face for words, numbers and formulas */
+}
+
+/* Science chalkboard skin: dark green board, cream chalk, gold task, blue quiz, green good, red bad. */
+:root {
+  --page: #0f1613; --board: #1d2b27; --panel: #22322d; --edge: #3a5047;
+  --chalk: #ece8dc; --dim: #9aaba3; --faint: #5d7068;
+  --task: #f0b45a; --quiz: #86c9e8; --good: #8fd6b0; --bad: #f08c7a;
+  --ui: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --vignette: rgba(0, 0, 0, .35);
+  color-scheme: dark;
+  --rule: #2e433b;
+  --track: #2f4640; --track-ask: #2d4a57;
+  --bar-edge: #2a3b35; --hover: #2b3f36;
+  --veil: #0a100e;
+}
+
+/* Band card: prompt and buttons on top, answers below at full width, feedback last. A prompt beside the answers
+   lost the width race to long choices or answer rows (it was squeezed to a word per line, worst in Firefox). */
+:root .card.band { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "pic head acts" "pic body body" "pic fb fb"; row-gap: 12px; }
+:root .band .head { align-self: auto; }
+:root .band .fb { align-self: auto; margin-top: 0; }
+:root .band .body { min-width: 0; }

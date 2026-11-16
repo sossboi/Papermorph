@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fault — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 5, title: 'Fault', minutes: 11, language: 'en', next: 6 };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+const BEATS = [
+  ['intro', 'Fault', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One · Chapter 5', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Fault', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'Blameworthiness, in the form of intent or negligence.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Fault means blameworthiness', (m) => {
+    const p = panel(0);
+    head(p, 'Intent or negligence', 150, .2);
+    row(m, p, 1, 'Intent, or dolus: the representor deliberately made the misrepresentation', 'dolus', 250);
+    row(m, p, 2, 'Negligence, or culpa: the representor was careless, or allowed it to arise', 'culpa', 350);
+  }],
+  ['test', 'The negligence test', (m) => {
+    const p = panel(0);
+    head(p, 'Negligence: foresee it, then fix it', 150, .2);
+    row(m, p, 1, 'First: was prejudice foreseeable? Should the representor have foreseen the misrepresentation?', 'fore', 250);
+    row(m, p, 2, 'Second: did the representor take reasonable steps to guard against it?', 'steps', 350);
+    text(m, p, 'Fail either step and culpa is established.', 800, 520, m('hack'), { size: 28, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['proximate', 'The fault must be proximate', (m) => {
+    const p = panel(0);
+    head(p, 'The fault must be the proximate cause', 150, .2);
+    row(m, p, 1, 'Union Government v National Bank: negligence alone is not enough', 'union', 250);
+    row(m, p, 2, 'Grosvenor Motors v Douglas: the middleman fraud, not the owner note, was the real cause', 'grosvenor', 350);
+  }],
+  ['dolus', 'Is intent required?', (m) => {
+    const p = panel(0);
+    head(p, 'Dolus is not required', 150, .2);
+    row(m, p, 1, 'Sonday v Surrey Estate confirms a negligent misrepresentation can suffice', 'no', 250);
+    row(m, p, 2, 'But whether culpa is a general requirement is debated by the scholars', 'debated', 350);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-fault-steps', prompt: ['The negligence test for estoppel has two steps. What are they?'],
+    build: choice(['Foresee prejudice, then take steps to fix it', 'Prove intent, then prove reliance', 'Prove detriment, then prove fault', 'Prove causation, then prove duty'], 0,
+      'Correct: the negligence test runs foresee-then-fix. Both steps must be satisfied.',
+      [null, 'Incorrect: the negligence test runs foresee then fix, not intent then reliance.', 'Incorrect: detriment is a prejudice requirement.', 'Incorrect: causation and duty are separate elements.']),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-fault-dolus', prompt: ['Is dolus, intent, a requirement for estoppel?'],
+    build: choice(['Yes, intent is always required', 'No, negligence can suffice', 'No, only intention to deceive counts as fault', 'No, fault must be on the representee'], 1,
+      'Correct: no. Sonday v Surrey Estate confirms a negligent misrepresentation can ground estoppel.',
+      ['Incorrect: intent is not required; negligence can suffice.', 'Incorrect: negligence is the form of culpa here, and culpa can suffice.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'Fault is blameworthiness, dolus or culpa', 'w1', 240);
+    row(m, p, 2, 'Negligence: foresee the prejudice, then take reasonable steps', 'w2', 340);
+    row(m, p, 3, 'The fault must be the proximate cause of the prejudice', 'w3', 440);
+    row(m, p, 4, 'Dolus is not required, but whether culpa is a general requirement is debated', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-negligence', prompt: ['The negligence test for estoppel has two steps. What are they?'],
+    build: choice(['Foresee the prejudice, then take reasonable steps to fix it', 'Prove intent, then prove reliance', 'Prove detriment, then prove fault', 'Prove causation, then prove duty'], 0,
+      'Correct: the negligence test runs foresee then fix.',
+      [null, 'Incorrect: the negligence test runs foresee then fix.', null, null]),
+  }, {
+    id: 'p-proximate', prompt: ['According to Union Government v National Bank, negligence must be…'],
+    build: choice(['The proximate cause of the prejudice', 'A mere contributor to the loss', 'The subjective leg of the test', 'The duty to mitigate'], 0,
+      'Correct: negligence alone is not enough; it must be the proximate cause of the loss.',
+      [null, 'Incorrect: a mere contributor may not be sufficient.', null, null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

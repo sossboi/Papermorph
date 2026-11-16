@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estoppel: Introduction and General Principles — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: 'Estoppel: Introduction and General Principles', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+// Every helper takes the beat's mark function m as its first argument: m is a parameter of the beat's run(m, D),
+// not a global, so a helper that reaches a word's time must be given it.
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+// A numbered row that fades in as the voice reaches its mark.
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+// A centred heading line for a panel.
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats: [id, title, run(m, D), { ask }?] ---------- */
+const BEATS = [
+  ['intro', 'Estoppel: Introduction and General Principles', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Estoppel: Introduction and General Principles', { x: 800, y: 430, size: 60, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'Estoppel by representation: a shield, not a sword.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The elements', (m) => {
+    const p = panel(0);
+    head(p, 'One doctrine, four elements', 150, .2);
+    row(m, p, 1, 'A representation, made by words or conduct to another', 'rep', 230);
+    row(m, p, 2, 'The representee believed it true', 'belief', 320);
+    row(m, p, 3, 'The representee acted on it', 'reliance', 410);
+    row(m, p, 4, 'Prejudice if the representor resiles', 'prej', 500);
+    row(m, p, 5, 'Fault on the representor\u2019s part', 'fault', 590);
+    row(m, p, 6, 'Causation: the representation caused the prejudice', 'caus', 680);
+    text(m, p, 'The onus rests on the representee to prove every element.', 800, 780, m('onus'), { size: 28, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['nature', 'The legal nature of estoppel', (m) => {
+    const p = panel(0);
+    head(p, 'Substantive law, not a rule of evidence', 150, .2);
+    row(m, p, 1, 'A defence only \u2014 it cannot found a cause of action', 'shield', 250);
+    row(m, p, 2, 'It must be specifically pleaded and proved', 'plead', 350);
+    row(m, p, 3, 'It overlaps with waiver, but the two stay separate', 'waiver', 450);
+    row(m, p, 4, 'A court may refuse it where allowing it would be unjust', 'discretion', 550);
+  }],
+  ['roots', 'Historical origins', (m) => {
+    const p = panel(0);
+    head(p, 'Three Latin roots, one idea', 150, .2);
+    row(m, p, 1, 'Obstringitur \u2014 you cannot undo your own act', 'obstringitur', 250);
+    row(m, p, 2, 'Exceptio doli mali \u2014 no profit from your own bad faith', 'doli', 350);
+    row(m, p, 3, 'Nemo contra suum factum \u2014 no going back on your deed', 'nemo', 450);
+    row(m, p, 4, 'Spencer Bower\u2019s definition was received into our law', 'spencer', 550);
+    row(m, p, 5, 'English law is persuasive only, never a source', 'trustbank', 650);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-elements', prompt: ['Which of the following is NOT an element of estoppel by representation?'],
+    build: choice(['A representation made by the representor', 'Belief by the representee that it is true', 'A written contract between the parties', 'Prejudice if the representor resiles'], 2,
+      'Correct: estoppel needs no contract. Representation, belief, reliance and prejudice are the elements; a contract is irrelevant.',
+      [null, null, 'Incorrect: a contract is not an element of estoppel \u2014 the doctrine protects reliance, not agreement.', null]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-shield', prompt: ['Estoppel is best described as\u2026'],
+    build: choice(['A cause of action that creates a new right', 'A rule of evidence that limits what may be proved', 'A substantive defence that precludes denying a representation', 'A remedy that transfers ownership of property'], 2,
+      'Correct: estoppel is a rule of substantive law and a defence only \u2014 it stops a party denying their own representation.',
+      ['Incorrect: estoppel cannot found a cause of action; it is a shield, not a sword.', 'Incorrect: that is the English classification; in South Africa estoppel is substantive law.', 'Incorrect: estoppel does not transfer ownership \u2014 it can at most limit a right.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'Estoppel by representation is the only form our law recognises', 'w1', 240);
+    row(m, p, 2, 'Four elements: representation, belief, reliance, prejudice \u2014 plus fault and causation', 'w2', 340);
+    row(m, p, 3, 'Substantive law, a shield not a sword, and it must be pleaded', 'w3', 440);
+    row(m, p, 4, 'Roman-Dutch roots; English authority is persuasive only', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-substantive', prompt: ['In South African law, estoppel by representation is\u2026'],
+    build: choice(['A rule of evidence', 'A rule of substantive law', 'A cause of action', 'A remedy in the law of contract'], 1,
+      'Correct: estoppel is substantive law. It operates as a defence and can in effect create enforceable rights, but it is not a rule of evidence.',
+      ['Incorrect: that is the English classification; Trust Bank v Eksteen and Johaadien v Stanley Porter place our law on a substantive footing.', null, 'Incorrect: estoppel is not a contractual remedy; it is a general defence.']),
+  }, {
+    id: 'p-english', prompt: ['What is the status of English authority on estoppel in South Africa?'],
+    build: choice(['Binding, because the doctrine was received from English law', 'Persuasive only \u2014 not a recognised source of our law', 'Irrelevant, because our law is purely Roman-Dutch', 'Binding only in the Constitutional Court'], 1,
+      'Correct: Trust Bank v Eksteen and Johaadien v Stanley Porter hold English law persuasive only; our courts may consult it but are not obliged to follow it.',
+      ['Incorrect: the doctrine was received, but English decisions are not binding in our law.', null, 'Incorrect: the doctrine is fully naturalised, yet English authority remains persuasive.']),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

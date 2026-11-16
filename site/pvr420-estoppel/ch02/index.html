@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Misrepresentation — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: 'Misrepresentation', minutes: 12, language: 'en', next: 3 };
+
+/* ---------- chapter drawing helpers ---------- */
+// Every helper takes the beat's mark function m as its first argument.
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+const BEATS = [
+  ['intro', 'Misrepresentation', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One · Chapter 2', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Misrepresentation', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'The threshold element of estoppel.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The threshold element', (m) => {
+    const p = panel(0);
+    head(p, 'No misrepresentation, no estoppel', 150, .2);
+    row(m, p, 1, 'I-C-A: identify, classify, apply', 'ica', 250);
+    row(m, p, 2, 'Words must be precise and unambiguous', 'words', 350);
+    row(m, p, 3, 'Conduct: would a reasonable representor have foreseen it could mislead?', 'conduct', 450);
+    row(m, p, 4, 'Silence needs a legal duty to speak', 'silence', 550);
+  }],
+  ['class', 'Three categories', (m) => {
+    const p = panel(0);
+    head(p, 'Three ways to make a representation', 150, .2);
+    row(m, p, 1, 'Commission by words: a positive statement of fact', 'w1', 250);
+    row(m, p, 2, 'Commission by conduct: positive acts creating a false impression', 'w2', 350);
+    row(m, p, 3, 'Omission by silence: where a legal duty to speak exists', 'w3', 450);
+    text(m, p, 'Classify before you test: the classification decides which threshold applies.', 800, 590, m('trap'), { size: 28, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['tests', 'The two-pronged test', (m) => {
+    const p = panel(0);
+    head(p, 'The two-pronged test ends every category', 150, .2);
+    row(m, p, 1, 'Objective leg: would a reasonable person have been misled?', 'obj', 250);
+    row(m, p, 2, 'Subjective leg: was this representee actually misled?', 'subj', 350);
+    row(m, p, 3, 'Both legs must be satisfied', 'both', 450);
+    text(m, p, 'Pretorius v Loudon gives the objective leg; Blackie Swart gives the subjective leg.', 800, 590, m('cases'), { size: 27, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['fact', 'Fact, not intention or law', (m) => {
+    const p = panel(0);
+    head(p, 'The representation must be one of fact', 150, .2);
+    row(m, p, 1, 'A statement of future intention generally fails', 'notint', 250);
+    row(m, p, 2, 'A present state of mind counts as present fact', 'state', 350);
+    row(m, p, 3, 'A representation of law alone usually fails; mixed fact and law can succeed', 'law', 450);
+    row(m, p, 4, 'It must be made to the representee, or a class including them', 'to', 550);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-conduct-test', prompt: ['Which test applies to a representation made by conduct?'],
+    build: choice(['The words test: it must be precise and unambiguous', 'A foreseeability threshold, then the two-pronged test', 'A duty to speak, then the two-pronged test', 'Only the subjective leg of the two-pronged test'], 1,
+      'Correct: Concor Holdings v Potgieter sets a foreseeability threshold for conduct, then the ordinary objective and subjective test. Precise and unambiguous belongs to words.',
+      [null, null, 'Incorrect: precise and unambiguous is the threshold for representations by words, not conduct.', null]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-subj', prompt: ['The subjective leg of the two-pronged test asks…'],
+    build: choice(['Whether a reasonable person would have been misled', 'Whether the representor intended to deceive', 'Whether this representee was actually misled', 'Whether the representation was made in writing'], 2,
+      'Correct: the subjective leg asks whether this representee was actually misled (Blackie Swart Architects v Van Heerden). The objective leg asks what a reasonable person would have understood.',
+      ['Incorrect: that is the objective leg, not the subjective one.', 'Incorrect: intention is a fault question, not the subjective leg of misrepresentation.', 'Incorrect: the form of the representation does not decide the subjective leg.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'No misrepresentation, no estoppel', 'w1', 240);
+    row(m, p, 2, 'I-C-A: identify, classify, apply', 'w2', 340);
+    row(m, p, 3, 'Words need precision; conduct needs foreseeability; silence needs a duty to speak', 'w3', 440);
+    row(m, p, 4, 'All three end in the objective and subjective legs, and both must be satisfied', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-ica', prompt: ['A problem question raises estoppel. What is the correct first step on misrepresentation?'],
+    build: choice(['Apply the two-pronged objective and subjective test at once', 'Classify the communication as words, conduct or silence', 'Decide whether the representor acted with dolus', 'Check whether the representation was made in writing'], 1,
+      'Correct: I-C-A comes first. Identify the conduct, then classify it, because the classification decides which threshold applies before the two-pronged test is reached.',
+      [null, null, 'Incorrect: the two-pronged test comes after classification, not before.', 'Incorrect: dolus is a fault question, reached only after misrepresentation is established.']),
+  }, {
+    id: 'p-silence', prompt: ['Silence can ground a misrepresentation only where…'],
+    build: choice(['The representor intended to deceive', 'The representee was actually misled', 'The representor was under a legal duty to speak', 'The representation was made in writing'], 2,
+      'Correct: there is no general duty to speak. Silence grounds a misrepresentation only where a legal duty to speak arose.',
+      [null, null, 'Incorrect: intention is not the threshold for silence; the duty to speak is.', null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

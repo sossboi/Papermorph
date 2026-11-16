@@ -47,6 +47,8 @@
       chapterBase: 'sip23-debt-collection/', chapters: 1 },
     { id: 'sip24-legal-costs', key: 'animebook:progress:' + new URL('sip24-legal-costs/', location.href).pathname,
       chapterBase: 'sip24-legal-costs/', chapters: 1 },
+    { id: 'pvr420-estoppel', key: 'animebook:progress:' + new URL('pvr420-estoppel/', location.href).pathname,
+      chapterBase: 'pvr420-estoppel/', chapters: 1 },
   ];
   for (const book of books) {
     const cover = document.querySelector(`[data-book="${book.id}"]`);

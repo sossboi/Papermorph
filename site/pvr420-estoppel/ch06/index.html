@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maintainability and Consequences — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 6, title: 'Maintainability and Consequences', minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+const BEATS = [
+  ['intro', 'Maintainability and Consequences', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One · Chapter 6', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Maintainability and Consequences', { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'Every element can be present and the plea can still fail.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'Why the plea can fail', (m) => {
+    const p = panel(0);
+    head(p, 'The plea can fail anyway', 150, .2);
+    row(m, p, 1, 'The represented state of affairs must be maintainable', 'maint', 250);
+    row(m, p, 2, 'Estoppel exists to stop resiling, so the representation must be maintainable', 'purpose', 350);
+  }],
+  ['cps', 'Three unmaintainable categories', (m) => {
+    const p = panel(0);
+    head(p, 'Three unmaintainable categories', 150, .2);
+    row(m, p, 1, 'Consistent: no inconsistency with the claim to override', 'consistent', 250);
+    row(m, p, 2, 'Policy: upholding would offend public policy', 'policy', 350);
+    row(m, p, 3, 'Status: would award capacity the representee lacks', 'status', 450);
+  }],
+  ['conseq', 'No substantive effect', (m) => {
+    const p = panel(0);
+    head(p, 'Estoppel is a defence only', 150, .2);
+    row(m, p, 1, 'No substantive effect, it blocks a claim but transfers nothing', 'none', 250);
+    row(m, p, 2, 'Trust Bank v Eksteen and Louw v MJ and H Trust confirm the general rule', 'trust', 350);
+  }],
+  ['property', 'The property strain', (m) => {
+    const p = panel(0);
+    head(p, 'Property law is the strain point', 150, .2);
+    row(m, p, 1, 'Apostoliese Geloofsending: no transfer of ownership', 'apostoliese', 250);
+    row(m, p, 2, 'Oriental Products: Shongwe and Harms reach the same practical result', 'oriental', 350);
+  }],
+  ['joshua', 'Joshua and section 25', (m) => {
+    const p = panel(0);
+    head(p, 'Joshua: traditional position valid', 150, .2);
+    row(m, p, 1, 'The traditional position is a severe but non-arbitrary deprivation', 'trad', 250);
+    row(m, p, 2, 'The Oriental Products position fails the law-of-general-application test', 'op', 350);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-maint-cat', prompt: ['Which of these is NOT one of the three unmaintainable categories?'],
+    build: choice(['Consistent', 'Policy', 'Status', 'Causation'], 3,
+      'Correct: causation is an element to satisfy, not a category that can make a representation unmaintainable.',
+      [null, null, null, 'Incorrect: causation is not one of the three unmaintainable categories; it is a separate element.']),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-maint-conseq', prompt: ['What is the general consequence of a successful estoppel plea?'],
+    build: choice(['It creates a new cause of action', 'It blocks the claim but transfers no rights', 'It transfers ownership of property', 'It creates a contract between the parties'], 1,
+      'Correct: estoppel has no substantive effect; it is a defence that precludes denying a representation.',
+      ['Incorrect: it cannot found a cause of action.', 'Incorrect: it does not transfer ownership; it can at most limit a right.', 'Incorrect: it does not create a contract.']),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'Maintainability: consistent, policy, status', 'w1', 240);
+    row(m, p, 2, 'Estoppel has no substantive effect, it is a defence only', 'w2', 340);
+    row(m, p, 3, 'Property law is the strain point, bare ownership against total loss', 'w3', 440);
+    row(m, p, 4, 'Joshua: the traditional position is constitutionally valid', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-maint', prompt: ['An estoppel plea can fail on maintainability. What is NOT a category?'],
+    build: choice(['Consistent', 'Policy', 'Status', 'Causation'], 3,
+      'Correct: causation is not one of the three unmaintainable categories.',
+      ['Incorrect: causation is a separate element, not an unmaintainable category.']),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

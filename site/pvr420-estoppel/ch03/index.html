@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prejudice — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: 'Prejudice', minutes: 10, language: 'en', next: 4 };
+
+/* ---------- chapter drawing helpers ---------- */
+// Every helper takes the beat's mark function m as its first argument.
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+const BEATS = [
+  ['intro', 'Prejudice', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Topic One · Chapter 3', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, 'Prejudice', { x: 800, y: 430, size: 64, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, 'Real patrimonial loss, not hurt feelings.', 800, 600, m('sub'), { size: 34, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The nature of prejudice', (m) => {
+    const p = panel(0);
+    head(p, 'Prejudice must hit the pocket', 150, .2);
+    row(m, p, 1, 'Actual detriment, not merely being misled', 'pocket', 250);
+    row(m, p, 2, 'Autolec v Du Plessis: the change in position must involve practical or business affairs', 'autolec', 350);
+    row(m, p, 3, 'The court looks forward, at the harm if the representor resiles', 'forward', 450);
+  }],
+  ['sum', 'The sum formula', (m) => {
+    const p = panel(0);
+    head(p, 'Prejudice is measured by a sum formula', 150, .2);
+    row(m, p, 1, 'First: the representee position after the misrepresentation', 'after', 250);
+    row(m, p, 2, 'Second: the position if the representor is allowed to resile', 'resile', 350);
+    row(m, p, 3, 'The difference between the two is the prejudice', 'diff', 450);
+    text(m, p, 'Fawdon v Lyleveld: paid R2 000 for a horse, net R0 after receipt, minus R2 000 if the owner resiles.', 800, 590, m('horse'), { size: 27, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['mitigate', 'Duty to mitigate', (m) => {
+    const p = panel(0);
+    head(p, 'The representee must mitigate', 150, .2);
+    row(m, p, 1, 'Reasonable steps to limit or prevent the loss must be shown', 'duty', 250);
+    row(m, p, 2, 'A representee who did not mitigate cannot claim the full extent of the harm', 'abssa', 350);
+    text(m, p, 'ABSA v De Klerk leaves open whether replacing one creditor with another is itself prejudice.', 800, 500, m('abssa'), { size: 27, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { ask: done => quiz(BAND, [{
+    id: 'c-prej-kind', prompt: ['What kind of harm satisfies the prejudice requirement?'],
+    build: choice(['Any disappointment or hurt feelings', 'Actual patrimonial loss tied to practical or business affairs', 'Only a direct and instantly calculable loss of money', 'Only loss of property, not money'], 1,
+      'Correct: Autolec v Du Plessis requires an actual patrimonial detriment involving the representee practical or business affairs.',
+      [null, 'Incorrect: hurt pride and disappointed sentiment are expressly not enough.', null, 'Incorrect: the loss need not be direct, instant or easily calculated.']),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-prej-when', prompt: ['Prejudice is assessed by looking at…'],
+    build: choice(['The loss already suffered when the dispute began', 'The detriment that will ensue if the representor is allowed to resile', 'The representor gain from the misrepresentation', 'The representee total wealth before the representation'], 1,
+      'Correct: the enquiry is forward-looking. The court asks what harm the representee would suffer if the representor were now permitted to deny the representation.',
+      [null, null, null, null]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, 'Prejudice is actual patrimonial loss, not sentimental harm', 'w1', 240);
+    row(m, p, 2, 'Assessed forward-looking, at what happens if the representor resiles', 'w2', 340);
+    row(m, p, 3, 'The sum formula compares the position after the representation with the position if the representor resiles', 'w3', 440);
+    row(m, p, 4, 'The representee must take reasonable steps to mitigate', 'w4', 540);
+    text(m, p, 'Now try the chapter practice.', 800, 660, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [{
+    id: 'p-autolec', prompt: ['According to Autolec Ltd v Du Plessis, prejudice must…'],
+    build: choice(['Be a direct and instantly calculable loss of money', 'Involve the representee practical or business affairs', 'Be proved beyond a reasonable doubt', 'Exceed a fixed monetary threshold'], 1,
+      'Correct: the change in position must involve the representee practical or business affairs.',
+      ['Incorrect: the court expressly said the detriment need not be direct, instant or easily quantified.', null, 'Incorrect: no monetary threshold is set.']),
+  }, {
+    id: 'p-sum', prompt: ['The sum formula measures prejudice by comparing…'],
+    build: choice(['The representee wealth before and after the dispute', 'The position after the misrepresentation with the position if the representor resiles', 'The representor gain with the representee loss', 'The contract price with the market value'], 1,
+      'Correct: the formula compares the representee net position after the misrepresentation with the position they would be in if the representor were allowed to resile.',
+      [null, null, null, null]),
+  }], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
