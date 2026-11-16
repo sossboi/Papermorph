@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corpus, Libertas and Fama — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: 'Corpus, Libertas and Fama', minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Corpus, Libertas and Fama"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, '"Personality Rights \u00b7 Part 2"', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Corpus, Libertas and Fama", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Corpus, libertas and fama: the body, liberty and reputation.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['corpus', 'Corpus', (m) => {
+    const p = panel(0);
+    head(p, "Corpus", 150, .2);
+    row(m, p, 1, "Freedom from physical interference, assault, battery and medical procedures without consent.", 'protects', 240);
+    row(m, p, 2, "Assault is the threat of physical harm.", 'assault', 330);
+    row(m, p, 3, "Battery is unlawful physical contact.", 'battery', 420);
+    row(m, p, 4, "Medical procedures without consent, and sexual assault, are also infringements.", 'medical', 510);
+  }],
+  ['corpus2', 'Corpus2', (m) => {
+    const p = panel(0);
+    head(p, "Corpus2", 150, .2);
+    row(m, p, 1, "Wrongfulness is assessed against the boni mores and constitutional values.", 'boni', 240);
+    row(m, p, 2, "Consent is a complete defence.", 'consent', 330);
+    row(m, p, 3, "Medical necessity may justify an interference.", 'necessity', 420);
+    row(m, p, 4, "Castell v De Greef: medical negligence, bodily integrity and the need for informed consent.", 'castell', 510);
+  }],
+  ['libertas', 'Libertas', (m) => {
+    const p = panel(0);
+    head(p, "Libertas", 150, .2);
+    row(m, p, 1, "Freedom from unlawful arrest, detention and false imprisonment.", 'movement', 240);
+    row(m, p, 2, "False imprisonment is unlawful confinement or restraint of movement.", 'false', 330);
+    row(m, p, 3, "Wrongful arrest is arrest without legal authority, or an abuse of authority.", 'arrest', 420);
+    row(m, p, 4, "Unlawful detention is continued detention without a legal basis.", 'detention', 510);
+  }],
+  ['arrest', 'Arrest', (m) => {
+    const p = panel(0);
+    head(p, "Arrest", 150, .2);
+    row(m, p, 1, "Only if authorised by law, by warrant or a statutory power.", 'authorised', 240);
+    row(m, p, 2, "And exercised reasonably.", 'reasonable', 330);
+    row(m, p, 3, "Wrongful arrest is arrest without legal authority, or an abuse of that authority.", 'wrongful', 420);
+  }],
+  ['fama', 'Fama', (m) => {
+    const p = panel(0);
+    head(p, "Fama", 150, .2);
+    row(m, p, 1, "The esteem in which a person is held by others.", 'esteem', 240);
+    row(m, p, 2, "Defamation is the primary form of infringement.", 'defamation', 330);
+    row(m, p, 3, "The elements are publication, defamatory meaning, reference to the plaintiff, wrongfulness and fault.", 'elements', 420);
+  }],
+  ['khumalo', 'Khumalo', (m) => {
+    const p = panel(0);
+    head(p, "Khumalo", 150, .2);
+    row(m, p, 1, "Stage one: determine the ordinary meaning, objectively, from the perspective of a reasonable reader of ordinary intelligence.", 'stage1', 240);
+    row(m, p, 2, "Stage two: determine whether that meaning is defamatory, on a preponderance of probabilities.", 'stage2', 330);
+    row(m, p, 3, "The plaintiff need only prove publication of defamatory matter; wrongfulness and intent are presumed.", 'presumed', 420);
+  }],
+  ['defences', 'Defences', (m) => {
+    const p = panel(0);
+    head(p, "Defences", 150, .2);
+    row(m, p, 1, "Truth and public benefit: the statement must be true and in the public interest.", 'truth', 240);
+    row(m, p, 2, "Fair comment: opinion on a matter of public interest, based on true facts and fair.", 'comment', 330);
+    row(m, p, 3, "Privilege: absolute, as in parliamentary or judicial proceedings, or qualified, as in the media.", 'privilege', 420);
+    row(m, p, 4, "Consent: the plaintiff consented to publication.", 'consent', 510);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Which right protects freedom from unlawful arrest and detention?"],
+    build: choice(["Fama", "Corpus", "Libertas", "Dignitas"], 2,
+      "Correct: libertas protects freedom of movement and physical liberty, including freedom from unlawful arrest, detention and false imprisonment.",
+      ["Incorrect: fama protects reputation.", "Incorrect: corpus protects physical integrity.", "Incorrect: dignitas protects self-respect and dignity."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Stage one of the Khumalo v Holomisa test asks\u2026"],
+    build: choice(["Whether the statement caused harm", "What the ordinary meaning of the words is", "Whether the defendant acted reasonably", "Whether the plaintiff is a public figure"], 1,
+      "Correct: stage one determines the ordinary meaning objectively, from the perspective of a reasonable reader of ordinary intelligence. Stage two asks whether that meaning is defamatory.",
+      ["Incorrect: harm is not the first question.", null, "Incorrect: the defendant's reasonableness is not stage one.", "Incorrect: the plaintiff's status is not the first question."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Corpus protects physical integrity, and consent is a complete defence.", 'w1', 240);
+    row(m, p, 2, "Libertas protects freedom of movement; arrest must be authorised by law and reasonable.", 'w2', 330);
+    row(m, p, 3, "Fama protects reputation, and defamation is its primary infringement.", 'w3', 420);
+    row(m, p, 4, "Khumalo v Holomisa gives a two-stage test: ordinary meaning, then defamatory effect.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-castell', prompt: ["What did Castell v De Greef 1994 (4) SA 408 (C) concern?"],
+    build: choice(["Defamation and the mass media", "Bodily integrity and the need for informed consent", "Wrongful arrest by the police", "Insult and dignity"], 1,
+      "Correct: Castell v De Greef concerned medical negligence, the patient's right to bodily integrity and the requirement of informed consent.",
+      ["Incorrect: the case is not a mass-media defamation case.", null, "Incorrect: it was not an arrest case.", "Incorrect: it was not an insult case."]),
+  },
+  {
+    id: 'p-defence', prompt: ["Which defence requires the statement to be both true and in the public interest?"],
+    build: choice(["Fair comment", "Privilege", "Truth and public benefit", "Consent"], 2,
+      "Correct: the defence of truth and public benefit requires both truth and public interest. Fair comment protects honest opinion on true facts.",
+      ["Incorrect: fair comment protects opinion, not necessarily true statements.", "Incorrect: privilege attaches to the occasion, not to truth.", null, "Incorrect: consent is a separate defence."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

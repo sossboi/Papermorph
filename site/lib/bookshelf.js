@@ -67,6 +67,14 @@
       chapterBase: 'pvr420-condictio-furtiva/', chapters: 1 },
     { id: 'pvr420-negotiorum-gestorum', key: 'animebook:progress:' + new URL('pvr420-negotiorum-gestorum/', location.href).pathname,
       chapterBase: 'pvr420-negotiorum-gestorum/', chapters: 1 },
+    { id: 'pvr420-iniuria', key: 'animebook:progress:' + new URL('pvr420-iniuria/', location.href).pathname,
+      chapterBase: 'pvr420-iniuria/', chapters: 1 },
+    { id: 'pvr420-corpus-libertas-fama', key: 'animebook:progress:' + new URL('pvr420-corpus-libertas-fama/', location.href).pathname,
+      chapterBase: 'pvr420-corpus-libertas-fama/', chapters: 1 },
+    { id: 'pvr420-dignitas-remedies', key: 'animebook:progress:' + new URL('pvr420-dignitas-remedies/', location.href).pathname,
+      chapterBase: 'pvr420-dignitas-remedies/', chapters: 1 },
+    { id: 'pvr420-mixed-revision', key: 'animebook:progress:' + new URL('pvr420-mixed-revision/', location.href).pathname,
+      chapterBase: 'pvr420-mixed-revision/', chapters: 1 },
   ];
   for (const book of books) {
     const cover = document.querySelector(`[data-book="${book.id}"]`);

@@ -37,6 +37,10 @@ site/*
 !site/pvr420-ob-turpem-causam/
 !site/pvr420-condictio-furtiva/
 !site/pvr420-negotiorum-gestorum/
+!site/pvr420-iniuria/
+!site/pvr420-corpus-libertas-fama/
+!site/pvr420-dignitas-remedies/
+!site/pvr420-mixed-revision/
 # science is off the shelf but linked from its own page, which links the clay and
 # notebook editions; all three ship so those links resolve.
 !site/science/

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dignitas, Feelings and Remedies — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: 'Dignitas, Feelings and Remedies', minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Dignitas, Feelings and Remedies"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, '"Personality Rights \u00b7 Part 3"', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Dignitas, Feelings and Remedies", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Dignitas, the right to feelings, and the remedies for iniuria.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['dignitas', 'Dignitas', (m) => {
+    const p = panel(0);
+    head(p, "Dignitas", 150, .2);
+    row(m, p, 1, "The esteem in which a person is held by themselves: self-worth and inner peace.", 'internal', 240);
+    row(m, p, 2, "It is broader than fama, which is external reputation.", 'broader', 330);
+    row(m, p, 3, "Insult, iniuria in the narrow sense, is the primary infringement.", 'insult', 420);
+    row(m, p, 4, "Fama is what others think of you; dignitas is what you think of yourself.", 'distinction', 510);
+  }],
+  ['dignity2', 'Dignity2', (m) => {
+    const p = panel(0);
+    head(p, "Dignity2", 150, .2);
+    row(m, p, 1, "Section 10 of the Constitution guarantees inherent dignity and the right to have it respected and protected.", 'ten', 240);
+    row(m, p, 2, "Infringement may be verbal insult, offensive gestures, written insult or conduct.", 'forms', 330);
+    row(m, p, 3, "Wrongfulness is assessed against the boni mores and constitutional values, asking whether a reasonable person in the plaintiff's position would feel their dignity impaired.", 'test', 420);
+    row(m, p, 4, "Animus iniuriandi is required: direct or indirect intent to impair dignity.", 'intent', 510);
+  }],
+  ['leroux', 'Leroux', (m) => {
+    const p = panel(0);
+    head(p, "Leroux", 150, .2);
+    row(m, p, 1, "A manipulated image of school learners.", 'facts', 240);
+    row(m, p, 2, "Defamation or dignity?", 'issue', 330);
+    row(m, p, 3, "The Constitutional Court addressed the boundary, and the reasoning drew criticism for its heteronormative assumptions.", 'hold', 420);
+    row(m, p, 4, "The case shows how closely dignitas and fama overlap.", 'note', 510);
+  }],
+  ['feelings', 'Feelings', (m) => {
+    const p = panel(0);
+    head(p, "Feelings", 150, .2);
+    row(m, p, 1, "Freedom from severe emotional distress caused by intentional conduct.", 'severe', 240);
+    row(m, p, 2, "Infringing religious feelings can found an iniuria, for example desecration of religious symbols or blasphemy in a personal attack.", 'religious', 330);
+    row(m, p, 3, "Breach of promise to marry was historically a form of iniuria, now largely replaced by contractual remedies.", 'promise', 420);
+  }],
+  ['solatium', 'Solatium', (m) => {
+    const p = panel(0);
+    head(p, "Solatium", 150, .2);
+    row(m, p, 1, "Solatium is money for non-patrimonial harm; it is compensatory, not punitive.", 'compensatory', 240);
+    row(m, p, 2, "The quantum is assessed with reference to previous awards, which guide but do not bind.", 'quantum', 330);
+    row(m, p, 3, "The factors are the nature of the infringement, the extent of the harm, the defendant's conduct, the plaintiff's status and the public interest.", 'factors', 420);
+    row(m, p, 4, "Courts exercise a discretion, and awards are generally modest.", 'modest', 510);
+  }],
+  ['other', 'Other', (m) => {
+    const p = panel(0);
+    head(p, "Other", 150, .2);
+    row(m, p, 1, "An interdict, prohibitory to stop the conduct or mandatory to compel action.", 'interdict', 240);
+    row(m, p, 2, "Retraction or an apology.", 'retraction', 330);
+    row(m, p, 3, "A declaratory order.", 'declaratory', 420);
+    row(m, p, 4, "Punitive damages in exceptional cases.", 'punitive', 510);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Khumalo v Holomisa: the two-stage defamation test.", 'khumalo', 240);
+    row(m, p, 2, "Le Roux v Dey: a manipulated image, defamation versus dignity.", 'leroux2', 330);
+    row(m, p, 3, "Castell v De Greef: bodily integrity and informed consent.", 'castell2', 420);
+    row(m, p, 4, "Bernstein v Bester: privacy, search and seizure, dignity in prison.", 'bernstein', 510);
+    row(m, p, 5, "Hyundai Motor Distributors: privacy and the constitutional limits on search warrants.", 'hyundai', 600);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The distinction between fama and dignitas is\u2026"],
+    build: choice(["Fama protects property, dignitas protects reputation", "Fama is external reputation, dignitas is internal self-worth", "Fama requires intent, dignitas does not", "Fama is constitutional, dignitas is only common law"], 1,
+      "Correct: fama is the esteem in which others hold you; dignitas is the esteem in which you hold yourself. Both are protected.",
+      ["Incorrect: neither right protects property.", null, "Incorrect: both require animus iniuriandi.", "Incorrect: dignity is constitutionalised by section 10."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Which case concerned a manipulated image and the line between defamation and dignity?"],
+    build: choice(["Khumalo v Holomisa", "Le Roux v Dey", "Castell v De Greef", "Bernstein v Bester"], 1,
+      "Correct: Le Roux v Dey 2011 (3) SA 274 (CC) dealt with a manipulated image, defamation versus dignity, and the majority and minority reasoning.",
+      ["Incorrect: Khumalo v Holomisa set the defamation test.", null, "Incorrect: Castell v De Greef concerned bodily integrity and consent.", "Incorrect: Bernstein v Bester concerned privacy and search."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Dignitas is internal self-worth; fama is external reputation.", 'w1', 240);
+    row(m, p, 2, "Insult requires animus iniuriandi directed at the plaintiff's self-respect.", 'w2', 330);
+    row(m, p, 3, "The right to feelings protects emotional well-being.", 'w3', 420);
+    row(m, p, 4, "Satisfaction, solatium, is compensatory and assessed on the listed factors.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-solatium', prompt: ["What is the nature of satisfaction (solatium) as a remedy for iniuria?"],
+    build: choice(["Punitive, to punish the wrongdoer", "Compensatory, for injury to personality", "Restitutionary, to reverse a transfer", "Nominal, only where no harm is proved"], 1,
+      "Correct: solatium compensates for non-patrimonial harm. It is not punitive; punitive damages are reserved for exceptional cases.",
+      ["Incorrect: it is not punitive.", null, "Incorrect: restitution belongs to the enrichment actions.", "Incorrect: it is not nominal; non-patrimonial harm is presumed in many cases."]),
+  },
+  {
+    id: 'p-factors', prompt: ["Which is NOT a factor in assessing the quantum of damages for iniuria?"],
+    build: choice(["The nature of the infringement", "The extent of the harm", "The defendant's conduct", "The plaintiff's patrimonial loss"], 3,
+      "Correct: iniuria protects personality interests, so patrimonial loss is not a quantum factor. The factors are the nature of the infringement, the extent of harm, the defendant's conduct, the plaintiff's status and the public interest.",
+      ["Incorrect: the nature of the infringement is a factor.", "Incorrect: the extent of the harm is a factor.", "Incorrect: the defendant's conduct is a factor."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniuria and the Constitutional Framework — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: 'Iniuria and the Constitutional Framework', minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Iniuria and the Constitutional Framework"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, '"Personality Rights \u00b7 Part 1"', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Iniuria and the Constitutional Framework", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Iniuria: the wrongful and intentional infringement of a personality right.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['overview', 'Overview', (m) => {
+    const p = panel(0);
+    head(p, "Overview", 150, .2);
+    row(m, p, 1, "Personality rights, unjustified enrichment and estoppel.", 'topics', 240);
+    row(m, p, 2, "Personality rights runs weeks one to four with Ms Baird.", 'weeks', 330);
+    row(m, p, 3, "Assessment one and assessment two each carry fifty percent of the semester mark.", 'assessment', 420);
+    row(m, p, 4, "The exam is one hundred percent, converted to fifty percent of the final mark.", 'exam', 510);
+    row(m, p, 5, "You need at least forty percent in the exam to pass, and forty percent in the semester mark to write.", 'pass', 600);
+  }],
+  ['constitution', 'Constitution', (m) => {
+    const p = panel(0);
+    head(p, "Constitution", 150, .2);
+    row(m, p, 1, "Section 8(1): the Bill of Rights applies to all law, common and statutory.", 'eight1', 240);
+    row(m, p, 2, "Section 8(2): it binds private parties horizontally, and juristic persons enjoy personality rights to the extent the right permits.", 'eight2', 330);
+    row(m, p, 3, "Section 36(1): a right may be limited only if reasonable and justifiable, weighing the nature of the right, the purpose, the extent, and less restrictive means.", 'thirtysix', 420);
+  }],
+  ['statute', 'Statute', (m) => {
+    const p = panel(0);
+    head(p, "Statute", 150, .2);
+    row(m, p, 1, "POPIA, the Protection of Personal Information Act, regulates the processing of personal information.", 'popia', 240);
+    row(m, p, 2, "The Cybercrimes Act criminalises cyberbullying, revenge pornography and online harassment.", 'cyber', 330);
+    row(m, p, 3, "The Equality Act prohibits unfair discrimination.", 'equality', 420);
+    row(m, p, 4, "The Children's Act protects children's rights, including dignity.", 'children', 510);
+  }],
+  ['nature', 'Nature', (m) => {
+    const p = panel(0);
+    head(p, "Nature", 150, .2);
+    row(m, p, 1, "Iniuria is the wrongful, intentional infringement of a personality interest.", 'def', 240);
+    row(m, p, 2, "It is one of the main forms of delictual conduct in our law.", 'form', 330);
+    row(m, p, 3, "The appropriate remedy is satisfaction, or solatium: money for non-patrimonial harm.", 'remedy', 420);
+    row(m, p, 4, "It is a delict sui generis, separate from Aquilian liability, which protects patrimonial interests.", 'sui', 510);
+  }],
+  ['liability', 'Liability', (m) => {
+    const p = panel(0);
+    head(p, "Liability", 150, .2);
+    row(m, p, 1, "Wrongfulness: the conduct must infringe a legally protected personality interest.", 'wrong', 240);
+    row(m, p, 2, "Intent, animus iniuriandi: the defendant must have intended the infringement.", 'intent', 330);
+    row(m, p, 3, "Causation: the conduct must have caused the infringement.", 'causation', 420);
+  }],
+  ['requirements', 'Requirements', (m) => {
+    const p = panel(0);
+    head(p, "Requirements", 150, .2);
+    row(m, p, 1, "Act: conduct by commission or omission.", 'act', 240);
+    row(m, p, 2, "Wrongfulness: infringement of a personality right, assessed objectively against the boni mores.", 'wrongfulness', 330);
+    row(m, p, 3, "Fault: animus iniuriandi, intention to injure, dolus direct or indirect.", 'fault', 420);
+    row(m, p, 4, "Causation: factual and legal.", 'causation', 510);
+    row(m, p, 5, "Damage: non-patrimonial harm, an injury to personality.", 'damage', 600);
+  }],
+  ['history', 'History', (m) => {
+    const p = panel(0);
+    head(p, "History", 150, .2);
+    row(m, p, 1, "Roman law: the actio iniuriarum protected physical integrity and dignity, and was a criminal-civil hybrid.", 'roman', 240);
+    row(m, p, 2, "Roman-Dutch law extended it to fama and dignitas and made it purely civil.", 'dutch', 330);
+    row(m, p, 3, "Modern South African law constitutionalised the personality rights.", 'modern', 420);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["What is the primary remedy for iniuria?"],
+    build: choice(["Satisfaction (solatium)", "Punitive damages", "Interdict", "Restitution of the thing"], 0,
+      "Correct: satisfaction, or solatium, is the primary remedy \u2014 monetary compensation for non-patrimonial harm. It is compensatory, not punitive.",
+      [null, "Incorrect: punitive damages are exceptional, not the primary remedy.", "Incorrect: an interdict is an additional remedy, not the primary one.", "Incorrect: restitution is not the remedy for an injury to personality."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["The Bill of Rights binds private parties through which provision?"],
+    build: choice(["Section 8(1)", "Section 8(2)", "Section 36(1)", "Section 10"], 1,
+      "Correct: section 8(2) makes the Bill of Rights applicable to private relationships, subject to the nature of the right.",
+      ["Incorrect: section 8(1) makes the Bill of Rights apply to all law, not to private parties specifically.", null, "Incorrect: section 36(1) governs the limitation of rights.", "Incorrect: section 10 guarantees dignity; it is not the horizontal-application provision."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Iniuria is the wrongful, intentional infringement of a personality right.", 'w1', 240);
+    row(m, p, 2, "The requirements are act, wrongfulness, fault as animus iniuriandi, causation and non-patrimonial damage.", 'w2', 330);
+    row(m, p, 3, "The Constitution is supreme, and section 8(2) applies the Bill of Rights horizontally.", 'w3', 420);
+    row(m, p, 4, "The primary remedy is satisfaction, solatium.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-reqs', prompt: ["Which is NOT a requirement of liability for iniuria?"],
+    build: choice(["Act", "Wrongfulness", "Fault in the form of intent", "Patrimonial loss"], 3,
+      "Correct: iniuria protects personality interests, so the damage is non-patrimonial harm. Patrimonial loss belongs to Aquilian liability.",
+      ["Incorrect: act is a requirement.", "Incorrect: wrongfulness is a requirement.", "Incorrect: fault as animus iniuriandi is a requirement."]),
+  },
+  {
+    id: 'p-limit', prompt: ["Under section 36(1), a right may be limited only if\u2026"],
+    build: choice(["Parliament so provides", "It is reasonable and justifiable in an open and democratic society", "The plaintiff consents", "The conduct was not intentional"], 1,
+      "Correct: section 36(1) requires the limitation to be reasonable and justifiable, weighing the listed factors.",
+      ["Incorrect: an ordinary Act is not enough; the limitation clause governs.", null, "Incorrect: consent is not the test for a constitutional limitation.", "Incorrect: intent is irrelevant to whether a limitation is justifiable."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

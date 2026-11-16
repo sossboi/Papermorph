@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mixed Revision — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: 'Mixed Revision', minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Mixed Revision"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, '"Personality Rights \u00b7 Revision"', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Mixed Revision", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The whole course in one pass: facts to issue to remedy to conclusion.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['craft', 'Craft', (m) => {
+    const p = panel(0);
+    head(p, "Craft", 150, .2);
+    row(m, p, 1, "Short answers of two to four marks want definitions, history and examples, one line per mark, numbered as asked.", 'short', 240);
+    row(m, p, 2, "A long theory essay of ten to fifteen marks wants an introduction, a structured body with case, year and holding, an evaluation and a conclusion, one authority per point.", 'essay', 330);
+    row(m, p, 3, "A long application of fifteen marks or more wants issue, generic requirements, any rule denying recovery, the remedy, its specific requirements, application to both sides, and a conclusion.", 'application', 420);
+  }],
+  ['moves', 'Moves', (m) => {
+    const p = panel(0);
+    head(p, "Moves", 150, .2);
+    row(m, p, 1, "Every application starts at the generic requirements.", 'generics', 240);
+    row(m, p, 2, "Every remedy choice runs the tense test.", 'tense', 330);
+    row(m, p, 3, "Every complication paragraph answers: what could change this?", 'complication', 420);
+  }],
+  ['essays', 'Essays', (m) => {
+    const p = panel(0);
+    head(p, "Essays", 150, .2);
+    row(m, p, 1, "Compare the condictio indebiti and the condictio sine causa: same in that both reverse unfounded transfers, different in trigger, in the role of error, in what is recovered and in their authority.", 'q1', 240);
+    row(m, p, 2, "Discuss whether the generic requirements have become the point of departure: Kudu Granite says yes, Nortje, Normkow and SSI say there is still no general action.", 'q2', 330);
+  }],
+  ['sources', 'Sources', (m) => {
+    const p = panel(0);
+    head(p, "Sources", 150, .2);
+    row(m, p, 1, "Foundations and liability: Sonnekus 2017 at 1 to 63 and 65 to 162, Sonnekus 2008 at 1 to 39 and 42 to 96, LAWSA paragraphs 206 to 208, 209 and 210.", 'foundations', 240);
+    row(m, p, 2, "Condictio indebiti: Sonnekus 2017 at 367 to 510, LAWSA 213 to 215.", 'indebiti', 330);
+    row(m, p, 3, "Sine causa: Sonnekus 2017 at 511 to 582, LAWSA 221 to 223.", 'sinecausa', 420);
+    row(m, p, 4, "Causa data: Sonnekus 2017 at 163 to 188, LAWSA 219 to 220.", 'causadata', 510);
+    row(m, p, 5, "Ob causam finitam: Sonnekus 2017 at 189 to 196, LAWSA 219(b).", 'finitam', 600);
+    row(m, p, 6, "Ob turpem causam: Sonnekus 2017 at 197 to 266, LAWSA 216 to 218.", 'turpem', 690);
+  }],
+  ['recall', 'Recall', (m) => {
+    const p = panel(0);
+    head(p, "Recall", 150, .2);
+    row(m, p, 1, "A mistaken payment of a debt that never existed: condictio indebiti.", 'indebiti2', 240);
+    row(m, p, 2, "A prior relationship, goods consumed after an erroneous transfer: condictio sine causa, unless error dominates, then indebiti.", 'sinecausa2', 330);
+    row(m, p, 3, "Performance for a future facility, right or modus that never arrived: causa data causa non secuta.", 'causadata2', 420);
+    row(m, p, 4, "Valid at transfer, the cause died later: ob causam finitam.", 'finitam2', 510);
+    row(m, p, 5, "Payment under blackmail or an unlawful deal: ob turpem causam, and check par delictum.", 'turpem2', 600);
+    row(m, p, 6, "A thing stolen or gone, with the rei vindicatio unavailable: condictio furtiva, for value.", 'furtiva2', 690);
+  }],
+  ['quizbank', 'Quizbank', (m) => {
+    const p = panel(0);
+    head(p, "Quizbank", 150, .2);
+    row(m, p, 1, "Two knowingly equal partners in an unlawful scheme: neither recovers, par delictum.", 'r1', 240);
+    row(m, p, 2, "A payment made under protest is later shown not to be due: condictio indebiti.", 'r2', 330);
+    row(m, p, 3, "Security given for a bank facility that never came: causa data causa non secuta.", 'r3', 420);
+    row(m, p, 4, "A valid causa that later falls away: ob causam finitam.", 'r4', 510);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["In a long application answer, what follows the generic requirements?"],
+    build: choice(["The conclusion", "Any rule denying recovery, then the remedy and its specific requirements", "A quotation from the worksheets", "The facts, repeated"], 1,
+      "Correct: issue, generic requirements, any rule denying recovery, the remedy, its specific requirements, application to both sides, conclusion.",
+      ["Incorrect: the conclusion comes last.", null, "Incorrect: worksheets are not cited.", "Incorrect: the facts are set out at the start."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A mistaken payment of a debt that never existed points to\u2026"],
+    build: choice(["Condictio sine causa", "Condictio indebiti", "Causa data causa non secuta", "Condictio furtiva"], 1,
+      "Correct: the condictio indebiti recovers money paid where nothing was owed, on proof of an excusable mistake.",
+      ["Incorrect: sine causa requires a prior relationship and consumption.", null, "Incorrect: causa data requires a future cause that never arrived.", "Incorrect: furtiva is the value claim against a thief."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Marks equal length: one line per mark in a short answer.", 'w1', 240);
+    row(m, p, 2, "Every application starts at the generics and runs the tense test for the remedy.", 'w2', 330);
+    row(m, p, 3, "Every remedy has its own specific requirements.", 'w3', 420);
+    row(m, p, 4, "Cite Sonnekus, LAWSA and the cases, not the worksheets.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-finitam', prompt: ["Which remedy fits a causa that was valid at transfer and later fell away?"],
+    build: choice(["Condictio indebiti", "Causa data causa non secuta", "Ob causam finitam", "Condictio sine causa"], 2,
+      "Correct: ob causam finitam is the remedy where the causa was valid when the transfer happened and subsequently fell away.",
+      ["Incorrect: indebiti requires that no cause ever existed.", "Incorrect: causa data requires a future cause that never arrived.", null, "Incorrect: sine causa is the residual value claim."]),
+  },
+  {
+    id: 'p-saambou', prompt: ["Which authority holds that the generic sine causa is unavailable in the alternative where error played a role?"],
+    build: choice(["Kudu Granite v Caterna", "Saambou Bank v Essa", "Williams v Evans", "Maseko v Maseko"], 1,
+      "Correct: Saambou Bank v Essa and Firstrand Bank v Absa Bank bar the generic sine causa where error played any role; the condictio indebiti must be used.",
+      ["Incorrect: Kudu Granite concerns the generic requirements.", null, "Incorrect: Williams v Evans is the causa data paradigm.", "Incorrect: Maseko v Maseko concerns par delictum."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
