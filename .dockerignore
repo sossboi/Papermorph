@@ -1,4 +1,39 @@
 # SPR421 Papermorph — build context excludes
+#
+# The published site is the SPR421 / SIP421 bookshelf only. The rest of site/
+# is upstream sample books (linear-algebra, pandemic, meiji, ...) that are not
+# on the shelf; copying them made the image ~1.6 GB instead of ~30 MB.
+
+# Ignore all of site/, then re-include only what the shelf serves.
+site/*
+!site/index.html
+!site/404.html
+!site/lib/
+!site/assets/
+!site/su3-indictments/
+!site/su5p1-plea-guilty/
+!site/su5p2-plea-not-guilty/
+!site/su6-trial-verdict/
+!site/su7p1-sentence/
+!site/su7p2-sentence-procedure/
+!site/sip14-defective-processes/
+!site/sip15-settlement-offers/
+!site/sip16-plea-counterclaim/
+!site/sip17-amendment-pleadings/
+!site/sip18-preparation-trial/
+!site/sip19-trial-judgment/
+!site/sip20-provisional-sentence/
+!site/sip21-appeals-reviews/
+!site/sip22-execution/
+!site/sip23-debt-collection/
+!site/sip24-legal-costs/
+# science is off the shelf but linked from its own page, which links the clay and
+# notebook editions; all three ship so those links resolve.
+!site/science/
+!site/physics-clay/
+!site/physics-notebook/
+
+# Repo noise
 .git
 .github
 .claude
@@ -8,6 +43,7 @@ img
 content
 books
 tools
+ci
 *.md
 LICENSE
 AGENTS.md
@@ -15,14 +51,4 @@ AGENTS.md
 .gitattributes
 Dockerfile
 .dockerignore
-site/**/making/
-site/**/review/
-site/**/chapters/
-site/**/images/
-site/**/art/
-site/**/data/
-site/**/notes/
-site/**/sandbox*/
-site/**/banner/
-site/**/promo/
-site/**/shorts/
+compose.yaml

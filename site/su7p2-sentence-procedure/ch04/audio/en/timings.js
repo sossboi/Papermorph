@@ -1,130 +1,130 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.912,
+  "dur": 4.133,
   "marks": {
-   "sub": 1.237
+   "sub": 0.82
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 4."
    ],
    [
-    1.237,
+    0.82,
     "Four ways to impose correctional supervision."
    ]
   ]
  },
  "idea": {
-  "dur": 29.496,
+  "dur": 38.733,
   "marks": {
-   "hoption": 7.227,
-   "report": 9.609,
-   "condition": 14.232,
-   "ioption": 21.849,
-   "noreport": 23.19,
-   "commissioner": 23.19
+   "hoption": 8.98,
+   "report": 11.86,
+   "condition": 18.4,
+   "ioption": 27.5,
+   "noreport": 31.32,
+   "commissioner": 31.32
   },
   "cues": [
    [
-    0.169,
+    0,
     "First: as a sentence by itself, s 276(1)(h), max 3 years."
    ],
    [
-    7.227,
+    8.98,
     "A probation report is required."
    ],
    [
-    9.609,
+    11.86,
     "Second: as a condition to a suspended sentence, max 5 years."
    ],
    [
-    14.232,
+    18.4,
     "Third: imprisonment linked to supervision, s 276(1)(i), max 5 years."
    ],
    [
-    21.849,
+    27.5,
     "No report needed."
    ],
    [
-    23.19,
+    31.32,
     "Fourth: the Commissioner applies under s 276A(3)."
    ],
    [
-    28.242,
+    37.52,
     "That is supervision."
    ]
   ]
  },
  "q1": {
-  "dur": 6.336,
+  "dur": 6.333,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.02,
     "Under s 276(1)(h), a probation report is..."
    ]
   ]
  },
  "wrap": {
-  "dur": 17.904,
+  "dur": 21.667,
   "marks": {
-   "w1": 1.016,
-   "w2": 6.758,
-   "w3": 12.292,
-   "end": 16.029
+   "w1": 1.26,
+   "w2": 7.88,
+   "w3": 15.0,
+   "end": 20.16
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.26,
     "s 276(1)(h): alone, 3 years, report required."
    ],
    [
-    6.758,
+    7.88,
     "s 276(1)(i): imprisonment, 5 years, no report."
    ],
    [
-    12.292,
+    15.0,
     "s 276A(3): Commissioner applies."
    ],
    [
-    16.029,
+    20.16,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.808,
+  "dur": 3.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.88,
     "That is the end of chapter 4."
    ]
   ]

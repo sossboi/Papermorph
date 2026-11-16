@@ -1,140 +1,140 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 5.448,
+  "dur": 6.0,
   "marks": {
-   "sub": 1.198
+   "sub": 0.92
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 3."
    ],
    [
-    1.198,
+    0.92,
     "The tiered structure of Act 105 of 1997."
    ]
   ]
  },
  "idea": {
-  "dur": 24.528,
+  "dur": 25.4,
   "marks": {
-   "prescribe": 3.464,
-   "life": 5.768,
-   "part2": 8.932,
-   "part3": 11.003,
-   "part4": 12.943,
-   "part5": 15.039,
-   "repeat": 18.451,
-   "permanent": 23.255
+   "prescribe": 3.76,
+   "life": 6.06,
+   "part2": 9.56,
+   "part3": 11.8,
+   "part4": 13.96,
+   "part5": 16.22,
+   "repeat": 19.58,
+   "permanent": 24.22
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 51 prescribes minimum sentences."
    ],
    [
-    3.464,
+    3.76,
     "Part I attracts life imprisonment."
    ],
    [
-    5.768,
+    6.06,
     "Part II: 15 years for first offenders."
    ],
    [
-    8.932,
+    9.56,
     "Part III: 10 years."
    ],
    [
-    11.003,
+    11.8,
     "Part IV: 5 years."
    ],
    [
-    12.943,
+    13.96,
     "Part V: 3 years."
    ],
    [
-    15.039,
+    16.22,
     "Second and third offenders attract longer minimums."
    ],
    [
-    18.451,
+    19.58,
     "The current regime took effect on 31 December 2007."
    ],
    [
-    23.255,
+    24.22,
     "That is the structure."
    ]
   ]
  },
  "q1": {
-  "dur": 4.08,
+  "dur": 3.933,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    0.72,
     "Under s 51, Part I attracts..."
    ]
   ]
  },
  "wrap": {
-  "dur": 15.24,
+  "dur": 14.133,
   "marks": {
-   "w1": 1.029,
-   "w2": 2.539,
-   "w3": 8.867,
-   "end": 13.359
+   "w1": 1.24,
+   "w2": 3.16,
+   "w3": 8.26,
+   "end": 12.52
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.029,
+    1.24,
     "Part I: life."
    ],
    [
-    2.539,
+    3.16,
     "Parts II-V: 15/10/5/3 years for first offenders."
    ],
    [
-    8.867,
+    8.26,
     "Current regime effective 31 December 2007."
    ],
    [
-    13.359,
+    12.52,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.832,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.42,
     "That is the end of chapter 3."
    ]
   ]

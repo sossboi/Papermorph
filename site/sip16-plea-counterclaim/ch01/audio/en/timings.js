@@ -1,170 +1,170 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 5.544,
+  "dur": 5.933,
   "marks": {
-   "sub": 1.471
+   "sub": 1.06
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 16."
    ],
    [
-    1.471,
+    1.06,
     "The defendant's answer, the counterclaim, and the close of pleadings."
    ]
   ]
  },
  "idea": {
-  "dur": 73.248,
+  "dur": 79.933,
   "marks": {
-   "clear": 4.922,
-   "adnc": 6.719,
-   "admit": 11.302,
-   "deny": 13.75,
-   "evasive": 16.016,
-   "nonadmit": 19.375,
-   "confess": 23.503,
-   "newfacts": 27.956,
-   "special": 33.125,
-   "declinatory": 36.289,
-   "dilatory": 38.841,
-   "prescription": 41.393,
-   "lis": 45.13,
-   "counterclaim": 48.789,
-   "reconvention": 51.797,
-   "nocounter": 55.625,
-   "replication": 58.112,
-   "aqn": 63.555,
-   "close": 65.456,
-   "joinder": 67.812,
-   "agreement": 68.945,
-   "litis": 70.104
+   "clear": 5.3,
+   "adnc": 7.92,
+   "admit": 12.4,
+   "deny": 15.54,
+   "evasive": 17.92,
+   "nonadmit": 21.62,
+   "confess": 25.8,
+   "newfacts": 29.62,
+   "special": 35.56,
+   "declinatory": 39.2,
+   "dilatory": 42.24,
+   "prescription": 45.12,
+   "lis": 49.36,
+   "counterclaim": 53.58,
+   "reconvention": 56.42,
+   "nocounter": 60.54,
+   "replication": 63.68,
+   "aqn": 69.3,
+   "close": 71.76,
+   "joinder": 74.3,
+   "agreement": 74.98,
+   "litis": 77.18
   },
   "cues": [
    [
-    0.117,
+    0,
     "The plea must give a clear, specific answer to every material allegation."
    ],
    [
-    4.922,
+    5.3,
     "Remember A-D-N-C: admit, deny, not admit, or confess and avoid."
    ],
    [
-    11.302,
+    12.4,
     "An admitted fact is deemed proved."
    ],
    [
-    13.75,
+    15.54,
     "A denial must not be evasive; a bare denial of liability is not admissible."
    ],
    [
-    19.375,
+    21.62,
     "Non-admission means the defendant has no knowledge of the allegation."
    ],
    [
-    23.503,
+    25.8,
     "Confession and avoidance concedes the facts but raises new ones, such as fraud, volenti, waiver, payment or ultra vires."
    ],
    [
-    33.125,
+    35.56,
     "A special plea attacks the claim's right to be heard: declinatory pleas destroy the claim, dilatory pleas merely delay it."
    ],
    [
-    41.393,
+    45.12,
     "Prescription and res judicata are declinatory; lis alibi pendens and arbitration are dilatory."
    ],
    [
-    48.789,
+    53.58,
     "A counterclaim is a claim in reconvention, delivered with the plea unless the plaintiff consents otherwise."
    ],
    [
-    55.625,
+    60.54,
     "You cannot counterclaim to a counterclaim."
    ],
    [
-    58.112,
+    63.68,
     "A replication is only needed to admit, qualify or nullify something new, never to repeat a denial."
    ],
    [
-    65.456,
+    71.76,
     "Pleadings close by joinder of issue, written agreement, or court order."
    ],
    [
-    70.104,
+    77.18,
     "Litis contestatio is the close of pleadings."
    ]
   ]
  },
  "q1": {
-  "dur": 4.752,
+  "dur": 4.533,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.1,
     "A defendant who has no knowledge of an allegation should plead..."
    ]
   ]
  },
  "wrap": {
-  "dur": 19.848,
+  "dur": 20.933,
   "marks": {
-   "w1": 1.016,
-   "w2": 6.445,
-   "w3": 10.859,
-   "end": 17.969
+   "w1": 1.36,
+   "w2": 7.48,
+   "w3": 12.24,
+   "end": 19.1
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.36,
     "A-D-N-C: admit, deny, not admit, confess and avoid."
    ],
    [
-    6.445,
+    7.48,
     "Special pleas: declinatory destroys, dilatory delays."
    ],
    [
-    10.859,
+    12.24,
     "Counterclaim is a claim in reconvention; replication only to admit, qualify or nullify."
    ],
    [
-    17.969,
+    19.1,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 3.192,
+  "dur": 3.133,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.12,
     "That is the end of chapter 16."
    ]
   ]

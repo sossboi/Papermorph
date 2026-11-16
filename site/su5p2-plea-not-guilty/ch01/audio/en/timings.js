@@ -1,120 +1,120 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.408,
+  "dur": 3.467,
   "marks": {
-   "sub": 1.107
+   "sub": 0.86
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 1."
    ],
    [
-    1.107,
+    0.86,
     "Every plea available to an accused."
    ]
   ]
  },
  "idea": {
-  "dur": 24.528,
+  "dur": 26.333,
   "marks": {
-   "list": 3.906,
-   "notguilty": 5.846,
-   "autrefois": 8.607,
-   "jur": 11.159,
-   "dis": 13.737,
-   "title": 15.534,
-   "resume": 18.242,
-   "combine": 22.044
+   "list": 4.98,
+   "notguilty": 7.06,
+   "autrefois": 10.22,
+   "jur": 12.7,
+   "dis": 15.58,
+   "title": 17.36,
+   "resume": 19.78,
+   "combine": 24.0
   },
   "cues": [
    [
-    0.104,
+    0,
     "Section 106(1) lists nine pleas."
    ],
    [
-    3.906,
+    4.98,
     "Guilty, not guilty, autrefois convict, autrefois acquit, free pardon, no jurisdiction, discharge under s 204, no title to prosecute, and prosecution may not be resumed."
    ],
    [
-    18.242,
+    19.78,
     "A not-guilty plea may be combined with certain other pleas."
    ],
    [
-    22.044,
+    24.0,
     "A guilty plea may never be combined."
    ]
   ]
  },
  "q1": {
-  "dur": 3.864,
+  "dur": 3.933,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.107,
+    0.68,
     "Which plea may be combined with a not-guilty plea?"
    ]
   ]
  },
  "wrap": {
-  "dur": 10.944,
+  "dur": 12.267,
   "marks": {
-   "w1": 1.016,
-   "w2": 3.698,
-   "w3": 6.888,
-   "end": 9.076
+   "w1": 1.48,
+   "w2": 5.14,
+   "w3": 8.24,
+   "end": 10.38
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.48,
     "s 106(1): nine pleas."
    ],
    [
-    3.698,
+    5.14,
     "Not-guilty may be combined with certain pleas."
    ],
    [
-    6.888,
+    8.24,
     "Guilty may never be combined."
    ],
    [
-    9.076,
+    10.38,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.688,
+  "dur": 2.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.1,
     "That is the end of chapter 1."
    ]
   ]

@@ -1,126 +1,126 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.288,
+  "dur": 3.333,
   "marks": {
-   "sub": 1.315
+   "sub": 0.9
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 6."
    ],
    [
-    1.315,
+    0.9,
     "Convicting of a lesser offence."
    ]
   ]
  },
  "idea": {
-  "dur": 26.304,
+  "dur": 27.733,
   "marks": {
-   "statute": 3.932,
-   "sections": 7.812,
-   "express": 12.435,
-   "proof": 16.432,
-   "acquittal": 21.693,
-   "robbery": 21.693
+   "statute": 4.38,
+   "sections": 9.38,
+   "express": 13.92,
+   "proof": 17.72,
+   "acquittal": 23.0,
+   "robbery": 23.0
   },
   "cues": [
    [
-    0.104,
+    0,
     "Competent verdicts exist only where a statute permits them."
    ],
    [
-    3.932,
+    4.38,
     "Sections 256 to 270 list them."
    ],
    [
-    7.812,
+    9.38,
     "If the express charge is proved, no competent verdict may be used."
    ],
    [
-    12.435,
+    13.92,
     "A competent verdict requires proof beyond reasonable doubt."
    ],
    [
-    16.432,
+    17.72,
     "A conviction on a competent verdict is treated as an acquittal on the original charge."
    ],
    [
-    21.693,
+    23.0,
     "Robbery has a unique double competent verdict: theft and assault."
    ]
   ]
  },
  "q1": {
-  "dur": 3.816,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.04,
     "Competent verdicts exist only where..."
    ]
   ]
  },
  "wrap": {
-  "dur": 13.68,
+  "dur": 14.533,
   "marks": {
-   "w1": 1.029,
-   "w2": 6.797,
-   "w3": 8.789,
-   "end": 11.81
+   "w1": 1.36,
+   "w2": 6.46,
+   "w3": 9.08,
+   "end": 12.68
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.029,
+    1.36,
     "Statutory basis required (ss 256-270)."
    ],
    [
-    6.797,
+    6.46,
     "Proof beyond reasonable doubt."
    ],
    [
-    8.789,
+    9.08,
     "Robbery: unique double competent verdict."
    ],
    [
-    11.81,
+    12.68,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 3.0,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.4,
     "That is the end of chapter 6."
    ]
   ]

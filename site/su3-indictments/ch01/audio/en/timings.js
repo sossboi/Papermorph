@@ -1,111 +1,111 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 4.104,
+  "dur": 4.133,
   "marks": {
-   "sub": 1.107
+   "sub": 1.42
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 1."
    ],
    [
-    1.107,
+    1.42,
     "The accused must know exactly what they are charged with."
    ]
   ]
  },
  "idea": {
-  "dur": 16.536,
+  "dur": 15.267,
   "marks": {
-   "right": 7.279,
-   "inform": 9.87,
-   "detail": 12.344
+   "right": 6.8,
+   "inform": 9.06,
+   "detail": 11.46
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 35(3) of the Constitution guarantees every accused the right to a fair trial."
    ],
    [
-    7.279,
+    6.8,
     "This includes the right to be informed of the charge with sufficient detail to answer it."
    ],
    [
-    12.344,
+    11.46,
     "The golden rule: the charge must be in unmistakable language."
    ]
   ]
  },
  "q1": {
-  "dur": 5.352,
+  "dur": 4.8,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.107,
+    1.12,
     "Which Constitutional section guarantees the right to a fair trial?"
    ]
   ]
  },
  "wrap": {
-  "dur": 10.44,
+  "dur": 11.667,
   "marks": {
-   "w1": 1.016,
-   "w2": 4.232,
-   "w3": 6.354,
-   "end": 8.568
+   "w1": 1.56,
+   "w2": 5.12,
+   "w3": 7.96,
+   "end": 9.88
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.56,
     "s 35(3): fair trial right."
    ],
    [
-    4.232,
+    5.12,
     "Right to be informed of the charge."
    ],
    [
-    6.354,
+    7.96,
     "Sufficient detail to answer it."
    ],
    [
-    8.568,
+    9.88,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.688,
+  "dur": 2.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.1,
     "That is the end of chapter 1."
    ]
   ]

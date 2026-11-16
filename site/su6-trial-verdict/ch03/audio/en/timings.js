@@ -1,130 +1,130 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.48,
+  "dur": 3.667,
   "marks": {
-   "sub": 1.185
+   "sub": 0.88
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 3."
    ],
    [
-    1.185,
+    0.88,
     "The checkpoint before the defence case."
    ]
   ]
  },
  "idea": {
-  "dur": 22.656,
+  "dur": 27.267,
   "marks": {
-   "allow": 4.831,
-   "test": 9.544,
-   "law": 12.109,
-   "cred": 14.766,
-   "lubaxa": 18.047,
-   "acquittal": 21.146
+   "allow": 5.22,
+   "test": 12.18,
+   "law": 15.02,
+   "cred": 18.72,
+   "lubaxa": 22.92,
+   "acquittal": 25.9
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 174 allows discharge at the close of the State case."
    ],
    [
-    4.831,
+    5.22,
     "The test is whether there is no evidence on which a reasonable court might convict."
    ],
    [
-    9.544,
+    12.18,
     "It is a question of law, not fact."
    ],
    [
-    12.109,
+    15.02,
     "Credibility is generally not considered."
    ],
    [
-    14.766,
+    18.72,
     "The modern test is Lubaxa, read with Schuping."
    ],
    [
-    18.047,
+    22.92,
     "A discharge has the same effect as an acquittal."
    ],
    [
-    21.146,
+    25.9,
     "That is the consequence."
    ]
   ]
  },
  "q1": {
-  "dur": 5.424,
+  "dur": 5.0,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    0.96,
     "Under s 174, the test is whether there is..."
    ]
   ]
  },
  "wrap": {
-  "dur": 14.976,
+  "dur": 17.2,
   "marks": {
-   "w1": 1.016,
-   "w2": 5.221,
-   "w3": 8.62,
-   "end": 13.086
+   "w1": 1.5,
+   "w2": 6.7,
+   "w3": 10.08,
+   "end": 15.28
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.5,
     "s 174: discharge at close of State case."
    ],
    [
-    5.221,
+    6.7,
     "Test: no evidence for reasonable conviction."
    ],
    [
-    8.62,
+    10.08,
     "Lubaxa: the test, and discharge has the effect of an acquittal."
    ],
    [
-    13.086,
+    15.28,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.832,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.42,
     "That is the end of chapter 3."
    ]
   ]

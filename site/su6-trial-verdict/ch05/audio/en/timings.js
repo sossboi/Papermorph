@@ -1,126 +1,126 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.72,
+  "dur": 3.667,
   "marks": {
-   "sub": 1.25
+   "sub": 0.94
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 5."
    ],
    [
-    1.25,
+    0.94,
     "The court must give judgment with reasons."
    ]
   ]
  },
  "idea": {
-  "dur": 19.488,
+  "dur": 21.133,
   "marks": {
-   "merits": 2.669,
-   "open": 5.104,
-   "reasons": 8.685,
-   "analysis": 12.656,
-   "absence": 16.159,
-   "time": 16.159
+   "merits": 2.76,
+   "open": 6.06,
+   "reasons": 9.86,
+   "analysis": 14.38,
+   "absence": 17.6,
+   "time": 17.6
   },
   "cues": [
    [
-    0.117,
+    0,
     "The court must give judgment on the merits."
    ],
    [
-    2.669,
+    2.76,
     "Judgment is delivered in open court."
    ],
    [
-    5.104,
+    6.06,
     "The accused is entitled to reasons for each conviction."
    ],
    [
-    8.685,
+    9.86,
     "Reasons must reflect an intelligent analysis of the evidence."
    ],
    [
-    12.656,
+    14.38,
     "Absence of reasons is treated as no reasons at all."
    ],
    [
-    16.159,
+    17.6,
     "The verdict must be delivered within a reasonable time."
    ]
   ]
  },
  "q1": {
-  "dur": 3.936,
+  "dur": 3.733,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.12,
     "The accused is entitled to reasons for..."
    ]
   ]
  },
  "wrap": {
-  "dur": 10.152,
+  "dur": 9.933,
   "marks": {
-   "w1": 1.016,
-   "w2": 3.698,
-   "w3": 6.133,
-   "end": 8.268
+   "w1": 1.3,
+   "w2": 3.8,
+   "w3": 6.24,
+   "end": 8.4
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.3,
     "Judgment on the merits, in open court."
    ],
    [
-    3.698,
+    3.8,
     "Reasons required for each conviction."
    ],
    [
-    6.133,
+    6.24,
     "Verdict within a reasonable time."
    ],
    [
-    8.268,
+    8.4,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.856,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.4,
     "That is the end of chapter 5."
    ]
   ]

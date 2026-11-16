@@ -1,125 +1,125 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 4.368,
+  "dur": 4.333,
   "marks": {
-   "sub": 1.185
+   "sub": 0.88
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 3."
    ],
    [
-    1.185,
+    0.88,
     "The court may question to establish what is in dispute."
    ]
   ]
  },
  "idea": {
-  "dur": 23.904,
+  "dur": 22.667,
   "marks": {
-   "allow": 5.547,
-   "only": 9.622,
-   "not": 14.375,
-   "cross": 16.862,
-   "silent": 20.898
+   "allow": 5.4,
+   "only": 9.66,
+   "not": 14.0,
+   "cross": 16.58,
+   "silent": 20.22
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 115(2)(a) allows the court to question the accused."
    ],
    [
-    5.547,
+    5.4,
     "Questioning is permitted only where it is unclear what is disputed."
    ],
    [
-    9.622,
+    9.66,
     "The court may not question about the facts relied on to substantiate a denial."
    ],
    [
-    14.375,
+    14.0,
     "That would cross into cross-examination."
    ],
    [
-    16.862,
+    16.58,
     "The court must inform the accused of the right to remain silent."
    ],
    [
-    20.898,
+    20.22,
     "Failure to do so may be an irregularity."
    ]
   ]
  },
  "q1": {
-  "dur": 6.504,
+  "dur": 6.467,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    0.68,
     "Under s 115(2)(a), the court may question only where..."
    ]
   ]
  },
  "wrap": {
-  "dur": 11.976,
+  "dur": 14.0,
   "marks": {
-   "w1": 1.016,
-   "w2": 5.352,
-   "w3": 7.161,
-   "end": 10.104
+   "w1": 1.44,
+   "w2": 6.82,
+   "w3": 8.96,
+   "end": 12.3
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.44,
     "s 115(2)(a): questioning to clarify issues."
    ],
    [
-    5.352,
+    6.82,
     "Never cross-examination."
    ],
    [
-    7.161,
+    8.96,
     "Accused must be informed of right to silence."
    ],
    [
-    10.104,
+    12.3,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.832,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.42,
     "That is the end of chapter 3."
    ]
   ]

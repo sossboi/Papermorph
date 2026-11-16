@@ -1,163 +1,163 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 4.92,
+  "dur": 5.133,
   "marks": {
-   "sub": 1.445
+   "sub": 1.06
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 21."
    ],
    [
-    1.445,
+    1.06,
     "Two ways to attack a judgment: appeal and review."
    ]
   ]
  },
  "idea": {
-  "dur": 57.816,
+  "dur": 46.267,
   "marks": {
-   "answer": 2.344,
-   "route": 4.518,
-   "never": 7.604,
-   "distinguish": 8.75,
-   "gross": 13.112,
-   "grossirregularity": 16.302,
-   "hcr53": 18.216,
-   "mcappeal": 21.875,
-   "asright": 25.065,
-   "mcr51": 26.654,
-   "tendays": 29.583,
-   "fifteen": 32.057,
-   "twenty": 34.44,
-   "stage2": 36.393,
-   "forty": 39.766,
-   "sixty": 42.096,
-   "leave": 44.74,
-   "suspension": 48.672,
-   "interlocutory": 52.865
+   "answer": 2.5,
+   "route": 4.44,
+   "never": 7.34,
+   "distinguish": 8.68,
+   "gross": 13.14,
+   "grossirregularity": 15.9,
+   "hcr53": 18.22,
+   "mcappeal": 22.12,
+   "asright": 26.16,
+   "mcr51": 27.28,
+   "tendays": 31.52,
+   "fifteen": 34.34,
+   "twenty": 35.88,
+   "stage2": 38.34,
+   "forty": 42.14,
+   "sixty": 44.3,
+   "leave": 47.736,
+   "suspension": 52.305,
+   "interlocutory": 57.078
   },
   "cues": [
    [
-    0.104,
+    0,
     "Appeal is about a wrong answer; review is about a wrong route."
    ],
    [
-    4.518,
+    4.44,
     "A High Court judge's decision is never reviewed; it is appealed."
    ],
    [
-    8.75,
+    8.68,
     "Appeal and review are distinguished by their object and their grounds."
    ],
    [
-    13.112,
+    13.14,
     "A review ground must be a gross irregularity, and it must cause prejudice."
    ],
    [
-    18.216,
+    18.22,
     "Review procedure is governed by HCR 53."
    ],
    [
-    21.875,
+    22.12,
     "An appeal from a Magistrates' Court lies as of right; no leave is needed."
    ],
    [
-    26.654,
+    27.28,
     "Stage one is MCR 51: ten court days to request reasons, fifteen for the magistrate to give them, and twenty to note the appeal."
    ],
    [
-    36.393,
+    38.34,
     "Stage two is the High Court under HCR 50."
    ],
    [
-    39.766,
+    42.14,
     "Forty court days to apply for a date, and sixty court days to file the record."
    ],
    [
-    44.74,
+    47.736,
     "An appeal from the High Court needs leave under section 17."
    ],
    [
-    48.672,
+    52.305,
     "A final decision is suspended pending appeal under section 18."
    ],
    [
-    52.865,
+    57.078,
     "An interlocutory order is not suspended unless the court directs otherwise."
    ]
   ]
  },
  "q1": {
-  "dur": 3.144,
+  "dur": 3.133,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.081,
+    1.02,
     "An appeal from a Magistrates' Court..."
    ]
   ]
  },
  "wrap": {
-  "dur": 20.64,
+  "dur": 21.8,
   "marks": {
-   "w1": 1.016,
-   "w2": 4.805,
-   "w3": 12.031,
-   "end": 18.776
+   "w1": 1.18,
+   "w2": 4.78,
+   "w3": 12.48,
+   "end": 20.14
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.18,
     "Appeal is a wrong answer; review is a wrong route."
    ],
    [
-    4.805,
+    4.78,
     "MC appeals lie as of right: 10, 15, 20 court days, then 40 and 60."
    ],
    [
-    12.031,
+    12.48,
     "HC appeals need leave under s 17; s 18 suspends a final decision pending appeal."
    ],
    [
-    18.776,
+    20.14,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 3.144,
+  "dur": 3.133,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.12,
     "That is the end of chapter 21."
    ]
   ]

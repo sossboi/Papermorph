@@ -1,125 +1,125 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.36,
+  "dur": 3.4,
   "marks": {
-   "sub": 1.25
+   "sub": 0.96
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 5."
    ],
    [
-    1.25,
+    0.96,
     "The three phases of changing a plea."
    ]
   ]
  },
  "idea": {
-  "dur": 27.888,
+  "dur": 27.067,
   "marks": {
-   "phase1": 4.505,
-   "phase2": 10.312,
-   "onus": 12.422,
-   "refuse": 17.344,
-   "phase3": 22.982
+   "phase1": 4.66,
+   "phase2": 10.22,
+   "onus": 12.66,
+   "refuse": 17.06,
+   "phase3": 22.66
   },
   "cues": [
    [
-    0.182,
+    0,
     "Phase 1: during plea proceedings, the court acts on doubt."
    ],
    [
-    4.505,
+    4.66,
     "Phase 2: later but before sentence, the accused needs a reasonable explanation."
    ],
    [
-    10.312,
+    10.22,
     "There is no onus on the accused."
    ],
    [
-    12.422,
+    12.66,
     "The court refuses only if the explanation is false beyond reasonable doubt."
    ],
    [
-    17.344,
+    17.06,
     "Phase 3: after the trial is finalised, only in exceptional circumstances."
    ],
    [
-    22.982,
+    22.66,
     "The applicant must prove a gross irregularity on a balance of probabilities."
    ]
   ]
  },
  "q1": {
-  "dur": 5.112,
+  "dur": 4.533,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.107,
+    1.22,
     "Before sentence, the accused changing a guilty plea needs..."
    ]
   ]
  },
  "wrap": {
-  "dur": 17.832,
+  "dur": 19.133,
   "marks": {
-   "w1": 1.094,
-   "w2": 5.117,
-   "w3": 10.625,
-   "end": 15.951
+   "w1": 1.32,
+   "w2": 6.28,
+   "w3": 11.5,
+   "end": 17.38
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.094,
+    1.32,
     "Phase 1: court acts on doubt (s 113)."
    ],
    [
-    5.117,
+    6.28,
     "Phase 2: reasonable explanation, no onus (Britz, Botha)."
    ],
    [
-    10.625,
+    11.5,
     "Phase 3: exceptional, onus on applicant (Qoko v La Grange)."
    ],
    [
-    15.951,
+    17.38,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.856,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.4,
     "That is the end of chapter 5."
    ]
   ]

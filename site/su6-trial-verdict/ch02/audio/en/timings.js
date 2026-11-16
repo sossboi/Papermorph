@@ -1,135 +1,135 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 2.448,
+  "dur": 2.733,
   "marks": {
-   "sub": 1.133
+   "sub": 0.88
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 2."
    ],
    [
-    1.133,
+    0.88,
     "From plea to verdict."
    ]
   ]
  },
  "idea": {
-  "dur": 22.368,
+  "dur": 22.667,
   "marks": {
-   "plea": 2.969,
-   "state": 5.312,
-   "exam": 9.753,
-   "close": 11.68,
-   "discharge": 16.029,
-   "defence": 19.167,
-   "args": 20.781
+   "plea": 3.12,
+   "state": 5.4,
+   "exam": 10.02,
+   "close": 12.18,
+   "discharge": 16.56,
+   "defence": 19.66,
+   "args": 21.46
   },
   "cues": [
    [
-    0.117,
+    0,
     "The trial commences when the accused pleads."
    ],
    [
-    2.969,
+    3.12,
     "The State leads evidence first."
    ],
    [
-    5.312,
+    5.4,
     "Examination-in-chief, cross-examination, re-examination."
    ],
    [
-    9.753,
+    10.02,
     "The State closes its case."
    ],
    [
-    11.68,
+    12.18,
     "The defence may apply for discharge under s 174."
    ],
    [
-    16.029,
+    16.56,
     "If refused, the defence presents its case."
    ],
    [
-    19.167,
+    19.66,
     "Final arguments follow."
    ],
    [
-    20.781,
+    21.46,
     "The court gives judgment."
    ]
   ]
  },
  "q1": {
-  "dur": 2.808,
+  "dur": 2.933,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.107,
+    1.24,
     "The trial commences when..."
    ]
   ]
  },
  "wrap": {
-  "dur": 9.288,
+  "dur": 9.733,
   "marks": {
-   "w1": 1.016,
-   "w2": 2.721,
-   "w3": 5.104,
-   "end": 7.422
+   "w1": 1.18,
+   "w2": 2.98,
+   "w3": 5.54,
+   "end": 8.02
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.18,
     "Trial commences at plea."
    ],
    [
-    2.721,
+    2.98,
     "State case, then defence case."
    ],
    [
-    5.104,
+    5.54,
     "Final arguments, then judgment."
    ],
    [
-    7.422,
+    8.02,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.712,
+  "dur": 3.733,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.66,
     "That is the end of chapter 2."
    ]
   ]

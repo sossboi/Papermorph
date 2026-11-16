@@ -1,130 +1,130 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.456,
+  "dur": 3.4,
   "marks": {
-   "sub": 1.315
+   "sub": 0.92
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 6."
    ],
    [
-    1.315,
+    0.92,
     "No minimum sentences for children."
    ]
   ]
  },
  "idea": {
-  "dur": 26.88,
+  "dur": 31.933,
   "marks": {
-   "under18": 3.945,
-   "ccl": 7.591,
-   "cja": 10.911,
-   "last": 13.529,
-   "menu": 16.797,
-   "options": 22.24
+   "under18": 4.84,
+   "ccl": 9.12,
+   "cja": 12.38,
+   "last": 15.66,
+   "menu": 19.96,
+   "options": 27.38
   },
   "cues": [
    [
-    0.104,
+    0,
     "Minimum sentences do not apply to offenders under 18."
    ],
    [
-    3.945,
+    4.84,
     "Centre for Child Law corrected s 51(6)."
    ],
    [
-    7.591,
+    9.12,
     "Such offenders are sentenced under the Child Justice Act."
    ],
    [
-    10.911,
+    12.38,
     "Detention is a measure of last resort."
    ],
    [
-    13.529,
+    15.66,
     "The Child Justice Act provides its own sentencing menu."
    ],
    [
-    16.797,
+    19.96,
     "Community-based sentences, restorative justice, fines, correctional supervision."
    ],
    [
-    22.24,
+    27.38,
     "Imprisonment: not under 14, last resort for older children."
    ]
   ]
  },
  "q1": {
-  "dur": 4.464,
+  "dur": 4.133,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.1,
     "Minimum sentences apply to offenders under 18..."
    ]
   ]
  },
  "wrap": {
-  "dur": 10.824,
+  "dur": 11.8,
   "marks": {
-   "w1": 1.016,
-   "w2": 3.711,
-   "w3": 5.69,
-   "end": 8.958
+   "w1": 1.4,
+   "w2": 4.58,
+   "w3": 6.62,
+   "end": 10.06
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.4,
     "No minimum sentences for under-18s."
    ],
    [
-    3.711,
+    4.58,
     "Child Justice Act governs."
    ],
    [
-    5.69,
+    6.62,
     "Detention: last resort, shortest period."
    ],
    [
-    8.958,
+    10.06,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 3.0,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.4,
     "That is the end of chapter 6."
    ]
   ]

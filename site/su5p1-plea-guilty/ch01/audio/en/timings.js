@@ -1,120 +1,120 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.864,
+  "dur": 4.133,
   "marks": {
-   "sub": 1.172
+   "sub": 0.84
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 1."
    ],
    [
-    1.172,
+    0.84,
     "Three routes to conviction on a guilty plea."
    ]
   ]
  },
  "idea": {
-  "dur": 26.76,
+  "dur": 28.067,
   "marks": {
-   "routes": 2.695,
-   "minor": 10.69,
-   "serious": 17.617,
-   "written": 23.763
+   "routes": 3.52,
+   "minor": 11.32,
+   "serious": 17.98,
+   "written": 25.04
   },
   "cues": [
    [
-    0.104,
+    0,
     "Section 112 has three routes."
    ],
    [
-    2.695,
+    3.52,
     "Section 112(1)(a) covers less serious offences: no questions, convict and sentence."
    ],
    [
-    10.69,
+    11.32,
     "Section 112(1)(b) covers serious offences: questioning is compulsory."
    ],
    [
-    17.617,
+    17.98,
     "Section 112(2) covers a written statement: questioning is discretionary."
    ],
    [
-    23.763,
+    25.04,
     "The seriousness of the offence determines the route."
    ]
   ]
  },
  "q1": {
-  "dur": 5.304,
+  "dur": 5.067,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    0.96,
     "Under s 112(1)(b), questioning is..."
    ]
   ]
  },
  "wrap": {
-  "dur": 16.368,
+  "dur": 24.667,
   "marks": {
-   "w1": 1.016,
-   "w2": 5.247,
-   "w3": 10.117,
-   "end": 14.492
+   "w1": 1.88,
+   "w2": 8.9,
+   "w3": 15.84,
+   "end": 22.7
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.88,
     "s 112(1)(a): minor offence, no questions."
    ],
    [
-    5.247,
+    8.9,
     "s 112(1)(b): serious offence, compulsory questioning."
    ],
    [
-    10.117,
+    15.84,
     "s 112(2): written statement, discretionary questioning."
    ],
    [
-    14.492,
+    22.7,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.688,
+  "dur": 2.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.1,
     "That is the end of chapter 1."
    ]
   ]

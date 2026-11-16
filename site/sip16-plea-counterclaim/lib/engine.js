@@ -806,6 +806,18 @@ function reset() {
   for (const k in S) delete S[k];
   Object.assign(S, { dots: {}, tick: {}, rows: [], chips: [], samples: [], list: G(scene), line: G(scene), venn: G(scene) });
 }
+// A scene's background: a group of the whole stage, drawn before the content so it sits behind it, and faded in on the
+// beat clock (show(bg, t0)) so it coincides with the content it belongs to. The stage's own background is the board
+// colour (engine.css, --board); a backdrop is the way to give a scene a picture, a wash of colour or a frame of
+// scenery that changes with the chapter. Call it first in a beat, then draw the content over it.
+// It is inserted as the scene's first child, not appended: a group added after the panel would paint over the words.
+function backdrop(t0, draw) {
+  const g = G(scene, { o: 0 });
+  draw(g);
+  scene.insertBefore(g, scene.firstChild);
+  show(g, t0);
+  return g;
+}
 function tick(v) {
   const g = G(S.line, { o: 0 });
   path(g, `M${X(v)} ${Y0 - 11}V${Y0 + 11}`, { stroke: COL.dim, 'stroke-width': 2.5 });
@@ -2180,6 +2192,7 @@ return { TRANSLATIONS, PORTRAIT, SW, SH, LANGUAGE, translate, DECIMAL_SIGN, isSh
   COL, MATH, NAME, BAND, RIGHT, TOPR, SCREEN, SORT_SCREEN, $m, mk, st, put, render, G, path, T, cite, ctx2d, textW, F,
   R, E, TX, $tex, texGraphic, texPart, OV, M, chip, tokens, layRow, collapse, mathEl, io, out, back, lin, tw, prog,
   show, hide, draw, pop, pulse, stream, mix, evalTo, soft, clockRun, camera, scene, S, AXIS, X, Y0, num, reset, tick,
+  backdrop,
   dot, arrow, panel, retire, header, fx, fxp, finishFx, pulseFx, shakeFx, floatText, TF, $, kbd, sources, uiW, SCORE,
   h, rich, card, mascotEl, quiz, qlayer, keyAct, choice, mcq, tap, tapEls, pickEls, findWords, FIND, findMouth, findSaw, grid, rat, gcd, lowest, blanks,
   SND, P, HOLD, clearCards, seek, seekInto, start, setSpeed, setPlaying, setCaptions, hideCover, restart, boot,
@@ -2201,6 +2214,7 @@ const TRANSLATIONS = ENGINE.TRANSLATIONS, PORTRAIT = ENGINE.PORTRAIT, SW = ENGIN
   lin = ENGINE.lin, tw = ENGINE.tw, prog = ENGINE.prog, show = ENGINE.show, hide = ENGINE.hide, draw = ENGINE.draw,
   pop = ENGINE.pop, pulse = ENGINE.pulse, stream = ENGINE.stream, mix = ENGINE.mix, evalTo = ENGINE.evalTo,
   soft = ENGINE.soft, clockRun = ENGINE.clockRun, camera = ENGINE.camera, scene = ENGINE.scene, S = ENGINE.S,
+  backdrop = ENGINE.backdrop,
   AXIS = ENGINE.AXIS, X = ENGINE.X, Y0 = ENGINE.Y0, num = ENGINE.num, reset = ENGINE.reset, tick = ENGINE.tick,
   dot = ENGINE.dot, arrow = ENGINE.arrow, panel = ENGINE.panel, retire = ENGINE.retire, header = ENGINE.header,
   fx = ENGINE.fx, fxp = ENGINE.fxp, finishFx = ENGINE.finishFx, pulseFx = ENGINE.pulseFx, shakeFx = ENGINE.shakeFx,

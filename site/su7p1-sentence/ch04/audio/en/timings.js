@@ -1,125 +1,125 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.816,
+  "dur": 3.933,
   "marks": {
-   "sub": 1.211
+   "sub": 0.9
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 4."
    ],
    [
-    1.211,
+    0.9,
     "The escape valve from minimum sentences."
    ]
   ]
  },
  "idea": {
-  "dur": 29.52,
+  "dur": 30.267,
   "marks": {
-   "depart": 7.552,
-   "malgas": 11.979,
-   "normally": 15.807,
-   "cumulative": 20.312,
-   "rape": 24.31
+   "depart": 7.8,
+   "malgas": 12.12,
+   "normally": 16.22,
+   "cumulative": 20.28,
+   "rape": 24.74
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 51(3)(a) allows departure where substantial and compelling circumstances exist."
    ],
    [
-    7.552,
+    7.8,
     "The Malgas test: prescribed sentences are the point of departure."
    ],
    [
-    11.979,
+    12.12,
     "They should normally be imposed, not departed from lightly."
    ],
    [
-    15.807,
+    16.22,
     "The court must weigh the cumulative effect of all mitigating factors."
    ],
    [
-    20.312,
+    20.28,
     "For rape, four factors can never alone justify departure."
    ],
    [
-    24.31,
+    24.74,
     "Prior sexual history, lack of injury, cultural beliefs, relationship."
    ]
   ]
  },
  "q1": {
-  "dur": 3.72,
+  "dur": 3.333,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.02,
     "The Malgas test requires the court to..."
    ]
   ]
  },
  "wrap": {
-  "dur": 15.528,
+  "dur": 17.733,
   "marks": {
-   "w1": 1.016,
-   "w2": 5.69,
-   "w3": 9.154,
-   "end": 13.646
+   "w1": 1.32,
+   "w2": 7.1,
+   "w3": 10.72,
+   "end": 15.9
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.32,
     "s 51(3)(a): substantial and compelling circumstances."
    ],
    [
-    5.69,
+    7.1,
     "Malgas: minimum is the point of departure."
    ],
    [
-    9.154,
+    10.72,
     "Four factors excluded for rape (s 51(3)(aA))."
    ],
    [
-    13.646,
+    15.9,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.808,
+  "dur": 3.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.88,
     "That is the end of chapter 4."
    ]
   ]

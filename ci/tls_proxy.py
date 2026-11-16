@@ -13,7 +13,8 @@ import ssl
 import urllib.request
 import urllib.error
 
-LISTEN = ("127.0.0.1", int(os.environ.get("PROXY_PORT", "5443")))
+LISTEN_HOST = os.environ.get("LISTEN_HOST", "127.0.0.1")
+LISTEN = (LISTEN_HOST, int(os.environ.get("PROXY_PORT", "5443")))
 UPSTREAM = os.environ["REGISTRY_UPSTREAM"]
 CERT = os.environ["TLS_CERT"]
 KEY = os.environ["TLS_KEY"]

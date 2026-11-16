@@ -1,163 +1,163 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 5.952,
+  "dur": 5.267,
   "marks": {
-   "sub": 1.536
+   "sub": 1.6
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 17."
    ],
    [
-    1.536,
+    1.6,
     "Amendment is a repair mechanism, available right up to judgment."
    ]
   ]
  },
  "idea": {
-  "dur": 66.6,
+  "dur": 50.0,
   "marks": {
-   "ventilation": 4.701,
-   "always": 6.693,
-   "malafide": 8.281,
-   "costs": 11.953,
-   "moolman": 13.672,
-   "bpc": 16.523,
-   "prejudice": 18.372,
-   "curable": 19.805,
-   "affidavits": 23.711,
-   "sworn": 25.859,
-   "onus": 29.141,
-   "burden": 31.927,
-   "delay": 34.922,
-   "decisive": 37.409,
-   "nine": 40.82,
-   "fan": 44.219,
-   "ws": 51.146,
-   "pjea": 56.706,
-   "swap": 63.242
+   "ventilation": 4.72,
+   "always": 6.38,
+   "malafide": 7.5,
+   "costs": 12.1,
+   "moolman": 14.22,
+   "bpc": 17.02,
+   "prejudice": 18.74,
+   "curable": 20.3,
+   "affidavits": 25.02,
+   "sworn": 27.3,
+   "onus": 30.98,
+   "burden": 33.66,
+   "delay": 37.42,
+   "decisive": 40.24,
+   "nine": 43.94,
+   "fan": 48.36,
+   "ws": 51.761,
+   "pjea": 57.132,
+   "swap": 62.619
   },
   "cues": [
    [
-    0.117,
+    0,
     "The purpose of amendment is to allow proper ventilation of the real dispute."
    ],
    [
-    4.701,
+    4.72,
     "Amendments will always be allowed unless mala fide, or unless the injustice cannot be compensated by costs."
    ],
    [
-    11.953,
+    12.1,
     "That is the Moolman formula."
    ],
    [
-    13.672,
+    14.22,
     "The governing test asks three questions: is the amendment bona fide, will it cause prejudice, and can that prejudice be cured by costs or a postponement."
    ],
    [
-    23.711,
+    25.02,
     "Affidavits are never amended; they are corrected by a further supplementary affidavit."
    ],
    [
-    29.141,
+    30.98,
     "The onus rests on the party seeking the amendment to show the opponent will not suffer prejudice."
    ],
    [
-    34.922,
+    37.42,
     "Delay alone is never decisive; it matters only because it feeds the prejudice enquiry."
    ],
    [
-    40.82,
+    43.94,
     "Erasmus lists nine instances in three tiers."
    ],
    [
-    44.219,
+    48.36,
     "Tier one, usually allowed: formal amendments, ambiguity, and a new cause or defence."
    ],
    [
-    51.146,
+    51.761,
     "Tier two, allowed but hard: withdrawing an admission and substituting parties."
    ],
    [
-    56.706,
+    57.132,
     "Tier three, refused: prescription, jurisdiction, excipiable matters, and appeal."
    ],
    [
-    63.242,
+    62.619,
     "Remember: swap is amend, add is join."
    ]
   ]
  },
  "q1": {
-  "dur": 5.856,
+  "dur": 5.467,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.18,
     "The Moolman formula provides that amendments will always be allowed unless..."
    ]
   ]
  },
  "wrap": {
-  "dur": 18.264,
+  "dur": 17.8,
   "marks": {
-   "w1": 1.029,
-   "w2": 6.823,
-   "w3": 10.326,
-   "end": 16.38
+   "w1": 1.2,
+   "w2": 6.2,
+   "w3": 9.42,
+   "end": 16.06
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.029,
+    1.2,
     "B.P.C.: bona fide, prejudice, curable by costs or postponement."
    ],
    [
-    6.823,
+    6.2,
     "Affidavits are never amended, only supplemented."
    ],
    [
-    10.326,
+    9.42,
     "Three tiers: FAN usually allowed, WS allowed but hard, PJEA refused."
    ],
    [
-    16.38,
+    16.06,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 3.336,
+  "dur": 4.133,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.68,
     "That is the end of chapter 17."
    ]
   ]

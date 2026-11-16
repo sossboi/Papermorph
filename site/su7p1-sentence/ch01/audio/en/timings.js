@@ -1,122 +1,122 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.96,
+  "dur": 3.867,
   "marks": {
-   "sub": 1.12
+   "sub": 0.82
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 1."
    ],
    [
-    1.12,
+    0.82,
     "The three elements every sentence must weigh."
    ]
   ]
  },
  "idea": {
-  "dur": 20.472,
+  "dur": 20.2,
   "marks": {
-   "crime": 3.438,
-   "offender": 4.44,
-   "society": 6.367,
-   "mercy": 9.766,
-   "weigh": 12.409,
-   "individual": 17.135
+   "crime": 3.4,
+   "offender": 4.3,
+   "society": 6.6,
+   "mercy": 9.58,
+   "weigh": 13.12,
+   "individual": 16.72
   },
   "cues": [
    [
-    0.117,
+    0,
     "The Zinn triad has three elements: the crime, the offender, and the interests of society."
    ],
    [
-    6.367,
+    6.6,
     "Rabie added mercy as the element that blends them."
    ],
    [
-    9.766,
+    9.58,
     "The court must weigh all three together."
    ],
    [
-    12.409,
+    13.12,
     "Individualisation is the main reason for wide sentencing discretion."
    ],
    [
-    17.135,
+    16.72,
     "The triad is the starting point for every sentence."
    ]
   ]
  },
  "q1": {
-  "dur": 3.192,
+  "dur": 3.067,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.26,
     "The Zinn triad consists of..."
    ]
   ]
  },
  "wrap": {
-  "dur": 12.12,
+  "dur": 12.733,
   "marks": {
-   "w1": 1.016,
-   "w2": 4.596,
-   "w3": 7.109,
-   "end": 10.26
+   "w1": 1.58,
+   "w2": 5.24,
+   "w3": 8.76,
+   "end": 11.02
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.58,
     "Zinn triad: crime, offender, society."
    ],
    [
-    4.596,
+    5.24,
     "Rabie: mercy blends the three."
    ],
    [
-    7.109,
+    8.76,
     "Individualisation justifies wide discretion."
    ],
    [
-    10.26,
+    11.02,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.688,
+  "dur": 2.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.1,
     "That is the end of chapter 1."
    ]
   ]

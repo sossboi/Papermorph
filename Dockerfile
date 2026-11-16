@@ -7,6 +7,11 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy the SPR421 bookshelf
 COPY site/ /usr/share/nginx/html/
 
+# Normalize permissions: narration tools write files (e.g. timings.js) with mode
+# 0600, which the nginx runtime (nginx user) cannot read -> 403 in container.
+RUN find /usr/share/nginx/html -type f ! -perm 644 -exec chmod 644 {} + \
+ && find /usr/share/nginx/html -type d ! -perm 755 -exec chmod 755 {} +
+
 # Basic SPA-ish fallback: serve 404.html for missing pages
 RUN printf 'server {\n\
     listen 80;\n\

@@ -1,130 +1,130 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 2.784,
+  "dur": 3.0,
   "marks": {
-   "sub": 1.185
+   "sub": 1.58
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 3."
    ],
    [
-    1.185,
+    1.58,
     "The menu of imprisonment."
    ]
   ]
  },
  "idea": {
-  "dur": 34.704,
+  "dur": 38.533,
   "marks": {
-   "ordinary": 3.281,
-   "life": 9.362,
-   "dangerous": 15.065,
-   "habitual": 20.104,
-   "periodical": 25.898,
-   "ioption": 25.898
+   "ordinary": 4.14,
+   "life": 10.18,
+   "dangerous": 16.06,
+   "habitual": 30.9,
+   "periodical": 32.0,
+   "ioption": 32.0
   },
   "cues": [
    [
-    0.104,
+    0,
     "Ordinary imprisonment: not less than 4 days."
    ],
    [
-    3.281,
+    4.14,
     "Life imprisonment: High Court, 25 years or 65 with 15 served."
    ],
    [
-    9.362,
+    10.18,
     "Dangerous criminal: s 286A, indeterminate, reappear."
    ],
    [
-    15.065,
+    16.06,
     "Habitual criminal: s 286, 7 to 15 years."
    ],
    [
-    20.104,
+    30.9,
     "Periodical imprisonment: s 285, 100 to 2000 hours."
    ],
    [
-    25.898,
+    32.0,
     "Section 276(1)(i): imprisonment plus possible correctional supervision, max 5 years."
    ],
    [
-    33.411,
+    37.2,
     "That is imprisonment."
    ]
   ]
  },
  "q1": {
-  "dur": 4.272,
+  "dur": 3.733,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    1.1,
     "Life imprisonment parole may be considered after..."
    ]
   ]
  },
  "wrap": {
-  "dur": 14.496,
+  "dur": 16.867,
   "marks": {
-   "w1": 1.016,
-   "w2": 3.542,
-   "w3": 7.747,
-   "end": 12.63
+   "w1": 1.42,
+   "w2": 4.02,
+   "w3": 7.94,
+   "end": 15.2
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.42,
     "Ordinary: not less than 4 days."
    ],
    [
-    3.542,
+    4.02,
     "Life: 25 years or 65 with 15 served."
    ],
    [
-    7.747,
+    7.94,
     "s 276(1)(i): max 5 years, no report needed."
    ],
    [
-    12.63,
+    15.2,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.832,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.42,
     "That is the end of chapter 3."
    ]
   ]

@@ -1,125 +1,125 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 3.48,
+  "dur": 3.667,
   "marks": {
-   "sub": 1.211
+   "sub": 0.88
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 4."
    ],
    [
-    1.211,
+    0.88,
     "When an allegation becomes an admission."
    ]
   ]
  },
  "idea": {
-  "dur": 27.648,
+  "dur": 27.8,
   "marks": {
-   "ask": 6.107,
-   "consent": 12.591,
-   "s220": 17.357,
-   "sufficient": 20.625,
-   "rebut": 24.922
+   "ask": 6.9,
+   "consent": 13.3,
+   "s220": 17.7,
+   "sufficient": 21.16,
+   "rebut": 25.26
   },
   "cues": [
    [
-    0.117,
+    0,
     "Section 115(2)(b) allows the court to ask about matters raised."
    ],
    [
-    6.107,
+    6.9,
     "Where an allegation is not placed in issue, the court must ask for consent to record it as an admission."
    ],
    [
-    12.591,
+    13.3,
     "If consent is given, it is deemed a s 220 admission."
    ],
    [
-    17.357,
+    17.7,
     "An admission is sufficient proof but not conclusive."
    ],
    [
-    20.625,
+    21.16,
     "It may later be rebutted, for example by duress or mistake."
    ],
    [
-    24.922,
+    25.26,
     "The accused is never obliged to consent."
    ]
   ]
  },
  "q1": {
-  "dur": 3.48,
+  "dur": 3.533,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    2.02,
     "A s 220 admission is..."
    ]
   ]
  },
  "wrap": {
-  "dur": 14.856,
+  "dur": 16.867,
   "marks": {
-   "w1": 1.016,
-   "w2": 6.146,
-   "w3": 10.182,
-   "end": 12.982
+   "w1": 1.3,
+   "w2": 7.42,
+   "w3": 11.96,
+   "end": 15.04
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.016,
+    1.3,
     "s 115(2)(b): court asks for consent to record admission."
    ],
    [
-    6.146,
+    7.42,
     "s 220: sufficient proof, not conclusive."
    ],
    [
-    10.182,
+    11.96,
     "May be rebutted (duress, mistake)."
    ],
    [
-    12.982,
+    15.04,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.808,
+  "dur": 3.867,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.016,
+    1.88,
     "That is the end of chapter 4."
    ]
   ]

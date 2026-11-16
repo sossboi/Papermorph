@@ -1,135 +1,135 @@
 window.TIMINGS = {
  "intro": {
-  "dur": 4.512,
+  "dur": 5.867,
   "marks": {
-   "sub": 1.237
+   "sub": 1.8
   },
   "cues": [
    [
-    0.104,
+    0,
     "Chapter 5."
    ],
    [
-    1.237,
+    1.8,
     "After sentence: functus officio and fines."
    ]
   ]
  },
  "idea": {
-  "dur": 28.272,
+  "dur": 30.067,
   "marks": {
-   "functus": 3.177,
-   "appeal": 5.794,
-   "admin": 9.245,
-   "fines": 12.383,
-   "limits": 18.828,
-   "total": 23.346,
-   "compensation": 23.346
+   "functus": 3.54,
+   "appeal": 6.06,
+   "admin": 9.14,
+   "fines": 12.64,
+   "limits": 20.24,
+   "total": 24.84,
+   "compensation": 24.84
   },
   "cues": [
    [
-    0.104,
+    0,
     "Once sentenced, the court is functus officio."
    ],
    [
-    3.177,
+    3.54,
     "The accused must appeal or review."
    ],
    [
-    5.794,
+    6.06,
     "Administrative release by the Department is criticised."
    ],
    [
-    9.245,
+    9.14,
     "Fines: less serious, means, gain."
    ],
    [
-    12.383,
+    12.64,
     "Regional court R600 000; district court R120 000."
    ],
    [
-    18.828,
+    20.24,
     "Total imprisonment including alternative may not exceed jurisdiction."
    ],
    [
-    23.346,
+    24.84,
     "Section 300 compensation is a civil judgment."
    ],
    [
-    26.94,
+    28.68,
     "That is the sentence."
    ]
   ]
  },
  "q1": {
-  "dur": 3.696,
+  "dur": 3.6,
   "marks": {},
   "cues": [
    [
-    0.117,
+    0,
     "Quick check."
    ],
    [
-    1.094,
+    0.6,
     "Once the court has passed sentence, it is..."
    ]
   ]
  },
  "wrap": {
-  "dur": 12.024,
+  "dur": 14.867,
   "marks": {
-   "w1": 1.042,
-   "w2": 3.984,
-   "w3": 6.953,
-   "end": 10.156
+   "w1": 1.68,
+   "w2": 4.38,
+   "w3": 8.96,
+   "end": 13.04
   },
   "cues": [
    [
-    0.117,
+    0,
     "To sum up."
    ],
    [
-    1.042,
+    1.68,
     "Functus officio: appeal or review."
    ],
    [
-    3.984,
+    4.38,
     "Fines: L-M-G, limits per court."
    ],
    [
-    6.953,
+    8.96,
     "s 300 compensation: civil judgment."
    ],
    [
-    10.156,
+    13.04,
     "Now try the chapter practice."
    ]
   ]
  },
  "final1": {
-  "dur": 2.592,
+  "dur": 2.6,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Chapter practice."
    ],
    [
-    1.445,
+    1.46,
     "Name the task."
    ]
   ]
  },
  "finish": {
-  "dur": 2.856,
+  "dur": 3.4,
   "marks": {},
   "cues": [
    [
-    0.104,
+    0,
     "Well done."
    ],
    [
-    1.029,
+    1.4,
     "That is the end of chapter 5."
    ]
   ]
