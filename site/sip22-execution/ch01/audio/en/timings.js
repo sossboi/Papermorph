@@ -108,10 +108,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 22.067,
   "marks": {
-   "w1": 1.3,
-   "w2": 6.54,
-   "w3": 13.58,
-   "end": 20.36
+   "w1": 1.22,
+   "w2": 7.04,
+   "w3": 14.16,
+   "end": 20.96,
+   "w4": 22.96
   },
   "cues": [
    [
@@ -119,24 +120,28 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.3,
+    1.22,
     "W-A-S: valid writ, attachment, sale."
    ],
    [
-    5.72,
+    5.54,
     "Movables first."
    ],
    [
-    6.54,
+    7.04,
     "A primary residence needs a court order under HCR 46A or MCR 43A."
    ],
    [
-    13.58,
+    14.16,
     "Third-party claims trigger interpleader: HCR 58 or s 69 MCA."
    ],
    [
-    20.36,
+    20.96,
     "Now try the chapter practice."
+   ],
+   [
+    22.96,
+    "The debtor may apply to set aside execution on good cause."
    ]
   ]
  },
@@ -165,6 +170,56 @@ window.TIMINGS = {
    [
     1.04,
     "That is the end of chapter 22."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 3.067,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: execution of judgment involves..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.267,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.22,
+    "Which comes first in execution: movables or immovables?"
+   ]
+  ]
+ },
+ "idea:was": {
+  "dur": 13.467,
+  "marks": {
+   "writ2": 3.92,
+   "attach": 6.98,
+   "sale": 10.54
+  },
+  "cues": [
+   [
+    0,
+    "W-A-S: Writ, Attachment, Sale."
+   ],
+   [
+    3.92,
+    "Writ or warrant of execution issued by the court."
+   ],
+   [
+    6.98,
+    "Sheriff attaches movables first, then immovables."
+   ],
+   [
+    10.54,
+    "Public auction sale; proceeds pay the creditor."
    ]
   ]
  }

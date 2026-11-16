@@ -118,5 +118,45 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:routes": {
+  "dur": 9.6,
+  "marks": {
+   "minor": 1.76,
+   "serious": 9.46,
+   "written": 16.106
+  },
+  "cues": [
+   [
+    0.46,
+    "Three routes compared."
+   ],
+   [
+    1.76,
+    "s 112(1)(a): minor offence, max 3 months, no questioning."
+   ],
+   [
+    9.46,
+    "s 112(1)(b): serious offence, compulsory questioning."
+   ],
+   [
+    16.106,
+    "s 112(2): written statement, discretionary questioning."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 4.733,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.4,
+    "Which route requires compulsory questioning of the accused?"
+   ]
+  ]
  }
 };

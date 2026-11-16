@@ -118,5 +118,75 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:pleas": {
+  "dur": 19.8,
+  "marks": {
+   "g1": 4.12,
+   "g2": 5.22,
+   "g3": 6.42,
+   "g4": 7.92,
+   "g5": 10.0,
+   "g6": 11.42,
+   "g7": 12.9,
+   "g8": 15.56,
+   "g9": 17.74
+  },
+  "cues": [
+   [
+    0,
+    "The nine pleas of s 106(1)."
+   ],
+   [
+    4.12,
+    "Guilty."
+   ],
+   [
+    5.22,
+    "Not guilty."
+   ],
+   [
+    6.42,
+    "Autrefois convict."
+   ],
+   [
+    7.92,
+    "Autrefois acquit."
+   ],
+   [
+    10.0,
+    "Free pardon."
+   ],
+   [
+    11.42,
+    "No jurisdiction."
+   ],
+   [
+    12.9,
+    "Discharge under s 204."
+   ],
+   [
+    15.56,
+    "No title to prosecute."
+   ],
+   [
+    17.74,
+    "Prosecution may not be resumed."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 4.333,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.16,
+    "Which plea may NOT be combined with a not-guilty plea?"
+   ]
+  ]
  }
 };

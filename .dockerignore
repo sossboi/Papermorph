@@ -27,6 +27,7 @@ site/*
 !site/sip22-execution/
 !site/sip23-debt-collection/
 !site/sip24-legal-costs/
+!site/pvr420-estoppel/
 # science is off the shelf but linked from its own page, which links the clay and
 # notebook editions; all three ship so those links resolve.
 !site/science/

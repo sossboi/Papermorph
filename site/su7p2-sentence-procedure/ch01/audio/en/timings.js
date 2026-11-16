@@ -128,5 +128,55 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:procedure": {
+  "dur": 24.067,
+  "marks": {
+   "s274": 1.88,
+   "oral2": 7.2,
+   "sap69": 10.18,
+   "denied": 14.14,
+   "fall2": 17.78
+  },
+  "cues": [
+   [
+    0,
+    "Sentencing procedure steps."
+   ],
+   [
+    1.88,
+    "s 274: court receives evidence as it thinks fit."
+   ],
+   [
+    7.2,
+    "Oral testimony preferred over documents."
+   ],
+   [
+    10.18,
+    "Previous convictions via SAP 69 fingerprint record."
+   ],
+   [
+    14.14,
+    "If denied: LCRC officer called to prove."
+   ],
+   [
+    17.78,
+    "s 271A: some convictions fall away after 10 years."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.467,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "Under s 274, what evidence may the court receive?"
+   ]
+  ]
  }
 };

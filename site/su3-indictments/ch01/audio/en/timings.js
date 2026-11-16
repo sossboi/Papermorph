@@ -109,5 +109,45 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:charge": {
+  "dur": 10.2,
+  "marks": {
+   "offence": 2.24,
+   "facts": 5.02,
+   "timeplace": 7.62
+  },
+  "cues": [
+   [
+    0,
+    "The charge requirements."
+   ],
+   [
+    2.24,
+    "The offence with which the accused is charged."
+   ],
+   [
+    5.02,
+    "The facts on which the charge is based."
+   ],
+   [
+    7.62,
+    "The time and place of the alleged offence."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 3.6,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.4,
+    "The charge must enable the accused to..."
+   ]
+  ]
  }
 };

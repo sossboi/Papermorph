@@ -120,5 +120,50 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:zinn": {
+  "dur": 18.133,
+  "marks": {
+   "crime": 2.12,
+   "offender": 6.66,
+   "society": 10.6,
+   "mercy": 15.58
+  },
+  "cues": [
+   [
+    0,
+    "The Zinn triad in detail."
+   ],
+   [
+    2.12,
+    "The crime: nature, seriousness, circumstances."
+   ],
+   [
+    6.66,
+    "The offender: background, character, prospects."
+   ],
+   [
+    10.6,
+    "Society's interests: deterrence, protection, retribution."
+   ],
+   [
+    15.58,
+    "Rabie: mercy blends the three elements."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 3.533,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.4,
+    "What did Rabie add to the Zinn triad?"
+   ]
+  ]
  }
 };

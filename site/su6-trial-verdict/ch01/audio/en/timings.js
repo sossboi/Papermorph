@@ -121,5 +121,65 @@ window.TIMINGS = {
     "That is the end of chapter 1."
    ]
   ]
+ },
+ "idea:flipjof": {
+  "dur": 22.2,
+  "marks": {
+   "f1": 2.76,
+   "l": 6.56,
+   "i": 9.2,
+   "p": 11.66,
+   "j": 13.56,
+   "o": 17.6,
+   "f2": 19.52
+  },
+  "cues": [
+   [
+    1.0,
+    "FLIP-JOF: seven trial principles."
+   ],
+   [
+    2.76,
+    "Fairness, s 35(3) Constitution."
+   ],
+   [
+    6.56,
+    "Legality, State proves legal guilt."
+   ],
+   [
+    9.2,
+    "Impartiality, passive umpire."
+   ],
+   [
+    11.66,
+    "Public, open court."
+   ],
+   [
+    13.56,
+    "Judicial control, court manages process."
+   ],
+   [
+    17.6,
+    "Orality, evidence viva voce."
+   ],
+   [
+    19.52,
+    "Finality, verdict ends the case."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.267,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "Which principle requires the presiding officer to be a passive umpire?"
+   ]
+  ]
  }
 };

@@ -92,9 +92,10 @@ window.TIMINGS = {
   "dur": 26.067,
   "marks": {
    "w1": 1.54,
-   "w2": 9.38,
-   "w3": 16.42,
-   "end": 23.76
+   "w2": 9.88,
+   "w3": 17.26,
+   "end": 24.84,
+   "w4": 26.96
   },
   "cues": [
    [
@@ -106,16 +107,20 @@ window.TIMINGS = {
     "Section 65 enforces an existing judgment: ten days unpaid, then a registered letter and ten more days."
    ],
    [
-    9.38,
+    9.88,
     "An EAO has two stages, a twenty-five percent cap of basic salary, and ten days to oppose."
    ],
    [
-    16.42,
+    17.26,
     "Administration is started by the debtor, debts under fifty thousand rand, administrator capped at twelve point five percent."
    ],
    [
-    23.76,
+    24.84,
     "Now try the chapter practice."
+   ],
+   [
+    26.96,
+    "The court may review the method of execution."
    ]
   ]
  },
@@ -144,6 +149,56 @@ window.TIMINGS = {
    [
     1.4,
     "That is the end of chapter 23."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 3.133,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: debt collection procedures include..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 3.133,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.9,
+    "Who starts an administration order?"
+   ]
+  ]
+ },
+ "idea:eao": {
+  "dur": 14.6,
+  "marks": {
+   "stage1": 4.12,
+   "stage2": 7.56,
+   "cap": 9.92
+  },
+  "cues": [
+   [
+    0,
+    "EAO: two stages, 25% cap."
+   ],
+   [
+    4.12,
+    "Employer notified, debtor has 10 days to oppose."
+   ],
+   [
+    7.56,
+    "Court confirms or sets aside."
+   ],
+   [
+    9.92,
+    "All EAOs combined may not exceed 25% of basic salary."
    ]
   ]
  }

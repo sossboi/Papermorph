@@ -113,10 +113,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 28.2,
   "marks": {
-   "w1": 1.42,
-   "w2": 6.46,
-   "w3": 14.24,
-   "end": 26.24
+   "w1": 1.22,
+   "w2": 6.08,
+   "w3": 13.2,
+   "end": 23.18,
+   "w4": 25.24
   },
   "cues": [
    [
@@ -124,20 +125,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.42,
+    1.22,
     "The primary onus never shifts; only the evidentiary burden does."
    ],
    [
-    6.46,
+    6.08,
     "Absolution: prima facie at the end of the plaintiff's case, balance of probabilities at the end of the whole case."
    ],
    [
-    14.24,
+    13.2,
     "Variation and rescission: HCR 42, HCR 31, s 23A; MC s 36 and MCR 49."
    ],
    [
-    26.24,
+    23.18,
     "Now try the chapter practice."
+   ],
+   [
+    25.24,
+    "Judgment may be reserved for later delivery."
    ]
   ]
  },
@@ -166,6 +171,61 @@ window.TIMINGS = {
    [
     1.24,
     "That is the end of chapter 19."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 2.6,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: the court gives judgment..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.867,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "At the close of the whole case, the court applies which test for absolution?"
+   ]
+  ]
+ },
+ "idea:onus": {
+  "dur": 21.8,
+  "marks": {
+   "primary": 2.52,
+   "evidentiary": 7.14,
+   "absolution1": 11.6,
+   "absolution2": 16.62
+  },
+  "cues": [
+   [
+    0,
+    "Primary onus versus evidentiary burden."
+   ],
+   [
+    2.52,
+    "Primary onus: fixed by substantive law, never shifts."
+   ],
+   [
+    7.14,
+    "Evidentiary burden: shifts as each party meets its burden."
+   ],
+   [
+    11.6,
+    "Absolution test 1: prima facie case at close of plaintiff's case."
+   ],
+   [
+    16.62,
+    "Absolution test 2: balance of probabilities at close of whole case."
    ]
   ]
  }

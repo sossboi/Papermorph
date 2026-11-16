@@ -105,10 +105,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 20.2,
   "marks": {
-   "w1": 1.24,
-   "w2": 5.4,
-   "w3": 14.5,
-   "end": 18.56
+   "w1": 1.26,
+   "w2": 5.82,
+   "w3": 15.72,
+   "end": 19.98,
+   "w4": 22.16
   },
   "cues": [
    [
@@ -116,24 +117,28 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.24,
+    1.26,
     "A liquid document needs no extrinsic evidence to prove the amount."
    ],
    [
-    5.4,
+    5.82,
     "Two onuses: the plaintiff proves the document; the defendant shows probability of success in the principal case."
    ],
    [
-    14.5,
+    15.72,
     "Twee Jonge Gezellen: three factors must coincide."
    ],
    [
-    16.58,
+    18.02,
     "Provisional is not final."
    ],
    [
-    18.56,
+    19.98,
     "Now try the chapter practice."
+   ],
+   [
+    22.16,
+    "The amount is adjusted at the final sentence hearing."
    ]
   ]
  },
@@ -162,6 +167,56 @@ window.TIMINGS = {
    [
     1.12,
     "That is the end of chapter 20."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 2.533,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: provisional sentence is..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.933,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "The constitutional discretion to refuse provisional sentence bites where..."
+   ]
+  ]
+ },
+ "idea:twee": {
+  "dur": 12.333,
+  "marks": {
+   "pay": 3.08,
+   "balanced": 5.86,
+   "oral": 10.1
+  },
+  "cues": [
+   [
+    1.72,
+    "Twee Jonge Gezellen three factors."
+   ],
+   [
+    3.08,
+    "The defendant cannot pay the judgment amount."
+   ],
+   [
+    5.86,
+    "The prospects of success in the principal case are evenly balanced."
+   ],
+   [
+    10.1,
+    "Oral evidence may tip the balance."
    ]
   ]
  }

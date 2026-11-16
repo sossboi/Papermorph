@@ -113,10 +113,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 20.933,
   "marks": {
-   "w1": 1.36,
-   "w2": 7.48,
-   "w3": 12.24,
-   "end": 19.1
+   "w1": 1.34,
+   "w2": 7.2,
+   "w3": 12.1,
+   "end": 19.18,
+   "w4": 21.52
   },
   "cues": [
    [
@@ -124,20 +125,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.36,
+    1.34,
     "A-D-N-C: admit, deny, not admit, confess and avoid."
    ],
    [
-    7.48,
+    7.2,
     "Special pleas: declinatory destroys, dilatory delays."
    ],
    [
-    12.24,
+    12.1,
     "Counterclaim is a claim in reconvention; replication only to admit, qualify or nullify."
    ],
    [
-    19.1,
+    19.18,
     "Now try the chapter practice."
+   ],
+   [
+    21.52,
+    "The A-D-N-C plea framework applies across civil procedure."
    ]
   ]
  },
@@ -166,6 +171,61 @@ window.TIMINGS = {
    [
     1.12,
     "That is the end of chapter 16."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 3.4,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: a defendant with no knowledge should plead..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 3.733,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.18,
+    "Which plea enters no knowledge of the allegation?"
+   ]
+  ]
+ },
+ "idea:adnc": {
+  "dur": 21.4,
+  "marks": {
+   "admit": 5.32,
+   "deny": 8.52,
+   "notadmit": 12.6,
+   "confess": 16.02
+  },
+  "cues": [
+   [
+    0,
+    "A-D-N-C: Admit, deny, not admit, confess."
+   ],
+   [
+    5.32,
+    "Admit: the defendant admits the allegation."
+   ],
+   [
+    8.52,
+    "Deny: the defendant places the allegation in issue."
+   ],
+   [
+    12.6,
+    "Not admit: the defendant has no knowledge."
+   ],
+   [
+    16.02,
+    "Confess: the defendant admits and raises new facts to avoid consequences."
    ]
   ]
  }

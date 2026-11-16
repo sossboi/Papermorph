@@ -106,10 +106,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 17.8,
   "marks": {
-   "w1": 1.2,
-   "w2": 6.2,
-   "w3": 9.42,
-   "end": 16.06
+   "w1": 1.42,
+   "w2": 7.54,
+   "w3": 11.34,
+   "end": 20.9,
+   "w4": 22.32
   },
   "cues": [
    [
@@ -117,20 +118,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.2,
+    1.42,
     "B.P.C.: bona fide, prejudice, curable by costs or postponement."
    ],
    [
-    6.2,
+    7.54,
     "Affidavits are never amended, only supplemented."
    ],
    [
-    9.42,
+    11.34,
     "Three tiers: FAN usually allowed, WS allowed but hard, PJEA refused."
    ],
    [
-    16.06,
+    20.9,
     "Now try the chapter practice."
+   ],
+   [
+    22.32,
+    "Late amendments are exceptional and require special cause."
    ]
   ]
  },
@@ -159,6 +164,60 @@ window.TIMINGS = {
    [
     1.68,
     "That is the end of chapter 17."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 3.067,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: amending a pleading after close..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 4.933,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.52,
+    "The B.P.C."
+   ],
+   [
+    2.0,
+    "test applies to which kind of amendment?"
+   ]
+  ]
+ },
+ "idea:bpc": {
+  "dur": 17.933,
+  "marks": {
+   "bona": 4.8,
+   "prejudice2": 7.86,
+   "curable": 12.36
+  },
+  "cues": [
+   [
+    0,
+    "B.P.C.: Bona Fide, Prejudice, Curable."
+   ],
+   [
+    4.8,
+    "Bona fide: the amendment must be honest and well-intentioned."
+   ],
+   [
+    7.86,
+    "Prejudice: the other party's position must not be irreparably harmed."
+   ],
+   [
+    12.36,
+    "Curable by costs: if prejudice exists, costs or postponement may cure it."
    ]
   ]
  }

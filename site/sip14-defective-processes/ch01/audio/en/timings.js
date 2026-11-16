@@ -102,6 +102,32 @@ window.TIMINGS = {
    ]
   ]
  },
+ "idea:strike": {
+  "dur": 18.867,
+  "marks": {
+   "exception2": 1.8,
+   "strike2": 6.56,
+   "irregular2": 11.84
+  },
+  "cues": [
+   [
+    0,
+    "Exception versus strike out."
+   ],
+   [
+    1.8,
+    "Exception attacks the whole pleading and lies only to pleas."
+   ],
+   [
+    6.56,
+    "Strike out attacks part of a pleading; the remedy for affidavits."
+   ],
+   [
+    11.84,
+    "HCR 30 or MCR 60A: an irregular step is lost by a further step with knowledge."
+   ]
+  ]
+ },
  "q1": {
   "dur": 3.333,
   "marks": {},
@@ -120,9 +146,10 @@ window.TIMINGS = {
   "dur": 26.733,
   "marks": {
    "w1": 1.28,
-   "w2": 10.28,
-   "w3": 17.48,
-   "end": 24.8
+   "w2": 5.38,
+   "w3": 12.74,
+   "end": 20.8,
+   "w4": 23.04
   },
   "cues": [
    [
@@ -134,16 +161,20 @@ window.TIMINGS = {
     "Exception attacks the whole pleading; strike out attacks part."
    ],
    [
-    10.28,
+    5.38,
     "Irregular step: HCR 30 or MCR 60A, lost by a further step with knowledge."
    ],
    [
-    17.48,
+    12.74,
     "Barring: five days' notice before replication, ipso facto after; condonation needs good cause."
    ],
    [
-    24.8,
+    20.8,
     "Now try the chapter practice."
+   ],
+   [
+    23.04,
+    "Minor procedural non-compliance may be condoned with good cause."
    ]
   ]
  },
@@ -161,6 +192,20 @@ window.TIMINGS = {
    ]
   ]
  },
+ "final2": {
+  "dur": 6.0,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "Which remedy for a defendant who admits the facts but disputes their legal effect?"
+   ]
+  ]
+ },
  "finish": {
   "dur": 3.6,
   "marks": {},
@@ -172,6 +217,16 @@ window.TIMINGS = {
    [
     1.16,
     "That is the end of chapter 14."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 5.933,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: an exception may be taken when a pleading is vague and embarrassing or bad in law."
    ]
   ]
  }

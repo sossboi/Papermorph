@@ -106,10 +106,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 18.133,
   "marks": {
-   "w1": 1.42,
-   "w2": 4.9,
-   "w3": 10.44,
-   "end": 16.4
+   "w1": 1.22,
+   "w2": 4.52,
+   "w3": 9.92,
+   "end": 16.18,
+   "w4": 18.56
   },
   "cues": [
    [
@@ -117,20 +118,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.42,
+    1.22,
     "Costs follow the event, judged by substance."
    ],
    [
-    4.9,
+    4.52,
     "Three scales: party-and-party, attorney-and-client, attorney-and-own-client."
    ],
    [
-    10.44,
+    9.92,
     "Inspect ten days, oppose twenty, then allocatur makes the bill a court order."
    ],
    [
-    16.4,
+    16.18,
     "Now try the chapter practice."
+   ],
+   [
+    18.56,
+    "Costs follow the event unless the court orders otherwise."
    ]
   ]
  },
@@ -159,6 +164,56 @@ window.TIMINGS = {
    [
     1.28,
     "That is the end of chapter 24."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 2.733,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: legal costs are generally..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 3.733,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.92,
+    "Which scale of costs is the highest?"
+   ]
+  ]
+ },
+ "idea:scales": {
+  "dur": 11.867,
+  "marks": {
+   "party": 1.78,
+   "attorney": 4.24,
+   "own": 8.58
+  },
+  "cues": [
+   [
+    0,
+    "Three scales of costs."
+   ],
+   [
+    1.78,
+    "Party-and-party: the standard scale."
+   ],
+   [
+    4.24,
+    "Attorney-and-client: higher, includes reasonable attorney fees."
+   ],
+   [
+    8.58,
+    "Attorney-and-own-client: the full indemnity scale."
    ]
   ]
  }

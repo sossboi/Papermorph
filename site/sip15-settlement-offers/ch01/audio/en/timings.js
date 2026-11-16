@@ -89,6 +89,32 @@ window.TIMINGS = {
    ]
   ]
  },
+ "idea:ctu": {
+  "dur": 13.2,
+  "marks": {
+   "compromise": 2.1,
+   "tender2": 6.64,
+   "unconditional2": 9.84
+  },
+  "cues": [
+   [
+    0,
+    "The C\u2011T\u2011U breakdown."
+   ],
+   [
+    2.1,
+    "Compromise means each side gives a little and liability is denied."
+   ],
+   [
+    6.64,
+    "Tender is a formal offer with costs consequences."
+   ],
+   [
+    9.84,
+    "Unconditional means no conditions and it cannot be withdrawn."
+   ]
+  ]
+ },
  "q1": {
   "dur": 4.333,
   "marks": {},
@@ -106,10 +132,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 22.933,
   "marks": {
-   "w1": 0.86,
-   "w2": 7.62,
-   "w3": 12.4,
-   "end": 20.4
+   "w1": 1.22,
+   "w2": 7.28,
+   "w3": 12.2,
+   "end": 19.52,
+   "w4": 21.6
   },
   "cues": [
    [
@@ -117,24 +144,28 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    0.86,
+    1.22,
     "Two tracks: common-law offers and HCR 34 or MCR 18 tenders."
    ],
    [
-    7.62,
+    7.28,
     "Without prejudice means hidden until after judgment, and only for costs."
    ],
    [
-    12.4,
+    12.2,
     "Security for costs: F-I-L-E."
    ],
    [
-    15.78,
+    15.18,
     "Mediation: Rule 41A and the Gauteng directive."
    ],
    [
-    20.4,
+    19.52,
     "Now try the chapter practice."
+   ],
+   [
+    21.6,
+    "Security for costs and mediation serve different purposes."
    ]
   ]
  },
@@ -152,6 +183,20 @@ window.TIMINGS = {
    ]
   ]
  },
+ "final2": {
+  "dur": 5.133,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the rules."
+   ],
+   [
+    0.96,
+    "Which track applies to a formal offer under HCR 34?"
+   ]
+  ]
+ },
  "finish": {
   "dur": 3.4,
   "marks": {},
@@ -163,6 +208,16 @@ window.TIMINGS = {
    [
     1.28,
     "That is the end of chapter 15."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 2.733,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: a mediation may be ordered..."
    ]
   ]
  }

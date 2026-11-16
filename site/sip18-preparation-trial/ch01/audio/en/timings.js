@@ -81,10 +81,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 19.333,
   "marks": {
-   "w1": 1.2,
-   "w2": 4.34,
-   "w3": 13.06,
-   "end": 17.54
+   "w1": 1.18,
+   "w2": 4.46,
+   "w3": 12.2,
+   "end": 16.4,
+   "w4": 18.24
   },
   "cues": [
    [
@@ -92,20 +93,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.2,
+    1.18,
     "Close of pleadings triggers the preparation stage."
    ],
    [
-    4.34,
+    4.46,
     "Discovery: twenty days on affidavit, then five plus five for inspection; compulsory in the HC only."
    ],
    [
-    13.06,
+    12.2,
     "Pre-trial conference minutes are filed twenty-five days before trial."
    ],
    [
-    17.54,
+    16.4,
     "Now try the chapter practice."
+   ],
+   [
+    18.24,
+    "The court controls the preparation timeline."
    ]
   ]
  },
@@ -134,6 +139,56 @@ window.TIMINGS = {
    [
     1.1,
     "That is the end of chapter 18."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 3.067,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: preparation for trial includes..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 4.133,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    0.9,
+    "In which court is discovery of documents compulsory?"
+   ]
+  ]
+ },
+ "idea:disc": {
+  "dur": 11.2,
+  "marks": {
+   "trialnoticed": 1.78,
+   "inspect": 5.72,
+   "copies": 8.38
+  },
+  "cues": [
+   [
+    0,
+    "Discovery timeline."
+   ],
+   [
+    1.78,
+    "Trial date noticed: 20 days to deliver list of documents."
+   ],
+   [
+    5.72,
+    "Opposite party has 5 days to inspect."
+   ],
+   [
+    8.38,
+    "Then 5 more days to request copies."
    ]
   ]
  }

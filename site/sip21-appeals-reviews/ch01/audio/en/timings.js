@@ -106,10 +106,11 @@ window.TIMINGS = {
  "wrap": {
   "dur": 21.8,
   "marks": {
-   "w1": 1.18,
-   "w2": 4.78,
-   "w3": 12.48,
-   "end": 20.14
+   "w1": 1.26,
+   "w2": 5.04,
+   "w3": 12.42,
+   "end": 20.1,
+   "w4": 22.3
   },
   "cues": [
    [
@@ -117,20 +118,24 @@ window.TIMINGS = {
     "To sum up."
    ],
    [
-    1.18,
+    1.26,
     "Appeal is a wrong answer; review is a wrong route."
    ],
    [
-    4.78,
+    5.04,
     "MC appeals lie as of right: 10, 15, 20 court days, then 40 and 60."
    ],
    [
-    12.48,
+    12.42,
     "HC appeals need leave under s 17; s 18 suspends a final decision pending appeal."
    ],
    [
-    20.14,
+    20.1,
     "Now try the chapter practice."
+   ],
+   [
+    22.3,
+    "Extension of time may be sought on good cause shown."
    ]
   ]
  },
@@ -159,6 +164,56 @@ window.TIMINGS = {
    [
     1.12,
     "That is the end of chapter 21."
+   ]
+  ]
+ },
+ "q2": {
+  "dur": 2.6,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Quick check: an appeal must be filed..."
+   ]
+  ]
+ },
+ "final2": {
+  "dur": 5.067,
+  "marks": {},
+  "cues": [
+   [
+    0,
+    "Apply the law."
+   ],
+   [
+    1.42,
+    "Which remedy for a gross irregularity that caused prejudice?"
+   ]
+  ]
+ },
+ "idea:answerroute": {
+  "dur": 13.867,
+  "marks": {
+   "answer": 2.74,
+   "route": 7.12,
+   "gross": 10.44
+  },
+  "cues": [
+   [
+    0,
+    "Wrong answer versus wrong route."
+   ],
+   [
+    2.74,
+    "Appeal: the court reached a wrong conclusion on law or fact."
+   ],
+   [
+    7.12,
+    "Review: the court followed a wrong procedure."
+   ],
+   [
+    10.44,
+    "Review requires both gross irregularity and prejudice."
    ]
   ]
  }
