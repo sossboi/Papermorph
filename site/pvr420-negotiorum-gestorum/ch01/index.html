@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negotiorum Gestorum — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 9, title: 'Negotiorum Gestorum', minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Negotiorum Gestorum"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 9', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Negotiorum Gestorum", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Negotiorum gestorum: the gestor's claim for services rendered without a mandate.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "A party, X, was unjustifiably impoverished.", 'imp', 240);
+    row(m, p, 2, "By attending to the affairs of another party, Y.", 'attend', 330);
+    row(m, p, 3, "So that Y does not incur loss or damage to their property.", 'loss', 420);
+    row(m, p, 4, "Modern law: available to someone who attended to another's affairs without a mandate, typically noticing the other may suffer serious harm and intervening to prevent it.", 'modern', 510);
+    row(m, p, 5, "It is not a free for all.", 'notfree', 600);
+  }],
+  ['reqs', 'Reqs', (m) => {
+    const p = panel(0);
+    head(p, "Reqs", 150, .2);
+    row(m, p, 1, "Service rendered by the gestor in the absence of an instruction to do so.", 'r1', 240);
+    row(m, p, 2, "The service must reasonably be in the interest of the dominus, as seen from the perspective of the gestor.", 'r2', 330);
+    row(m, p, 3, "Expenses must be proportionate to the dominus's interest.", 'r3', 420);
+    row(m, p, 4, "Disbursements must be proportionate to the means of the dominus, and the gestor cannot incur costs the dominus would not ordinarily have incurred.", 'r4', 510);
+  }],
+  ['proportion', 'Proportion', (m) => {
+    const p = panel(0);
+    head(p, "Proportion", 150, .2);
+    row(m, p, 1, "Always ask what the dominus would have done in a similar situation.", 'ask', 240);
+    row(m, p, 2, "The old sole-benefit-of-the-dominus requirement no longer applies in modern law.", 'old', 330);
+  }],
+  ['intent', 'Intent', (m) => {
+    const p = panel(0);
+    head(p, "Intent", 150, .2);
+    row(m, p, 1, "The gestor must act with the intention of benefiting someone other than the gestor, and this has been watered down: there is no requirement that the gestor knew they were attending another's affairs at the time.", 'other', 240);
+    row(m, p, 2, "Even where the dominus prohibited performance, the gestor may still succeed if the defiance was reasonable.", 'prohibit', 330);
+    row(m, p, 3, "The gestor must not act with a charitable intention.", 'charity', 420);
+  }],
+  ['other', 'Other', (m) => {
+    const p = panel(0);
+    head(p, "Other", 150, .2);
+    row(m, p, 1, "The law does not condone interference in the affairs of another.", 'sceptical', 240);
+    row(m, p, 2, "There must be a reasonable ground to act, for example administration of a minor's affairs, and you must determine whose estate benefited.", 'ground', 330);
+    row(m, p, 3, "A claim for expenses incurred while holding another's property: the law makes no distinction between bona fide and mala fide holder, the mere fact that expenses were incurred is sufficient.", 'holder', 420);
+    row(m, p, 4, "An occupier in control of property is in the same position, but if the occupier holds under a valid contract, contractual remedies apply.", 'occupier', 510);
+  }],
+  ['tripartite', 'Tripartite', (m) => {
+    const p = panel(0);
+    head(p, "Tripartite", 150, .2);
+    row(m, p, 1, "The principal contractor does not pay the subcontractor.", 'pc', 240);
+    row(m, p, 2, "The subcontractor can claim from the principal contractor, so it is not impoverished.", 'sc', 330);
+    row(m, p, 3, "The dominus must still pay the principal contractor, so it is not enriched.", 'dominus', 420);
+    row(m, p, 4, "The enrichment claim against the dominus fails.", 'fails', 510);
+  }],
+  ['factors', 'Factors', (m) => {
+    const p = panel(0);
+    head(p, "Factors", 150, .2);
+    row(m, p, 1, "The meddling must not be senseless or useless.", 'f1', 240);
+    row(m, p, 2, "It must be for some benefit or valid reason.", 'f2', 330);
+    row(m, p, 3, "Both parties must have a clear self-interest, and the dominus must have an interest being protected.", 'f3', 420);
+    row(m, p, 4, "There must be no senseless negation of the dominus's instructions: the gestor needs a reasonable ground for defying them.", 'f4', 510);
+    row(m, p, 5, "There must be a valid iusta causa for the negation, in the spirit of good neighbourliness.", 'f5', 600);
+    row(m, p, 6, "The dominus must not be left worse off, at the very least back in their prior position.", 'f6', 690);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Standard Bank Financial Services v Taylam: the bank honoured a guarantee against the client's instruction, believing it acted for the client's benefit, and the six-factor fairness test applies.", 'taylam', 240);
+    row(m, p, 2, "Kunneke v Eerste Nasionale Bank: traveller's cheques cashed without the second signature, and the validity requirements of fairness were not met, so the claim failed.", 'kunneke', 330);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The old sole-benefit requirement\u2026"],
+    build: choice(["Still applies in modern law", "No longer applies in modern law", "Applies only to minors", "Applies only where the dominus prohibited performance"], 1,
+      "Correct: the old sole-benefit-of-the-dominus requirement no longer applies; the test is whether the service was reasonably in the dominus's interest from the gestor's perspective.",
+      ["Incorrect: it has been abolished.", null, "Incorrect: it is not limited to minors.", "Incorrect: prohibition raises the separate Taylam factors."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["In the tripartite scenario, the enrichment claim against the dominus fails because\u2026"],
+    build: choice(["The subcontractor is not impoverished and the dominus is not enriched", "The subcontractor acted unreasonably", "The dominus prohibited the work", "The principal contractor is insolvent"], 0,
+      "Correct: the subcontractor can claim from the principal contractor, so it is not impoverished, and the dominus must still pay the principal contractor, so it is not enriched.",
+      [null, "Incorrect: the subcontractor's reasonableness is not the reason.", "Incorrect: prohibition is not part of the tripartite analysis.", "Incorrect: insolvency is not the reason the claim fails."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Negotiorum gestorum gives the gestor a reimbursement claim where there was no mandate.", 'w1', 240);
+    row(m, p, 2, "Four requirements: no instruction, reasonable interest of the dominus, proportionality to the interest, and proportionality to the means.", 'w2', 330);
+    row(m, p, 3, "No charitable intention, and defiance of the dominus must be reasonable.", 'w3', 420);
+    row(m, p, 4, "Where the gestor defies the dominus, run Taylam's six factors.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-reqs', prompt: ["Which is NOT one of the four requirements of the actio negotiorum gestorum contraria?"],
+    build: choice(["Service rendered without an instruction", "The service was reasonably in the interest of the dominus", "Expenses proportionate to the dominus's interest", "The gestor acted with a charitable intention"], 3,
+      "Correct: the gestor must NOT act with a charitable intention, so that is not a requirement.",
+      ["Incorrect: absence of instruction is the first requirement.", "Incorrect: reasonable interest of the dominus is the second.", "Incorrect: proportionality to the interest is the third."]),
+  },
+  {
+    id: 'p-taylam', prompt: ["When does the Taylam six-factor fairness test apply?"],
+    build: choice(["In every negotiorum gestorum claim", "Where the gestor acts against the dominus's express instruction", "Where the gestor is a minor", "Where the dominus is insolvent"], 1,
+      "Correct: the test applies where the gestor acts against the dominus's express instruction, and equity must reign between the parties.",
+      ["Incorrect: the test is not universal; it is triggered by defiance of instructions.", null, "Incorrect: minority is not the trigger.", "Incorrect: insolvency is not the trigger."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

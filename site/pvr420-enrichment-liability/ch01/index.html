@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enrichment Liability — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: 'Enrichment Liability', minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Enrichment Liability"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 2', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Enrichment Liability", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Enrichment liability: the generics are necessary, never sufficient.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "Stage one: the plaintiff proves the generic requirements.", 'stage1', 240);
+    row(m, p, 2, "Stage two: the defendant is liable to restitution of the unfounded patrimonial transfer.", 'stage2', 330);
+    row(m, p, 3, "Stage three: an enrichment action arises when the defendant fails to rebut the proof.", 'stage3', 420);
+    row(m, p, 4, "Generic requirements plus the specific requirements of one common-law action.", 'both', 510);
+  }],
+  ['when', 'When', (m) => {
+    const p = panel(0);
+    head(p, "When", 150, .2);
+    row(m, p, 1, "A patrimonial transfer calculable in money from one estate to another.", 'transfer', 240);
+    row(m, p, 2, "Enrichment and impoverishment, one at the expense of the other.", 'enrich', 330);
+    row(m, p, 3, "No legal cause for the transfer, or no legal basis to maintain its value.", 'nocause', 420);
+    row(m, p, 4, "No other remedy available to the impoverished party: last resort.", 'last', 510);
+  }],
+  ['where', 'Where', (m) => {
+    const p = panel(0);
+    head(p, "Where", 150, .2);
+    row(m, p, 1, "A change in the net value of one party's assets.", 'imb', 240);
+    row(m, p, 2, "Caused by an unfounded patrimonial transfer.", 'unfounded', 330);
+    row(m, p, 3, "Enriching that party at the expense of another.", 'expense', 420);
+    row(m, p, 4, "The transfer was not self-inflicted.", 'notself', 510);
+    row(m, p, 5, "And no other remedy is available.", 'noother', 600);
+  }],
+  ['why', 'Why', (m) => {
+    const p = panel(0);
+    head(p, "Why", 150, .2);
+    row(m, p, 1, "There is no general enrichment action in South African law.", 'nogeneral', 240);
+    row(m, p, 2, "Roman-Dutch law developed several actions, and the Middle Ages added a single equity concept used alongside them.", 'roman', 330);
+    row(m, p, 3, "The cardinal principle common to all forms is unfounded enrichment.", 'cardinal', 420);
+    row(m, p, 4, "Pleading a specific action usually indicates the generics are met, and the onus rests on the plaintiff.", 'pleading', 510);
+  }],
+  ['timeline', 'Timeline', (m) => {
+    const p = panel(0);
+    head(p, "Timeline", 150, .2);
+    row(m, p, 1, "1966, Nortje v Pool: the law does not recognise a general claim for enrichment.", 'nortje', 240);
+    row(m, p, 2, "2001, McCarthy Retail v Shortdistance Carriers: seemed to support a single action but never took the final step.", 'mccarthy', 330);
+    row(m, p, 3, "2001, First National Bank v Perry NO: set out the four generic requirements and created no general action.", 'fnb', 420);
+    row(m, p, 4, "2003, Kudu Granite v Caterna: the generics are the point of departure, not the condictiones.", 'kudu', 510);
+    row(m, p, 5, "2005, Normkow Administrators v Fedsure: bound by Nortje, still no general claim.", 'fedsure', 600);
+    row(m, p, 6, "2007, St Helena Primary School: no general claim, but proving the generics suffices.", 'sthelena', 690);
+  }],
+  ['map', 'Map', (m) => {
+    const p = panel(0);
+    head(p, "Map", 150, .2);
+    row(m, p, 1, "Was there a patrimonial transfer between two estates?", 'q1', 240);
+    row(m, p, 2, "Is there a legal basis, a causa?", 'q2', 330);
+    row(m, p, 3, "Is another remedy available?", 'q3', 420);
+    row(m, p, 4, "Can the plaintiff prove the four generic requirements?", 'q4', 510);
+    row(m, p, 5, "Does a rule denying restitution apply, such as par delictum?", 'q5', 600);
+    row(m, p, 6, "Which specific action fits the facts, and can its own requirements be proved?", 'q6', 690);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["What must a plaintiff prove before selecting an enrichment action?"],
+    build: choice(["Only the requirements of the specific action", "The generic requirements and the specific requirements of one action", "That no contract exists between the parties", "That the defendant acted fraudulently"], 1,
+      "Correct: compliance with the generics is a sine qua non, and the plaintiff must also prove the specific requirements of the applicable common-law action.",
+      ["Incorrect: the generics are necessary, so the specific requirements alone are never enough.", null, "Incorrect: the absence of a contract is not the test; a transfer with any legal basis defeats the claim.", "Incorrect: fraud is not required; enrichment liability is not a delictual claim."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Which case made the generic requirements the point of departure for enrichment claims?"],
+    build: choice(["Nortje v Pool", "First National Bank v Perry NO", "Kudu Granite v Caterna", "McCarthy Retail v Shortdistance Carriers"], 2,
+      "Correct: Kudu Granite v Caterna 2003 (5) SA 193 (SCA) held that after recognition of the generic requirements they are the point of departure, not the condictiones.",
+      ["Incorrect: Nortje v Pool held that no general enrichment claim is recognised.", "Incorrect: FNB v Perry set out the four generics but did not make them the point of departure.", null, "Incorrect: McCarthy Retail stopped short of recognising a single action."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Enrichment liability needs two layers: the generics and one specific action.", 'w1', 240);
+    row(m, p, 2, "The claim arises when transfer, enrichment and impoverishment, no legal cause and no other remedy are all present.", 'w2', 330);
+    row(m, p, 3, "There is no general enrichment action; the generics are the point of departure.", 'w3', 420);
+    row(m, p, 4, "Run the remedy map, then prove the chosen action's own requirements.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-twolayer', prompt: ["Why do the generic requirements alone not found a claim?"],
+    build: choice(["Because they are only a defence", "Because the plaintiff must also prove the requirements of one common-law action", "Because they apply only to delictual claims", "Because the defendant may always rebut them"], 1,
+      "Correct: the generics are a sine qua non for the existence of an enrichment remedy, but the specific requirements of the applicable action must also be proved.",
+      ["Incorrect: the generics are part of the cause of action, not a defence.", null, "Incorrect: they underlie all the individual enrichment actions, not delict.", "Incorrect: rebuttal is a separate matter; the two-layer rule is about proof."]),
+  },
+  {
+    id: 'p-nortje', prompt: ["What did Nortje v Pool 1966 (3) SA 96 (A) decide?"],
+    build: choice(["That a general enrichment claim exists", "That the law does not recognise a general claim for enrichment", "That the condictiones are abolished", "That enrichment is a delictual remedy"], 1,
+      "Correct: Nortje v Pool held that the law does not recognise a general claim for enrichment, preferring incremental development by extending existing actions.",
+      ["Incorrect: the case rejected a general claim.", null, "Incorrect: the condictiones remain the individual actions.", "Incorrect: enrichment is a distinct obligationary claim, not delict."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

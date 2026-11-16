@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unjustified Enrichment — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: 'Unjustified Enrichment', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Unjustified Enrichment"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 1', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Unjustified Enrichment", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Unjustified enrichment: the safety valve of the law of obligations.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "You bear your own loss.", 'rule', 240);
+    row(m, p, 2, "Unjustified enrichment is the safety valve: a person who obtains an enrichment directly linked to the legally baseless impoverishment of another must reverse it.", 'valve', 330);
+    row(m, p, 3, "LAWSA paragraph 206: the defendant is enriched, the plaintiff correspondingly impoverished, the enrichment is at the plaintiff's expense, and it is unjustified.", 'law', 420);
+    row(m, p, 4, "That creates an obligation by operation of law to restore up to the level of the plaintiff's impoverishment.", 'restore', 510);
+  }],
+  ['focal', 'Focal', (m) => {
+    const p = panel(0);
+    head(p, "Focal", 150, .2);
+    row(m, p, 1, "A patrimonial transfer, calculable in money, from one estate to another.", 'transfer', 240);
+    row(m, p, 2, "From the impoverished party to the enriched party.", 'direction', 330);
+    row(m, p, 3, "Without a relevant legal cause.", 'cause', 420);
+  }],
+  ['generic', 'Generic', (m) => {
+    const p = panel(0);
+    head(p, "Generic", 150, .2);
+    row(m, p, 1, "Enriched and impoverished, both limbs, measured on the net asset position.", 'e', 240);
+    row(m, p, 2, "At the expense of: the same causal event, and disregard any intermediate estate.", 'a', 330);
+    row(m, p, 3, "Sine causa: unfounded, tested objectively, is there any legal rationale for the transfer.", 's', 420);
+    row(m, p, 4, "No rule of law denying restitution, for example par delictum.", 'n', 510);
+  }],
+  ['causa', 'Causa', (m) => {
+    const p = panel(0);
+    head(p, "Causa", 150, .2);
+    row(m, p, 1, "Contract, even a bargain with an excessive or a low price.", 'contract', 240);
+    row(m, p, 2, "Donation.", 'donation', 330);
+    row(m, p, 3, "Succession under a will.", 'succession', 420);
+    row(m, p, 4, "Prescription, extinctive or acquisitive.", 'prescription', 510);
+    row(m, p, 5, "A court judgment.", 'judgment', 600);
+    row(m, p, 6, "Delict.", 'delict', 690);
+  }],
+  ['last', 'Last', (m) => {
+    const p = panel(0);
+    head(p, "Last", 150, .2);
+    row(m, p, 1, "Contract and delict are lex specialis and take precedence.", 'subsidiary', 240);
+    row(m, p, 2, "It supplements the law, it never replaces it.", 'never', 330);
+    row(m, p, 3, "A patrimonial transfer with a legal basis can never be sine causa.", 'basis', 420);
+  }],
+  ['methods', 'Methods', (m) => {
+    const p = panel(0);
+    head(p, "Methods", 150, .2);
+    row(m, p, 1, "An increase in assets.", 'assets', 240);
+    row(m, p, 2, "A reduction of expenses or liabilities.", 'expenses', 330);
+    row(m, p, 3, "A non-diminishing of assets that would have been lost.", 'nondim', 420);
+    row(m, p, 4, "A non-increase of expenses.", 'noninc', 510);
+    row(m, p, 5, "The benefit of another's expertise.", 'expertise', 600);
+    row(m, p, 6, "Unauthorised use of another's assets.", 'use', 690);
+  }],
+  ['calc', 'Calc', (m) => {
+    const p = panel(0);
+    head(p, "Calc", 150, .2);
+    row(m, p, 1, "Position before the event.", 'before', 240);
+    row(m, p, 2, "Position after the event.", 'after', 330);
+    row(m, p, 3, "The increase is the enrichment, the decrease the impoverishment.", 'diff', 420);
+    row(m, p, 4, "Take all assets, claims and obligations, saved expenses and the customary fee for services.", 'holistic', 510);
+  }],
+  ['extent', 'Extent', (m) => {
+    const p = panel(0);
+    head(p, "Extent", 150, .2);
+    row(m, p, 1, "Its extent is the lesser of enrichment and impoverishment at litis contestatio.", 'lesser', 240);
+    row(m, p, 2, "Do not confuse that with the initial calculation: they are two different moments.", 'notconfuse', 330);
+    row(m, p, 3, "Three exceptions modify the lesser-amount rule: culpable disposal, culpable failure to provide, and mora debitoris.", 'exceptions', 420);
+  }],
+  ['remedy', 'Remedy', (m) => {
+    const p = panel(0);
+    head(p, "Remedy", 150, .2);
+    row(m, p, 1, "Restitution of the thing first, with its natural fruits.", 'thing', 240);
+    row(m, p, 2, "Value second, in exceptional cases and in lieu of the asset.", 'value', 330);
+    row(m, p, 3, "The claim for enrichment may never exceed the existing enrichment.", 'quote', 420);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "King v Cohen Benjamin: receiving money you were already owed is no enrichment, the net position is unchanged.", 'king', 240);
+    row(m, p, 2, "Pucjlowski v Johnston's Executors: recovery of the property itself first, economic value only in exceptional cases.", 'pucjlowski', 330);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Which of the following is NOT one of the four generic requirements of enrichment liability?"],
+    build: choice(["The plaintiff is impoverished and the defendant enriched", "The enrichment is at the expense of the impoverishment", "The enrichment is unfounded, or sine causa", "The defendant acted with fault or intent"], 3,
+      "Correct: fault is not a generic requirement. The four are enrichment and impoverishment, at the expense of, unfounded, and no rule of law denying restitution.",
+      [null, null, null, "Incorrect: fault is not one of the generic requirements; it is not part of the four-part checklist from First National Bank v Perry NO."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Unjustified enrichment is best described as\u2026"],
+    build: choice(["A general action that replaces contract and delict", "A remedy of last resort that supplements the law", "A delictual claim for patrimonial loss", "A contractual remedy for undue performance"], 1,
+      "Correct: enrichment is subsidiary, never an alternative. Contract and delict, as lex specialis, take precedence.",
+      ["Incorrect: there is no general enrichment action in South African law; Nortje v Pool so held.", null, "Incorrect: it is not a delictual claim, and it does not require blameful conduct.", "Incorrect: where a contract governs the performance, the contractual remedy applies, not the enrichment action."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "The damage lies where it falls, and unjustified enrichment is the safety valve.", 'w1', 240);
+    row(m, p, 2, "Three focal elements: patrimonial transfer, from impoverished to enriched, without legal cause.", 'w2', 330);
+    row(m, p, 3, "Four generic requirements: enriched and impoverished, at the expense of, sine causa, no rule denying restitution.", 'w3', 420);
+    row(m, p, 4, "Last resort: contract and delict come first, and a transfer with a legal basis can never be sine causa.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-generic', prompt: ["Which case set out the four generic requirements of enrichment liability?"],
+    build: choice(["Kudu Granite v Caterna", "First National Bank v Perry NO", "Nortje v Pool", "McCarthy Retail v Shortdistance Carriers"], 1,
+      "Correct: First National Bank v Perry NO 2001 (3) SA 960 (SCA) para 23 set out the four generic requirements without creating a general action.",
+      ["Incorrect: Kudu Granite applied the generic requirements and made them the point of departure.", null, "Incorrect: Nortje v Pool held that no general enrichment claim is recognised.", "Incorrect: McCarthy Retail seemed to support a single action but stopped short."]),
+  },
+  {
+    id: 'p-lastresort', prompt: ["When may the impoverished party not rely on unjustified enrichment?"],
+    build: choice(["Where the enrichment was sine causa", "Where a contractual or delictual remedy is available", "Where the defendant is insolvent", "Where the transfer was made by a third party"], 1,
+      "Correct: enrichment is a remedy of last resort. Contract and delict are lex specialis; if a contractual, delictual, mandament van spolle or rei vindicatio route exists it must be used.",
+      ["Incorrect: sine causa is a requirement for the claim, not a bar to it.", null, "Incorrect: insolvency does not displace the subsidiarity rule.", "Incorrect: a third-party payment may found or defeat a claim, but it is not the subsidiarity bar."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ob Causam Finitam — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 6, title: 'Ob Causam Finitam', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Ob Causam Finitam"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 6', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Ob Causam Finitam", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Ob causam finitam: a valid cause that subsequently falls away.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "Performance made under a valid causa.", 'valid', 240);
+    row(m, p, 2, "That valid causa subsequently falls away.", 'falls', 330);
+    row(m, p, 3, "The plaintiff seeks to recover the value of the performance.", 'recover', 420);
+    row(m, p, 4, "The transfer was lawful when it happened; then the ground supporting it died.", 'lawful', 510);
+  }],
+  ['warning', 'Warning', (m) => {
+    const p = panel(0);
+    head(p, "Warning", 150, .2);
+    row(m, p, 1, "The remedy overlaps with condictio causa data causa non secuta.", 'overlap', 240);
+    row(m, p, 2, "When both fit, parties opt for the better-known causa data, so ob causam finitam is often neglected.", 'neglected', 330);
+    row(m, p, 3, "In an exam, deliberately check this remedy: naming it when the facts show a cause that was valid at transfer and dead later distinguishes you.", 'exam', 420);
+  }],
+  ['elements', 'Elements', (m) => {
+    const p = panel(0);
+    head(p, "Elements", 150, .2);
+    row(m, p, 1, "Performance made under a valid causa.", 'e1', 240);
+    row(m, p, 2, "The valid causa subsequently falls away.", 'e2', 330);
+    row(m, p, 3, "The plaintiff seeks to recover the value of the performance.", 'e3', 420);
+  }],
+  ['when', 'When', (m) => {
+    const p = panel(0);
+    head(p, "When", 150, .2);
+    row(m, p, 1, "Performance delivered under a valid causa which later falls away.", 's1', 240);
+    row(m, p, 2, "Performance delivered under a duty to perform, where a change in circumstances affected that duty.", 's2', 330);
+    row(m, p, 3, "Performance subsequently becomes impossible, supervening impossibility, though restitution is arguably a contractual remedy.", 's3', 420);
+    row(m, p, 4, "A donation has been revoked, where a donee who misbehaves must return the gift.", 's4', 510);
+  }],
+  ['athlete', 'Athlete', (m) => {
+    const p = panel(0);
+    head(p, "Athlete", 150, .2);
+    row(m, p, 1, "An athlete signs a two-year sponsorship.", 'sign', 240);
+    row(m, p, 2, "The first payment is made.", 'pay', 330);
+    row(m, p, 3, "Shortly after, the athlete tests positive for a banned substance and is banned for four years.", 'ban', 420);
+    row(m, p, 4, "The contract did not specify that banned substances were a breach.", 'silent', 510);
+    row(m, p, 5, "The court held the athlete must reimburse the payment already made, and cannot claim the remaining payments because the agreed services cannot be rendered.", 'hold', 600);
+  }],
+  ['tenses', 'Tenses', (m) => {
+    const p = panel(0);
+    head(p, "Tenses", 150, .2);
+    row(m, p, 1, "Condictio indebiti: the cause never existed.", 'indebiti', 240);
+    row(m, p, 2, "Causa data causa non secuta: the cause existed in the future and never arrived.", 'causadata', 330);
+    row(m, p, 3, "Ob causam finitam: the cause is valid now and dead later.", 'finitam', 420);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Ob causam finitam applies where the cause\u2026"],
+    build: choice(["Never existed", "Existed in the future and never arrived", "Was valid when the transfer happened and later fell away", "Was unlawful from the start"], 2,
+      "Correct: the transfer was lawful when it happened, and the ground supporting it later died.",
+      ["Incorrect: a cause that never existed is the condictio indebiti.", "Incorrect: a future cause that never arrived is causa data causa non secuta.", null, "Incorrect: an unlawful cause points to ob turpem causam."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Which remedy overlaps with ob causam finitam?"],
+    build: choice(["Condictio indebiti", "Causa data causa non secuta", "Condictio furtiva", "Actio negotiorum gestorum"], 1,
+      "Correct: the two overlap, which is why parties usually plead the better-known causa data and ob causam finitam is neglected.",
+      ["Incorrect: indebiti concerns a cause that never existed.", null, "Incorrect: furtiva concerns a thief and the value of a thing.", "Incorrect: negotiorum gestorum is the gestor's claim."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Ob causam finitam recovers performance made under a valid causa that later falls away.", 'w1', 240);
+    row(m, p, 2, "Four scenarios: a causa that expires, a changed duty, impossibility, and a revoked donation.", 'w2', 330);
+    row(m, p, 3, "It overlaps with causa data, which is why it is neglected.", 'w3', 420);
+    row(m, p, 4, "Check it deliberately in an exam.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-tense', prompt: ["Which condictio fits a cause that was valid at transfer and later expired?"],
+    build: choice(["Condictio indebiti", "Causa data causa non secuta", "Ob causam finitam", "Condictio sine causa"], 2,
+      "Correct: ob causam finitam is the remedy where the causa was valid when the transfer happened and subsequently fell away.",
+      ["Incorrect: indebiti requires that no cause ever existed.", "Incorrect: causa data requires a future cause that never arrived.", null, "Incorrect: sine causa is the residual value claim."]),
+  },
+  {
+    id: 'p-athlete', prompt: ["In the sponsored athlete scenario, what was the outcome?"],
+    build: choice(["The athlete kept the payment and claimed the remainder", "The athlete reimbursed the payment made and could not claim the remaining payments", "The sponsor recovered nothing because the contract was silent", "The athlete was liable for delictual damages"], 1,
+      "Correct: the court held the athlete must reimburse the payment already made and could not claim the remaining payments, because the agreed services could not be rendered.",
+      ["Incorrect: the athlete had to reimburse the payment.", null, "Incorrect: silence on banned substances did not defeat the claim.", "Incorrect: the claim was an enrichment claim, not delict."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

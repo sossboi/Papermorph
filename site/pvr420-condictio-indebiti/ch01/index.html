@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condictio Indebiti — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: 'Condictio Indebiti', minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Condictio Indebiti"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 3', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Condictio Indebiti", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The condictio indebiti: recovery of what was paid where nothing was owed.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "Someone paid, transferred or performed something that was not due, by mistake or without a legal basis, and wants it back.", 'paid', 240);
+    row(m, p, 2, "LAWSA paragraph 213: the object is to recover money or other property transferred in intended payment of a non-existent debt.", 'law', 330);
+    row(m, p, 3, "The onus is on the plaintiff for all the elements, but once the defendant's receipt is proved a presumption of enrichment arises.", 'onus', 420);
+  }],
+  ['reasons', 'Reasons', (m) => {
+    const p = panel(0);
+    head(p, "Reasons", 150, .2);
+    row(m, p, 1, "To restore equity, returning the parties to their original positions.", 'one', 240);
+    row(m, p, 2, "To recover payment, property or performance made by mistake or without a legal basis.", 'two', 330);
+    row(m, p, 3, "To recover performance made under protest, where the disputed payment is later shown not to be due.", 'three', 420);
+    row(m, p, 4, "To recover payment made ultra vires, as in Bowman.", 'four', 510);
+    row(m, p, 5, "To recover payments made by minors without the requisite consent.", 'five', 600);
+  }],
+  ['reqs', 'Reqs', (m) => {
+    const p = panel(0);
+    head(p, "Reqs", 150, .2);
+    row(m, p, 1, "The plaintiff or the plaintiff's agent transferred property, paid money or rendered services without being indebted to the defendant.", 'notindebted', 240);
+    row(m, p, 2, "The transfer was made indebite: in the absence of any natural or civil obligation, with no legal basis and no other reasonable cause.", 'indebite', 330);
+    row(m, p, 3, "The transfer was made by mistake, and the mistake must be excusable, an iustus error.", 'mistake', 420);
+  }],
+  ['authority', 'Authority', (m) => {
+    const p = panel(0);
+    head(p, "Authority", 150, .2);
+    row(m, p, 1, "The action lies only where ownership was transferred, extended to a condictio possessionis for possession.", 'ownership', 240);
+    row(m, p, 2, "It lies only against the true recipiens: a mere conduit or agent is not the recipiens, and being intended or benefited is not enough.", 'recipiens', 330);
+    row(m, p, 3, "The plaintiff must be the one who in law made the payment, not necessarily the one who physically made it.", 'payer', 420);
+  }],
+  ['subrules', 'Subrules', (m) => {
+    const p = panel(0);
+    head(p, "Subrules", 150, .2);
+    row(m, p, 1, "Payment under protest is not payment under duress: protest leaves the condictio indebiti open if the sum is later shown not due, while duress points to contractual remedies.", 'protest', 240);
+    row(m, p, 2, "A third party may validly pay a debt in the name and on behalf of the debtor without the debtor's knowledge, so there is a legal basis.", 'third', 330);
+    row(m, p, 3, "Mistake of fact and mistake of law are no longer distinguished: indebiti lies regardless.", 'mistake', 420);
+    row(m, p, 4, "The condictio indebiti is a related debt, and runs from when the original debt was due.", 'prescription', 510);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Duff's Trustees v Estate Arde: a third party may pay another's debt in the debtor's name, so a legal basis existed.", 'duff', 240);
+    row(m, p, 2, "Bowman, De Wet and Du Plessis NNO v Fidelity Bank: an ultra vires payment by liquidators is indebite and recoverable.", 'bowman', 330);
+    row(m, p, 3, "Divisional Council of Aliwal North v De Wet: a reimbursement paid to a person not entitled under the regulations is recoverable.", 'aliwal', 420);
+    row(m, p, 4, "Phillips v Hughes: payments due to the creditors were not indebite, so the action failed.", 'phillips', 510);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Which requirement is the most important in the condictio indebiti?"],
+    build: choice(["That the plaintiff acted in good faith", "That the transfer was made indebite", "That the defendant was the true recipiens", "That the payment was made under protest"], 1,
+      "Correct: the transfer must be made indebite, in the absence of any natural or civil obligation. It is the most important requirement.",
+      ["Incorrect: good faith is not the central requirement; the absence of a legal basis is.", null, "Incorrect: the true recipiens rule limits against whom the action lies, but it is not the most important requirement.", "Incorrect: protest affects the route to recovery, not the core requirement."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["The condictio indebiti lies only against\u2026"],
+    build: choice(["Any person who received the payment", "The true recipiens", "The person who physically handled the money", "The plaintiff's agent"], 1,
+      "Correct: a mere conduit or agent is not the recipiens, and being intended or benefited is not enough.",
+      ["Incorrect: a mere conduit is not the recipiens.", null, "Incorrect: physical handling does not make a person the recipiens.", "Incorrect: the agent acts for the plaintiff, not as the recipiens."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "The condictio indebiti recovers what was paid where nothing was owed.", 'w1', 240);
+    row(m, p, 2, "Three requirements: no indebtedness, transfer indebite, and excusable mistake.", 'w2', 330);
+    row(m, p, 3, "It lies only against the true recipiens, and only where ownership passed.", 'w3', 420);
+    row(m, p, 4, "Protest is not duress, and mistake of law is no longer a bar.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-indebite', prompt: ["What does \"indebite\" require?"],
+    build: choice(["That the plaintiff was indebted to the defendant", "That there was no natural or civil obligation and no other reasonable cause", "That the defendant acted unlawfully", "That the payment was made by a third party"], 1,
+      "Correct: indebite means made in the absence of any natural or civil obligation, with no legal basis and no other reasonable cause for the payment.",
+      ["Incorrect: if the plaintiff was indebted the payment was due, so the action fails.", null, "Incorrect: unlawfulness is not the test; the test is the absence of a legal basis.", "Incorrect: a third-party payment may itself create a legal basis, as in Duff's Trustees."]),
+  },
+  {
+    id: 'p-protest', prompt: ["What is the effect of paying under protest?"],
+    build: choice(["It makes the payment irrecoverable", "It preserves the condictio indebiti if the sum is later shown not to be due", "It converts the claim into a delictual one", "It proves duress"], 1,
+      "Correct: protest is not duress. Payment under protest leaves the condictio indebiti open where the disputed payment is later shown not to be due.",
+      ["Incorrect: protest does not make the payment irrecoverable.", null, "Incorrect: it does not convert the claim into a delictual one.", "Incorrect: protest and duress are distinct; duress points to contractual remedies."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

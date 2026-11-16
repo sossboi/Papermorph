@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condictio Sine Causa — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: 'Condictio Sine Causa', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Condictio Sine Causa"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 4', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Condictio Sine Causa", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The condictio sine causa: a residual action for value, not for the thing.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "A prior relationship or interaction between the parties.", 'prior', 240);
+    row(m, p, 2, "A goods transfer made erroneously under it.", 'erroneous', 330);
+    row(m, p, 3, "The goods are consumed or used, so they cannot come back.", 'consumed', 420);
+    row(m, p, 4, "The plaintiff sues for the value.", 'value', 510);
+  }],
+  ['faces', 'Faces', (m) => {
+    const p = panel(0);
+    head(p, "Faces", 150, .2);
+    row(m, p, 1, "Generalis: synonymous with, and a substitute for, indebiti, ob turpem and causa data; it adds no remedial leeway and circumvents none of their requirements.", 'generalis', 240);
+    row(m, p, 2, "Specialis: available where none of the other condictiones could be instituted, as Voet put it, when there is no room for other actions.", 'specialis', 330);
+  }],
+  ['elements', 'Elements', (m) => {
+    const p = panel(0);
+    head(p, "Elements", 150, .2);
+    row(m, p, 1, "A prior relationship or interaction between the parties.", 'e1', 240);
+    row(m, p, 2, "An erroneous payment or performance as a result of that interaction.", 'e2', 330);
+    row(m, p, 3, "The plaintiff seeks to recover the value of goods.", 'e3', 420);
+    row(m, p, 4, "It is not concurrent with other enrichment actions and cannot be pleaded in the alternative to them.", 'not', 510);
+  }],
+  ['reqs', 'Reqs', (m) => {
+    const p = panel(0);
+    head(p, "Reqs", 150, .2);
+    row(m, p, 1, "The plaintiff's performance rested on the erroneous unilateral assumption that payment was due.", 'r1', 240);
+    row(m, p, 2, "The defendant consumed the goods after the erroneous performance, and their value is recoverable.", 'r2', 330);
+    row(m, p, 3, "There was use and enjoyment of the plaintiff's property or labour, with no contract for that use, which is what makes it sine causa.", 'r3', 420);
+    row(m, p, 4, "Return became impossible after that use and enjoyment.", 'r4', 510);
+  }],
+  ['boundary', 'Boundary', (m) => {
+    const p = panel(0);
+    head(p, "Boundary", 150, .2);
+    row(m, p, 1, "If the contract is alive, the contractual remedy applies, not the condictio.", 'contract', 240);
+    row(m, p, 2, "If a party resiles from a contract for a lawful reason, a contractual remedy is available and this action is outside its scope.", 'resile', 330);
+  }],
+  ['swap', 'Swap', (m) => {
+    const p = panel(0);
+    head(p, "Swap", 150, .2);
+    row(m, p, 1, "The owner can still recover the object by rei vindicatio.", 'vindicatio', 240);
+    row(m, p, 2, "The owner offers it back.", 'offer', 330);
+    row(m, p, 3, "And claims the performance back with the condictio sine causa.", 'claim', 420);
+    row(m, p, 4, "Two remedies, one clean exchange.", 'clean', 510);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Saambou Bank v Essa and Firstrand Bank v Absa Bank: the generic sine causa is not available in the alternative where error played any role; the condictio indebiti must be used.", 'saambou', 240);
+    row(m, p, 2, "Rulten v Herald Industries: the sine causa is a residual action, filling gaps where there is no room for other actions.", 'rulten', 330);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The condictio sine causa specialis is available where\u2026"],
+    build: choice(["The plaintiff made a mistake", "None of the other condictiones can be instituted", "The defendant consumed the goods", "The parties had a prior relationship"], 1,
+      "Correct: the specialis fills gaps where there is no room for other actions, as Voet 12.7.7 puts it.",
+      ["Incorrect: where error played any role the condictio indebiti must be used, not sine causa.", null, "Incorrect: consumption is a requirement, but the action is residual in scope.", "Incorrect: a prior relationship is an element, not the reason the action is available."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Where error played a role in the transfer, which action must be used?"],
+    build: choice(["Condictio sine causa", "Condictio indebiti", "Condictio furtiva", "Actio negotiorum gestorum"], 1,
+      "Correct: Saambou Bank v Essa and Firstrand Bank v Absa Bank hold that the generic sine causa is not available in the alternative where error played any role.",
+      ["Incorrect: sine causa cannot tag along where error drove the transfer.", null, "Incorrect: furtiva is the value claim against a thief.", "Incorrect: negotiorum gestorum is the gestor's claim, not a payment claim."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Sine causa recovers value, not the thing, where the goods are consumed.", 'w1', 240);
+    row(m, p, 2, "Prior relationship, erroneous transfer, value back: the P-E-V chain.", 'w2', 330);
+    row(m, p, 3, "It is residual and never concurrent with the other condictiones.", 'w3', 420);
+    row(m, p, 4, "If the contract is alive, the contractual remedy applies.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-pev', prompt: ["What is the P-E-V chain of the condictio sine causa?"],
+    build: choice(["Payment, error, value", "Prior relationship, erroneous transfer, value back", "Possession, enrichment, vindicatio", "Performance, enrichment, contract"], 1,
+      "Correct: prior relationship, erroneous transfer, value back. The chain is the elements in order.",
+      ["Incorrect: that is not the worksheet's chain.", null, "Incorrect: vindicatio is a separate real remedy.", "Incorrect: a contract takes the case out of the condictio."]),
+  },
+  {
+    id: 'p-residual', prompt: ["Why is the condictio sine causa called a residual action?"],
+    build: choice(["Because it is a last-resort remedy like all enrichment actions", "Because it fills gaps where none of the other condictiones can be instituted", "Because it is subsidiary to delict", "Because it applies only to goods"], 1,
+      "Correct: Rulten v Herald Industries and Voet 12.7.7 describe it as filling gaps when there is no room for other actions.",
+      ["Incorrect: subsidiarity is a separate doctrine; residual describes its gap-filling role.", null, "Incorrect: it is not subsidiary to delict.", "Incorrect: its subject matter is not what makes it residual."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

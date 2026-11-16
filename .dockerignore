@@ -28,6 +28,15 @@ site/*
 !site/sip23-debt-collection/
 !site/sip24-legal-costs/
 !site/pvr420-estoppel/
+!site/pvr420-unjustified-enrichment/
+!site/pvr420-enrichment-liability/
+!site/pvr420-condictio-indebiti/
+!site/pvr420-condictio-sine-causa/
+!site/pvr420-causa-data-non-secuta/
+!site/pvr420-ob-causam-finitam/
+!site/pvr420-ob-turpem-causam/
+!site/pvr420-condictio-furtiva/
+!site/pvr420-negotiorum-gestorum/
 # science is off the shelf but linked from its own page, which links the clay and
 # notebook editions; all three ship so those links resolve.
 !site/science/

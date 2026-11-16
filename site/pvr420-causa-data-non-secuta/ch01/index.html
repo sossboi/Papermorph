@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Causa Data Causa Non Secuta — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 5, title: 'Causa Data Causa Non Secuta', minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Causa Data Causa Non Secuta"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 5', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Causa Data Causa Non Secuta", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Causa data causa non secuta: performance for a future cause that never came.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "To recover the value of performance made in terms of a future assumption, modus or causa of a valid contract.", 'one', 240);
+    row(m, p, 2, "To recover undue performance made in anticipation of a consequence that does not transpire.", 'two', 330);
+    row(m, p, 3, "To recover the value of assets subject to an unfounded attachment by the State.", 'three', 420);
+  }],
+  ['trigger', 'Trigger', (m) => {
+    const p = panel(0);
+    head(p, "Trigger", 150, .2);
+    row(m, p, 1, "A contract or arrangement that everyone entered expecting something in the future.", 'contract', 240);
+    row(m, p, 2, "A bank facility, an entitlement, a development, a written contract to be signed.", 'future', 330);
+    row(m, p, 3, "The future thing never happened, yet one side has already performed.", 'never', 420);
+    row(m, p, 4, "The condictio causa data causa non secuta.", 'action', 510);
+  }],
+  ['remedy', 'Remedy', (m) => {
+    const p = panel(0);
+    head(p, "Remedy", 150, .2);
+    row(m, p, 1, "Performance in terms of a valid contract based on a future cause.", 'valid', 240);
+    row(m, p, 2, "The future causa on which the contract is based is not fulfilled.", 'notfulfilled', 330);
+    row(m, p, 3, "Due performance made in anticipation of a consequence that does not transpire.", 'anticipation', 420);
+    row(m, p, 4, "Unfounded attachment of assets by the State.", 'state', 510);
+  }],
+  ['reqs', 'Reqs', (m) => {
+    const p = panel(0);
+    head(p, "Reqs", 150, .2);
+    row(m, p, 1, "Performance made in terms of a valid contract based on a future condition, a causa futura.", 'causafutura', 240);
+    row(m, p, 2, "The causa futura is not fulfilled: if the future condition is not fulfilled or is invalid, performance made under the contract can be claimed back.", 'unfulfilled', 330);
+    row(m, p, 3, "The tender scenario: tenders require formal written contracts, parties often begin performance before the contract is signed, and if it is never signed the performing party may recover the value.", 'tender', 420);
+    row(m, p, 4, "Unfounded attachment of assets by the State.", 'attach', 510);
+  }],
+  ['views', 'Views', (m) => {
+    const p = panel(0);
+    head(p, "Views", 150, .2);
+    row(m, p, 1, "Breach of contract.", 'breach', 240);
+    row(m, p, 2, "Some views hold that recovery after breach is a contractual remedy, so there is no scope for an enrichment action.", 'warn', 330);
+    row(m, p, 3, "The worksheet poses it as: what are your views on this?", 'yourview', 420);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Williams v Evans: security given for a bank facility that never came is the paradigm case.", 'williams', 240);
+    row(m, p, 2, "Fourie v CDMO Home: property bought on the assumption of water pumping rights that did not exist.", 'fourie', 330);
+    row(m, p, 3, "Benoni Town Council v Minister of Agricultural Credit and Land Tenure: a modus attached to a donation that was ignored; recovery was limited to the bare value of the undeveloped land.", 'benoni', 420);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The paradigm case for causa data causa non secuta is\u2026"],
+    build: choice(["A mistaken payment of a non-existent debt", "Security given for a bank facility that never came", "A donation with an unfulfilled modus", "A payment made under an unlawful agreement"], 1,
+      "Correct: Williams v Evans 1978 (1) SA 1170 (C) is the paradigm: security provided on the assumption that overdraft facilities would be granted, and they were not.",
+      ["Incorrect: that is the condictio indebiti.", null, "Incorrect: Benoni Town Council involves a modus, which is a distinct illustration.", "Incorrect: that is the condictio ob turpem causam."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["In the tender scenario, the formal contract is\u2026"],
+    build: choice(["Signed before performance begins", "Never signed", "Void for uncertainty", "A deed of donation"], 1,
+      "Correct: tenders require formal written contracts; if the formal contract is never signed, the party who delivered performance may recover its value.",
+      ["Incorrect: the scenario assumes performance begins before the written contract is signed.", null, "Incorrect: the contract is not void for uncertainty; it is simply never concluded.", "Incorrect: a tender is not a donation."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Causa data causa non secuta recovers performance for a future cause that never arrived.", 'w1', 240);
+    row(m, p, 2, "Performance under a valid contract, a causa futura that is unfulfilled or invalid.", 'w2', 330);
+    row(m, p, 3, "The tender scenario: performance before the written contract is signed.", 'w3', 420);
+    row(m, p, 4, "Breach of contract is contested, with some views sending it to the contractual remedy.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-causafutura', prompt: ["What is a causa futura?"],
+    build: choice(["A cause that has already fallen away", "A future condition on which the contract is based", "A cause that never existed", "An unlawful cause"], 1,
+      "Correct: a causa futura is a future condition. If it is not fulfilled or is invalid, performance made under the contract can be claimed back.",
+      ["Incorrect: a cause that has fallen away is the condictio ob causam finitam.", null, "Incorrect: a cause that never existed points to indebiti.", "Incorrect: an unlawful cause points to ob turpem causam."]),
+  },
+  {
+    id: 'p-benoni', prompt: ["What was recovered in Benoni Town Council v Minister of Agricultural Credit and Land Tenure?"],
+    build: choice(["The improved value of the land", "The bare value of the undeveloped land", "Nothing, because the donation was valid", "Damages for breach of contract"], 1,
+      "Correct: the council recovered only the bare value of the undeveloped land, not the improved value, because the modus was not fulfilled.",
+      ["Incorrect: the improved value was not recovered.", null, "Incorrect: the unfulfilled modus opened the claim.", "Incorrect: the claim was an enrichment claim, not damages."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

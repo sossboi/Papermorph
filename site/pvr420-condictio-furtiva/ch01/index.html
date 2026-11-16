@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condictio Furtiva — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 8, title: 'Condictio Furtiva', minutes: 9, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Condictio Furtiva"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 8', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Condictio Furtiva", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The condictio furtiva: from a thief, the value of what is gone.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "To recover property from a thief.", 'thief', 240);
+    row(m, p, 2, "Under Roman law it was the alternative to the rei vindicatio where the property could not be recovered.", 'roman', 330);
+    row(m, p, 3, "The thief is held liable for the value of the property towards the former owner.", 'value', 420);
+  }],
+  ['trigger', 'Trigger', (m) => {
+    const p = panel(0);
+    head(p, "Trigger", 150, .2);
+    row(m, p, 1, "A stolen or gone object.", 'gone', 240);
+    row(m, p, 2, "You still know who has its value.", 'know', 330);
+    row(m, p, 3, "The rei vindicatio cannot reach it.", 'cant', 420);
+    row(m, p, 4, "The condictio furtiva carries the value across.", 'furtiva', 510);
+  }],
+  ['remedy', 'Remedy', (m) => {
+    const p = panel(0);
+    head(p, "Remedy", 150, .2);
+    row(m, p, 1, "A remedy to recover the value of property from a thief in instances where the object can no longer be recovered.", 'r', 240);
+  }],
+  ['when', 'When', (m) => {
+    const p = panel(0);
+    head(p, "When", 150, .2);
+    row(m, p, 1, "The plaintiff wants to recover the value of property from a thief.", 'w1', 240);
+    row(m, p, 2, "The object could no longer be recovered.", 'w2', 330);
+    row(m, p, 3, "The rei vindicatio is not available as a remedy.", 'w3', 420);
+  }],
+  ['switch', 'Switch', (m) => {
+    const p = panel(0);
+    head(p, "Switch", 150, .2);
+    row(m, p, 1, "Rei vindicatio fails.", 'vindicatio', 240);
+    row(m, p, 2, "Furtiva carries the value across.", 'furtiva', 330);
+    row(m, p, 3, "The thing must be tried first: if the car is still in the thief's garage, use the rei vindicatio; if it is burnt, check furtiva.", 'first', 420);
+  }],
+  ['taxonomy', 'Taxonomy', (m) => {
+    const p = panel(0);
+    head(p, "Taxonomy", 150, .2);
+    row(m, p, 1, "It belongs to enrichment by taking: claims against those who infringe rights and enrich themselves by consuming or alienating another's property.", 'taking', 240);
+    row(m, p, 2, "The textbook warns this category is weakly developed in South African law, which is why Clifford v Farinha carries such weight.", 'weak', 330);
+  }],
+  ['flag', 'Flag', (m) => {
+    const p = panel(0);
+    head(p, "Flag", 150, .2);
+    row(m, p, 1, "The worksheet lists LAWSA paragraphs 216 to 218, but in this volume those paragraphs are the section on the condictio ob turpem vel iniustam causam, and no furtiva discussion appears there.", 'cite', 240);
+    row(m, p, 2, "Preserve the lecturer's citation as instructed, and note the textbook reality: the best reading is the theft and illegal-transfer overlap between the two actions.", 'preserve', 330);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Clifford v Farinha: a sibling used the motor vehicle without permission, it was stolen while in use, and the owner recovered the value of the vehicle from the sibling by the condictio furtiva.", 'clifford', 240);
+    row(m, p, 2, "Unauthorised use is the wrongful holding that anchors the value claim when the object is gone.", 'principle', 330);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The condictio furtiva is the alternative to\u2026"],
+    build: choice(["The condictio indebiti", "The rei vindicatio", "The actio negotiorum gestorum", "The mandament van spolle"], 1,
+      "Correct: under Roman law it was the alternative to the rei vindicatio where the property could not be recovered.",
+      ["Incorrect: indebiti concerns money paid where nothing was owed.", null, "Incorrect: negotiorum gestorum is the gestor's claim.", "Incorrect: the mandament van spolle is a possession remedy."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Clifford v Farinha anchors the value claim on\u2026"],
+    build: choice(["Theft by the defendant", "Unauthorised use as a wrongful holding", "A contract of loan", "A donation"], 1,
+      "Correct: unauthorised use is the wrongful holding that anchors the value claim when the object is gone.",
+      ["Incorrect: the claim was not founded on the theft itself.", null, "Incorrect: there was no contract.", "Incorrect: no donation was involved."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Furtiva recovers the value of property from a thief where the object is gone.", 'w1', 240);
+    row(m, p, 2, "The rei vindicatio must be unavailable.", 'w2', 330);
+    row(m, p, 3, "It sits in enrichment by taking, a weakly developed category.", 'w3', 420);
+    row(m, p, 4, "Unauthorised use anchors the claim.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-where', prompt: ["When is the condictio furtiva available?"],
+    build: choice(["Whenever the plaintiff owns the property", "Only where the object can no longer be recovered and the rei vindicatio is unavailable", "Only where the defendant is a thief in the criminal sense", "Only where the property was consumed"], 1,
+      "Correct: the object could no longer be recovered and the rei vindicatio is not available as a remedy.",
+      ["Incorrect: ownership alone is not enough; the real remedy must be unavailable.", null, "Incorrect: a criminal conviction is not required.", "Incorrect: consumption is one way the object is lost, not the sole route."]),
+  },
+  {
+    id: 'p-taxonomy', prompt: ["Where does the condictio furtiva sit in the enrichment taxonomy?"],
+    build: choice(["Enrichment by giving", "Enrichment by imposing", "Enrichment by taking", "Enrichment by transfer"], 2,
+      "Correct: it belongs to enrichment by taking, claims against those who infringe rights and enrich themselves by consuming or alienating another's property.",
+      ["Incorrect: giving is the deliberate transfer category.", "Incorrect: imposing is the benefit-without-consent category.", null, "Incorrect: transfer is not the taxonomy's category for this claim."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

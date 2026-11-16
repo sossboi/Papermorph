@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ob Turpem Causam — PVR420</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 7, title: 'Ob Turpem Causam', minutes: 10, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"Ob Turpem Causam"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, 'PVR420 · Unit 7', { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Ob Turpem Causam", { x: 800, y: 430, size: 58, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Ob turpem causam: performance under an unlawful agreement.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['idea', 'The core idea', (m) => {
+    const p = panel(0);
+    head(p, "The core idea", 150, .2);
+    row(m, p, 1, "Recover performance made in terms of an unlawful agreement.", 'unlawful', 240);
+    row(m, p, 2, "The lecturer's example: a person who pays because they are being blackmailed uses the condictio ob turpem causam to recover the payment.", 'example', 330);
+    row(m, p, 3, "When money or goods move under an agreement that is illegal, void or against the boni mores, first ask who was more guilty, because par delictum decides everything.", 'think', 420);
+  }],
+  ['elements', 'Elements', (m) => {
+    const p = panel(0);
+    head(p, "Elements", 150, .2);
+    row(m, p, 1, "Payment or performance unlawfully made: a transfer in execution of an unlawful agreement is performance under a void or non-existent contract.", 'e1', 240);
+    row(m, p, 2, "The plaintiff's conduct is blameless.", 'e2', 330);
+    row(m, p, 3, "The plaintiff must be willing to tender counter-performance.", 'e3', 420);
+  }],
+  ['pardelictum', 'Pardelictum', (m) => {
+    const p = panel(0);
+    head(p, "Pardelictum", 150, .2);
+    row(m, p, 1, "If both parties are equally guilty for the unlawfulness of the contract and the unlawful performance, neither can claim back.", 'equal', 240);
+    row(m, p, 2, "If one party is less blameworthy, or did not participate in the unlawful conduct, that party can recover.", 'less', 330);
+    row(m, p, 3, "If the court believes a party acted scandalously, the par delictum rule bars the claim.", 'boni', 420);
+  }],
+  ['maxims', 'Maxims', (m) => {
+    const p = panel(0);
+    head(p, "Maxims", 150, .2);
+    row(m, p, 1, "Ex turpi causa non oritur actio: from a scandalous cause no obligation arises, and the effect is that the unlawful contract is void.", 'ex', 240);
+    row(m, p, 2, "You cannot claim for services rendered in terms of an unlawful contract with this condictio.", 'services', 330);
+  }],
+  ['matrix', 'Matrix', (m) => {
+    const p = panel(0);
+    head(p, "Matrix", 150, .2);
+    row(m, p, 1, "Both parties thought it lawful and the contract turned out unlawful: the plaintiff may claim performance or value only if willing to return what they received.", 'both', 240);
+    row(m, p, 2, "Only the plaintiff blameless: the blameless party recovers, no tender is needed, and the blameworthy party cannot claim back.", 'one', 330);
+    row(m, p, 3, "The tender question is reached only if the defendant is not affected by par delictum.", 'defendant', 420);
+  }],
+  ['cases', 'Cases', (m) => {
+    const p = panel(0);
+    head(p, "Cases", 150, .2);
+    row(m, p, 1, "Maseko v Maseko: a fraudulent marriage to defraud creditors, and equal participation in the unlawful scheme meant no recovery.", 'maseko', 240);
+    row(m, p, 2, "Rousseau v Visser: a pyramid scheme, where the operators were far more blameworthy than the investors, so the investors recovered a portion.", 'rousseau', 330);
+    row(m, p, 3, "Minister of Justice v Van Heerden: entrapment cuts both ways, and the ministry's claim failed.", 'vanheerden', 420);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The par delictum rule bars recovery where\u2026"],
+    build: choice(["The plaintiff was less blameworthy", "Both parties are equally guilty of the unlawfulness", "The defendant was a thief", "The agreement was void for uncertainty"], 1,
+      "Correct: if both parties are equally guilty for the unlawfulness of the contract and the unlawful performance, neither can claim back.",
+      ["Incorrect: the less blameworthy party can recover.", null, "Incorrect: theft points to the condictio furtiva.", "Incorrect: voidness for uncertainty is not the par delictum rule."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Ex turpi causa non oritur actio means\u2026"],
+    build: choice(["From a scandalous cause, no obligation arises", "An unlawful contract is always enforceable", "A thief acquires ownership by possession", "A donation may be revoked at will"], 0,
+      "Correct: from a scandalous cause no obligation arises, and the effect is that the unlawful contract is void.",
+      [null, "Incorrect: the maxim makes the unlawful contract void, not enforceable.", "Incorrect: that is not the maxim's meaning.", "Incorrect: revocation of a donation is a separate enrichment scenario."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, 'To sum up', 140, .2);
+    row(m, p, 1, "Ob turpem causam recovers performance made under an unlawful agreement.", 'w1', 240);
+    row(m, p, 2, "The plaintiff must be blameless and willing to tender counter-performance.", 'w2', 330);
+    row(m, p, 3, "Par delictum: equal guilt bars both, unequal guilt unlocks recovery.", 'w3', 420);
+    row(m, p, 4, "Ex turpi causa makes the unlawful contract void.", 'w4', 510);
+    text(m, p, "Now try the chapter practice.", 800, 620, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-maseko', prompt: ["What did Maseko v Maseko 1992 (3) SA 190 (W) decide?"],
+    build: choice(["Equal participation in an unlawful scheme bars recovery", "A fraudulent marriage is always void", "The less blameworthy party recovers in full", "Creditors may never be defrauded"], 0,
+      "Correct: the parties participated equally in a fraudulent scheme to defeat creditors, so the par delictum rule barred the claim.",
+      [null, "Incorrect: the case turned on equal guilt, not on a general rule about fraudulent marriages.", "Incorrect: the claim was refused, not granted.", "Incorrect: the case is about the parties' guilt, not a rule about creditors."]),
+  },
+  {
+    id: 'p-tender', prompt: ["When is the tender question reached?"],
+    build: choice(["Always, in every unlawful-agreement claim", "Only where the defendant is not affected by par delictum", "Only where the plaintiff is a minor", "Only where the agreement is void ab initio"], 1,
+      "Correct: the counter-performance matrix reaches the tender question only if the defendant is not affected by par delictum.",
+      ["Incorrect: the question is not always reached.", null, "Incorrect: minority is not the trigger.", "Incorrect: voidness alone does not reach the tender question."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
