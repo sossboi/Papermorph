@@ -20,7 +20,19 @@ const row = (m, p, n, str, mark, y) => {
   const g = G(p, { x: -16, y, o: 0 });
   mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
   T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
-  T(g, str, { x: 260, size: 32, weight: 600 });
+  // Wrap str into lines that fit within the stage's usable width
+  const size = 32;
+  const avail = 1240;
+  const lh = 36;
+  const words = str.split(' ');
+  const lines = [];
+  let line = '';
+  for (const w of words) {
+    const testLine = line ? line + ' ' + w : w;
+    if (line && uiW(testLine, size) > avail) { lines.push(line); line = w; } else { line = testLine; }
+  }
+  if (line) lines.push(line);
+  lines.forEach((l, i) => { T(g, l, { x: 260, y: y + i * lh, size, weight: 600 }); });
   tw(g, { o: 1, x: 0 }, m(mark), .6);
   return g;
 };
