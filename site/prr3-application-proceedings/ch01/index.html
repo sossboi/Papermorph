@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Action or Application, and the Papers" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Action or Application, and the Papers", minutes: 11, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 3"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Action or Application, and the Papers", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Action or Application, and the Papers", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Application proceedings: the case built on the papers.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['fit', 'Fit', (m) => {
+    const p = panel(0);
+    head(p, "Fit", 150, .2, { size: 34 });
+    row(m, p, 1, "Study Unit 2 covered the action procedure: summons, pleadings, trial.", 'before', 245);
+    row(m, p, 2, "The alternative is application, or motion, procedure, where the case is decided without a trial.", 'current', 333);
+    row(m, p, 3, "Instead of oral evidence, the whole case is built from a notice of motion and a set of sworn affidavits.", 'papers', 421);
+    row(m, p, 4, "So this unit is mostly about drafting and timing: which document you draft, who deposes to it, who it is served on, and by when.", 'job', 509);
+  }],
+  ['choose', 'Choose', (m) => {
+    const p = panel(0);
+    head(p, "Choose", 150, .2, { size: 34 });
+    row(m, p, 1, "Ask whether there are factual disputes of such a nature that they can be dealt with on the papers before the court.", 'test', 245);
+    row(m, p, 2, "If there is a real dispute of fact, the matter should proceed by action.", 'dispute', 333);
+    row(m, p, 3, "If the facts are not genuinely in dispute, or the dispute can be resolved on the papers, application procedure is appropriate.", 'nodispute', 421);
+    row(m, p, 4, "Urgent applications are a distinct species, brought ex parte or on shortened time, and they follow their own rules.", 'urgent', 509);
+    row(m, p, 5, "Choosing wrongly is expensive: a matter dismissed as ill-founded may have to be re-run as an action.", 'consequence', 597);
+  }],
+  ['documents', 'Documents', (m) => {
+    const p = panel(0);
+    head(p, "Documents", 150, .2, { size: 34 });
+    row(m, p, 1, "In an action the parties exchange pleadings: the combined summons and particulars of claim, the plea, the counterclaim and the replication.", 'actiondocs', 245);
+    row(m, p, 2, "In an application the applicant files a notice of motion and a founding affidavit, and the respondent files a notice of opposition and an opposing affidavit.", 'appdocs', 333);
+    row(m, p, 3, "The applicant may then file a replying affidavit.", 'reply', 421);
+    row(m, p, 4, "The notice of motion tells the respondent what relief is sought and when to oppose; the affidavits carry the evidence.", 'notice', 509);
+  }],
+  ['facta', 'Facta', (m) => {
+    const p = panel(0);
+    head(p, "Facta", 150, .2, { size: 34 });
+    row(m, p, 1, "Facta probanda are the facts that must be proved: the material facts that establish the cause of action or the defence.", 'probanda', 245);
+    row(m, p, 2, "Facta probantia are the facts that prove those facts: the evidence, the documents and the surrounding circumstances.", 'probantia', 333);
+    row(m, p, 3, "Pleadings and affidavits carry facta probanda only.", 'rule', 421);
+    row(m, p, 4, "Attaching a document to prove a fact is facta probantia, and it does not belong in a pleading; the classic example is a retrenchment letter attached to a plea to prove that the defendant cannot pay maintenance.", 'trap', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Application proceedings are appropriate where\u2026"],
+    build: choice(["there is a substantial dispute of fact", "the facts can be decided on the papers without a trial", "the claim is for a large sum of money", "the defendant has failed to deliver a plea"], 1,
+      "Correct: application procedure is used where factual disputes are of such a nature that they can be dealt with on the papers before the court.",
+      ["Incorrect: a substantial dispute of fact points to action proceedings.", null, "Incorrect: the amount in issue does not determine the procedure.", "Incorrect: a failure to plead is a default in an action, not a reason for application procedure."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Facta probantia are\u2026"],
+    build: choice(["the material facts that establish the cause of action", "the facts that prove the material facts: the evidence, documents and circumstances", "the prayers at the end of the notice of motion", "the admissions made in the opposing affidavit"], 1,
+      "Correct: facta probanda are the facts to be proved, and facta probantia are the facts that prove them.",
+      ["Incorrect: that is facta probanda.", null, "Incorrect: prayers are the relief sought, not evidence.", "Incorrect: admissions are a consequence of the papers, not the definition."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Application procedure is the on-the-papers route: a notice of motion plus affidavits, with no trial.", 'w1', 245);
+    row(m, p, 2, "Choose it where there is no genuine dispute of fact; a real dispute points to an action.", 'w2', 333);
+    row(m, p, 3, "The notice of motion states the relief, the founding affidavit carries the applicant's evidence, and the respondent answers by notice of opposition and opposing affidavit.", 'w3', 421);
+    row(m, p, 4, "Pleadings and affidavits carry facta probanda only; facta probantia prove them.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-facta', prompt: ["A pleader attaches a retrenchment letter to a plea to show the defendant cannot afford maintenance. What is wrong?"],
+    build: choice(["Nothing: it is relevant to the means enquiry", "It is facta probantia and does not belong in a pleading", "It should have been attached to the particulars of claim only", "It must be proved by oral evidence at trial"], 1,
+      "Correct: the plea carries facta probanda only. A document that proves a fact is facta probantia, and the deck gives the retrenchment letter as the example.",
+      ["Incorrect: relevance does not make a document facta probanda.", null, "Incorrect: the objection applies to any pleading, not only the plea.", "Incorrect: the objection is about the pleading, not about how the fact is proved later."]),
+  },
+  {
+    id: 'p-dispute', prompt: ["A respondent raises a genuine dispute of fact in an application. What is the correct course?"],
+    build: choice(["The court must decide the dispute on the papers", "The matter should proceed by action", "The applicant must withdraw the application", "The respondent is barred"], 1,
+      "Correct: where a real dispute of fact exists it cannot be resolved on the papers, and the matter should be referred to trial or action.",
+      ["Incorrect: a genuine dispute of fact cannot be decided on affidavits alone.", null, "Incorrect: withdrawal is not the remedy; the procedure is wrong.", "Incorrect: the respondent's dispute is a valid answer, not a default."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

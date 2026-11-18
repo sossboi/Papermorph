@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Best Interests, Care, Contact and Guardianship" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Best Interests, Care, Contact and Guardianship", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 5"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Best Interests, Care, Contact and Guardianship", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Best Interests, Care, Contact and Guardianship", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The best-interest standard, and the three building blocks.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['best', 'Best', (m) => {
+    const p = panel(0);
+    head(p, "Best", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 28(2) of the Constitution provides that a child's best interests are of paramount importance in every matter concerning the child.", 'constitution', 245);
+    row(m, p, 2, "Section 7(1) of the Children's Act unpacks that standard into concrete factors.", 'section7', 333);
+    row(m, p, 3, "There are fourteen factors, and they cluster into four themes: the relationship, the impact of change, the child themselves, and protection and efficiency.", 'fourteen', 421);
+    row(m, p, 4, "Whenever a scenario asks you to advise on care, contact, guardianship, termination of parental responsibilities and rights, or adoption, structure the answer around these factors.", 'apply', 509);
+    row(m, p, 5, "Never assert only that something is in the child's best interests without reference to them.", 'never', 597);
+  }],
+  ['care', 'Care', (m) => {
+    const p = panel(0);
+    head(p, "Care", 150, .2, { size: 34 });
+    row(m, p, 1, "Care is defined in section 1 of the Children's Act, and it includes providing a suitable place to live, living conditions conducive to the child's health and development, and the necessary financial support.", 'definition', 245);
+    row(m, p, 2, "It includes safeguarding and promoting the child's well-being and protecting the child from maltreatment, abuse, neglect, degradation, discrimination and exploitation.", 'protect', 333);
+    row(m, p, 3, "It includes guiding, directing and securing the child's education and upbringing, and guiding the child in decisions appropriate to their age and maturity.", 'guide', 421);
+    row(m, p, 4, "And it includes ensuring that the child's best interests are the paramount concern in all matters affecting the child.", 'paramount', 509);
+    row(m, p, 5, "Do not use the word custody: it is outdated terminology from the old Divorce Act framework and has been replaced by care, contact and guardianship.", 'nocustody', 597);
+  }],
+  ['contact', 'Contact', (m) => {
+    const p = panel(0);
+    head(p, "Contact", 150, .2, { size: 34 });
+    row(m, p, 1, "Contact means maintaining a personal relationship with the child.", 'definition', 245);
+    row(m, p, 2, "Where the child lives with someone else, it means communication on a regular basis with the child in person, including visiting or being visited, or communication in any other manner, including by post, telephone or electronic communication.", 'liveselsewhere', 333);
+    row(m, p, 3, "You cannot have contact without care: care is the broader and more encompassing concept.", 'carefirst', 421);
+  }],
+  ['guardianship', 'Guardianship', (m) => {
+    const p = panel(0);
+    head(p, "Guardianship", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 18(3) requires a guardian to administer and safeguard the child's property and property interests, to assist or represent the child in administrative, contractual and other legal matters, and to give or refuse consents required by law.", 'section18', 245);
+    row(m, p, 2, "Those consents include the child's marriage, adoption, departure or removal from the Republic, application for a passport, and alienation or encumbrance of the child's immovable property.", 'bigfive', 333);
+    row(m, p, 3, "Section 18(4): where there is more than one guardian, each may generally act independently and without the consent of the others.", 'sub4', 421);
+    row(m, p, 4, "Section 18(5): but the big five consents require the consent of all the guardians.", 'sub5', 509);
+  }],
+  ['residence', 'Residence', (m) => {
+    const p = panel(0);
+    head(p, "Residence", 150, .2, { size: 34 });
+    row(m, p, 1, "Primary residence is not defined in the Children's Act; it is a concept used in practice, not statute, so do not hunt for a section number.", 'notdefined', 245);
+    row(m, p, 2, "In pleadings you set out that it would be in the best interests of the minor child for primary residence to vest with the plaintiff or the defendant.", 'plead', 333);
+    row(m, p, 3, "Generally one parent gets primary residence and the other gets contact rights.", 'usual', 421);
+    row(m, p, 4, "A fifty-fifty split is technically possible, but it depends on the circumstances and the level of co-operation between the parties.", 'fifty', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The word \"custody\" in a Child Law answer is\u2026"],
+    build: choice(["the correct modern term for primary residence", "outdated terminology that signals the wrong framework", "equivalent to guardianship", "defined in s 1 of the Children's Act"], 1,
+      "Correct: custody is outdated terminology from the old Divorce Act framework, replaced by care, contact and guardianship under the Children's Act.",
+      ["Incorrect: the modern term is care, and primary residence is a practice concept.", null, "Incorrect: guardianship is a distinct concept under s 18.", "Incorrect: care, contact and guardianship are defined; custody is not used."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Section 18(5) of the Children's Act requires\u2026"],
+    build: choice(["the consent of one guardian only", "the consent of all the guardians for the big five decisions", "the consent of the child only", "no consent where the guardians are separated"], 1,
+      "Correct: marriage, adoption, departure or removal from the Republic, a passport, and alienation of the child's immovable property all require every guardian's consent.",
+      ["Incorrect: s 18(4) allows independent action generally, but s 18(5) overrides it for the big five.", null, "Incorrect: the child's consent is not the statutory requirement here.", "Incorrect: separation does not remove the consent requirement."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The best-interest standard is constitutional, and section 7(1) of the Children's Act unpacks it into fourteen factors in four clusters.", 'w1', 245);
+    row(m, p, 2, "Care is the broader concept, and contact cannot exist without it.", 'w2', 333);
+    row(m, p, 3, "Guardianship covers property, representation and the statutory consents.", 'w3', 421);
+    row(m, p, 4, "Section 18(4) lets guardians act independently, but section 18(5) requires all guardians to consent to the big five.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-contact', prompt: ["Which statement about contact is correct?"],
+    build: choice(["Contact can exist independently of care", "Contact requires care, and includes regular communication in person or by other means", "Contact is limited to physical visits", "Contact is decided without reference to the best-interest factors"], 1,
+      "Correct: care is the broader concept and contact cannot exist without it; contact includes in-person and other regular communication.",
+      ["Incorrect: you cannot have contact without care.", null, "Incorrect: contact includes post, telephone and electronic communication.", "Incorrect: every question in this unit runs through the best-interest standard."]),
+  },
+  {
+    id: 'p-guardian', prompt: ["A child has two guardians. Which act may one guardian perform alone?"],
+    build: choice(["Consenting to the child's adoption", "Consenting to the child's application for a passport", "Administering and safeguarding the child's property", "Consenting to the child's departure from the Republic"], 2,
+      "Correct: s 18(4) lets each guardian act independently generally; the big five consents in s 18(5) require all guardians.",
+      ["Incorrect: adoption is one of the big five requiring all guardians.", "Incorrect: a passport is one of the big five.", null, "Incorrect: departure from the Republic is one of the big five."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Matrimonial Property, Pension Interest and Forfeiture" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: "Matrimonial Property, Pension Interest and Forfeiture", minutes: 12, language: 'en', next: '../ch05/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 2"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Matrimonial Property, Pension Interest and Forfeiture", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Matrimonial Property, Pension Interest and Forfeiture", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The matrimonial property regimes, pension interest and forfeiture.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['regimes', 'Regimes', (m) => {
+    const p = panel(0);
+    head(p, "Regimes", 150, .2, { size: 34 });
+    row(m, p, 1, "Every marriage in South African law, including a customary marriage, is in community of property unless the parties entered an antenuptial contract agreeing otherwise.", 'default', 245);
+    row(m, p, 2, "A marriage certificate does not show the regime: ask the client, and ask for the antenuptial contract.", 'certificate', 333);
+    row(m, p, 3, "In community of property, each spouse has an undivided half share of the joint estate, divided on dissolution by death or divorce.", 'community', 421);
+    row(m, p, 4, "Out of community with accrual needs an antenuptial contract that specifically includes the accrual; the spouse with the smaller accrual claims half the difference.", 'accrual', 509);
+    row(m, p, 5, "Out of community without accrual needs an antenuptial contract too, and each party keeps their own estate.", 'noaccrual', 597);
+    row(m, p, 6, "Parties to a customary marriage cannot later register an antenuptial contract, because that would change the matrimonial property system; to change it you must apply to court under section 21 of the Matrimonial Property Act.", 'change', 685);
+  }],
+  ['accrual', 'Accrual', (m) => {
+    const p = panel(0);
+    head(p, "Accrual", 150, .2, { size: 34 });
+    row(m, p, 1, "The particulars of claim or counterclaim must state that the accrual system applies, which party's estate accrued the least, and that the party is entitled to half the difference between the respective estates.", 'three', 245);
+    row(m, p, 2, "Ask whether that party contributed to the growth of the other's estate.", 'ask', 333);
+    row(m, p, 3, "Where the marriage was before the Matrimonial Property Act there was no accrual, and section 7(3) of the Divorce Act allows a redistribution order.", 'before', 421);
+    row(m, p, 4, "The deck records EB v ER as declaring section 7(3) inconsistent with the Constitution to the extent that it fails to include dissolution of a marriage by death, but gives no citation, so check the judgment before quoting it.", 'eb', 509);
+  }],
+  ['pension', 'Pension', (m) => {
+    const p = panel(0);
+    head(p, "Pension", 150, .2, { size: 34 });
+    row(m, p, 1, "Check the opposing party's age from the ID number; if they are in their sixties, be careful with retirement.", 'age', 245);
+    row(m, p, 2, "The Pension Funds Act was recently amended and its definition of pension interest trumps the Divorce Act, because section 1(2) of the Pension Funds Amendment Act says that if the two conflict, the Pension Funds Act prevails.", 'pfa', 333);
+    row(m, p, 3, "For a court order under section 7(8)(a) of the Divorce Act, pension interest is the member's individual account or minimum individual reserve, determined under the fund's rules, on the date of the court order.", 'define', 421);
+    row(m, p, 4, "Section 7(7) of the Divorce Act deems pension interest part of a person's assets for calculating patrimonial benefits.", 'plead', 509);
+    row(m, p, 5, "Make the divorce order specify the pension interest.", 'specify', 597);
+    row(m, p, 6, "If the order divides the joint estate but is silent on pension interest, the fund will not pay out, and the claiming party must apply to vary the order.", 'trap', 685);
+  }],
+  ['forfeiture', 'Forfeiture', (m) => {
+    const p = panel(0);
+    head(p, "Forfeiture", 150, .2, { size: 34 });
+    row(m, p, 1, "Only a party who receives a benefit from the marriage can forfeit it.", 'who', 245);
+    row(m, p, 2, "The court considers the duration of the marriage, the circumstances which gave rise to the breakdown, and any substantial misconduct of either party.", 'factors', 333);
+    row(m, p, 3, "Courts seldom grant forfeiture, and costs in divorce are likewise refused without good cause, so always ask but do not rely on it.", 'rare', 421);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A marriage is in community of property unless\u2026"],
+    build: choice(["the parties signed an antenuptial contract agreeing otherwise", "the marriage certificate says otherwise", "the parties were married by customary law", "the parties have no children"], 0,
+      "Correct: every marriage, including a customary marriage, is in community of property unless the parties entered an antenuptial contract agreeing otherwise.",
+      [null, "Incorrect: a marriage certificate does not show the matrimonial property regime.", "Incorrect: customary marriages are also in community of property by default.", "Incorrect: children do not affect the matrimonial property regime."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A divorce order divides the joint estate but says nothing about pension interest. What follows?"],
+    build: choice(["The pension interest is divided automatically as part of the joint estate", "The pension fund will not pay out, and the claiming party must apply to vary the order", "The order is void", "The Pension Funds Act definition no longer applies"], 1,
+      "Correct: the interest still forms part of the joint estate, but because the order is silent the fund will not pay out, and the claiming party must apply to vary the divorce order.",
+      ["Incorrect: the interest forms part of the estate, but silence in the order stops the payout.", null, "Incorrect: the order is not void; it is effective but must be varied.", "Incorrect: the Pension Funds Act definition applies regardless of what the order says."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Every marriage is in community of property unless an antenuptial contract says otherwise, and the marriage certificate does not show the regime.", 'w1', 245);
+    row(m, p, 2, "Out of community with accrual needs an antenuptial contract that specifically includes the accrual.", 'w2', 333);
+    row(m, p, 3, "The Pension Funds Act definition of pension interest prevails over the Divorce Act definition.", 'w3', 421);
+    row(m, p, 4, "A divorce order must specify pension interest, or the fund will not pay and the order must be varied.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-accrual', prompt: ["Which statement about the accrual system is correct?"],
+    build: choice(["It applies automatically to every marriage out of community of property", "It must be specifically included in the antenuptial contract", "It is implied by the Matrimonial Property Act", "It cannot be claimed in divorce"], 1,
+      "Correct: an antenuptial contract must specifically include the accrual for the accrual system to apply.",
+      ["Incorrect: without an antenuptial contract the marriage is in community of property.", null, "Incorrect: the Act does not imply the accrual; the contract must include it.", "Incorrect: half the difference in accruals is claimable on dissolution."]),
+  },
+  {
+    id: 'p-forfeit', prompt: ["Who may forfeit patrimonial benefits on divorce?"],
+    build: choice(["Either party, whatever the marriage regime", "Only the party who receives a benefit from the marriage", "Only the party who contributed most to the joint estate", "Only the plaintiff"], 1,
+      "Correct: only a party who receives a benefit from the marriage can forfeit it, and the court weighs the duration of the marriage, the circumstances of the breakdown and substantial misconduct.",
+      ["Incorrect: the benefit requirement limits who can forfeit.", null, "Incorrect: contribution is not the test for forfeiture.", "Incorrect: the defendant may also forfeit by counterclaim."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

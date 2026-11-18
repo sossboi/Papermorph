@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Maintenance Court: Complaint to Enquiry" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "The Maintenance Court: Complaint to Enquiry", minutes: 11, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 4"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Maintenance Court: Complaint to Enquiry", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Maintenance Court: Complaint to Enquiry", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Maintenance: a money-and-timing unit.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['spine', 'Spine', (m) => {
+    const p = panel(0);
+    head(p, "Spine", 150, .2, { size: 34 });
+    row(m, p, 1, "Maintenance is regulated by the Maintenance Act 99 of 1998, and the sections of this unit follow the order of the Act: complaint, investigation, enquiry, orders, default orders, enforcement and offences.", 'act', 245);
+    row(m, p, 2, "A client needs support, for a child or occasionally a spouse, and your job is to know where to claim it, what must be proved, how the Maintenance Court runs the enquiry, and what to do when the order is not paid.", 'job', 333);
+    row(m, p, 3, "In divorce litigation maintenance appears as a parental responsibility and right and as a section 7 claim; here the claim is free-standing, in the Maintenance Court.", 'recap', 421);
+  }],
+  ['prerequisites', 'Prerequisites', (m) => {
+    const p = panel(0);
+    head(p, "Prerequisites", 150, .2, { size: 34 });
+    row(m, p, 1, "There must be a relationship that gives rise to a duty to support: a parent and child, or spouses.", 'relationship', 245);
+    row(m, p, 2, "The claimant must show need, and the duty is measured against what the child or spouse reasonably requires.", 'need', 333);
+    row(m, p, 3, "The other party must have the means to pay, and the enquiry is an investigation of both need and means.", 'means', 421);
+    row(m, p, 4, "Check for an existing maintenance order before starting, because the remedy may be variation rather than a new complaint.", 'existing', 509);
+  }],
+  ['journey', 'Journey', (m) => {
+    const p = panel(0);
+    head(p, "Journey", 150, .2, { size: 34 });
+    row(m, p, 1, "The applicant completes the prescribed form to apply for a maintenance order and lodges it with a maintenance officer.", 'complaint', 245);
+    row(m, p, 2, "The Maintenance Officer investigates and tries to resolve the matter, and if the parties agree a consent order is made.", 'investigate', 333);
+    row(m, p, 3, "If there is no agreement, the Maintenance Officer refers the matter to an enquiry.", 'refer', 421);
+    row(m, p, 4, "The section 10 enquiry takes the form of a full trial: each party leads evidence, oral and documentary, and the court decides.", 'enquiry', 509);
+    row(m, p, 5, "The court then makes an order under section 16.", 'order', 597);
+  }],
+  ['structure', 'Structure', (m) => {
+    const p = panel(0);
+    head(p, "Structure", 150, .2, { size: 34 });
+    row(m, p, 1, "The Act provides for a complaint to a maintenance officer, an investigation, a section 10 enquiry, maintenance and other orders, default orders under section 18, enforcement and offences.", 'sections', 245);
+    row(m, p, 2, "The deck lists a number of sections by title only, and their content is not invented here.", 'silent', 333);
+    row(m, p, 3, "The file is named Study Unit 4 but the title slide says Study Unit 5; this book follows the file name.", 'name', 421);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The Maintenance Act 99 of 1998 is\u2026"],
+    build: choice(["the Act that governs maintenance in the Maintenance Court", "a section of the Divorce Act", "the Magistrates' Courts Act", "the Children's Act"], 0,
+      "Correct: maintenance is regulated by the Maintenance Act 99 of 1998, and the unit follows the order of its sections.",
+      ["Incorrect: the Divorce Act governs divorce, not the Maintenance Court.", "Incorrect: the Magistrates' Courts Act governs the civil jurisdiction of the magistrates' courts.", "Incorrect: the Children's Act governs parental responsibilities and rights."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A maintenance complaint begins with\u2026"],
+    build: choice(["a combined summons issued by the clerk of the court", "the applicant completing the prescribed form and lodging it with a maintenance officer", "an ex parte application to the High Court", "a notice of motion served by the sheriff"], 1,
+      "Correct: the applicant completes the prescribed form to apply for a maintenance order and lodges it with a maintenance officer, who then investigates.",
+      ["Incorrect: a combined summons belongs to an action, not to the Maintenance Court.", null, "Incorrect: maintenance is not brought by ex parte application.", "Incorrect: a notice of motion belongs to application proceedings."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The Maintenance Act 99 of 1998 is the spine, and the unit follows the order of the Act.", 'w1', 245);
+    row(m, p, 2, "The prerequisites are a relationship giving rise to a duty, need, and the means to pay.", 'w2', 333);
+    row(m, p, 3, "The journey runs complaint, investigation, consent order or referral, then the section 10 enquiry.", 'w3', 421);
+    row(m, p, 4, "The section 10 enquiry is a full trial, not a paper hearing.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-enquiry', prompt: ["What form does the section 10 enquiry take?"],
+    build: choice(["A paper hearing on affidavit", "A full trial in which each party leads oral and documentary evidence", "An arbitration by the maintenance officer", "A mediation session"], 1,
+      "Correct: the deck states that the section 10 enquiry takes the form of a full trial, with each party leading evidence.",
+      ["Incorrect: the enquiry is not decided on the papers.", null, "Incorrect: the maintenance officer investigates and refers; the court conducts the enquiry.", "Incorrect: mediation is not the section 10 procedure."]),
+  },
+  {
+    id: 'p-consent', prompt: ["What happens if the parties agree during the investigation?"],
+    build: choice(["The matter must still go to a section 10 enquiry", "A consent order is made", "The complaint is withdrawn", "The maintenance officer decides the amount"], 1,
+      "Correct: the Maintenance Officer investigates and tries to resolve the matter, and if the parties agree a consent order is made.",
+      ["Incorrect: an agreement avoids the enquiry.", null, "Incorrect: the complaint is resolved, not withdrawn.", "Incorrect: the officer facilitates the agreement; the parties decide."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

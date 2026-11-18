@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Acquiring and Losing Parental Responsibilities and Rights" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Acquiring and Losing Parental Responsibilities and Rights", minutes: 12, language: 'en', next: '../ch03/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 5"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Acquiring and Losing Parental Responsibilities and Rights", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Acquiring and Losing Parental Responsibilities and Rights", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "How parental responsibilities and rights are acquired and lost.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['mother', 'Mother', (m) => {
+    const p = panel(0);
+    head(p, "Mother", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 19(1): the biological mother of a child has full parental responsibilities and rights in respect of the child, whether married or not.", 'section19', 245);
+    row(m, p, 2, "Section 19(2): if the mother is unmarried and the biological father is not the child's guardian, the mother of the mother, the maternal grandmother, is the child's guardian.", 'grandmother', 333);
+    row(m, p, 3, "Section 19(3): this does not apply where the child was conceived through a surrogacy agreement.", 'surrogacy', 421);
+  }],
+  ['fathermarried', 'Fathermarried', (m) => {
+    const p = panel(0);
+    head(p, "Fathermarried", 150, .2, { size: 34 });
+    row(m, p, 1, "The biological father acquires full parental responsibilities and rights automatically if he is married to the mother, or was married to the mother at the time of conception, at birth, or at any time in between.", 'section12', 245);
+    row(m, p, 2, "No court order is needed: the marriage itself triggers the acquisition.", 'automatic', 333);
+  }],
+  ['fatherunmarried', 'Fatherunmarried', (m) => {
+    const p = panel(0);
+    head(p, "Fatherunmarried", 150, .2, { size: 34 });
+    row(m, p, 1, "An unmarried biological father acquires full parental responsibilities and rights through either of two independent doors.", 'section21', 245);
+    row(m, p, 2, "First, he lives with the mother in a permanent life partnership at the time of the child's birth.", 'door1', 333);
+    row(m, p, 3, "Second, regardless of where he lives, he consents to be identified as the father, or successfully applies under section 26 to be identified, or pays damages under customary law; and he contributes or has attempted in good faith to contribute to the child's upbringing for a reasonable period; and he contributes or has attempted in good faith to contribute towards expenses connected with the maintenance of the child for a reasonable period.", 'door2', 421);
+    row(m, p, 4, "Either door is enough on its own.", 'either', 509);
+    row(m, p, 5, "Disputes about whether he has satisfied the section 21 contribution requirements go to mediation, not straight to court.", 'mediation', 597);
+  }],
+  ['section26', 'Section26', (m) => {
+    const p = panel(0);
+    head(p, "Section26", 150, .2, { size: 34 });
+    row(m, p, 1, "A father who does not qualify under section 21 may apply for an amendment to the registration of birth if the mother has consented.", 'amendment', 245);
+    row(m, p, 2, "He may apply to court for an order confirming paternity if the mother refuses consent, is incompetent to consent owing to mental illness, cannot be located, or is deceased.", 'court', 333);
+    row(m, p, 3, "Section 26 does not apply to conception through rape or incest, or through artificial fertilisation using a donor: those are expressly excluded.", 'excluded', 421);
+  }],
+  ['others', 'Others', (m) => {
+    const p = panel(0);
+    head(p, "Others", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 23 allows any person with an interest in the well-being or development of the child to apply to court for an order granting that person contact with, or care of, the child.", 'section23', 245);
+    row(m, p, 2, "The court considers the best interests of the child, the child's relationship with the person, the commitment shown to the child, the contribution to expenses, and any other factor.", 'factors', 333);
+    row(m, p, 3, "The same applicant may also apply for guardianship under section 24, using a related application.", 'section24', 421);
+    row(m, p, 4, "A care-giver, such as a grandparent, does not automatically acquire parental responsibilities and rights merely by factually caring for the child.", 'caregiver', 509);
+  }],
+  ['losing', 'Losing', (m) => {
+    const p = panel(0);
+    head(p, "Losing", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 28(1) allows an application to the High Court, a divorce court, or a children's court for an order suspending or terminating any or all of a person's parental responsibilities and rights, or extending or circumscribing their exercise.", 'section28', 245);
+    row(m, p, 2, "Section 28(3) lists who may bring it: a co-holder, any other person with a sufficient interest, the child with leave of the court, any other person in the child's interest with leave, and the family advocate or a representative of an interested organ of state.", 'who', 333);
+    row(m, p, 3, "Section 28(4) requires the court to consider the best interests of the child, the relationship between the child and the person, the degree of commitment shown, and any other relevant fact.", 'consider', 421);
+  }],
+  ['plans', 'Plans', (m) => {
+    const p = panel(0);
+    head(p, "Plans", 150, .2, { size: 34 });
+    row(m, p, 1, "A parenting plan sets out how co-holders will exercise their responsibilities and rights; it must be in writing and signed, and it may be registered with the Family Advocate or made an order of court.", 'section33', 245);
+    row(m, p, 2, "A section 22 agreement is different: it provides for the acquisition of parental responsibilities and rights by a person who does not already have them.", 'section22', 333);
+    row(m, p, 3, "A section 22 agreement takes effect only once registered with the Family Advocate or made an order of court.", 'effect', 421);
+    row(m, p, 4, "Section 35 makes it a criminal offence, punishable by a fine or imprisonment not exceeding one year, to refuse another person access or the exercise of their rights contrary to a court order or an agreement.", 'offence', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["An unmarried biological father acquires full parental responsibilities and rights where\u2026"],
+    build: choice(["he is named on the birth certificate", "he lives with the mother in a permanent life partnership at the child's birth, or he meets the identification and contribution requirements", "he pays maintenance voluntarily", "the mother consents"], 1,
+      "Correct: s 21 gives two independent doors, the permanent life partnership, or identification plus good-faith contribution to upbringing and maintenance.",
+      ["Incorrect: the birth certificate is not the test.", null, "Incorrect: voluntary payment alone is not one of the doors.", "Incorrect: the mother's consent is relevant to a s 26 birth-registration amendment, not to s 21."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A s 22 PR&R agreement differs from a s 33 parenting plan because\u2026"],
+    build: choice(["the s 22 agreement is about who acquires PR&R, and the s 33 plan is about how co-holders exercise them", "the s 22 agreement needs no signature", "the s 33 plan can never be made an order of court", "the s 22 agreement is a criminal matter"], 0,
+      "Correct: s 22 concerns the acquisition of PR&R by someone who does not already hold them; s 33 regulates how co-holders exercise the rights they already have.",
+      [null, "Incorrect: a parenting plan must be in writing and signed, and a s 22 agreement follows its own formalities.", "Incorrect: a parenting plan may be made an order of court under s 33(2).", "Incorrect: s 22 is a civil mechanism; s 35 creates the offence."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The biological mother has full parental responsibilities and rights under section 19, married or not.", 'w1', 245);
+    row(m, p, 2, "A father married to the mother acquires them automatically under section 12; an unmarried father uses section 21's two doors or section 26.", 'w2', 333);
+    row(m, p, 3, "Section 23 lets any interested person apply for contact or care, and section 28 governs termination, suspension and restriction.", 'w3', 421);
+    row(m, p, 4, "A section 22 agreement confers rights, a section 33 plan regulates how co-holders exercise them, and section 35 makes refusal an offence.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-s26', prompt: ["When may a father apply to court under s 26 for an order confirming paternity?"],
+    build: choice(["Only where the mother has consented", "Where the mother refuses consent, is incompetent to consent, cannot be located, or is deceased", "Only where the parents were married", "Only where the child is over eighteen"], 1,
+      "Correct: s 26 permits the court application in those four situations; the s 26 route excludes conception through rape, incest or donor artificial fertilisation.",
+      ["Incorrect: consent takes the birth-registration route, not the court route.", null, "Incorrect: marriage is irrelevant to s 26.", "Incorrect: the child's age is not the trigger."]),
+  },
+  {
+    id: 'p-s35', prompt: ["What is the consequence of refusing a person access contrary to a court order?"],
+    build: choice(["It is a civil breach only", "It is a criminal offence punishable by a fine or imprisonment not exceeding one year", "It is punishable by imprisonment of at least one year", "It voids the order"], 1,
+      "Correct: s 35(1) makes refusing access or the exercise of PR&R contrary to a court order or a s 22 agreement an offence, with a fine or imprisonment up to one year.",
+      ["Incorrect: it is an offence, not merely a civil breach.", null, "Incorrect: the maximum is one year, not a minimum.", "Incorrect: the order stands; the refusal is punished."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

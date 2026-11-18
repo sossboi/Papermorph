@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Orders, the Warrant of Arrest and Variation" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: "Orders, the Warrant of Arrest and Variation", minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 6"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Orders, the Warrant of Arrest and Variation", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Orders, the Warrant of Arrest and Variation", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The orders the court may grant, and how they are enforced.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['section7', 'Section7', (m) => {
+    const p = panel(0);
+    head(p, "Section7", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 7(1) lets the court prohibit the respondent from committing or attempting any act of domestic violence, from enlisting another person to commit it, from entering a shared residence where that is in the complainant's best interests, from entering a specified part of it, from entering the complainant's residence, workplace or place of study, and from preventing the complainant from entering or remaining in the shared residence.", 'prohibitions', 245);
+    row(m, p, 2, "Section 7(2) allows any additional conditions reasonably necessary for safety, health or wellbeing, including seizing weapons and a peace officer accompanying the complainant to collect personal property.", 'conditions', 333);
+    row(m, p, 3, "Section 7(3) allows rent or mortgage obligations to be imposed on the respondent where entry to a shared residence is prohibited, and section 7(4) allows emergency monetary relief, which has the effect of a civil judgment of a magistrate's court.", 'money', 421);
+    row(m, p, 4, "Section 7(5): the complainant's addresses and contact details must be omitted from the order unless its terms require them.", 'privacy', 509);
+    row(m, p, 5, "Section 7(6): if in a child's best interests, the court may refuse the respondent contact with the child or order contact on conditions.", 'child', 597);
+    row(m, p, 6, "Section 7(7): the court may not refuse an order merely because other legal remedies exist, and where a provision belongs under other law it must limit that provision's duration.", 'otherlaw', 685);
+  }],
+  ['warrant', 'Warrant', (m) => {
+    const p = panel(0);
+    head(p, "Warrant", 150, .2, { size: 34 });
+    row(m, p, 1, "Whenever the court issues a protection order under section 5(2) or section 6, it must authorise a warrant of arrest and suspend its execution subject to compliance with the section 7 prohibitions, conditions and obligations.", 'issued', 245);
+    row(m, p, 2, "The warrant stays in force until the order is set aside or the warrant is cancelled after execution.", 'sleeping', 333);
+    row(m, p, 3, "If the respondent breaches the order, the complainant hands the warrant to a SAPS member with an affidavit in the prescribed form stating the contravention.", 'breach', 421);
+    row(m, p, 4, "If the member has reasonable grounds to suspect the complainant is suffering or may suffer harm, the member must immediately arrest the respondent for the offence in section 17(1)(a).", 'arrest', 509);
+    row(m, p, 5, "If the member thinks the grounds are insufficient, the member must immediately hand the respondent a written notice calling them to appear in court on a stated date.", 'notice', 597);
+    row(m, p, 6, "In deciding whether harm is likely, the member considers the risk to safety, health, wellbeing or property; the seriousness of the breach; the time since the breach; and the nature and extent of harm previously suffered.", 'factors', 685);
+  }],
+  ['variation', 'Variation', (m) => {
+    const p = panel(0);
+    head(p, "Variation", 150, .2, { size: 34 });
+    row(m, p, 1, "A complainant or respondent may, on written notice to the other party and the court, apply to vary or set aside a final order in the prescribed manner.", 'apply', 245);
+    row(m, p, 2, "The other party must, within 10 days of the notice being served, give written notice of the grounds and facts of opposition.", 'oppose', 333);
+    row(m, p, 3, "The court must be satisfied of all three: that circumstances have changed materially since the original order, that there is good cause for the variation or setting aside, and that there was proper service on the respondent.", 'three', 421);
+    row(m, p, 4, "And the court may not grant the application to a complainant unless satisfied it is made freely and voluntarily.", 'freely', 509);
+  }],
+  ['police', 'Police', (m) => {
+    const p = panel(0);
+    head(p, "Police", 150, .2, { size: 34 });
+    row(m, p, 1, "A SAPS member must render the assistance required, including helping the complainant find a shelter and obtain medical treatment, hand over the prescribed notice in the complainant's official language of choice, and explain the remedies and the right to lay a criminal complaint.", 'assist', 245);
+    row(m, p, 2, "A functionary who reasonably believes a child, a person with a disability or an older person may be a complainant must without delay complete the prescribed report and submit it to a social worker or SAPS member, and conduct a risk assessment.", 'functionary', 333);
+    row(m, p, 3, "Any adult who knows, believes or suspects on reasonable grounds that domestic violence has been committed against a child, a person with a disability or an older person must report it as soon as possible, and failure to report is an offence.", 'adult', 421);
+    row(m, p, 4, "A peace officer may arrest without warrant a respondent reasonably suspected of an act of domestic violence that is an offence, and must arrest without warrant where they believe an offence with an element of violence was committed.", 'arrest2', 509);
+    row(m, p, 5, "A SAPS member who reasonably suspects a person who can give information is in a private residence may enter without a warrant to interrogate that person, after audibly demanding admission and stating the purpose.", 'enter', 597);
+  }],
+  ['tools', 'Tools', (m) => {
+    const p = panel(0);
+    head(p, "Tools", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 4A safety monitoring notice is available only to a complainant who shares a joint residence with the respondent, and it can order the SAPS station commander to have a member contact and visit the complainant at regular intervals; the annexure with the complainant's electronic address may not be disclosed to the respondent.", 's4a', 245);
+    row(m, p, 2, "Section 5B lets the court direct an electronic communications service provider to furnish particulars, with costs falling on the respondent when a final order is granted.", 's5b', 333);
+    row(m, p, 3, "Section 5C: the court must establish whether any other order bears on the application, must hear pending applications together, and must not contradict existing orders.", 's5c', 421);
+    row(m, p, 4, "On a final order the court must award costs against the respondent for service of process and for obtaining and providing information under section 5B.", 'costs', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A warrant of arrest issued with a protection order is\u2026"],
+    build: choice(["executed immediately on issue", "suspended until the respondent breaches the order", "valid only for 30 days", "issued only where the respondent appears"], 1,
+      "Correct: s 8(1) requires the court to authorise the warrant and suspend its execution subject to compliance with the s 7 prohibitions, conditions and obligations.",
+      ["Incorrect: the warrant is suspended, not executed.", null, "Incorrect: it remains in force until the order is set aside or the warrant is cancelled after execution.", "Incorrect: the warrant is authorised whenever an order is issued under s 5(2) or s 6."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["To vary or set aside a final protection order, the court must be satisfied of\u2026"],
+    build: choice(["changed circumstances only", "changed circumstances, good cause and proper service", "the complainant's consent only", "that the respondent has been arrested"], 1,
+      "Correct: s 10(2) requires all three, and a complainant's own application must additionally be shown to be made freely and voluntarily.",
+      ["Incorrect: changed circumstances alone are not enough.", null, "Incorrect: consent is not the test.", "Incorrect: an arrest is not a requirement."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Section 7 prohibitions stop behaviour, conditions protect safety, money orders keep the complainant housed, and section 7(5) hides the complainant's address.", 'w1', 245);
+    row(m, p, 2, "The warrant is issued with the order and suspended until breach, then woken by the complainant's affidavit and the SAPS member's judgement of harm.", 'w2', 333);
+    row(m, p, 3, "Variation needs changed circumstances, good cause and proper service, and a complainant's own application must be freely and voluntary.", 'w3', 421);
+    row(m, p, 4, "The police must assist and explain remedies, functionaries and adults must report, and a peace officer may arrest without a warrant.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-s4a', prompt: ["A safety monitoring notice under s 4A is available to\u2026"],
+    build: choice(["any complainant, whatever their living arrangements", "a complainant who shares a joint residence with the respondent", "only a complainant who has a final order", "only a child complainant"], 1,
+      "Correct: s 4A is available to a complainant who shares a joint residence with the respondent, and the electronic address annexure may not be disclosed to the respondent.",
+      ["Incorrect: the joint residence requirement limits the remedy.", null, "Incorrect: it may be sought with the s 4(1) application, before any order.", "Incorrect: it is not limited to child complainants."]),
+  },
+  {
+    id: 'p-report', prompt: ["What is the duty of an adult who reasonably suspects domestic violence against a child?"],
+    build: choice(["No duty, unless they are a family member", "To report it as soon as possible to a social worker or SAPS", "To report it only with the child's consent", "To report it within 30 days"], 1,
+      "Correct: s 2B requires any adult who knows, believes or suspects on reasonable grounds that domestic violence has been committed against a child, a person with a disability or an older person to report it as soon as possible, and failure to report is an offence.",
+      ["Incorrect: the duty applies to any adult.", null, "Incorrect: consent is not required.", "Incorrect: the report must be made as soon as possible."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

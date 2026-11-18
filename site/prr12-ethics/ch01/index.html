@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Framework: What Ethics Is and Who Regulates It" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "The Framework: What Ethics Is and Who Regulates It", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 12"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Framework: What Ethics Is and Who Regulates It", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Framework: What Ethics Is and Who Regulates It", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "What ethics is, and who regulates it.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['method', 'Method', (m) => {
+    const p = panel(0);
+    head(p, "Method", 150, .2, { size: 34 });
+    row(m, p, 1, "First, who is the duty owed to: the State, the court, the client, the opponent, colleagues or the public.", 'who', 245);
+    row(m, p, 2, "Second, what is the rule, and where is it found: the Legal Practice Act, a paragraph of the Code of Conduct, the common law or another source.", 'what', 333);
+    row(m, p, 3, "Third, is there a conflict between duties, for example the client's interests against the duty to the court.", 'conflict', 421);
+    row(m, p, 4, "Fourth, what is the permitted route, usually one of refusing or withdrawing, advising the client, or disclosing.", 'route', 509);
+    row(m, p, 5, "Fifth, what do you record and say: document the instructions and the advice, and if withdrawing, give reasons that reveal nothing privileged.", 'record', 597);
+    row(m, p, 6, "Legal ethics exists to protect the public, keep standards high so practitioners can be trusted, and attach disciplinary consequences to non-compliance.", 'why', 685);
+  }],
+  ['terms', 'Terms', (m) => {
+    const p = panel(0);
+    head(p, "Terms", 150, .2, { size: 34 });
+    row(m, p, 1, "Ethics is either an empirical description of how people actually behave morally or the normative study of how they ought to behave.", 'ethics', 245);
+    row(m, p, 2, "Legal ethics is applied ethical theory on how to act morally in one's role as a lawyer.", 'legalethics', 333);
+    row(m, p, 3, "Professional legal ethics are the formally promulgated rules found in a code of conduct, and also derived from statute and common law; if they are not obeyed, disciplinary action follows, and fitness to practise is measured against them.", 'professional', 421);
+    row(m, p, 4, "Values are what is good and desirable, and ignoring them is not forced and carries no discipline; ethics are rules for proper conduct, and a breach leads to discipline; morals are a personal standard, and ignoring them is personal only.", 'values', 509);
+    row(m, p, 5, "The profession has a dual function, to assist the client and to promote justice in society, and the tension between them is the source of most ethical dilemmas.", 'dual', 597);
+  }],
+  ['profession', 'Profession', (m) => {
+    const p = panel(0);
+    head(p, "Profession", 150, .2, { size: 34 });
+    row(m, p, 1, "There are six traits: complex training completed, a certificate of competence, collegiality, autonomy and independence from the State and from clients, altruism and high ethical standards based on trust, and adherence to professional codes.", 'six', 245);
+    row(m, p, 2, "Remember them as T-C-C-A-A-C: training, certificate, collegiality, autonomy, altruism, code.", 'remember', 333);
+    row(m, p, 3, "The deck notes the downside of collegiality: homogeneity, people who look and think alike, may reduce diversity.", 'downside', 421);
+  }],
+  ['sources', 'Sources', (m) => {
+    const p = panel(0);
+    head(p, "Sources", 150, .2, { size: 34 });
+    row(m, p, 1, "The Legal Practice Act 28 of 2014 is the primary statute, in operation from 1 November 2018, governing admission, trust accounts, the Legal Practice Council, discipline and the Fidelity Fund.", 'lpa', 245);
+    row(m, p, 2, "The Code of Conduct is made under section 36(1) of the LPA, and it is the practical rulebook: cite the paragraph number, for example CoC 57.1.", 'coc', 333);
+    row(m, p, 3, "Regulations and rules made under the LPA govern trust accounts and other matters, including Rule 54.", 'regulations', 421);
+    row(m, p, 4, "The Attorneys Act 53 of 1979 and the Admission of Advocates Act 74 of 1964 are repealed, though older cases and textbooks still refer to them.", 'repealed', 509);
+  }],
+  ['regulators', 'Regulators', (m) => {
+    const p = panel(0);
+    head(p, "Regulators", 150, .2, { size: 34 });
+    row(m, p, 1, "The Legal Practice Council regulates the conduct of legal practitioners, attorneys and advocates together, and it replaced the law societies and the General Council of the Bar on 1 November 2018.", 'lpc', 245);
+    row(m, p, 2, "Practitioners are members of the provincial office where they practise, and the LSSA survives only as a voluntary body with no disciplinary powers.", 'provincial', 333);
+    row(m, p, 3, "The Legal Practitioners Fidelity Fund covers clients against theft of trust money by a practitioner or staff, and it receives trust interest.", 'lpff', 421);
+    row(m, p, 4, "The Legal Services Ombud is part of the regulatory structure.", 'ombud', 509);
+    row(m, p, 5, "Do not say the Law Society disciplines attorneys: since 1 November 2018 it is the LPC, and the general ethics and duties did not change much, only the regulator did.", 'trap', 597);
+  }],
+  ['fit', 'Fit', (m) => {
+    const p = panel(0);
+    head(p, "Fit", 150, .2, { size: 34 });
+    row(m, p, 1, "In General Council of the Bar of South Africa v Jiba, a fit and proper person was described as one with integrity, objectivity, dignity, capacity for hard work, respect for legal order and a sense of equality or fairness, and continued defiance of the law may render a person unfit.", 'jiba', 245);
+    row(m, p, 2, "In Ex parte Gunguluza, a person who cheated during admission examinations was not fit and proper for admission.", 'gunguluza', 333);
+    row(m, p, 3, "Jasat v Natal Law Society sets a three-stage enquiry: first, is the offending conduct established on a balance of probabilities; second, does it make the person unfit to practise; third, considering all the circumstances, is removal from the roll or only suspension appropriate.", 'jasat', 421);
+    row(m, p, 4, "Prove it, judge it, punish it, and the High Court admits, suspends and strikes off.", 'remember2', 509);
+  }],
+  ['standards', 'Standards', (m) => {
+    const p = panel(0);
+    head(p, "Standards", 150, .2, { size: 34 });
+    row(m, p, 1, "Paragraph 3.3 ranks the duties: the client's interests are paramount, but always subject to the duty to the court, the interests of justice, observance of the law, and the profession's ethical standards.", 'ranking', 245);
+    row(m, p, 2, "Think C-J-L-E overriding the client's wish.", 'remember3', 333);
+    row(m, p, 3, "Paragraphs 3.1 to 3.16 are the checklist: honesty and integrity, no discrimination, avoiding conflicts, privilege and confidentiality, respecting the client's freedom to choose a practitioner, accounting faithfully for client money, independence, advising on prospects, competence, reasonable fees, staying abreast of developments, integrity toward others, and not bringing the profession into disrepute.", 'checklist', 421);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Since 1 November 2018 the body that disciplines attorneys is\u2026"],
+    build: choice(["the Law Society of South Africa", "the Legal Practice Council", "the General Council of the Bar", "the Minister of Justice"], 1,
+      "Correct: regulatory authority over attorneys and advocates was unified in the LPC and its provincial offices from 1 November 2018; the LSSA survives only as a voluntary body.",
+      ["Incorrect: the LSSA has no disciplinary powers.", null, "Incorrect: the Bar council regulated advocates only, and its functions moved to the LPC.", "Incorrect: the Minister is part of the structure but does not discipline practitioners."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["CoC 3.3 ranks the duties so that\u2026"],
+    build: choice(["the client's interests always prevail", "the client's interests are paramount but subject to the court, justice, the law and professional ethics", "the interests of justice always prevail over the client", "the duty to the court is the lowest ranked"], 1,
+      "Correct: 3.3 makes the client's interests paramount subject to 3.3.1 the duty to the court, 3.3.2 the interests of justice, 3.3.3 observance of the law and 3.3.4 the profession's ethical standards.",
+      ["Incorrect: the client's interests are expressly subordinated.", null, "Incorrect: the ranking is court, justice, law, ethics, then the client's paramount interest.", "Incorrect: the duty to the court ranks above the client."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Run the five questions: who the duty is owed to, what the rule is, whether there is a conflict, what route is permitted, and what you record and say.", 'w1', 245);
+    row(m, p, 2, "Ethics, legal ethics and professional legal ethics are distinct, and only the last carries formal discipline.", 'w2', 333);
+    row(m, p, 3, "The LPA and the Code of Conduct are the primary instruments, and the LPC regulates practitioners since 1 November 2018.", 'w3', 421);
+    row(m, p, 4, "Jasat gives the three stages of a misconduct enquiry, and CoC 3.3 ranks the client's interests below the court, justice, law and ethics.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-jasat', prompt: ["What is the correct order of the Jasat enquiry into misconduct?"],
+    build: choice(["Fitness, proof, penalty", "Proof, fitness, penalty", "Penalty, proof, fitness", "Proof, penalty, fitness"], 1,
+      "Correct: first the conduct must be established on a balance of probabilities, then a value judgment on fitness, then the penalty of removal or suspension.",
+      ["Incorrect: fitness is judged only after the conduct is proved.", null, "Incorrect: the penalty comes last.", "Incorrect: the penalty is considered only after fitness is established."]),
+  },
+  {
+    id: 'p-fit', prompt: ["Which description of a fit and proper person was given in General Council of the Bar v Jiba?"],
+    build: choice(["A person with no criminal record", "A person with integrity, objectivity, dignity, capacity for hard work, respect for legal order and a sense of equality or fairness", "A person who has practised for at least ten years", "A person who has never been sued"], 1,
+      "Correct: Jiba supplies that description, and adds that continued defiance of the law may render a person unfit.",
+      ["Incorrect: the test is broader than a clean record.", null, "Incorrect: years of practice are not the test.", "Incorrect: never having been sued is not the test."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

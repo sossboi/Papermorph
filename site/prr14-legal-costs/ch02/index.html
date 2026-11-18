@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Tariffs, Rule 69 Scales and Taxation" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Tariffs, Rule 69 Scales and Taxation", minutes: 13, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 14"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Tariffs, Rule 69 Scales and Taxation", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Tariffs, Rule 69 Scales and Taxation", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The prescribed tariffs, counsel's fees, and taxation.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['tariffs', 'Tariffs', (m) => {
+    const p = panel(0);
+    head(p, "Tariffs", 150, .2, { size: 34 });
+    row(m, p, 1, "The Supreme Court of Appeal and the Constitutional Court use the Appeal Court Tariff under Rule 18; the High Court, the Land Claims Court and the Labour Court use the High Court Tariff under Rule 70, read with Rules 67A and 69; and the Magistrates' Court uses the Magistrates' Court Tariff under Rule 33 and Annexure 2.", 'table', 245);
+    row(m, p, 2, "The tariffs are updated and increased once or more per year and published in the Government Gazette, so always check the current tariff.", 'updates', 333);
+    row(m, p, 3, "The Code of Conduct and the rules made under the Legal Practice Act remain the ethical frame.", 'source', 421);
+  }],
+  ['rule69', 'Rule69', (m) => {
+    const p = panel(0);
+    head(p, "Rule69", 150, .2, { size: 34 });
+    row(m, p, 1, "Effective from 12 April 2024, these rules completely changed how counsel's fees are dealt with by the courts and taxing masters, and they apply only to party-and-party court orders.", 'effective', 245);
+    row(m, p, 2, "The court must first decide the scale of the court order under Rule 67(2), and then decide the appropriate scale of counsel's fees under Rule 67(3).", 'two', 333);
+    row(m, p, 3, "If no scale is allowed by the court, Scale A applies.", 'default', 421);
+    row(m, p, 4, "Every counsel employed must be allocated a scale, and the older approach of allowing junior counsel half of senior counsel's fees has fallen away.", 'all', 509);
+    row(m, p, 5, "Rule 69 sets Scale A at R1 500 per hour, Scale B up to R3 000 per hour and Scale C up to R4 500 per hour.", 'scales', 597);
+    row(m, p, 6, "An attorney with a right of appearance in the High Court who appears personally is also entitled to be paid on the counsel scales and must ask the judge to include a scale in the order.", 'attorney', 685);
+  }],
+  ['specific', 'Specific', (m) => {
+    const p = panel(0);
+    head(p, "Specific", 150, .2, { size: 34 });
+    row(m, p, 1, "Qualifying fees are expenses incurred by an expert witness who must qualify to give evidence, through experiments, investigations, research or observation, and they must be included in the court order or the taxing master will tax them off because they are not covered by the party-and-party rules.", 'qualifying', 245);
+    row(m, p, 2, "Reservation fees are paid to a witness, including an expert, for being reserved for giving evidence and proving lost income; the amount is gazetted unless the witness proves undue hardship from a higher loss of earnings, and if the witness was not needed because the case settled the fees must still be in the court order.", 'reservation', 333);
+    row(m, p, 3, "Fees payable to an expert must be paid by the attorney who reserved the witness, and the agreement determines whether they are paid before or after the case.", 'expert', 421);
+  }],
+  ['ai', 'Ai', (m) => {
+    const p = panel(0);
+    head(p, "Ai", 150, .2, { size: 34 });
+    row(m, p, 1, "The dividing line is the billing model, not AI versus no AI.", 'line', 245);
+    row(m, p, 2, "An hourly fee must reflect actual time spent, including time prompting, reviewing and verifying AI output, and hours that AI eliminated cannot be manufactured.", 'hourly', 333);
+    row(m, p, 3, "A fixed, deliverable or value-based fee turns on whether the agreed fee is reasonable on its own terms, and efficiency does not automatically reduce it.", 'fixed', 421);
+    row(m, p, 4, "Rebuilding an hourly account around how long the work would have taken without AI is never permissible.", 'never', 509);
+    row(m, p, 5, "There is no binding LPC rule on AI and fees; reasonableness is assessed under the Code of Conduct and the fourteen factors in the LPC fees memorandum, applied by a Fees Dispute Resolution Committee, and the onus rests on the practitioner to justify the fee.", 'framework', 597);
+  }],
+  ['bill', 'Bill', (m) => {
+    const p = panel(0);
+    head(p, "Bill", 150, .2, { size: 34 });
+    row(m, p, 1, "First establish the nature of the bill, that is whether it is a Magistrates' Court or High Court matter; second decide the applicable scale, party-and-party, attorney-and-client or attorney-and-own-client; third sort the file contents into subfolders in proper date order; and fourth make notes, because detailed notes of everything done must appear on the file.", 'four', 245);
+    row(m, p, 2, "A bill has a normal court-document header, then columns for date, item number, description, fees and disbursements, and the description of what was done comes from the party-and-party rules.", 'anatomy', 333);
+    row(m, p, 3, "A consultation when taking instructions for the attachment of a motor vehicle lasting one hour fifteen minutes is one item with its fee, and perusing a credit agreement of ten pages is another.", 'example', 421);
+  }],
+  ['taxation', 'Taxation', (m) => {
+    const p = panel(0);
+    head(p, "Taxation", 150, .2, { size: 34 });
+    row(m, p, 1, "Taxation is before a taxing master, who is a registrar in the High Court and a clerk of the court in the Magistrates' Court.", 'who', 245);
+    row(m, p, 2, "The party that won and to whom costs were awarded obtains a date for taxation and gives the opponent notice of the date, time and place.", 'notice', 333);
+    row(m, p, 3, "The opponent may object in writing to any item, for example that it is not allowed by the tariff, that the wrong scale was applied, that the amount was calculated incorrectly, or that the time spent was unreasonably long.", 'object', 421);
+    row(m, p, 4, "The taxing master peruses the bill with both parties, each side argues, and the master rules item by item.", 'ruling', 509);
+    row(m, p, 5, "Taxing off means the master determines the appropriateness, reasonableness and correctness of the items and removes those that fail, and the taxed-off amounts are totalled in the allocatur and subtracted from the bill's totals.", 'taxoff', 597);
+    row(m, p, 6, "A bill ends in an allocatur, which reflects the totals after the taxed-off amounts and adds the drawing and attendance fees.", 'allocatur', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["If the court allows no scale for counsel's fees, the default is\u2026"],
+    build: choice(["Scale B", "Scale A", "Scale C", "no fees for counsel"], 1,
+      "Correct: where the advocates do not argue for a specific scale, or the court allows none, Scale A applies.",
+      ["Incorrect: Scale B is not the default.", null, "Incorrect: Scale C is not the default.", "Incorrect: counsel's fees are still determined on a scale."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["The drawing fee for a bill of costs is\u2026"],
+    build: choice(["11% of the total bill including disbursements", "11% of only the attorney's fees allowed", "6% of the first R10 000", "a fixed gazetted amount"], 1,
+      "Correct: the drawing fee is 11% of the attorney's fees allowed only, in both the High Court and the Magistrates' Court.",
+      ["Incorrect: disbursements are excluded from the drawing fee base.", null, "Incorrect: 6% is the second tier of the attendance fee.", "Incorrect: it is a percentage, not a fixed amount."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The tariff follows the court: Appeal Court Tariff for the SCA and Constitutional Court, High Court Tariff for the High Court, Land Claims Court and Labour Court, and the Magistrates' Court Tariff under Rule 33 and Annexure 2.", 'w1', 245);
+    row(m, p, 2, "Rule 69 scales run A at R1 500, B up to R3 000 and C up to R4 500 per hour, and Scale A applies by default.", 'w2', 333);
+    row(m, p, 3, "Qualifying and reservation fees must be in the court order or they are taxed off.", 'w3', 421);
+    row(m, p, 4, "The drawing fee is 11 per cent of fees allowed and the attendance fee is tiered, with VAT on fees if the practitioner is registered.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-scale', prompt: ["What is the hourly rate for Scale A under Rule 69?"],
+    build: choice(["R1 000", "R1 500", "R3 000", "R4 500"], 1,
+      "Correct: Scale A is R1 500 per hour, Scale B up to R3 000 and Scale C up to R4 500.",
+      ["Incorrect: R1 000 is not a scale.", null, "Incorrect: R3 000 is Scale B.", "Incorrect: R4 500 is Scale C."]),
+  },
+  {
+    id: 'p-taxoff', prompt: ["What does \"taxing off\" mean at taxation?"],
+    build: choice(["The taxing master reduces the bill to a single total", "The master removes items that are not appropriate, reasonable or correct", "The master adds the drawing and attendance fees", "The master charges VAT on the bill"], 1,
+      "Correct: taxing off is the removal of items and amounts that fail the appropriateness, reasonableness and correctness test, and the total taxed off is subtracted in the allocatur.",
+      ["Incorrect: totalling is the allocatur, not taxing off.", null, "Incorrect: adding fees is done after the taxed-off total.", "Incorrect: VAT is calculated on fees, not by taxing off."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

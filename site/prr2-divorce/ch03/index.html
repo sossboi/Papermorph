@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Children, Maintenance and the Family Advocate" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: "Children, Maintenance and the Family Advocate", minutes: 12, language: 'en', next: '../ch04/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 2"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Children, Maintenance and the Family Advocate", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Children, Maintenance and the Family Advocate", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Minor children, the Family Advocate, and child maintenance.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['prr', 'Prr', (m) => {
+    const p = panel(0);
+    head(p, "Prr", 150, .2, { size: 34 });
+    row(m, p, 1, "Plead each responsibility and right separately, with the section of the Children's Act that gives it.", 'plead', 245);
+    row(m, p, 2, "Plead compliance with section 6(5) and section 10 of the Children's Act.", 'compliance', 333);
+    row(m, p, 3, "Care and contact are the two core rights, and the deck sets out the practical detail of contact: sleepovers, collections and drop-offs, the places where visits happen, birthdays and school events, school holidays, and telephonic or video contact.", 'contact', 421);
+    row(m, p, 4, "Every proposed arrangement runs through the best interests of the child.", 'best', 509);
+  }],
+  ['annexure', 'Annexure', (m) => {
+    const p = panel(0);
+    head(p, "Annexure", 150, .2, { size: 34 });
+    row(m, p, 1, "Annexure A is always needed: it is a commissioned affidavit, and it is attached to the combined summons and filed at court.", 'always', 245);
+    row(m, p, 2, "Annexure B is only needed where there is a beef, a dispute, about parental responsibilities and rights, and it is not an affidavit.", 'beef', 333);
+    row(m, p, 3, "The Family Advocate sees Annexure A in every matter where there is a minor or dependent child, and eventually produces a report and recommendations on the best interests of the child.", 'seen', 421);
+    row(m, p, 4, "In settled or unopposed matters you take the settlement agreement or draft order to the Family Advocate to be endorsed or noted.", 'settled', 509);
+    row(m, p, 5, "The court is not bound by the Family Advocate's requirements, and you may challenge them, including with your own experts.", 'notbound', 597);
+  }],
+  ['childm', 'Childm', (m) => {
+    const p = panel(0);
+    head(p, "Childm", 150, .2, { size: 34 });
+    row(m, p, 1, "Maintenance is itself a parental responsibility and right under section 18(2) of the Children's Act.", 'right', 245);
+    row(m, p, 2, "Section 15 of the Maintenance Act states the common-law duty of parents to support their children: food, clothing, accommodation, medical care and education.", 'duty', 333);
+    row(m, p, 3, "The court considers the obligation, the need, and the ability to afford.", 'factors', 421);
+    row(m, p, 4, "The duty is joint and is apportioned between the parents according to their respective means, whether the child was born in or out of wedlock.", 'joint', 509);
+    row(m, p, 5, "Technically the duty never ends; in practice it ends when the child is self-supporting.", 'ends', 597);
+  }],
+  ['twotoone', 'Twotoone', (m) => {
+    const p = panel(0);
+    head(p, "Twotoone", 150, .2, { size: 34 });
+    row(m, p, 1, "A child has their own expenses: clothes, toys, school fees, school clothes, extra-murals and sport.", 'own', 245);
+    row(m, p, 2, "The child also lives in a household with rent or bond, electricity, water, municipal amenities, food and cleaning.", 'household', 333);
+    row(m, p, 3, "Household expenses are divided on a 2:1 ratio: an adult counts as 2 parts and a child as 1 part.", 'ratio', 421);
+    row(m, p, 4, "A mother and two minor children with rent of R4 000 gives 2 plus 1 plus 1, four parts, so one part is R1 000 and each child's share is R1 000.", 'example', 509);
+    row(m, p, 5, "Everyone under the roof counts, including a new partner and that partner's children.", 'everyone', 597);
+    row(m, p, 6, "But in the particulars of claim you claim only for your own client's children.", 'claim', 685);
+  }],
+  ['spousal', 'Spousal', (m) => {
+    const p = panel(0);
+    head(p, "Spousal", 150, .2, { size: 34 });
+    row(m, p, 1, "When a marriage is dissolved the reciprocal duty of support between the spouses dies.", 'dies', 245);
+    row(m, p, 2, "Section 7(2) of the Divorce Act is the buffer: the court has a discretion to grant spousal maintenance.", 'buffer', 333);
+    row(m, p, 3, "You have one chance to claim it in the divorce; if the client waives it, they can never claim it later in the Maintenance Court.", 'onechance', 421);
+    row(m, p, 4, "It may be rehabilitative, for a specific period to get a person on their feet; lifelong, until death or remarriage, which courts no longer favour; or nominal, a small placeholder amount.", 'types', 509);
+    row(m, p, 5, "Courts like a clean break, and a deed of settlement can provide for maintenance instead.", 'clean', 597);
+    row(m, p, 6, "If there is any doubt, claim nominal maintenance rather than waive it.", 'trap', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Annexure B to the particulars of claim is required\u2026"],
+    build: choice(["in every divorce where there is a minor child", "only where there is a dispute about parental responsibilities and rights", "instead of Annexure A where the matter is unopposed", "only where the parties have settled"], 1,
+      "Correct: Annexure B is needed only where there is a beef about parental responsibilities and rights, and it is not an affidavit.",
+      ["Incorrect: Annexure A is the always-required affidavit.", null, "Incorrect: Annexure A is required even in unopposed matters.", "Incorrect: a settlement does not replace Annexure B; the Family Advocate still sees Annexure A."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Household expenses are apportioned between the parents\u2026"],
+    build: choice(["equally, regardless of who lives in the home", "on a 2:1 ratio, an adult counting as 2 parts and a child as 1 part", "only according to the number of children", "only against the parent who earns more"], 1,
+      "Correct: the deck's 2:1 rule counts an adult as 2 parts and a child as 1 part, and everyone living under the roof counts.",
+      ["Incorrect: the ratio is 2:1, not an equal split.", null, "Incorrect: adults and children alike are counted, in the 2:1 ratio.", "Incorrect: the apportionment is by parts, then checked against the parents' means."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Plead each parental responsibility and right with its Children's Act section, and plead section 6(5) and section 10 compliance.", 'w1', 245);
+    row(m, p, 2, "Annexure A is always needed and is a commissioned affidavit; Annexure B is only for a dispute about parental responsibilities and rights.", 'w2', 333);
+    row(m, p, 3, "Child maintenance follows the obligation, need and ability enquiry, and household expenses are apportioned 2 to 1.", 'w3', 421);
+    row(m, p, 4, "Spousal maintenance is one shot in the divorce: waived means never, so claim nominal maintenance if in doubt.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-waive', prompt: ["A client waives spousal maintenance in the divorce. What is the consequence?"],
+    build: choice(["She may claim it later in the Maintenance Court", "She can never claim it later", "The court will grant it anyway", "It reverts to the court's discretion on appeal"], 1,
+      "Correct: there is one chance to claim spousal maintenance in the divorce. If it is waived, it can never be claimed later in the Maintenance Court.",
+      ["Incorrect: the waiver is final.", null, "Incorrect: the court cannot grant what was not claimed and was waived.", "Incorrect: the waiver is not revisited on appeal."]),
+  },
+  {
+    id: 'p-parts', prompt: ["A father, his new partner, her two children and his two children live in one home with rent of R16 000. What is each child's share of the rent?"],
+    build: choice(["R1 000", "R2 000", "R4 000", "R8 000"], 1,
+      "Correct: two adults are 4 parts and four children are 4 parts, 8 parts in all, so one part is R16 000 divided by 8, which is R2 000 per child.",
+      ["Incorrect: that would be 16 parts, not 8.", null, "Incorrect: that is two children's share, not one child's.", "Incorrect: that would be one part out of 2."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

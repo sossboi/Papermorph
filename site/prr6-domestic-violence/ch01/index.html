@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Who Is Protected and What Counts as Abuse" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Who Is Protected and What Counts as Abuse", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 6"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Who Is Protected and What Counts as Abuse", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Who Is Protected and What Counts as Abuse", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The Domestic Violence Act: who it protects, and what it calls abuse.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['purpose', 'Purpose', (m) => {
+    const p = panel(0);
+    head(p, "Purpose", 150, .2, { size: 34 });
+    row(m, p, 1, "The purpose is to afford the victims of domestic violence the maximum protection from domestic abuse that the law can provide.", 'maximum', 245);
+    row(m, p, 2, "It introduces measures to ensure that the relevant organs of state give full effect to the Act, conveying that the State is committed to the elimination of domestic violence.", 'state', 333);
+    row(m, p, 3, "Speed is the point: the Act exists so that protection is available before the abuse escalates.", 'speed', 421);
+    row(m, p, 4, "The statistics on the slides explain why speed matters; they are context, not a legal rule to cite in an answer.", 'stats', 509);
+  }],
+  ['complainant', 'Complainant', (m) => {
+    const p = panel(0);
+    head(p, "Complainant", 150, .2, { size: 34 });
+    row(m, p, 1, "A complainant is any person who is or has been in a domestic relationship with a respondent and who is or has been subjected, or allegedly subjected, to an act of domestic violence, including any child in the care of the complainant.", 'section1', 245);
+    row(m, p, 2, "Section 4(1)(a): any complainant may, on an ex parte basis, in the prescribed form and manner, apply to the court for a protection order.", 'exparte', 333);
+    row(m, p, 3, "Ex parte means no notice to the respondent first; the point is protection before the respondent knows an application is under way.", 'exparte2', 421);
+  }],
+  ['relationship', 'Relationship', (m) => {
+    const p = panel(0);
+    head(p, "Relationship", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 1 lists six categories: they are or were married, including by custom or religion; they live or lived together in a relationship in the nature of marriage although not able to be married; they are parents of a child or have or had parental responsibility for one; they are family members related by consanguinity, affinity or adoption; they are or were in an engagement, dating or customary relationship, including an actual or perceived romantic, intimate or sexual relationship of any duration; or they are persons in a close relationship who share or shared the same residence.", 'six', 245);
+    row(m, p, 2, "Close relationship is a court-assessed five-factor test: the degree of trust, the level of dependence and commitment, the length of the relationship, the frequency of contact, and the degree of intimacy.", 'five', 333);
+    row(m, p, 3, "Category six needs both a close relationship and a shared residence: living together alone is not enough.", 'both', 421);
+  }],
+  ['types', 'Types', (m) => {
+    const p = panel(0);
+    head(p, "Types", 150, .2, { size: 34 });
+    row(m, p, 1, "Physical abuse includes physical violence or threats, depriving the complainant of liberty, administering harmful substances without consent, and withholding medication.", 'physical', 245);
+    row(m, p, 2, "Sexual abuse is any conduct that abuses, humiliates, degrades or otherwise violates the sexual integrity of the complainant, whether or not it is a sexual offence.", 'sexual', 333);
+    row(m, p, 3, "Emotional, verbal or psychological abuse is degrading, manipulating, threatening, offensive, intimidating or humiliating conduct that causes mental or psychological harm.", 'emotional', 421);
+    row(m, p, 4, "Economic abuse covers depriving the complainant of economic resources, disposing of household effects without permission, using their financial resources without permission, and coercing them to relinquish control of assets.", 'economic', 509);
+    row(m, p, 5, "The Act also lists intimidation, harassment, sexual harassment, related person abuse, spiritual abuse, damage to property, elder abuse, coercive behaviour, controlling behaviour, and exposing a child to domestic violence.", 'others', 597);
+  }],
+  ['abuse', 'Abuse', (m) => {
+    const p = panel(0);
+    head(p, "Abuse", 150, .2, { size: 34 });
+    row(m, p, 1, "Emotional abuse includes insults, ridicule and name calling; threats to cause emotional pain; obsessive possessiveness or jealousy that seriously invades privacy, liberty, integrity or security; wilful damage to property in the complainant's vicinity; harming or threatening a household pet; disclosing sexual orientation or private information without consent; threatening the death or injury of another; and threats of suicide or self-harm.", 'emotional', 245);
+    row(m, p, 2, "Economic abuse is remembered as D-D-U-C: deprive, dispose, use, coerce.", 'economic', 333);
+    row(m, p, 3, "Harassment includes repeatedly contacting the complainant by electronic communications, monitoring or tracking their movements without consent, and disclosing abusive communications.", 'harassment', 421);
+  }],
+  ['onbehalf', 'Onbehalf', (m) => {
+    const p = panel(0);
+    head(p, "Onbehalf", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 4(3)(a): an application may be brought on the complainant's behalf by a functionary or another person with a material interest in the complainant's wellbeing.", 'section43', 245);
+    row(m, p, 2, "Section 4(3)(b): it must be brought with the complainant's written consent, except where the complainant is a child and the court considers the application in the child's best interests, or the complainant cannot in the court's opinion give consent.", 'consent', 333);
+    row(m, p, 3, "Section 4(4): any child, or any person on behalf of a child, may apply for a protection order without the consent or assistance of a parent, guardian or anyone else.", 'child', 421);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Category 6 of the domestic relationship definition requires\u2026"],
+    build: choice(["only that the parties share a residence", "a close relationship assessed on five factors and a shared residence", "that the parties are related by blood", "that the parties are or were married"], 1,
+      "Correct: category 6 needs both a close relationship, argued against the five factors, and a shared residence; living together alone does not satisfy it.",
+      ["Incorrect: a shared residence alone is not enough.", null, "Incorrect: consanguinity is category 4.", "Incorrect: marriage is category 1."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A child applying for a protection order\u2026"],
+    build: choice(["needs the written consent of a parent or guardian", "may apply without the consent or assistance of a parent, guardian or anyone else", "must apply through a functionary", "must first obtain leave of the court"], 1,
+      "Correct: s 4(4) allows any child, or any person on behalf of a child, to apply without the consent or assistance of a parent or guardian.",
+      ["Incorrect: s 4(4) removes the consent requirement for a child.", null, "Incorrect: a functionary may apply for someone else, but a child may apply directly.", "Incorrect: leave of the court is not required for a child applicant."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "A complainant is a person in or formerly in a domestic relationship who is subjected or allegedly subjected to domestic violence, including a child in their care.", 'w1', 245);
+    row(m, p, 2, "There are six categories of domestic relationship, and category six needs both a close relationship and a shared residence.", 'w2', 333);
+    row(m, p, 3, "The Act lists physical, sexual, emotional, economic, intimidation, harassment and several other types of abuse.", 'w3', 421);
+    row(m, p, 4, "An application may be brought on the complainant's behalf, and a child may apply without any consent or assistance.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-close', prompt: ["Which factor is NOT part of the five-factor close relationship test?"],
+    build: choice(["The degree of trust between the persons", "The level of each person's dependence on and commitment to the other", "Whether the parties are related by blood", "The degree of intimacy between the persons"], 2,
+      "Correct: the five factors are trust, dependence and commitment, length of the relationship, frequency of contact and intimacy; blood relationship is a separate category.",
+      ["Incorrect: trust is the first factor.", "Incorrect: dependence and commitment is the second factor.", null, "Incorrect: intimacy is the fifth factor."]),
+  },
+  {
+    id: 'p-economic', prompt: ["Which conduct is economic abuse?"],
+    build: choice(["Insulting the complainant repeatedly", "Using the complainant's financial resources without permission", "Threatening to harm a household pet", "Following the complainant to work"], 1,
+      "Correct: economic abuse covers depriving resources, disposing of household effects, using the complainant's financial resources without permission, and coercing them to relinquish control.",
+      ["Incorrect: insults fall under emotional, verbal or psychological abuse.", null, "Incorrect: threatening a pet falls under emotional abuse.", "Incorrect: following the complainant falls under harassment."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

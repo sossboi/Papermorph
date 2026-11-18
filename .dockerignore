@@ -66,3 +66,15 @@ AGENTS.md
 Dockerfile
 .dockerignore
 compose.yaml
+
+!site/prr2-divorce/
+!site/prr3-application-proceedings/
+!site/prr4-maintenance/
+!site/prr5-child-law/
+!site/prr6-domestic-violence/
+!site/prr8-preparation-trial/
+!site/prr10-execution/
+!site/prr11-labour-law/
+!site/prr12-ethics/
+!site/prr13-rental-housing/
+!site/prr14-legal-costs/

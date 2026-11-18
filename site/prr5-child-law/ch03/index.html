@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Forums: Children's Court, High Court and Family Advocate" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: "The Forums: Children's Court, High Court and Family Advocate", minutes: 12, language: 'en', next: '../ch04/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 5"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Forums: Children's Court, High Court and Family Advocate", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Forums: Children's Court, High Court and Family Advocate", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Who you gonna call: the right forum.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['tree', 'Tree', (m) => {
+    const p = panel(0);
+    head(p, "Tree", 150, .2, { size: 34 });
+    row(m, p, 1, "First ask whether there is a pending divorce.", 'q1', 245);
+    row(m, p, 2, "If there is, ask whether the parties are married: if yes, you can go to the Family Advocate; if no, you can go to the Children's Court.", 'married', 333);
+    row(m, p, 3, "If there is no pending divorce, ask whether the child is possibly in need of care and protection under section 150.", 'q3', 421);
+    row(m, p, 4, "If yes, you can go to the Children's Court; if no, you can go to the Family Advocate or the Children's Court.", 'need', 509);
+    row(m, p, 5, "Social workers, psychologists, NGOs and play therapists may assist the court or the Family Advocate with reports and requirements.", 'others', 597);
+  }],
+  ['ccjur', 'Ccjur', (m) => {
+    const p = panel(0);
+    head(p, "Ccjur", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 45 lists what the Children's Court may adjudicate: the protection and well-being of a child, care and contact, guardianship, paternity, support, early childhood development and prevention services, maltreatment and abuse, temporary safe care, alternative care, adoption, and any other matter relating to the care, protection or well-being of a child.", 'section45', 245);
+    row(m, p, 2, "Section 1(4) excludes matters arising from the Administration Amendment Act, the Divorce Act, the Maintenance Act, the Domestic Violence Act and the Recognition of Customary Marriages Act.", 'section14', 333);
+    row(m, p, 3, "Confirm the court can actually hear the matter before filing anything.", 'check', 421);
+  }],
+  ['hcjur', 'Hcjur', (m) => {
+    const p = panel(0);
+    head(p, "Hcjur", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 45(3) reserves certain matters for the High Court alone: artificial fertilisation, the departure, removal or abduction of a child from the Republic, applications for the return of a child from abroad, the age of majority or contractual legal capacity, safeguarding a child's interest in property, and surrogate motherhood agreements.", 'exclusive', 245);
+    row(m, p, 2, "Section 45(3A) gives the High Court and the Children's Court concurrent jurisdiction over guardianship, and section 45(3B) adds the Regional Court for the assignment, exercise, extension, restriction, suspension or termination of guardianship.", 'concurrent', 333);
+    row(m, p, 3, "Section 45(4): nothing in section 45 limits the inherent jurisdiction of the High Court as the upper guardian of all children.", 'inherent', 421);
+  }],
+  ['powers', 'Powers', (m) => {
+    const p = panel(0);
+    head(p, "Powers", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 46 lists the orders the court may make, and the deck flags family preservation and early intervention, an order for the child or another person to undergo professional assessment, an order limiting a person's access or prohibiting contact, an order allowing contact subject to conditions, and an order instructing a person to carry out an investigation under section 50.", 'section46', 245);
+    row(m, p, 2, "For a general application under the Children's Act, use Form 2 and refer the matter under section 53.", 'form2', 333);
+    row(m, p, 3, "Under section 62 the court may order a report and recommendation, typically compiled by a social worker, and manage client expectations: these reports are often not provided well in advance.", 'reports', 421);
+  }],
+  ['evidence', 'Evidence', (m) => {
+    const p = panel(0);
+    head(p, "Evidence", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 63(1) makes a written report by a medical practitioner, psychologist, family advocate, designated social worker or other suitably qualified person admissible on its mere production as evidence of the facts stated in it.", 'section63', 245);
+    row(m, p, 2, "Section 63(3): if a person's rights are prejudiced by such a report, the court must disclose the relevant parts to that person within the prescribed period and give them the opportunity to question the author or refute a statement.", 'section633', 333);
+    row(m, p, 3, "Section 58 gives the child, a parent, a person with parental responsibilities and rights, a care-giver, a person whose rights may be affected, and a person with sufficient interest the right to adduce evidence and, with leave, to question witnesses and address the court.", 'section58', 421);
+  }],
+  ['fa', 'Fa', (m) => {
+    const p = panel(0);
+    head(p, "Fa", 150, .2, { size: 34 });
+    row(m, p, 1, "The Family Advocate mediates disputes between the biological father and mother under section 21(3), registers and investigates parental responsibilities and rights agreements under section 22, furnishes reports on adoption under section 23, may bring a section 28 application, assists with parenting plans under section 33, and can be ordered to investigate under section 62.", 'role', 245);
+    row(m, p, 2, "Referrals use Annexure A and Annexure B.", 'annexures', 333);
+    row(m, p, 3, "Expect long waiting times: the source notes an alleged standard operating procedure of around six months.", 'waiting', 421);
+    row(m, p, 4, "It is not always clear what information may be provided to the Family Advocate, so confirm with the office or a supervising practitioner case by case.", 'unclear', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A matter arising from the Divorce Act is\u2026"],
+    build: choice(["within the Children's Court jurisdiction", "excluded from the Children's Court by s 1(4)", "within the Family Advocate's exclusive jurisdiction", "a High Court matter only"], 1,
+      "Correct: s 1(4) of the Children's Act excludes matters arising from the Divorce Act, the Maintenance Act, the Domestic Violence Act and the Recognition of Customary Marriages Act.",
+      ["Incorrect: s 1(4) excludes it.", null, "Incorrect: the Family Advocate has a role in divorce matters, but the exclusion is from the Children's Court.", "Incorrect: it is not reserved for the High Court."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A written report under s 63 of the Children's Act is\u2026"],
+    build: choice(["admissible on its mere production, but a prejudiced party must be given the relevant parts and a chance to respond", "inadmissible unless the author testifies", "conclusive and cannot be challenged", "admissible only in the High Court"], 0,
+      "Correct: s 63(1) makes it admissible on mere production, and s 63(3) requires disclosure to a prejudiced party and an opportunity to question the author or refute a statement.",
+      [null, "Incorrect: mere production suffices; the author need not testify first.", "Incorrect: s 63(3) expressly allows the report to be challenged.", "Incorrect: it applies in the Children's Court."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Run the forum decision tree first: pending divorce, then marriage, then whether the child may be in need of care and protection.", 'w1', 245);
+    row(m, p, 2, "Section 45 lists what the Children's Court may hear, and section 1(4) excludes the Divorce, Maintenance, Domestic Violence and Customary Marriages Acts.", 'w2', 333);
+    row(m, p, 3, "Section 45(3) reserves certain matters for the High Court, whose inherent jurisdiction as upper guardian is never ousted.", 'w3', 421);
+    row(m, p, 4, "A section 63 report is admissible on mere production, but a prejudiced party must be given the relevant parts and a chance to respond.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-forum', prompt: ["There is no pending divorce and the child is not in need of care and protection. Which forum is available?"],
+    build: choice(["Only the High Court", "The Family Advocate or the Children's Court", "Only the Maintenance Court", "Only the Regional Court"], 1,
+      "Correct: on the decision tree, with no pending divorce and no s 150 concern, either the Family Advocate or the Children's Court is available.",
+      ["Incorrect: the High Court is not the only route.", null, "Incorrect: maintenance is a claim within a forum, not the forum here.", "Incorrect: the Regional Court is not the forum for a PR&R dispute."]),
+  },
+  {
+    id: 'p-exclusive', prompt: ["Which matter is reserved for the High Court alone by s 45(3)?"],
+    build: choice(["A contact dispute between parents", "The departure, removal or abduction of a child from the Republic", "A maintenance claim", "A parenting plan"], 1,
+      "Correct: s 45(3) reserves departure, removal or abduction from the Republic, along with artificial fertilisation, return from abroad, age of majority, property interests and surrogacy.",
+      ["Incorrect: contact is within the Children's Court jurisdiction.", null, "Incorrect: support is listed in s 45 as a Children's Court matter.", "Incorrect: a parenting plan is dealt with under s 33."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

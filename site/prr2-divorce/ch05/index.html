@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Issuing, Service and the Defendant's Pleadings" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 5, title: "Issuing, Service and the Defendant's Pleadings", minutes: 13, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 2"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Issuing, Service and the Defendant's Pleadings", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Issuing, Service and the Defendant's Pleadings", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Issue, serve, file, and the defendant's answer.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['issue', 'Issue', (m) => {
+    const p = panel(0);
+    head(p, "Issue", 150, .2, { size: 34 });
+    row(m, p, 1, "Make four copies of the plaintiff's summons: just in case, the defendant, us, and the placeholder.", 'copies', 245);
+    row(m, p, 2, "At the Registrar, sign the original and every copy, stamp every page of the original including the annexures but only the summons page of the copies, allocate a case number by hand on the original, and open a court file.", 'registrar', 333);
+    row(m, p, 3, "Only the first court document is issued before service; everything after is served and then filed.", 'onlyfirst', 421);
+    row(m, p, 4, "The Registrar places the original marriage certificate, the proof of residence and the placeholder copy on the court file.", 'file', 509);
+  }],
+  ['sheriff', 'Sheriff', (m) => {
+    const p = panel(0);
+    head(p, "Sheriff", 150, .2, { size: 34 });
+    row(m, p, 1, "A second BEAT memo takes the original summons and the defendant's copy to the sheriff with a sheriff's letter giving details not in the summons: a cell number, times the defendant is available, and whether the defendant consented to accept service at the sheriff's office.", 'memo', 245);
+    row(m, p, 2, "The sheriff goes to the defendant's residence, place of work or wherever found within the sheriff's area, shows and explains the original, and physically hands over the copy.", 'service', 333);
+    row(m, p, 3, "The sheriff returns the original with a return of service stating the date, time, address and the full names of the person served, which is prima facie proof of service.", 'return', 421);
+    row(m, p, 4, "The originals are filed only when you apply for a court date, once the action is undefended, settled or litis contestatio is reached.", 'filelater', 509);
+  }],
+  ['defendant', 'Defendant', (m) => {
+    const p = panel(0);
+    head(p, "Defendant", 150, .2, { size: 34 });
+    row(m, p, 1, "Make three copies of the original notice of intention to defend: just in case, one for the defendant and one for the plaintiff. There is no placeholder, because that is used only when the action is instituted.", 'threecopies', 245);
+    row(m, p, 2, "Serve the notice on the opposing attorneys, who sign and stamp the original and both copies to acknowledge receipt.", 'serve', 333);
+    row(m, p, 3, "Then file the notice at the Registrar, who stamps both and keeps the original on the court file.", 'file', 421);
+    row(m, p, 4, "When we act for the defendant we never keep original court documents: it is the plaintiff's attorneys' duty to apply for a court date and compile the original bundle.", 'neverkeep', 509);
+  }],
+  ['electronic', 'Electronic', (m) => {
+    const p = panel(0);
+    head(p, "Electronic", 150, .2, { size: 34 });
+    row(m, p, 1, "After the sheriff serves the combined summons, later court documents may be served by email, provided both parties have agreed in writing.", 'agree', 245);
+    row(m, p, 2, "That is Rule 13(3) of the Magistrates' Courts Rules and Rule 19(3) of the High Court Rules.", 'rules', 333);
+    row(m, p, 3, "If the plaintiff does not agree, you may approach the court to grant consent.", 'noconsent', 421);
+    row(m, p, 4, "All time periods for service stay the same, and you print and attach the service mail to your documents before filing.", 'same', 509);
+  }],
+  ['plea', 'Plea', (m) => {
+    const p = panel(0);
+    head(p, "Plea", 150, .2, { size: 34 });
+    row(m, p, 1, "The plea is the defendant's response to the particulars of claim, served and filed within 20 court days from the date of service of the notice of intention to defend.", 'when', 245);
+    row(m, p, 2, "It may be accompanied by a special plea, a counterclaim, an exception or an application to strike out.", 'companion', 333);
+    row(m, p, 3, "Rule 17 of the Magistrates' Courts Rules and Rule 22 of the High Court Rules require the defendant to admit, deny or confess and avoid all the material facts alleged, or state which are not admitted and to what extent, and clearly and concisely state all material facts relied on.", 'rule', 421);
+    row(m, p, 4, "Every allegation of fact in the particulars of claim that is not denied or admitted in the plea is deemed to be admitted.", 'deemed', 509);
+    row(m, p, 5, "Do not say you note or take note of an allegation: that admits it.", 'noted', 597);
+  }],
+  ['responses', 'Responses', (m) => {
+    const p = panel(0);
+    head(p, "Responses", 150, .2, { size: 34 });
+    row(m, p, 1, "Admit, where the defendant admits the truth of the allegation.", 'admit', 245);
+    row(m, p, 2, "Deny, but a bare denial is to be avoided where an explanation is possible.", 'deny', 333);
+    row(m, p, 3, "Admit and deny and explain, where part of the paragraph is true.", 'admitdeny', 421);
+    row(m, p, 4, "Confess and avoid, where the defendant admits the truth but adds information to mitigate its effect.", 'confess', 509);
+    row(m, p, 5, "Non-admission, where the defendant has no knowledge and so cannot admit or deny, putting the plaintiff to the proof.", 'nonadmission', 597);
+    row(m, p, 6, "As a general rule a plea carries no annexures: the plea contains facta probanda only, and a document that proves a fact is facta probantia.", 'noannexures', 685);
+  }],
+  ['further', 'Further', (m) => {
+    const p = panel(0);
+    head(p, "Further", 150, .2, { size: 34 });
+    row(m, p, 1, "The counterclaim is the defendant's own claim against the plaintiff, and it follows the prayers in the plea; the defendant becomes the plaintiff in reconvention.", 'counterclaim', 245);
+    row(m, p, 2, "If particulars of the parties, children, marriage and jurisdiction are not disputed, incorporate them rather than repeat them.", 'incorporate', 333);
+    row(m, p, 3, "The replication is the plaintiff's response to the plea, and the plea to the counterclaim is the response to the counterclaim.", 'replication', 421);
+    row(m, p, 4, "File a replication only where the plea raises new facts the plaintiff must answer; bare denials need no replication.", 'onlynew', 509);
+    row(m, p, 5, "If a replication is filed, every allegation in the plea not specifically answered is deemed denied.", 'deemeddenied', 597);
+    row(m, p, 6, "Pleadings close on joinder of issue, when the last day for a pleading lapses, by written agreement filed with the Registrar, or by court order.", 'closed', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["How many copies of the plaintiff's combined summons are made?"],
+    build: choice(["Two: the original and the defendant's copy", "Three: just in case, the defendant and us", "Four: just in case, the defendant, us and the placeholder", "Five: one for each party and the Family Advocate"], 2,
+      "Correct: the deck's memory hack is just in case, defendant, us, placeholder, four copies; the original goes to court.",
+      ["Incorrect: that is the defendant's notice of intention to defend, which takes three copies.", "Incorrect: three is the defendant's set; the plaintiff's set adds the placeholder.", null, "Incorrect: the Family Advocate is not served with a copy at issuing."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["An allegation of fact in the particulars of claim that is not denied or admitted in the plea is\u2026"],
+    build: choice(["struck from the record", "deemed to be admitted", "referred to the Family Advocate", "treated as a bare denial"], 1,
+      "Correct: every allegation of fact in the POC that is not denied or admitted in the plea is deemed to be admitted, and saying you note an allegation admits it.",
+      ["Incorrect: it is not struck out; it stands as admitted.", null, "Incorrect: the Family Advocate does not decide pleadings.", "Incorrect: a bare denial is a form of denial, and this allegation has none."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Four copies of the plaintiff's summons, and only the first document is issued before service.", 'w1', 245);
+    row(m, p, 2, "The sheriff serves, and the return of service is prima facie proof; originals are filed only when you apply for a court date.", 'w2', 333);
+    row(m, p, 3, "A plea must admit, deny or confess and avoid every material allegation, and an unanswered allegation is deemed admitted.", 'w3', 421);
+    row(m, p, 4, "A counterclaim follows the prayers, a replication is needed only for new facts, and pleadings close on joinder of issue.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-plea', prompt: ["Which response is appropriate where the defendant admits the truth of an allegation but wishes to add facts that reduce its effect?"],
+    build: choice(["A bare denial", "Confession and avoidance", "Non-admission", "An exception"], 1,
+      "Correct: confess and avoid admits the truth but adds information to mitigate its effect.",
+      ["Incorrect: a bare denial contradicts the allegation rather than admitting it.", null, "Incorrect: non-admission is used where the defendant has no knowledge and cannot admit or deny.", "Incorrect: an exception attacks the pleading, not the truth of an allegation."]),
+  },
+  {
+    id: 'p-replication', prompt: ["When must the plaintiff file a replication?"],
+    build: choice(["Always, within 15 court days of the plea", "Only where the plea raises new facts the plaintiff must answer", "Only where the defendant files a counterclaim", "Never in a divorce action"], 1,
+      "Correct: a replication is filed only where the plea raises new facts; bare denials need no replication.",
+      ["Incorrect: a replication is not compulsory.", null, "Incorrect: a counterclaim is answered by a plea to the counterclaim.", "Incorrect: a replication is available where new facts are raised."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

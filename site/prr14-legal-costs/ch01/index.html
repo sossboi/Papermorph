@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Relationships, Fees and Cost Orders" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "The Relationships, Fees and Cost Orders", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 14"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Relationships, Fees and Cost Orders", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Relationships, Fees and Cost Orders", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Who pays whom, and what may an attorney charge.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['relationships', 'Relationships', (m) => {
+    const p = panel(0);
+    head(p, "Relationships", 150, .2, { size: 34 });
+    row(m, p, 1, "Between attorney and client, the attorney enters into a fees agreement with the client; the parties agree the tariffs and it need not be based on the Rules of Court, it must only be reasonable, and it may be a contingency fee agreement.", 'client', 245);
+    row(m, p, 2, "Between the parties, if you are involved in litigation the court orders who must pay the costs of whom, and on which tariff and scale.", 'parties', 333);
+    row(m, p, 3, "Between the parties and the justice system, there may be charges payable by the parties that cover the costs of the courts.", 'system', 421);
+  }],
+  ['ethics', 'Ethics', (m) => {
+    const p = panel(0);
+    head(p, "Ethics", 150, .2, { size: 34 });
+    row(m, p, 1, "Overreaching means charging too much, or charging for things the attorney or staff did not actually do, such as charging the rates of an attorney, a candidate attorney and a secretary all to read the same document.", 'overreach', 245);
+    row(m, p, 2, "Undercharging means charging too little, and it is a breach of ethics only where specific tariffs must be applied; without compulsory tariffs an attorney may charge what they consider reasonable.", 'under', 333);
+    row(m, p, 3, "Charging lower than a compulsory tariff is touting, trying to attract clients rather than letting them approach voluntarily, and it is prohibited.", 'touting', 421);
+    row(m, p, 4, "Recovery or attempted recovery of costs for work not strictly necessary is not allowed on a party-and-party scale: you may charge only for work necessary to the client's case.", 'recovery', 509);
+    row(m, p, 5, "Manufacturing costs is fabricating work never done, and it amounts to fraud or theft.", 'manufacture', 597);
+    row(m, p, 6, "Fees may be shared only with another attorney and with nobody else, under Code of Conduct Part III Rule 12.", 'sharing', 685);
+  }],
+  ['deposit', 'Deposit', (m) => {
+    const p = panel(0);
+    head(p, "Deposit", 150, .2, { size: 34 });
+    row(m, p, 1, "The attorney may ask the client for an amount as a deposit to cover future fees and disbursements; it must be paid into the trust account and remain there until the work is done.", 'deposit', 245);
+    row(m, p, 2, "Once some work is done the attorney may draft a bill of costs for it, and an amount equal to that bill may be transferred from trust into the business account.", 'transfer', 333);
+    row(m, p, 3, "A deposit may not exceed the total reasonable costs envisaged for the case.", 'cap', 421);
+    row(m, p, 4, "A retainer is a fixed monthly payment by which the attorney is retained and must be available to do any work the client wants or that they specifically agreed on; the attorney may not then charge per case, and must remain available for the duration of the agreement, sometimes including an undertaking not to act against that client.", 'retainer', 509);
+  }],
+  ['contingency', 'Contingency', (m) => {
+    const p = panel(0);
+    head(p, "Contingency", 150, .2, { size: 34 });
+    row(m, p, 1, "No common-law contingency fee agreement was ever allowed in South African law; courts declared it illegal, because it amounted to pactum de quota litis, sharing in the proceeds of litigation, which was a crime until 1997 and is contra bonos mores and unprofessional conduct.", 'common', 245);
+    row(m, p, 2, "Tjatji v RAF holds that a contingency fee agreement that does not comply with the Act is invalid and unlawful.", 'tjatji', 333);
+    row(m, p, 3, "Only an agreement under the Contingency Fees Act 66 of 1997 is allowed, on the prescribed form published in Government Notice R.547 of 23 April 1999, which may not be amended at all.", 'act', 421);
+    row(m, p, 4, "Fees are recoverable only if the case is finalised successfully, and success must be defined in the agreement.", 'success', 509);
+    row(m, p, 5, "There are two types: no win no fee, where the attorney charges the normal fee recorded in the agreement, or an increased fee if you win, at the increased tariffs also recorded.", 'two', 597);
+    row(m, p, 6, "Criminal law and family law matters are excluded.", 'excluded', 685);
+  }],
+  ['collection', 'Collection', (m) => {
+    const p = panel(0);
+    head(p, "Collection", 150, .2, { size: 34 });
+    row(m, p, 1, "Collection commission arises under section 65 of the Magistrates' Courts Act for debt collection, usually in monthly down payments.", 'section65', 245);
+    row(m, p, 2, "It is 10 per cent on the amount collected, subject to a maximum per payment or instalment: R543.00 plus VAT from 19 June 2023, R583.00 plus VAT from 20 September 2024, and R615.00 plus VAT from 28 November 2025.", 'rate', 333);
+    row(m, p, 3, "No additional fee may be charged on an instalment.", 'noextra', 421);
+    row(m, p, 4, "It differs from a contingency fee because it is a charge on amounts actually collected in an instalment debt, not a share in the proceeds of litigation.", 'why', 509);
+  }],
+  ['scales', 'Scales', (m) => {
+    const p = panel(0);
+    head(p, "Scales", 150, .2, { size: 34 });
+    row(m, p, 1, "Party and party uses the tariff promulgated in the Rules of Court, Rule 70 in the High Court and Rule 33 with Annexure 2 in the Magistrates' Court, and it allows only costs necessary or proper for the attainment of justice.", 'pp', 245);
+    row(m, p, 2, "If the attorney telephones the client about the matter and then confirms the call by email, the email is not strictly necessary and its cost cannot be recovered from the other side.", 'example', 333);
+    row(m, p, 3, "Attorney and client still uses the same tariff, but the approach is wider: all costs in the applicable tariff may be allowed, not only the necessary ones, and the taxing master has a wider discretion and may allow some higher fees, so the email would be recoverable.", 'ac', 421);
+    row(m, p, 4, "Attorney and own client means the fees and disbursements agreed between attorney and client, usually in a written fees agreement, and the court tariffs do not apply; they are almost always higher but must still be reasonable.", 'oc', 509);
+    row(m, p, 5, "A court order that the opponent pay attorney and own client costs is a punishment for inappropriate conduct, and the taxing master uses the winning party's agreed fees agreement.", 'punishment', 597);
+  }],
+  ['other', 'Other', (m) => {
+    const p = panel(0);
+    head(p, "Other", 150, .2, { size: 34 });
+    row(m, p, 1, "Costs de bonis propriis is a punitive order against a person acting in a representative capacity, such as an attorney or executor, usually for mala fides, gross negligence or unreasonableness.", 'bonis', 245);
+    row(m, p, 2, "Wasted costs are costs of services of no use to the parties, for example preparation for a trial that was postponed.", 'wasted', 333);
+    row(m, p, 3, "Reserved costs mean the court will decide the costs of an interim matter at a later stage; in the Magistrates' Court they become costs in the cause under Rule 33(2).", 'reserved', 421);
+    row(m, p, 4, "Costs in the cause means the interim costs follow the final costs order.", 'cause', 509);
+    row(m, p, 5, "Costs of the day are costs occasioned on a specific day, usually wasted costs for part of a day lost to a postponement.", 'day', 597);
+    row(m, p, 6, "Costs immediately taxable and payable are the costs of interlocutory proceedings: in the High Court they are in fact immediately taxable, while in the Magistrates' Court Rule 33(3) requires a specific order authorising immediate taxation.", 'taxable', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A contingency fee agreement under the Contingency Fees Act may not exceed\u2026"],
+    build: choice(["the attorney's normal fee", "twice the normal fee or 25% of the capital obtained, whichever is lower", "25% of the capital obtained, with VAT excluded", "any amount the parties agree"], 1,
+      "Correct: the two caps are a 100% uplift on the normal fee and 25% of the total capital obtained, VAT included in the 25%, and the lower of the two applies.",
+      ["Incorrect: an increased fee is permitted, subject to the caps.", null, "Incorrect: VAT is included in the 25% cap.", "Incorrect: the Act and its caps override the agreement."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["On a party-and-party scale the taxing master allows\u2026"],
+    build: choice(["all costs in the tariff, whether necessary or not", "only costs necessary or proper for the attainment of justice", "the fees agreed between the attorney and the client", "no disbursements"], 1,
+      "Correct: Rule 70(3) directs the taxing master to allow costs necessary or proper for the attainment of justice, so an unnecessary email cannot be recovered.",
+      ["Incorrect: that is the wider attorney-and-client approach.", null, "Incorrect: that is the attorney-and-own-client scale.", "Incorrect: disbursements are recoverable if necessary."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "There are three relationships: attorney and client, the parties, and the parties and the justice system.", 'w1', 245);
+    row(m, p, 2, "Overreaching, manufacturing costs and fee sharing with a non-practitioner are unethical; a deposit is held in trust and a retainer buys availability.", 'w2', 333);
+    row(m, p, 3, "Only a Contingency Fees Act agreement is lawful, with a 100 per cent uplift cap or 25 per cent of capital, whichever is lower.", 'w3', 421);
+    row(m, p, 4, "Party-and-party allows only necessary costs, attorney-and-client allows all tariff costs, and attorney-and-own-client is what the parties agreed.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-retainer', prompt: ["What is the effect of a retainer fee agreement?"],
+    build: choice(["The attorney may still charge per case", "The attorney is paid a fixed amount to be available and may not charge per case", "The retainer is refundable at the end of the month", "The retainer must be shared with the client's family"], 1,
+      "Correct: the retainer buys the attorney's availability for the agreed work, so the attorney may not then charge per case.",
+      ["Incorrect: charging per case contradicts the retainer.", null, "Incorrect: the retainer is earned as the availability is provided.", "Incorrect: fee sharing is restricted to other attorneys."]),
+  },
+  {
+    id: 'p-collection', prompt: ["What is the maximum collection commission per instalment as from 28 November 2025?"],
+    build: choice(["10% of the amount collected with no cap", "R615.00 plus VAT", "R583.00 plus VAT", "25% of the amount collected"], 1,
+      "Correct: from 28 November 2025 the maximum is R615.00 plus VAT per payment or instalment, and no additional fee may be charged on an instalment.",
+      ["Incorrect: the 10% is subject to a cap.", null, "Incorrect: R583.00 plus VAT applied from 20 September 2024.", "Incorrect: 25% is the contingency fee cap on capital."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

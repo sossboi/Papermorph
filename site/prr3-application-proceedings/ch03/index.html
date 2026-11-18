@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Rule 55, Service and the Road to Hearing" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: "Rule 55, Service and the Road to Hearing", minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 3"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Rule 55, Service and the Road to Hearing", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Rule 55, Service and the Road to Hearing", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Rule 55 of the Magistrates' Courts Rules, service, and the hearing.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['rule55', 'Rule55', (m) => {
+    const p = panel(0);
+    head(p, "Rule55", 150, .2, { size: 34 });
+    row(m, p, 1, "Initiate the application by notice of motion supported by a founding affidavit.", 'initiate', 245);
+    row(m, p, 2, "Address the notice of motion to the party or parties against whom relief is sought.", 'address', 333);
+    row(m, p, 3, "If necessary, also serve it on any other person affected by the order.", 'serve', 421);
+    row(m, p, 4, "Have the sheriff serve copies of the notice of motion and all attached affidavits on the respondent.", 'sheriff', 509);
+    row(m, p, 5, "After receiving notice of opposition, lodge the original notice of motion and supporting affidavits with the clerk of the court.", 'opposition', 597);
+    row(m, p, 6, "Deliver a replying affidavit, if needed, within 10 court days of receiving the opposing affidavit.", 'reply', 685);
+  }],
+  ['unopposed', 'Unopposed', (m) => {
+    const p = panel(0);
+    head(p, "Unopposed", 150, .2, { size: 34 });
+    row(m, p, 1, "If no opposing affidavit or notice of opposition is received within the required time, the applicant may set the matter down for hearing.", 'noopposition', 245);
+    row(m, p, 2, "After the opposing affidavit is delivered, apply for a hearing date within 5 court days.", 'date', 333);
+    row(m, p, 3, "If the applicant fails to apply for a hearing date, the respondent may do so.", 'respondentdate', 421);
+    row(m, p, 4, "Deliver written notice of the allocated hearing date to the opposing party at least the prescribed number of court days before the hearing.", 'notice', 509);
+  }],
+  ['types', 'Types', (m) => {
+    const p = panel(0);
+    head(p, "Types", 150, .2, { size: 34 });
+    row(m, p, 1, "Ex parte applications are brought without notice to the other side, and they require a higher duty of disclosure.", 'exparte', 245);
+    row(m, p, 2, "Urgent applications are brought on shortened time, and the founding affidavit must set out the urgency and why the usual time limits cannot be followed.", 'urgent', 333);
+    row(m, p, 3, "Interlocutory applications arise during pending proceedings, and they follow the same motion-and-affidavit shape.", 'interlocutory', 421);
+    row(m, p, 4, "Each type has its own prescribed form, and the notice of motion must follow the applicable form closely.", 'forms', 509);
+  }],
+  ['substituted', 'Substituted', (m) => {
+    const p = panel(0);
+    head(p, "Substituted", 150, .2, { size: 34 });
+    row(m, p, 1, "Confirm that ordinary service under the rules cannot be effected.", 'confirm', 245);
+    row(m, p, 2, "Exhaust and record every avenue to find the person to be served.", 'exhaust', 333);
+    row(m, p, 3, "Decide the proposed method: email, social media, publication, or service at a place of employment.", 'decide', 421);
+    row(m, p, 4, "If the person is abroad, add edictal citation.", 'abroad', 509);
+    row(m, p, 5, "Draft an ex parte application, using the prescribed form, and set out the efforts made and the method proposed.", 'draft', 597);
+    row(m, p, 6, "After the order, serve exactly as ordered, and for publication file the whole newspaper page.", 'after', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["After the opposing affidavit is delivered, the applicant must apply for a hearing date within\u2026"],
+    build: choice(["5 court days", "10 court days", "15 court days", "20 court days"], 0,
+      "Correct: the deck sets 5 court days for applying for a hearing date after the opposing affidavit is delivered.",
+      ["Incorrect: 10 court days is the replying affidavit period.", "Incorrect: 15 court days is the replication period in an action.", "Incorrect: 20 court days is the plea period in an action."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Substituted service requires\u2026"],
+    build: choice(["only that the sheriff could not find the person", "an ex parte application recording every effort to serve and the method proposed", "the consent of the other party", "an order of the High Court only"], 1,
+      "Correct: the deck directs you to confirm ordinary service is impossible, exhaust and record every avenue, and draft an ex parte application setting out the method.",
+      ["Incorrect: the sheriff's inability alone is not enough; the efforts must be recorded and an order obtained.", null, "Incorrect: substituted service is ordered without notice to the person to be served.", "Incorrect: the Magistrates' Court may also order substituted service."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Rule 55 MCR: notice of motion plus founding affidavit, served by the sheriff, with a replying affidavit within 10 court days.", 'w1', 245);
+    row(m, p, 2, "If nobody opposes, the applicant may set the matter down; if they do, apply for a hearing date within 5 court days.", 'w2', 333);
+    row(m, p, 3, "Ex parte, urgent and interlocutory applications each have their own form and their own duty of disclosure.", 'w3', 421);
+    row(m, p, 4, "Substituted service needs an ex parte application that records every effort to serve and complies exactly with the order.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-exparte', prompt: ["What duty applies to an ex parte application that does not apply to an ordinary application?"],
+    build: choice(["The applicant must act in good faith only", "A higher duty of disclosure, placing all material facts before the court", "The applicant need not serve the papers", "The court may not grant an order without a hearing"], 1,
+      "Correct: an ex parte application is brought without notice to the other side, so the applicant owes a higher duty of disclosure and must place all material facts before the court.",
+      ["Incorrect: good faith is required in every application; the ex parte duty goes further.", null, "Incorrect: the papers are served after the order is granted.", "Incorrect: the order is granted on the papers precisely because there is no hearing."]),
+  },
+  {
+    id: 'p-serve', prompt: ["After an order of substituted service by publication, what must the applicant do?"],
+    build: choice(["Serve any page of the newspaper that shows the notice", "Serve exactly as ordered and file the whole newspaper page", "Send a copy by email as well", "Do nothing further, as the order is final"], 1,
+      "Correct: the deck directs you to serve exactly as ordered, and for publication to file the whole newspaper page.",
+      ["Incorrect: the whole page must be filed, not any page.", null, "Incorrect: service must follow the order, not an informal extra step.", "Incorrect: the order must be carried out; otherwise service is invalid."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

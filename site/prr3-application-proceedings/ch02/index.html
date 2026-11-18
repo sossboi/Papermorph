@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Affidavits: Commissioning, Founding and Opposing" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Affidavits: Commissioning, Founding and Opposing", minutes: 12, language: 'en', next: '../ch03/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 3"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Affidavits: Commissioning, Founding and Opposing", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Affidavits: Commissioning, Founding and Opposing", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Affidavits: commissioning, the founding affidavit, and the answer.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['commission', 'Commission', (m) => {
+    const p = panel(0);
+    head(p, "Commission", 150, .2, { size: 34 });
+    row(m, p, 1, "Every affidavit must be sworn or affirmed before a commissioner of oaths.", 'oath', 245);
+    row(m, p, 2, "The commissioner puts the prescribed questions: whether the deponent knows and understands the content of the declaration, whether they object to taking the prescribed oath or affirmation, and whether they consider it binding on their conscience.", 'questions', 333);
+    row(m, p, 3, "For an electronic document, the deponent must view it in the software in which it is presented, verify its authenticity there, and the commissioner certifies a copy of the electronic original.", 'electronic', 421);
+    row(m, p, 4, "An affidavit that is not properly commissioned is not evidence, and the application may fail on that ground alone.", 'consequence', 509);
+  }],
+  ['founding', 'Founding', (m) => {
+    const p = panel(0);
+    head(p, "Founding", 150, .2, { size: 34 });
+    row(m, p, 1, "The applicant deposes to it, and it must set out the facts that establish the relief claimed.", 'who', 245);
+    row(m, p, 2, "It follows the sequence of the notice of motion: each prayer should be supported by the facts that justify it.", 'structure', 333);
+    row(m, p, 3, "State carefully what is within the deponent's personal knowledge, what is within another person's knowledge, and what is alleged on information and belief.", 'knowledge', 421);
+    row(m, p, 4, "Attach the documents relied on as annexures, each marked and referred to in the body.", 'annexures', 509);
+    row(m, p, 5, "Draft it as a narrative of facts, not as an argument: the heads of argument come later.", 'drafting', 597);
+  }],
+  ['opposing', 'Opposing', (m) => {
+    const p = panel(0);
+    head(p, "Opposing", 150, .2, { size: 34 });
+    row(m, p, 1, "Go through the founding affidavit paragraph by paragraph.", 'paragraph', 245);
+    row(m, p, 2, "For each allegation, admit it, deny it with facts, or confess and avoid it.", 'three', 333);
+    row(m, p, 3, "Where the information is within another person's knowledge, get that person to depose to a confirmatory affidavit.", 'knowledge', 421);
+    row(m, p, 4, "Where witnesses can corroborate your version, get confirmatory affidavits from them, and attach copies of corroborating documents as annexures.", 'corroborate', 509);
+    row(m, p, 5, "Commission everything and serve it within the required time.", 'commission', 597);
+    row(m, p, 6, "A bare denial is weak: deny with facts where you can.", 'bare', 685);
+  }],
+  ['replying', 'Replying', (m) => {
+    const p = panel(0);
+    head(p, "Replying", 150, .2, { size: 34 });
+    row(m, p, 1, "The applicant may deliver a replying affidavit within 10 court days of receiving the opposing affidavit.", 'when', 245);
+    row(m, p, 2, "It answers only what is new in the opposing affidavit; it does not re-argue the founding affidavit.", 'new', 333);
+    row(m, p, 3, "The court has a discretion to allow further affidavits, but the parties cannot keep filing indefinitely.", 'discretion', 421);
+    row(m, p, 4, "A filing notice accompanies the replying affidavit, and the court may refuse to consider a document that was not properly filed.", 'filingnotice', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["An affidavit that has not been properly commissioned is\u2026"],
+    build: choice(["admissible if the facts are common cause", "not evidence, and the application may fail on that ground", "valid if the deponent later confirms it in court", "acceptable in the Magistrates' Court only"], 1,
+      "Correct: an affidavit must be sworn or affirmed before a commissioner of oaths; without that it is not evidence.",
+      ["Incorrect: the defect is formal and goes to admissibility, not to whether the facts are disputed.", null, "Incorrect: later confirmation does not cure the defect.", "Incorrect: the commissioning requirement applies in both courts."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A replying affidavit must be delivered within\u2026"],
+    build: choice(["5 court days of the founding affidavit", "10 court days of receiving the opposing affidavit", "15 court days of the notice of motion", "20 court days of the hearing date"], 1,
+      "Correct: the replying affidavit is delivered within 10 court days of receiving the opposing affidavit.",
+      ["Incorrect: 5 court days is not the replying period.", null, "Incorrect: 15 court days is the replication period in an action.", "Incorrect: the period runs from service of the opposing affidavit, not from the hearing."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Every affidavit must be commissioned, and an uncommissioned affidavit is not evidence.", 'w1', 245);
+    row(m, p, 2, "The founding affidavit carries the facts that support each prayer, stated by knowledge and with annexures marked.", 'w2', 333);
+    row(m, p, 3, "The opposing affidavit answers paragraph by paragraph: admit, deny with facts, or confess and avoid.", 'w3', 421);
+    row(m, p, 4, "A replying affidavit is filed within 10 court days and answers only what is new.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-oppose', prompt: ["How should a respondent answer each allegation in the founding affidavit?"],
+    build: choice(["Deny every allegation to put the applicant to proof", "Admit it, deny it with facts, or confess and avoid it", "Ignore allegations that are not disputed", "Refer the court to the heads of argument"], 1,
+      "Correct: the deck's rule is to go through the founding affidavit paragraph by paragraph and admit, deny with facts, or confess and avoid.",
+      ["Incorrect: a bare denial of everything is weak and may be disregarded.", null, "Incorrect: an unanswered allegation may be taken as not disputed.", "Incorrect: heads of argument do not replace the opposing affidavit."]),
+  },
+  {
+    id: 'p-confirm', prompt: ["Where a fact in the opposing affidavit is within a third party's knowledge, what should the respondent do?"],
+    build: choice(["Allege it on information and belief without more", "Get that person to depose to a confirmatory affidavit", "Attach the third party's letter as an annexure only", "Leave it for cross-examination at the hearing"], 1,
+      "Correct: where the information is within another person's knowledge, the deck directs you to get that person to depose to a confirmatory affidavit.",
+      ["Incorrect: an allegation on information and belief is weaker than a confirmatory affidavit.", null, "Incorrect: a letter is not a sworn statement.", "Incorrect: there is no cross-examination on the papers."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

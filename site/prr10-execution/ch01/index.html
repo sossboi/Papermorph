@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Movable and Immovable Execution" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Movable and Immovable Execution", minutes: 13, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 10"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Movable and Immovable Execution", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Movable and Immovable Execution", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Enforcing a judgment against property.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['start', 'Start', (m) => {
+    const p = panel(0);
+    head(p, "Start", 150, .2, { size: 34 });
+    row(m, p, 1, "Execution takes place after a judgment has been obtained but has not been satisfied.", 'after', 245);
+    row(m, p, 2, "The purpose is not to create a new debt: execution gives effect to an existing judgment.", 'notnew', 333);
+    row(m, p, 3, "MCR 36 is the general provision dealing with process in execution, and MCR 36(2) allows a warrant to be sued out where the judgment has not been satisfied, stayed or suspended.", 'mcr36', 421);
+    row(m, p, 4, "The judgment creditor, called the execution creditor in the Rules, has the judgment and initiates the process; the judgment debtor is the person against whom it was granted; the registrar or clerk issues the process; and the sheriff executes it.", 'parties', 509);
+    row(m, p, 5, "In the Magistrates' Court the process is a warrant of execution; in the High Court it is generally a writ of execution.", 'warrant', 597);
+    row(m, p, 6, "Process for costs is not issued until those costs have been taxed or agreed in writing in a fixed amount, so the amount in the warrant must be legally capable of execution.", 'costs', 685);
+  }],
+  ['movable', 'Movable', (m) => {
+    const p = panel(0);
+    head(p, "Movable", 150, .2, { size: 34 });
+    row(m, p, 1, "MCR 41(1): the execution creditor may, at the creditor's own risk and subject to Rules 36 and 37, issue from the registrar or clerk a warrant substantially in Form 32 of Annexure 1.", 'issue', 245);
+    row(m, p, 2, "At the creditor's own risk means issuing execution is no guarantee of recovery: there may be no sufficient property, or the sale may not satisfy the judgment.", 'ownrisk', 333);
+    row(m, p, 3, "MCR 41(3) sets the backbone sequence: the sheriff proceeds forthwith to the residence, place of employment or business; demands satisfaction of the warrant; if it is not satisfied, demands that sufficient movable and disposable property be pointed out; and if sufficient property is not pointed out, searches for it.", 'three', 421);
+    row(m, p, 4, "Section 67 of the Magistrates' Courts Act lists exempt items: beds, bedding and wearing apparel, necessary furniture and household essentials, a farmer's stock and tools, tools and implements of trade, professional supplies, arms and ammunition the debtor must possess, and necessary food and drink, subject to value limits set by the Minister.", 'exempt', 509);
+  }],
+  ['attach', 'Attach', (m) => {
+    const p = panel(0);
+    head(p, "Attach", 150, .2, { size: 34 });
+    row(m, p, 1, "The sheriff prepares an inventory of the property attached, which is the formal record of what is subject to execution.", 'inventory', 245);
+    row(m, p, 2, "The value matters because the object is to satisfy the warrant, and an inventory of only nominal value may make a sale pointless.", 'valuation', 333);
+    row(m, p, 3, "Form 33 is the notice of attachment in execution, and it notifies the judgment debtor that the property in the inventory has been laid under judicial attachment.", 'form33', 421);
+    row(m, p, 4, "Attachment is not the same as removal: physical removal is not the legal test for attachment.", 'notremoval', 509);
+    row(m, p, 5, "MCR 41(14)(c) is the default: in the absence of an instruction or authorisation, the sheriff leaves attached property, other than money or documents, on the premises in the possession of the person it was found in.", 'custody', 597);
+    row(m, p, 6, "MCR 41(14)(b) requires the execution creditor or attorney to satisfy the registrar or clerk in writing of the desirability of immediate removal, and the registrar endorses approval and authorises the sheriff in writing.", 'immediate', 685);
+  }],
+  ['sale', 'Sale', (m) => {
+    const p = panel(0);
+    head(p, "Sale", 150, .2, { size: 34 });
+    row(m, p, 1, "MCR 41(19)(a)(i): movable property to be sold in execution is sold by public auction for cash to the highest bidder by the sheriff who removed the goods, or with the magistrate's approval by an auctioneer, and an electronic platform may run simultaneously.", 'auction', 245);
+    row(m, p, 2, "The execution creditor, after consulting the sheriff, prepares the notice of sale and furnishes copies in time for the prescribed notices to be displayed not later than 10 days before the sale.", 'notice', 333);
+    row(m, p, 3, "The sale date must be not less than 15 days after attachment, subject to exceptions for perishable goods and court-authorised shorter periods.", 'fifteen', 421);
+    row(m, p, 4, "If the proceeds are sufficient the process is directed to satisfying the judgment and costs, and the creditor is not entitled to treat a surplus as extra compensation.", 'proceeds', 509);
+    row(m, p, 5, "On completion of a sale the sheriff attaches a vendue roll to the return, showing the property sold, prices realised, purchasers and an account of distribution, and sends a copy to the other sheriffs for the area.", 'vendue', 597);
+    row(m, p, 6, "MCR 41(18): unless a court orders further retention, the sheriff must release movable property retained for more than six months, unless a sale is pending, and the period is suspended while an interpleader claim is pending.", 'sixmonths', 685);
+  }],
+  ['nulla', 'Nulla', (m) => {
+    const p = panel(0);
+    head(p, "Nulla", 150, .2, { size: 34 });
+    row(m, p, 1, "A nulla bona return is the sheriff's return that there is not sufficient movable property to satisfy the warrant, and it arises in two situations: the sheriff returns nulla bona, or the movable property is sold but the proceeds are insufficient.", 'nulla', 245);
+    row(m, p, 2, "MCR 43(1)(a): subject to MCR 43A, no warrant against immovable property may be issued unless there is a return showing insufficient movable property, or the property has been declared specially executable by the court.", 'gate', 333);
+    row(m, p, 3, "MCR 43(1)(b) requires the warrant to identify the property fully: nature, magisterial district, physical address, title deed number, erf or sectional title unit number and exclusive-use area.", 'detail', 421);
+    row(m, p, 4, "MCR 43(3): notice of attachment on Form 33 must be served on the owner and the Registrar of Deeds, and on the occupier where someone other than the owner occupies.", 'notice2', 509);
+    row(m, p, 5, "The sale is generally appointed for a date not less than 45 days after service of the notice of attachment, and the execution creditor prepares conditions of sale on Form 33A.", 'sale2', 597);
+  }],
+  ['residential', 'Residential', (m) => {
+    const p = panel(0);
+    head(p, "Residential", 150, .2, { size: 34 });
+    row(m, p, 1, "MCR 43A(2)(a): the court must establish whether the property is the judgment debtor's primary residence and must consider alternative means available to the debtor for satisfying the debt.", 'primary', 245);
+    row(m, p, 2, "MCR 43A(2)(b): the court may not authorise execution against a primary residence unless, having considered all relevant factors, it considers execution warranted.", 'warranted', 333);
+    row(m, p, 3, "MCR 43A(2)(c): the registrar or clerk may not issue a warrant against residential immovable property unless a court has ordered execution against it.", 'order', 421);
+    row(m, p, 4, "The application is a notice of motion on Form 1B with a founding affidavit, and anything not placed before the court is not evidence.", 'application', 509);
+    row(m, p, 5, "MCR 43A(5) requires supporting documents: market value, local authority valuation, mortgage bonds, rates and dues, body corporate levies, and any other factor.", 'support', 597);
+    row(m, p, 6, "MCR 43A(8) lets the court include conditions, order information, condone failures, order execution where there is no other satisfactory means, set a reserve price, postpone, refuse, or make a costs order.", 'powers', 685);
+  }],
+  ['interpleader', 'Interpleader', (m) => {
+    const p = panel(0);
+    head(p, "Interpleader", 150, .2, { size: 34 });
+    row(m, p, 1, "A person other than the execution debtor may claim that attached property, or the proceeds of property sold, belongs to that person.", 'thirdparty', 245);
+    row(m, p, 2, "MCR 44(2)(a): the claimant must give the sheriff three copies of an affidavit within 10 court days of the claim, setting out the basis of the claim and the supporting evidence, and the sheriff notifies the execution creditor.", 'claim', 333);
+    row(m, p, 3, "MCR 44(1)(a): where two or more persons make adverse claims to the same property, the holder, the sheriff, may summon the claimants to court and must state that the applicant has no personal interest other than costs and is not colluding with the claimants.", 'adverse', 421);
+    row(m, p, 4, "A third-party claim is not a challenge to the underlying judgment; it asserts that the property to be executed does not belong to the execution debtor.", 'notchallenge', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The sheriff's sequence under MCR 41(3) is\u2026"],
+    build: choice(["search, then demand satisfaction, then point out property", "demand satisfaction, then point out sufficient property, then search", "attach, then demand satisfaction, then sell", "point out property, then demand satisfaction, then search"], 1,
+      "Correct: MCR 41(3)(a) to (c) runs demand for satisfaction, then a demand that sufficient movable and disposable property be pointed out, then a search if sufficient property is not pointed out.",
+      ["Incorrect: the search is the last step, not the first.", null, "Incorrect: attachment follows the sequence, it does not precede it.", "Incorrect: satisfaction is demanded before property is pointed out."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A warrant against immovable property may not issue unless\u2026"],
+    build: choice(["the judgment creditor requests it", "there is a nulla bona return or the property has been declared specially executable", "the debtor owns no movable property at all", "the sheriff has attached the property already"], 1,
+      "Correct: MCR 43(1)(a) requires either a return showing insufficient movable property or a court declaration that the property is specially executable.",
+      ["Incorrect: the creditor's request is not the gate.", null, "Incorrect: the test is a return showing insufficiency, not the absence of movables.", "Incorrect: attachment follows the warrant, not the other way round."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "MCR 36 is the gateway: the judgment must be unsatisfied, not stayed or suspended.", 'w1', 245);
+    row(m, p, 2, "Movable execution runs demand, point out, search, then inventory and attachment; attachment is not removal.", 'w2', 333);
+    row(m, p, 3, "Sale is by public auction for cash, not less than 15 days after attachment, with a vendue roll on completion.", 'w3', 421);
+    row(m, p, 4, "A nulla bona return opens the door to MCR 43, and a primary residence needs a court order under MCR 43A before any warrant issues.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-custody', prompt: ["What is the default position for attached movable property under MCR 41(14)(c)?"],
+    build: choice(["The sheriff removes it immediately", "It remains on the premises in the possession of the person it was found in", "It is sold within 15 days", "It is returned to the debtor unconditionally"], 1,
+      "Correct: absent an instruction or authorisation, the sheriff leaves attached property other than money or documents on the premises in the possession of the person in whose possession it was attached.",
+      ["Incorrect: immediate removal needs the written process in MCR 41(14)(b).", null, "Incorrect: sale is a later stage and needs the auction procedure.", "Incorrect: it remains under attachment."]),
+  },
+  {
+    id: 'p-43a', prompt: ["What must happen before a warrant may issue against a primary residence?"],
+    build: choice(["The sheriff must obtain a nulla bona return only", "A court must order execution against that property", "The debtor must consent in writing", "The property must be declared specially executable by the registrar"], 1,
+      "Correct: MCR 43A(2)(c) prohibits the registrar or clerk from issuing a warrant against residential immovable property unless a court has ordered execution against it.",
+      ["Incorrect: a nulla bona return is the MCR 43 gate, not the MCR 43A gate.", null, "Incorrect: the debtor's consent is not required.", "Incorrect: special executability is a separate MCR 43 route."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Employee, Dismissal and Unfair Labour Practice" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Employee, Dismissal and Unfair Labour Practice", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 11"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Employee, Dismissal and Unfair Labour Practice", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Employee, Dismissal and Unfair Labour Practice", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Who is an employee, and what counts as a dismissal.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['field', 'Field', (m) => {
+    const p = panel(0);
+    head(p, "Field", 150, .2, { size: 34 });
+    row(m, p, 1, "Labour law regulates the legal relationship between employer and employee, in both an individual and a collective sense.", 'regulates', 245);
+    row(m, p, 2, "Individual labour law governs the employment contract between the employer and the employee, and it is influenced by the law of contract, legislation and case law.", 'individual', 333);
+    row(m, p, 3, "Collective labour law governs collective agreements between employers' organisations and trade unions, and collective disputes often concern strikes and lockouts.", 'collective', 421);
+    row(m, p, 4, "Section 23 of the Constitution gives everyone the right to fair labour practices, and it protects the rights of workers and employers to form and join organisations and, for workers, to strike.", 'constitution', 509);
+  }],
+  ['legislation', 'Legislation', (m) => {
+    const p = panel(0);
+    head(p, "Legislation", 150, .2, { size: 34 });
+    row(m, p, 1, "The Labour Relations Act 66 of 1995 regulates labour relations, unfair dismissals, unfair labour practices, strikes, unions, the CCMA and the Labour Court.", 'lra', 245);
+    row(m, p, 2, "The Basic Conditions of Employment Act 75 of 1997 sets minimum conditions: working hours, leave, pay, notice, severance and certificates of service.", 'bcea', 333);
+    row(m, p, 3, "The Employment Equity Act 55 of 1998 prohibits unfair discrimination and requires employment equity measures.", 'eea', 421);
+    row(m, p, 4, "The Occupational Health and Safety Act 85 of 1993 provides compensation for employees injured at work or who contract occupational diseases.", 'ohsa', 509);
+    row(m, p, 5, "The Code of Practice on Dismissal and the Code of Good Practice on harassment guide the fairness enquiry, and the CCMA Rules regulate proceedings before the Commission.", 'codes', 597);
+  }],
+  ['employee', 'Employee', (m) => {
+    const p = panel(0);
+    head(p, "Employee", 150, .2, { size: 34 });
+    row(m, p, 1, "The BCEA defines an employee as any person, excluding an independent contractor, who works for another person or for the State and who receives or is entitled to receive remuneration, and any other person who in any manner assists in carrying on the business of an employer.", 'bcea2', 245);
+    row(m, p, 2, "Not being an employee means no protection from labour legislation.", 'noprotect', 333);
+    row(m, p, 3, "Section 200A of the LRA lists the factors: control over the manner of work and hours, integration into the organisation, time worked over a period, economic dependence, provision of tools, and exclusivity.", 'factors', 421);
+    row(m, p, 4, "A person is presumed to be an employee if one or more of those factors are present, and the employer must then prove the contrary.", 'presumption', 509);
+    row(m, p, 5, "The presumption does not apply above the ministerial threshold, which as at 1 May 2026 is R269,600.90 per annum, and the parties may ask the CCMA for an award on employee status.", 'threshold', 597);
+  }],
+  ['dismissal', 'Dismissal', (m) => {
+    const p = panel(0);
+    head(p, "Dismissal", 150, .2, { size: 34 });
+    row(m, p, 1, "A dismissal occurs where the employer terminates the employment contract, with or without notice.", 'terminates', 245);
+    row(m, p, 2, "It includes a fixed-term contract that is not renewed, or is renewed on less favourable terms, despite a reasonable expectation of renewal.", 'fixed', 333);
+    row(m, p, 3, "It includes the employer refusing to allow the employee to return after maternity leave.", 'maternity', 421);
+    row(m, p, 4, "It includes re-employing some dismissed employees but refusing to re-employ others.", 'selective', 509);
+    row(m, p, 5, "It includes the employee resigning because the employer made continued employment intolerable, and resigning after a business transfer where the new employer offers substantially less favourable conditions.", 'constructive', 597);
+    row(m, p, 6, "Dismissal is not limited to being fired: it covers non-renewal, refusal to return to work, selective re-employment and constructive dismissal.", 'notlimited', 685);
+  }],
+  ['ulp', 'Ulp', (m) => {
+    const p = panel(0);
+    head(p, "Ulp", 150, .2, { size: 34 });
+    row(m, p, 1, "An unfair labour practice is unfair conduct by an employer during the employment relationship.", 'definition', 245);
+    row(m, p, 2, "It may involve promotion, demotion, probation, training or benefits, unfair suspension, disciplinary action short of dismissal such as unfair warnings, failure to reinstate or re-employ despite an agreement, and occupational detriment for a protected disclosure other than dismissal.", 'examples', 333);
+    row(m, p, 3, "In the promotion case study, the issue was not whether Sarah should have been promoted, but whether the employer acted fairly in the promotion process.", 'case', 421);
+  }],
+  ['auto', 'Auto', (m) => {
+    const p = panel(0);
+    head(p, "Auto", 150, .2, { size: 34 });
+    row(m, p, 1, "A dismissal is automatically unfair if the reason is linked to freedom of association or trade union rights, participation in a protected strike or protest action, refusal to perform work during a protected strike unless necessary for safety, forcing the employee to accept a demand on a matter of mutual interest, exercising rights under the LRA or participating in its proceedings, pregnancy or a related reason, unfair discrimination, a transfer of business under section 197 or 197A, or making a protected disclosure.", 'section187', 245);
+    row(m, p, 2, "It may still be fair if the reason is based on an inherent requirement of the job, or the employee has reached the normal or agreed retirement age.", 'exceptions', 333);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Section 200A of the LRA creates\u2026"],
+    build: choice(["an irrebuttable presumption that every worker is an employee", "a presumption of employee status where one or more listed factors are present, which the employer must rebut", "a rule that independent contractors are always employees", "a threshold below which no claim may be brought"], 1,
+      "Correct: if one or more s 200A factors are present the person is presumed to be an employee, and the employer must prove the contrary; the presumption does not apply above the ministerial threshold.",
+      ["Incorrect: the presumption is rebuttable.", null, "Incorrect: independent contractors are excluded from the BCEA definition.", "Incorrect: the threshold removes the presumption rather than barring claims."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A dismissal is not limited to being fired because\u2026"],
+    build: choice(["only terminations with notice qualify", "it includes non-renewal of a fixed-term contract, refusal to allow return after maternity leave, selective re-employment and constructive dismissal", "resignation is never a dismissal", "only misconduct dismissals count"], 1,
+      "Correct: s 186(1) lists those situations, so dismissal covers far more than a simple termination.",
+      ["Incorrect: termination with or without notice both qualify.", null, "Incorrect: constructive dismissal is expressly included.", "Incorrect: the definition is not limited to misconduct."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Labour law regulates the individual employment relationship and the collective relationship, and section 23 of the Constitution underpins it.", 'w1', 245);
+    row(m, p, 2, "The LRA, BCEA, EEA and OHSA are the core statutes, with the Codes and the CCMA Rules guiding practice.", 'w2', 333);
+    row(m, p, 3, "Section 200A presumes employee status where any factor is present, and the employer must rebut it.", 'w3', 421);
+    row(m, p, 4, "Section 186(1) defines dismissal broadly, and section 187 makes certain dismissals automatically unfair.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-constructive', prompt: ["When does a resignation amount to a dismissal under s 186(1)?"],
+    build: choice(["Never: a resignation is always voluntary", "Where the employer made continued employment intolerable", "Only where the employer agrees in writing", "Only where the employee gives notice"], 1,
+      "Correct: s 186(1) includes the employee resigning because the employer made continued employment intolerable, which is constructive dismissal.",
+      ["Incorrect: the statute expressly includes it.", null, "Incorrect: the employer's agreement is not required.", "Incorrect: notice is irrelevant to the definition."]),
+  },
+  {
+    id: 'p-auto', prompt: ["Which dismissal is automatically unfair under s 187?"],
+    build: choice(["A dismissal for poor work performance", "A dismissal because the employee is pregnant", "A dismissal after a retrenchment consultation", "A dismissal for misconduct"], 1,
+      "Correct: pregnancy, intended pregnancy or a related reason is listed in s 187 as an automatically unfair reason.",
+      ["Incorrect: poor performance is an incapacity dismissal tested for fairness under s 188.", null, "Incorrect: a retrenchment is tested for fairness, not automatically unfair.", "Incorrect: misconduct is tested for fairness under s 188."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

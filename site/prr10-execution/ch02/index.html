@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Garnishee Orders and Emoluments Attachment Orders" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Garnishee Orders and Emoluments Attachment Orders", minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 10"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Garnishee Orders and Emoluments Attachment Orders", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Garnishee Orders and Emoluments Attachment Orders", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Attaching money owed to the judgment debtor.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['distinction', 'Distinction', (m) => {
+    const p = panel(0);
+    head(p, "Distinction", 150, .2, { size: 34 });
+    row(m, p, 1, "An emoluments attachment order attaches the judgment debtor's emoluments, that is remuneration or salary, payable by the debtor's employer: section 65J of the Magistrates' Courts Act and Rule 46 of the Magistrates' Courts Rules, on Form 38.", 'eao', 245);
+    row(m, p, 2, "A garnishee order attaches a debt owing to the judgment debtor by a third party: section 72 of the Act and Rule 47 of the Rules, on Form 39.", 'garnishee', 333);
+    row(m, p, 3, "Ask whose money is being attached. Salary from an employer points to an EAO; another debt owed by a third party points to a garnishee order.", 'question', 421);
+    row(m, p, 4, "Sandile obtains judgment against Sipho, and Sipho is owed R5 000 by Siya: Sandile is the judgment creditor, Sipho the judgment debtor and Siya the garnishee, and the order tells Siya to pay Sandile directly.", 'example', 509);
+  }],
+  ['financial', 'Financial', (m) => {
+    const p = panel(0);
+    head(p, "Financial", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 65A of the Act, with Rule 45 of the Rules, provides for an enquiry into the financial position of the judgment debtor where a judgment for payment of money remains unsatisfied.", 'section65a', 245);
+    row(m, p, 2, "It places the debtor's income, expenditure, assets, liabilities and obligations to creditors before the court.", 'purpose', 333);
+    row(m, p, 3, "A financial enquiry must not be confused with attachment: it does not automatically result in an emoluments attachment order.", 'notattachment', 421);
+    row(m, p, 4, "Section 65 allows a judgment debtor to make a written offer to pay in specified instalments, and where the debtor is employed the court may, subject to the statutory requirements, authorise an EAO.", 'instalments', 509);
+    row(m, p, 5, "The sequence is: financial position, then the court considers the ability to pay, then an appropriate order may follow.", 'sequence', 597);
+  }],
+  ['eao', 'Eao', (m) => {
+    const p = panel(0);
+    head(p, "Eao", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 65J provides for an order attaching emoluments presently or in the future owing or accruing to the judgment debtor by or from the employer.", 'section65j', 245);
+    row(m, p, 2, "The employer must pay the specified amounts to the judgment creditor or the creditor's attorney until the judgment debt and applicable costs are paid in full.", 'employer', 333);
+    row(m, p, 3, "Section 65J was substituted by section 9 of the Courts of Law Amendment Act 7 of 2017, and the current framework requires judicial oversight, so an EAO is not merely an administrative instruction to an employer.", 'oversight', 421);
+    row(m, p, 4, "Rule 46 uses Form 38A, the notice of intention to issue an EAO, and Form 38, the EAO itself.", 'forms', 509);
+    row(m, p, 5, "A garnishee who unreasonably fails to make the required deductions, or fails to stop deductions after the debt and costs are paid, may incur liability under the Act.", 'liability', 597);
+  }],
+  ['garnishee', 'Garnishee', (m) => {
+    const p = panel(0);
+    head(p, "Garnishee", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 72 of the Act deals with attachment of a debt owing to the judgment debtor, and Rule 47 deals with the procedure.", 'section72', 245);
+    row(m, p, 2, "Rule 47(1) requires the application to establish that judgment has been granted in favour of the creditor, that it remains unsatisfied, that the garnishee falls within the jurisdictional requirements, and that a debt is presently or in the future owing or accruing from the garnishee to the debtor.", 'requirements', 333);
+    row(m, p, 3, "The debt need not be presently due and payable: section 72 permits attachment of a debt presently or in the future owing or accruing.", 'future', 421);
+    row(m, p, 4, "Rule 37 covers a second or further EAO or garnishee order.", 'further', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["An emoluments attachment order is governed by\u2026"],
+    build: choice(["s 72 MCA and Rule 47 MCR", "s 65J MCA and Rule 46 MCR", "s 65A MCA and Rule 45 MCR", "MCR 41(1) and Form 32"], 1,
+      "Correct: s 65J is the statutory authority for an EAO, Rule 46 is the procedure, and Form 38 is the prescribed order.",
+      ["Incorrect: s 72 and Rule 47 govern a garnishee order.", null, "Incorrect: s 65A and Rule 45 govern the financial enquiry.", "Incorrect: MCR 41(1) and Form 32 govern a warrant against movable property."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A garnishee order attaches\u2026"],
+    build: choice(["the judgment debtor's salary from an employer", "a debt presently or in the future owing or accruing to the judgment debtor by a third party", "the judgment debtor's immovable property", "the judgment debtor's movable property"], 1,
+      "Correct: s 72 MCA attaches a debt owing to the judgment debtor, and the garnishee is the third party who owes it.",
+      ["Incorrect: salary points to an emoluments attachment order.", null, "Incorrect: immovable property is governed by MCR 43 and 43A.", "Incorrect: movable property is governed by MCR 41."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "An EAO attaches salary through the employer under section 65J and Rule 46, on Form 38.", 'w1', 245);
+    row(m, p, 2, "A garnishee order attaches a debt owed by a third party under section 72 and Rule 47, on Form 39.", 'w2', 333);
+    row(m, p, 3, "A financial enquiry under section 65A and Rule 45 establishes the debtor's position but does not itself attach anything.", 'w3', 421);
+    row(m, p, 4, "Ask whose money is being attached, and identify the rule before applying the procedure.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-enquiry', prompt: ["What is the effect of a financial enquiry under s 65A MCA?"],
+    build: choice(["It automatically results in an emoluments attachment order", "It places the debtor's financial position before the court but does not itself attach anything", "It cancels the judgment debt", "It replaces the need for a warrant"], 1,
+      "Correct: the enquiry informs the court; an EAO follows only if the statutory requirements are met.",
+      ["Incorrect: the deck expressly warns against confusing the two.", null, "Incorrect: the judgment debt remains.", "Incorrect: a warrant or attachment order is still required."]),
+  },
+  {
+    id: 'p-form', prompt: ["Which form is the emoluments attachment order itself?"],
+    build: choice(["Form 32", "Form 38A", "Form 38", "Form 39"], 2,
+      "Correct: Form 38 is the EAO; Form 38A is the notice of intention to issue one, and Form 39 is the garnishee order.",
+      ["Incorrect: Form 32 is the warrant for execution against property.", "Incorrect: Form 38A is the notice of intention.", null, "Incorrect: Form 39 is the garnishee order."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

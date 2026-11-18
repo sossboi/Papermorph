@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Leases, Rights and Implied Terms" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Leases, Rights and Implied Terms", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 13"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Leases, Rights and Implied Terms", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Leases, Rights and Implied Terms", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The lease, and what the Rental Housing Act adds to it.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['lease', 'Lease', (m) => {
+    const p = panel(0);
+    head(p, "Lease", 150, .2, { size: 34 });
+    row(m, p, 1, "A lease has three essentials: delivery of the property by the lessor, the lessee's temporary use and enjoyment of it, and the lessee's undertaking to pay rent.", 'essentials', 245);
+    row(m, p, 2, "A lease does not have to be in writing, but if the tenant asks, the landlord must reduce it to writing.", 'writing', 333);
+    row(m, p, 3, "Huur gaat voor koop: the lease supersedes a sale of the property, the tenant keeps occupation for the full term, and the buyer steps into the shoes of the landlord with no further formalities.", 'huur', 421);
+    row(m, p, 4, "The parties can contract out of the common law, and a lease may be cancelled only if the agreement provides for cancellation and the reason is not an unfair practice.", 'out', 509);
+  }],
+  ['tenant', 'Tenant', (m) => {
+    const p = panel(0);
+    head(p, "Tenant", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 4(1): in advertising a dwelling or negotiating a lease, a landlord may not unfairly discriminate against prospective tenants, tenants, members of their household or bona fide visitors on grounds including race, gender, sex, pregnancy, marital status, sexual orientation, ethnic or social origin, colour, age, disability, religion, conscience, belief, culture, language and birth.", 'discriminate', 245);
+    row(m, p, 2, "Section 4(2): the landlord may exercise the right of inspection only in a reasonable manner after reasonable notice.", 'privacy', 333);
+    row(m, p, 3, "Section 4(3): the landlord may not search the tenant's person or home, search their property, have their possessions seized, or infringe the privacy of their communications, and this extends to guests and the tenant's household.", 'maynot', 421);
+  }],
+  ['landlord', 'Landlord', (m) => {
+    const p = panel(0);
+    head(p, "Landlord", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 4(5) gives the landlord the right to prompt and regular payment of rent and charges, to recover unpaid rental through a Tribunal ruling or court order, and to terminate the lease if that is not an unfair practice and the grounds are specified in the lease.", 'section45', 245);
+    row(m, p, 2, "On termination the landlord may receive the rental housing property in a good state of repair, subject to normal wear and tear, and may repossess it with a court order.", 'termination', 333);
+    row(m, p, 3, "The landlord may claim compensation for damage caused by the tenant, the tenant's household or a visitor.", 'damage', 421);
+  }],
+  ['implied', 'Implied', (m) => {
+    const p = panel(0);
+    head(p, "Implied", 150, .2, { size: 34 });
+    row(m, p, 1, "The landlord must give the tenant a written receipt for every payment, showing the date, the address and the purpose of the payment, whether rent, arrears or deposit, and the period it covers.", 'receipt', 245);
+    row(m, p, 2, "The deposit must be invested by the landlord in an interest-bearing account and the tenant can claim the interest, except where the landlord is an estate agent.", 'deposit', 333);
+    row(m, p, 3, "The tenant and landlord must jointly inspect the property before the tenant moves in and record defects and damage.", 'inspect', 421);
+    row(m, p, 4, "At expiration they must arrange a joint inspection within 3 days before expiry to determine what damage was caused during occupation, and the landlord must apply the deposit and interest to reasonable repair costs and pay the balance within 14 days of getting possession back.", 'expire', 509);
+    row(m, p, 5, "If there is no post-lease inspection, the property is treated as in good state and the landlord has no further claim, and the deposit plus interest must be refunded within 7 days of expiration.", 'noinspection', 597);
+    row(m, p, 6, "If the tenant abandons the property before expiry without notice, the lease is deemed to have expired on the date the landlord becomes aware of the vacancy.", 'ditched', 685);
+  }],
+  ['periodic', 'Periodic', (m) => {
+    const p = panel(0);
+    head(p, "Periodic", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 5(4): the tenant and landlord cannot waive the standard terms of section 5(3).", 'waive', 245);
+    row(m, p, 2, "Section 5(5): at expiration, if the tenant remains in the dwelling with the express or tacit consent of the landlord and there is no further written lease, the parties are deemed to have entered into a periodic lease on the same terms, except that at least one month's written notice must be given to terminate.", 'periodic2', 333);
+    row(m, p, 3, "Section 5(6) lists what a written lease must contain: the names and addresses of the parties, a description of the dwelling, the rental and any escalation, the frequency of payment if not monthly, the deposit, the lease period or notice period, the obligations of the parties, and any other charges.", 'contents', 421);
+    row(m, p, 4, "A list of defects and a copy of the house rules must be attached as annexures, and the landlord must ensure those provisions are complied with.", 'annexures', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A lease does not have to be in writing, but\u2026"],
+    build: choice(["it is void unless it is in writing", "if the tenant asks, the landlord must reduce it to writing", "it must be registered against the title deed", "it must be signed by both parties before a commissioner"], 1,
+      "Correct: s 5(1) and (2) provide that a lease need not be in writing, but the landlord must reduce it to writing if the tenant asks.",
+      ["Incorrect: writing is not a validity requirement.", null, "Incorrect: registration is not required for a lease.", "Incorrect: commissioning is not required."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Huur gaat voor koop means that\u2026"],
+    build: choice(["the tenant must buy the property", "the lease supersedes a sale, so the tenant keeps occupation and the buyer steps into the landlord's shoes", "the landlord may cancel the lease on sale", "the tenant has a right of first refusal"], 1,
+      "Correct: the lease agreement supersedes the sale, the tenant retains occupation for the full term, and the buyer steps into the shoes of the landlord with no further formalities.",
+      ["Incorrect: the maxim does not impose a duty to buy.", null, "Incorrect: cancellation is restricted, not freed.", "Incorrect: a right of first refusal is not what the maxim provides."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "A lease needs delivery, temporary use and enjoyment, and an undertaking to pay rent.", 'w1', 245);
+    row(m, p, 2, "Section 4 protects the tenant against discrimination and unreasonable inspection, and section 4(5) gives the landlord payment, recovery, termination and repair rights.", 'w2', 333);
+    row(m, p, 3, "Section 5(3) implies receipts, deposit interest, joint inspections and strict refund periods.", 'w3', 421);
+    row(m, p, 4, "A holding-over tenant falls into a periodic lease on the same terms with one month's notice.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-deposit', prompt: ["What must the landlord do with the tenant's deposit?"],
+    build: choice(["Keep it as cash in a separate drawer", "Invest it in an interest-bearing account, and the tenant can claim the interest", "Use it for repairs during the lease", "Refund it only at the end of the following year"], 1,
+      "Correct: s 5(3)(d) requires the deposit to be invested in an interest-bearing account, and the tenant can claim the interest, except where the landlord is an estate agent.",
+      ["Incorrect: the statute requires an interest-bearing account.", null, "Incorrect: the deposit is applied at expiration, not during the lease.", "Incorrect: the refund periods are set by the section."]),
+  },
+  {
+    id: 'p-holding', prompt: ["A tenant stays on after the lease expires with the landlord's tacit consent and no new lease is signed. What follows?"],
+    build: choice(["The tenant is a trespasser", "A periodic lease on the same terms, terminable on at least one month's written notice", "A new fixed-term lease for one year", "The lease is void"], 1,
+      "Correct: s 5(5) deems a periodic lease on the same terms and conditions, except that at least one month's written notice is required to terminate.",
+      ["Incorrect: consent prevents trespass.", null, "Incorrect: no new fixed term is imposed.", "Incorrect: the lease continues in periodic form."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

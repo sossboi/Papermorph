@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Application, the Interim Order and the Final Order" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "The Application, the Interim Order and the Final Order", minutes: 13, language: 'en', next: '../ch03/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 6"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Application, the Interim Order and the Final Order", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Application, the Interim Order and the Final Order", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "From application to a final protection order.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['court', 'Court', (m) => {
+    const p = panel(0);
+    head(p, "Court", 150, .2, { size: 34 });
+    row(m, p, 1, "Any court in the area where the complainant permanently or temporarily resides, studies, carries on business or is employed; where the respondent does the same; or where the cause of action arose, has jurisdiction to grant a protection order.", 'section12', 245);
+    row(m, p, 2, "Section 12(2): no minimum period is required for the first two hooks.", 'nominimum', 333);
+    row(m, p, 3, "Section 12(3): a protection order is enforceable throughout the Republic.", 'republic', 421);
+    row(m, p, 4, "Three hooks: the complainant's area, the respondent's area, and where it happened; once granted, the order follows the complainant anywhere in South Africa.", 'hooks', 509);
+  }],
+  ['service', 'Service', (m) => {
+    const p = panel(0);
+    head(p, "Service", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 13(1)(a): serve immediately on the person affected, at their residence, place of business, employment or study, in the prescribed manner, by the clerk of the court, the sheriff or a peace officer.", 'section13', 245);
+    row(m, p, 2, "Section 13(1)(b): where the parties share a residence, documents under sections 5(3)(a), 5(4) and 6(5)(a) are served by hand on the respondent personally, and documents under sections 5(7)(c) and 6(5)(b) are served by hand on the complainant personally.", 'shared', 333);
+    row(m, p, 3, "Section 13(1)(c): if service cannot be effected in the prescribed manner, the court may order service in another form or manner.", 'other', 421);
+    row(m, p, 4, "Section 13(2): the regulations must provide State financial assistance to a complainant or respondent who cannot pay service fees.", 'aid', 509);
+    row(m, p, 5, "In a shared residence the personal-service rule is not interchangeable.", 'trap', 597);
+  }],
+  ['interim', 'Interim', (m) => {
+    const p = panel(0);
+    head(p, "Interim", 150, .2, { size: 34 });
+    row(m, p, 1, "The court must consider the application as soon as reasonably possible and may consider additional evidence, oral or by affidavit, which forms part of the record.", 'asap', 245);
+    row(m, p, 2, "The court must issue an interim protection order, even though the respondent has not been given notice, if it is satisfied of two things.", 'must', 333);
+    row(m, p, 3, "First, that the respondent is committing or has committed an act of domestic violence, and that the complainant is suffering or may suffer harm as a result, on prima facie evidence.", 'prima', 421);
+    row(m, p, 4, "Second, that an order is immediately necessary to protect the complainant from that harm.", 'necessary', 509);
+    row(m, p, 5, "Section 5(3) and (6) protect the respondent: certified copies of the application, the supporting affidavits, the record of any evidence and the original interim order must be served on the respondent, and the order must call on the respondent to show cause on the return date why it should not be made final.", 'rights', 597);
+    row(m, p, 6, "The interim order is of force and effect from the time its existence and content are served on the respondent.", 'force', 685);
+  }],
+  ['nointerim', 'Nointerim', (m) => {
+    const p = panel(0);
+    head(p, "Nointerim", 150, .2, { size: 34 });
+    row(m, p, 1, "The court directs the clerk to serve certified copies of the application and supporting affidavits on the respondent, with a prescribed notice calling on the respondent to show cause on the return date why a protection order should not be issued.", 'serve2', 245);
+    row(m, p, 2, "Return dates under sections 5(3)(b) and 5(4)(a) may not be less than 10 court days after service on the respondent.", 'ten', 333);
+    row(m, p, 3, "The respondent may anticipate the return date on not less than 24 hours' written notice to the complainant and the court.", 'anticipate', 421);
+  }],
+  ['final', 'Final', (m) => {
+    const p = panel(0);
+    head(p, "Final", 150, .2, { size: 34 });
+    row(m, p, 1, "The standard changes with the scenario.", 'standard', 245);
+    row(m, p, 2, "Where the respondent does not appear and an interim order was issued, the court must issue a final order if satisfied that proper service was effected and the application contains prima facie evidence of the act.", 'prima', 333);
+    row(m, p, 3, "Where the respondent does not appear and no interim order was issued, the court must proceed to hear the matter on the earlier evidence and any further affidavits or oral evidence, and issues a final order if satisfied on a balance of probabilities.", 'balance', 421);
+    row(m, p, 4, "Where the respondent appears to oppose, the court hears the matter and must extend the interim order if there is a dispute of fact, adjourning so evidence can be led.", 'appear', 509);
+    row(m, p, 5, "Where the respondent appears but the complainant does not, the court must extend the interim order and return date, and may discharge the interim order if the complainant does not appear on the extended date.", 'absent', 597);
+    row(m, p, 6, "After a final order, the original must be served on the respondent within 48 hours or as soon as reasonably possible, and a certified copy plus the original warrant of arrest on the complainant.", 'after', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["An interim protection order may be granted only if\u2026"],
+    build: choice(["the respondent has been given notice and a hearing held", "there is prima facie evidence of the act and of harm, and an order is immediately necessary", "the complainant has laid a criminal charge", "the parties have attempted mediation"], 1,
+      "Correct: s 5(1) and (2) require prima facie evidence that the respondent is committing or has committed domestic violence, that the complainant is suffering or may suffer harm, and that an order is immediately necessary.",
+      ["Incorrect: the interim order is granted without notice to the respondent.", null, "Incorrect: a criminal complaint is a parallel remedy, not a prerequisite.", "Incorrect: mediation is not a prerequisite for an interim order."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A final protection order made after a contested hearing requires\u2026"],
+    build: choice(["prima facie evidence of the act", "a finding on a balance of probabilities", "proof beyond a reasonable doubt", "the respondent's consent"], 1,
+      "Correct: where the respondent appears and opposes, the court hears the matter and issues a final order if satisfied on a balance of probabilities.",
+      ["Incorrect: prima facie evidence is the interim standard.", null, "Incorrect: the criminal standard does not apply to a protection order.", "Incorrect: consent is not required for a final order."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Jurisdiction follows the complainant's area, the respondent's area, or where the cause of action arose, and the order is enforceable throughout the Republic.", 'w1', 245);
+    row(m, p, 2, "An interim order needs prima facie evidence of the act and of harm, and that an order is immediately necessary.", 'w2', 333);
+    row(m, p, 3, "The return date may not be less than 10 court days after service, and the respondent may anticipate on 24 hours' notice.", 'w3', 421);
+    row(m, p, 4, "A final order after a contested hearing requires a finding on a balance of probabilities, and it is served within 48 hours.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-return', prompt: ["What is the minimum period between service on the respondent and the return date?"],
+    build: choice(["24 hours", "5 court days", "10 court days", "20 court days"], 2,
+      "Correct: return dates under s 5(3)(b) and s 5(4)(a) may not be less than 10 court days after service on the respondent.",
+      ["Incorrect: 24 hours is the notice the respondent needs to anticipate the return date.", "Incorrect: 5 court days is not the minimum runway.", null, "Incorrect: 20 court days is the plea period in an action."]),
+  },
+  {
+    id: 'p-force', prompt: ["When does an interim protection order take effect?"],
+    build: choice(["When the court grants it", "When its existence and content are served on the respondent", "When the return date is allocated", "When the warrant of arrest is executed"], 1,
+      "Correct: s 5(6) provides that the interim order is of force and effect from the time its existence and content are served on the respondent.",
+      ["Incorrect: the order is granted without notice, but it takes effect on service.", null, "Incorrect: the return date does not trigger its force.", "Incorrect: the warrant is suspended until a breach."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

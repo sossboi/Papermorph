@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Relationship with Clients" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 3, title: "The Relationship with Clients", minutes: 13, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 12"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Relationship with Clients", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Relationship with Clients", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Instructions, conflicts, privilege and trust money.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['mandate', 'Mandate', (m) => {
+    const p = panel(0);
+    head(p, "Mandate", 150, .2, { size: 34 });
+    row(m, p, 1, "Uberrima fides, the highest possible degree of good faith, is owed to the client.", 'uberrima', 245);
+    row(m, p, 2, "Before accepting, check that no conflict of interest exists, that no illegality or impropriety is part of the instruction, that you have the necessary skill, and that you have the time to attend to it efficiently and within a reasonable time.", 'before', 333);
+    row(m, p, 3, "The contract of mandate is an agent and principal relationship, the law of agency applies, it need not be in writing though a Letter of Mandate is important practice, and it may be general or specific.", 'contract', 421);
+    row(m, p, 4, "Act within the parameters of your instructions while exercising professional judgment, and failing to execute the instruction exposes you to civil action and LPC discipline.", 'within', 509);
+    row(m, p, 5, "Present every proposed settlement to the client, even an inadequate one, never settle without authority, and explain the consequences so the client can consent informedly.", 'settlement', 597);
+  }],
+  ['conflicts', 'Conflicts', (m) => {
+    const p = panel(0);
+    head(p, "Conflicts", 150, .2, { size: 34 });
+    row(m, p, 1, "A conflicting interest is one likely to adversely affect the lawyer's judgment on behalf of, or loyalty to, a client, or which the lawyer might be prompted to prefer to that client's interests.", 'definition', 245);
+    row(m, p, 2, "In S v Jacobs it was improper to continue acting for two clients with conflicting versions once the conflict became apparent.", 'jacobs', 333);
+    row(m, p, 3, "In S v Hollenbach it was unprofessional to continue for both accused once a clear conflict arose.", 'hollenbach', 421);
+    row(m, p, 4, "In Ebersohn v Prokureursorde, Transvaal, acting for both seller and purchaser and then pursuing the purchaser was unprofessional and dishonourable.", 'ebersohn', 509);
+    row(m, p, 5, "Wishart v Blieden gives the test for acting against a former client: confidential information was imparted in the attorney-client relationship, it is relevant to the matter at hand, and the present client's interests are adverse to the former client's.", 'wishart', 597);
+  }],
+  ['coc58', 'Coc58', (m) => {
+    const p = panel(0);
+    head(p, "Coc58", 150, .2, { size: 34 });
+    row(m, p, 1, "CoC 58.1 guards against becoming personally associated with the client's interests, 58.2 forbids standing bail for a client, and 58.3 forbids accepting a brief before a body of which you are contemporaneously a member.", 'personal', 245);
+    row(m, p, 2, "Under 58.4 you must refuse a brief if you received confidential information bearing on the matter in an earlier brief, or a reasonable belief might exist that the earlier client could be prejudiced.", 'refuse', 333);
+    row(m, p, 3, "Under 58.5 you may accept a later brief after advising the opposing party if no prejudicial confidential information was received and both sides agree.", 'later', 421);
+    row(m, p, 4, "Under 58.6 you may not accept an appeal brief if you accepted a brief for the opposing party at any stage, and 58.7 and 58.8 bar briefs after presiding at a companies-law enquiry or accepting a brief from a liquidator or trustee.", 'never', 509);
+    row(m, p, 5, "CoC 59.1 and 59.2 govern conflicts among clients: withdraw from one or all as soon as possible once aware, and you may not continue for either if you hold privileged information of one that could prejudice another; you may act for two adversaries in drawing up a settlement agreement but must advise all of their right to independent advice.", 'two', 597);
+  }],
+  ['cabrank', 'Cabrank', (m) => {
+    const p = panel(0);
+    head(p, "Cabrank", 150, .2, { size: 34 });
+    row(m, p, 1, "Uniform Rule 2.1 of the High Court Rules and CoC 26 oblige counsel to accept a brief in the courts they profess to practise in, for a proper professional fee.", 'advocates', 245);
+    row(m, p, 2, "You may refuse where you are not competent, where you cannot agree a reasonable fee, or, as Senior Counsel, where the matter does not need an SC or the scale would prejudice your practice.", 'refuse2', 333);
+    row(m, p, 3, "You may not refuse a brief in an area you practise in because you disapprove of the client, their opinions or their alleged conduct.", 'notrefuse', 421);
+    row(m, p, 4, "CoC Part VI paragraph 62 applies the cab-rank rule to attorneys and candidate attorneys with rights of appearance with the necessary changes.", 'attorneys', 509);
+  }],
+  ['privilege', 'Privilege', (m) => {
+    const p = panel(0);
+    head(p, "Privilege", 150, .2, { size: 34 });
+    row(m, p, 1, "All communications between practitioner and client are confidential as an implied term, they survive the client's death and the end of the mandate, and only the client may waive them.", 'confidential', 245);
+    row(m, p, 2, "The Thint test for legal professional privilege has three elements: the practitioner acted in a professional capacity, the client consulted in confidence, and the communication was made for the purpose of obtaining legal advice or is closely connected to it.", 'thint', 333);
+    row(m, p, 3, "Legal advice privilege covers communications to give advice in a professional capacity, while litigation privilege covers communications with respect to actual or contemplated litigation.", 'two2', 421);
+    row(m, p, 4, "Privilege does not cover communications not intended to be confidential, communications to facilitate a crime, the client's name, or facts the practitioner learnt through their own means.", 'notcover', 509);
+  }],
+  ['negligence', 'Negligence', (m) => {
+    const p = panel(0);
+    head(p, "Negligence", 150, .2, { size: 34 });
+    row(m, p, 1, "A practitioner must act with reasonable skill and care, and failure is a breach of contract with a delictual claim also possible.", 'duty', 245);
+    row(m, p, 2, "The test is whether the average practitioner, under the same circumstances, would have acted differently.", 'test', 333);
+    row(m, p, 3, "Letting a client's matter prescribe is actionable negligence.", 'prescription', 421);
+    row(m, p, 4, "Julies v Peter McKenzie Attorneys requires the plaintiff to allege and prove a mandate, breach of the mandate, negligence, damages and that the damages were within the contemplation of the parties: M-B-N-D-C.", 'julies', 509);
+  }],
+  ['trust', 'Trust', (m) => {
+    const p = panel(0);
+    head(p, "Trust", 150, .2, { size: 34 });
+    row(m, p, 1, "Trust money in a trust account always belongs to the client, it is covered against theft by the Legal Practitioners Fidelity Fund, proper records must be kept, trust balances must be extracted every month under Rule 54.15.1, and the accounts are audited annually and submitted to the LPC.", 'belongs', 245);
+    row(m, p, 2, "Interest on a trust account is paid annually to the LPFF and the client gets none unless the practitioner is instructed to make a trust investment.", 'interest', 333);
+    row(m, p, 3, "Under section 86(3) no client instruction is needed and the interest goes to the LPFF; under section 86(4) a written instruction is required, the interest goes to the client, and 5 per cent still goes to the LPFF.", 'section86', 421);
+    row(m, p, 4, "Rule 54 keeps trust money separate, requires monthly updates, permits payment only by cheque or electronic transfer to a designated payee, and forbids withdrawals by cellular or telephone transacting.", 'rule54', 509);
+  }],
+  ['access', 'Access', (m) => {
+    const p = panel(0);
+    head(p, "Access", 150, .2, { size: 34 });
+    row(m, p, 1, "Most people in South Africa cannot afford legal practitioners, so practitioners have a limited duty to assist the poor in certain circumstances.", 'poor', 245);
+    row(m, p, 2, "Legal Aid South Africa is the statutory body, it employs its own advocates and attorneys and may appoint private practitioners on its own fee structure.", 'lasa', 333);
+    row(m, p, 3, "The LPC has requested that practitioners continue pro bono work, but there is currently no rule compelling them to take pro bono cases, so it is encouraged rather than mandatory.", 'probono', 421);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The Wishart v Blieden test for acting against a former client requires\u2026"],
+    build: choice(["only that confidential information was received", "confidential information imparted in the relationship, its relevance to the matter, and adverse interests between the present and former client", "only that the present client consents", "only that the former client is notified"], 1,
+      "Correct: the SCA test has all three elements, and all three must be present.",
+      ["Incorrect: relevance and adverse interests are also required.", null, "Incorrect: consent is not part of the test.", "Incorrect: notification is not part of the test."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Under s 86(4) of the LPA, a trust investment\u2026"],
+    build: choice(["needs no client instruction and the interest goes to the LPFF", "needs a written client instruction, the interest goes to the client, and 5% still goes to the LPFF", "is prohibited", "needs only an oral instruction"], 1,
+      "Correct: s 86(4) requires a written instruction, pays the interest to the client, and s 86(5)(b) still directs 5% to the LPFF.",
+      ["Incorrect: that is s 86(3), where no instruction is needed.", null, "Incorrect: trust investments are expressly permitted.", "Incorrect: the statute requires a written instruction."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Check for conflicts, competence and time before accepting a mandate, and never settle without the client's authority.", 'w1', 245);
+    row(m, p, 2, "Wishart gives the three-part former-client test, and CoC 58 lists the personal conflicts that bar a brief.", 'w2', 333);
+    row(m, p, 3, "The cab-rank rule obliges counsel to accept a brief unless a listed exception applies, and disapproval of the client is not one.", 'w3', 421);
+    row(m, p, 4, "Privilege needs capacity, confidence and purpose, and trust money belongs to the client and is governed by Rule 54 and section 86.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-cabrank', prompt: ["When may counsel refuse a brief under the cab-rank rule?"],
+    build: choice(["Because the client's alleged conduct is disgraceful", "Because counsel is not professionally competent to accept it", "Because the case is unlikely to succeed", "Because the client cannot pay any fee at all"], 1,
+      "Correct: CoC 26.3 permits refusal in a criminal matter only where counsel believes they are not professionally competent; disapproval of the client or their conduct is expressly not a ground.",
+      ["Incorrect: CoC 26.2 forbids refusing on that basis.", null, "Incorrect: prospects are not a ground of refusal.", "Incorrect: the fee ground is failure to agree a reasonable fee, not inability to pay anything."]),
+  },
+  {
+    id: 'p-julies', prompt: ["Which is NOT one of the five elements a plaintiff must prove against an attorney in Julies?"],
+    build: choice(["A mandate was given", "Breach of the mandate", "The attorney acted fraudulently", "Damages were within the contemplation of the parties"], 2,
+      "Correct: the elements are mandate, breach, negligence, damages and contemplation; fraud is not required.",
+      ["Incorrect: a mandate is the first element.", "Incorrect: breach is the second.", null, "Incorrect: contemplation is the fifth."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Close of Pleadings, Set Down and the Pre-Trial Conference" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "Close of Pleadings, Set Down and the Pre-Trial Conference", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 8"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Close of Pleadings, Set Down and the Pre-Trial Conference", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Close of Pleadings, Set Down and the Pre-Trial Conference", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Getting a defended action ready to be heard.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['phases', 'Phases', (m) => {
+    const p = panel(0);
+    head(p, "Phases", 150, .2, { size: 34 });
+    row(m, p, 1, "The action procedure has three phases: pleadings, preparation for trial, and trial.", 'three', 245);
+    row(m, p, 2, "Preparation for trial procedures commence only once pleadings are closed, which is also called litis contestatio.", 'close', 333);
+    row(m, p, 3, "After that point the parties may not exchange further pleadings.", 'after', 421);
+    row(m, p, 4, "Claims under the actio iniuriarum and claims for damages for personal injury, including pain and suffering, loss of amenities of life and disfigurement, are transmissible on the death of the injured person after litis contestatio, but not before it, and they cannot be ceded before that stage is reached.", 'transmissible', 509);
+    row(m, p, 5, "So if the plaintiff dies before pleadings close, the deceased estate cannot continue the claim.", 'estate', 597);
+  }],
+  ['closed', 'Closed', (m) => {
+    const p = panel(0);
+    head(p, "Closed", 150, .2, { size: 34 });
+    row(m, p, 1, "MCR 21A sets out four ways: either party joins issue without alleging new matter and without adding a further pleading; the last day allowed for filing a replication or subsequent pleading lapses and it is not filed; the parties agree in writing that pleadings are closed and file the agreement with the registrar or clerk; or the parties cannot agree and the court, on application, declares them closed.", 'rule21a', 245);
+    row(m, p, 2, "Any party who fails to deliver a replication or subsequent pleading within the time stated in MCR 21 is automatically barred.", 'bar', 333);
+    row(m, p, 3, "For any other pleading, another party may deliver a written notice calling for delivery within five court days, and failure means the party is in default and automatically barred.", 'noticebar', 421);
+    row(m, p, 4, "For this rule the days from 16 December to 15 January, both inclusive, are not counted in the time allowed for delivering any pleading.", 'december', 509);
+  }],
+  ['setdown', 'Setdown', (m) => {
+    const p = panel(0);
+    head(p, "Setdown", 150, .2, { size: 34 });
+    row(m, p, 1, "The plaintiff must deliver a notice of trial for an approved day once pleadings have closed.", 'plaintiff', 245);
+    row(m, p, 2, "If the plaintiff fails to deliver notice of trial within 15 court days, the defendant may do so.", 'defendant', 333);
+    row(m, p, 3, "Delivery of the notice sets down any claim in reconvention by the defendant, that is the counterclaim.", 'counterclaim', 421);
+    row(m, p, 4, "Notice of trial must be delivered at least 20 court days before the approved day.", 'twenty', 509);
+    row(m, p, 5, "In divorce actions the registrar must, at the written request of the plaintiff, set the action down where the defendant failed to deliver the notice of intention to defend, failed to deliver a plea after a notice of bar, or gave written notice that the defendant does not intend to defend; serving the notice of set down on the defendant is not necessary but may be done as a courtesy.", 'divorce', 597);
+    row(m, p, 6, "Within 15 court days of the close of pleadings the plaintiff applies for a trial date by lodging an indexed and paginated court bundle and notice of set down with the registrar or clerk.", 'bundle', 685);
+  }],
+  ['pretrial', 'Pretrial', (m) => {
+    const p = panel(0);
+    head(p, "Pretrial", 150, .2, { size: 34 });
+    row(m, p, 1, "Either party may request a pre-trial conference in writing, or the magistrate may decide one is necessary under section 54 of the Magistrates' Courts Act.", 'request', 245);
+    row(m, p, 2, "A notice of pre-trial is served on all parties, and any party receiving it may within 10 court days serve a notice setting a date, time and place for a meeting to prepare.", 'notice', 333);
+    row(m, p, 3, "Each party must provide the other with a list of aspects they wish to discuss at least 5 court days before the meeting, and it need not be a formal notice.", 'five', 421);
+    row(m, p, 4, "The minutes of the preparation meeting must be prepared and signed by all parties and filed by the plaintiff no later than 5 court days before the pre-trial conference.", 'minutes', 509);
+    row(m, p, 5, "Sub-rule 4 lists eleven aspects to be dealt with in the minutes.", 'eleven', 597);
+    row(m, p, 6, "The court makes an order reciting what was done and limiting the issues for trial, and that order is binding unless altered at the trial to prevent manifest injustice.", 'binding', 685);
+  }],
+  ['casemgmt', 'Casemgmt', (m) => {
+    const p = panel(0);
+    head(p, "Casemgmt", 150, .2, { size: 34 });
+    row(m, p, 1, "Judicial case management applies to any matter the court determines appropriate, of its own accord or on request, at any stage after a notice of intention to defend is filed.", 'rule22a', 245);
+    row(m, p, 2, "It is used in the interests of justice to alleviate congested trial rolls and address the problems that cause delay, while the primary responsibility remains with the parties and their representatives.", 'purpose', 333);
+    row(m, p, 3, "A case is not allocated a trial date unless a judicial officer certifies it trial-ready under rule 22(4)(b), or a pre-trial conference has been concluded.", 'notrialdate', 421);
+    row(m, p, 4, "The judicial officer must be satisfied that the case is ready, that issues amenable to resolution without trial have been dealt with, that the remaining issues are adequately defined, that the discovery and expert-witness rules have been complied with, and that potential causes of delay have been pre-empted.", 'satisfied', 509);
+    row(m, p, 5, "The registrar or clerk may direct compliance letters electronically to a party who fails to comply with time limits, and on non-adherence refer the matter to the judicial officer.", 'letter', 597);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Preparation for trial procedures commence\u2026"],
+    build: choice(["as soon as the summons is issued", "only once pleadings are closed, at litis contestatio", "after the trial date is allocated", "when the defendant delivers the notice of intention to defend"], 1,
+      "Correct: the deck states that preparation for trial procedures only commence once pleadings are closed, and the close of pleadings is litis contestatio.",
+      ["Incorrect: at that stage there is no defended action yet.", null, "Incorrect: the trial date is allocated during preparation, not before it.", "Incorrect: the NID begins the pleadings, not the preparation stage."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Notice of trial must be delivered at least\u2026"],
+    build: choice(["5 court days before the approved day", "10 court days before the approved day", "15 court days before the approved day", "20 court days before the approved day"], 3,
+      "Correct: the notice of trial must be delivered at least 20 court days before the approved day.",
+      ["Incorrect: 5 court days is the period for a list of aspects before the preparation meeting.", "Incorrect: 10 court days is the period to serve a notice of a preparation meeting.", "Incorrect: 15 court days is the period within which the plaintiff must deliver the notice after the close of pleadings."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Preparation for trial begins only at litis contestatio, and MCR 21A sets out the four ways pleadings close.", 'w1', 245);
+    row(m, p, 2, "A party who fails to deliver a replication in time is automatically barred, and 16 December to 15 January does not count.", 'w2', 333);
+    row(m, p, 3, "The plaintiff delivers the notice of trial within 15 court days of the close, at least 20 court days before the approved day.", 'w3', 421);
+    row(m, p, 4, "The pre-trial conference under section 54 narrows the issues, and no trial date is allocated without certification of trial readiness.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-bar', prompt: ["What is the consequence of failing to deliver a replication within the time stated in MCR 21?"],
+    build: choice(["A notice of bar must first be served", "The party is automatically barred from doing so", "The court must grant an extension", "The pleading may be delivered late with leave"], 1,
+      "Correct: MCR 21A provides that any party who fails to deliver a replication or subsequent pleading within the time stated in MCR 21 is automatically barred.",
+      ["Incorrect: a notice of bar applies to other pleadings, not to a replication.", null, "Incorrect: the bar is automatic, not discretionary.", "Incorrect: once barred, the pleading cannot simply be delivered late."]),
+  },
+  {
+    id: 'p-december', prompt: ["How are the days from 16 December to 15 January treated in the time allowed for delivering a pleading?"],
+    build: choice(["They count as full days", "They are not counted", "They count only if the court sits", "They count as half days"], 1,
+      "Correct: for MCR 21A the days from 16 December to 15 January, both inclusive, are not counted in the time allowed for delivering any pleading.",
+      ["Incorrect: they are excluded.", null, "Incorrect: the exclusion does not depend on whether the court sits.", "Incorrect: they are excluded entirely."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

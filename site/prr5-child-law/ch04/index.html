@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The 2026 Children's Courts Rules: Procedure" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 4, title: "The 2026 Children's Courts Rules: Procedure", minutes: 13, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 5"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The 2026 Children's Courts Rules: Procedure", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The 2026 Children's Courts Rules: Procedure", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The Children's Courts Rules, in force since 27 March 2026.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['overview', 'Overview', (m) => {
+    const p = panel(0);
+    head(p, "Overview", 150, .2, { size: 34 });
+    row(m, p, 1, "The Children's Courts Rules of South Africa commenced on 27 March 2026.", 'commence', 245);
+    row(m, p, 2, "They are made under section 6 of the Rules Board for Courts of Law Act 107 of 1985, read with section 52 of the Children's Act.", 'authority', 333);
+    row(m, p, 3, "They are your first reference for how a Children's Court matter is actually run: procedure, forms and timelines.", 'first', 421);
+    row(m, p, 4, "There are seven chapters, covering definitions and interpretation, child participation and accommodation, the clerk's duties, court proceedings, children in need of care and protection, adoption, and general matters.", 'chapters', 509);
+    row(m, p, 5, "Rule 1(2): a Saturday, Sunday or public holiday is not reckoned as part of any period calculated under the Rules, unless a contrary intention appears.", 'diesnon', 597);
+  }],
+  ['participation', 'Participation', (m) => {
+    const p = panel(0);
+    head(p, "Participation", 150, .2, { size: 34 });
+    row(m, p, 1, "Rule 3 requires the court to determine whether the child is able to participate and chooses to, and to record the reasons.", 'rule3', 245);
+    row(m, p, 2, "If the child participates, inform them of their rights age-appropriately, explain the process in simple language, and ensure an informal, child-friendly environment.", 'inform', 333);
+    row(m, p, 3, "Promote participation through an intermediary, interpreter, legal representative, comfort person or audio-visual facility, with reasonable accommodation for a child with a disability.", 'promote', 421);
+    row(m, p, 4, "If the child is not present, enquire why and postpone to give the child a chance to participate, unless there is a recorded reason to proceed.", 'absent', 509);
+    row(m, p, 5, "Rule 5 requires plain, age-appropriate language, one question at a time, no legal terminology, and no misleading, intimidating or repetitive questions.", 'rule5', 597);
+    row(m, p, 6, "Rule 6 allows any mode of communication for very young children, with a suitably qualified expert to assist.", 'rule6', 685);
+  }],
+  ['clerk', 'Clerk', (m) => {
+    const p = panel(0);
+    head(p, "Clerk", 150, .2, { size: 34 });
+    row(m, p, 1, "The clerk must accept and submit all applications to the presiding officer, and may not refuse to accept an application for any reason.", 'accept', 245);
+    row(m, p, 2, "The clerk must inform an unrepresented party of the right to legal representation, of Legal Aid South Africa, a law clinic or the Legal Practice Council for pro bono help, of reasonable accommodation, of an interpreter, and of appearing by audio-visual facility.", 'informrights', 333);
+    row(m, p, 3, "Office hours are 07h45 to 16h15, every day except Saturday, Sunday and public holidays.", 'hours', 421);
+    row(m, p, 4, "For an audio-visual hearing the clerk must arrange and forward the link at least 3 days before the hearing, unless a shorter period is agreed.", 'link', 509);
+  }],
+  ['forms', 'Forms', (m) => {
+    const p = panel(0);
+    head(p, "Forms", 150, .2, { size: 34 });
+    row(m, p, 1, "Proceedings are brought on notice, substantially in Form 2 of the justice regulations, and Form 2 is not needed again for subsequent proceedings in the same matter.", 'form2', 245);
+    row(m, p, 2, "Where Form 2 does not suit, use Form A of the Annexure, supported by an affidavit setting out the nature of the application, the grounds, the relief sought and all relevant documents and reports.", 'forma', 333);
+    row(m, p, 3, "Every Form A must give the applicant's full names and contact details, the preferred address for further service, the child's details, the parents' or guardians' details, the respondent's details, whether professionals are involved, any pending matter or previous order, and the grounds if an existing order is varied or suspended.", 'contents', 421);
+    row(m, p, 4, "A respondent may oppose and must file an answering affidavit within 10 days; other affected persons likewise within 10 days.", 'oppose', 509);
+  }],
+  ['urgent', 'Urgent', (m) => {
+    const p = panel(0);
+    head(p, "Urgent", 150, .2, { size: 34 });
+    row(m, p, 1, "An ex parte application requires no notice to any party and is made on Form A with an affidavit setting out every factor in support.", 'exparte', 245);
+    row(m, p, 2, "An urgent application is available where the court is satisfied the child may suffer imminent harm to physical, mental or social well-being if not dealt with immediately, or where dispensing with notice is in the child's best interests.", 'urgent', 333);
+    row(m, p, 3, "An urgent order is interim and must call the party to appear on a specified return date to show cause why it should not be made final.", 'return', 421);
+    row(m, p, 4, "A copy of the interim order and the urgent application must be served under rule 11.", 'serve', 509);
+    row(m, p, 5, "Anyone affected may anticipate the return date on not less than 24 hours' notice, filing an answering affidavit with that notice.", 'anticipate', 597);
+  }],
+  ['jcm', 'Jcm', (m) => {
+    const p = panel(0);
+    head(p, "Jcm", 150, .2, { size: 34 });
+    row(m, p, 1, "The objectives are to protect and act in the child's best interests, address all causes of delay, and expedite finalisation, with the same presiding officer handling all pending matters for a specific child where reasonably possible.", 'object', 245);
+    row(m, p, 2, "If a JCM hearing is necessary, the clerk must notify the parties within 5 days on Form C.", 'notice', 333);
+    row(m, p, 3, "At the JCM hearing the court may consider information and make orders for progress, determine who must be present, deal with interim applications, direct the clerk or professionals, and issue timelines.", 'powers', 421);
+    row(m, p, 4, "The presiding officer may postpone the JCM hearing on good cause shown, for periods not exceeding 30 calendar days at a time.", 'postpone', 509);
+    row(m, p, 5, "Once JCM is finalised, the presiding officer must certify the matter ready for hearing and allocate a hearing date.", 'certify', 597);
+  }],
+  ['hearing', 'Hearing', (m) => {
+    const p = panel(0);
+    head(p, "Hearing", 150, .2, { size: 34 });
+    row(m, p, 1, "Once a date is allocated, the clerk serves notice substantially in Form 4 of the justice regulations, unless the parties were already informed by the court to attend.", 'notice2', 245);
+    row(m, p, 2, "Unless the court directs otherwise, the hearing takes place as provided in section 42(8) of the Act, is conducted in camera under section 56, and is conducted per section 60(3).", 'incamera', 333);
+    row(m, p, 3, "The court explains the nature and purpose of the hearing and the child's right to participate.", 'explain', 421);
+    row(m, p, 4, "If a question of law or fact can conveniently be decided separately, the court may order it, and must do so at any party's request unless the questions cannot conveniently be separated.", 'separate', 509);
+    row(m, p, 5, "All parties, including the child, may adduce evidence, call witnesses, question and cross-examine them, and address the court.", 'evidence', 597);
+  }],
+  ['care', 'Care', (m) => {
+    const p = panel(0);
+    head(p, "Care", 150, .2, { size: 34 });
+    row(m, p, 1, "Rule 16: the court must review whether removal to temporary safe care was necessary before the expiry of the next court day after Form 36 and the supporting documents are received.", 'review', 245);
+    row(m, p, 2, "After review the court may confirm or set aside the removal, and must refer the question of whether the child is in need of care and protection to a designated social worker for a section 155(2) investigation.", 'after', 333);
+    row(m, p, 3, "Rule 17: the report and supporting documents for extending an alternative care order must be submitted before the order lapses, or be accompanied by grounds showing good cause for the delay.", 'extension', 421);
+    row(m, p, 4, "Chapter 6 governs adoption: a freeing order, notice of the proposed adoption on Form E, consent before a presiding officer, and the consideration of the adoption application.", 'adoption', 509);
+    row(m, p, 5, "A person consenting must be informed of the right to withdraw consent within 60 days.", 'withdraw', 597);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["The Children's Courts Rules of South Africa commenced on\u2026"],
+    build: choice(["27 February 2026", "27 March 2026", "1 April 2026", "1 January 2026"], 1,
+      "Correct: GNR.7179 is dated 27 February 2026, and the Rules commenced on 27 March 2026.",
+      ["Incorrect: 27 February 2026 is the date of the Government Notice.", null, "Incorrect: 1 April 2026 is not the commencement date.", "Incorrect: 1 January 2026 is not the commencement date."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["A respondent who wishes to oppose a Children's Court application must file an answering affidavit within\u2026"],
+    build: choice(["5 days", "10 days", "15 days", "20 days"], 1,
+      "Correct: the respondent must file an answering affidavit within 10 days of receiving the application, setting out the grounds of opposition.",
+      ["Incorrect: 5 days is the applicant's reply period under rule 9.", null, "Incorrect: 15 days is the replication period in an action.", "Incorrect: 20 days is the plea period in an action."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The 2026 Rules are the first reference for Children's Court procedure, and the dies non rule excludes weekends and public holidays.", 'w1', 245);
+    row(m, p, 2, "Rule 3 drives child participation, and rules 5 and 6 govern how children are questioned.", 'w2', 333);
+    row(m, p, 3, "The clerk must accept every application and inform unrepresented parties of their rights.", 'w3', 421);
+    row(m, p, 4, "JCM notice is 5 days, postponement is capped at 30 days, and an urgent order is interim with a return date.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-diesnon', prompt: ["How does rule 1(2) treat a Saturday in a period calculated under the Rules?"],
+    build: choice(["It counts as a full day", "It is not reckoned as part of the period, unless a contrary intention appears", "It counts only if the court sits", "It counts as half a day"], 1,
+      "Correct: rule 1(2) applies the dies non approach, so Saturdays, Sundays and public holidays are excluded unless a contrary intention appears.",
+      ["Incorrect: the rule excludes it.", null, "Incorrect: the rule does not depend on whether the court sits.", "Incorrect: it is excluded entirely, not halved."]),
+  },
+  {
+    id: 'p-jcm', prompt: ["What is the maximum period for which a judicial case management hearing may be postponed?"],
+    build: choice(["7 calendar days", "14 calendar days", "30 calendar days at a time", "60 calendar days at a time"], 2,
+      "Correct: the presiding officer may postpone the JCM hearing on good cause shown for periods not exceeding 30 calendar days at a time.",
+      ["Incorrect: 7 days is not the cap.", "Incorrect: 14 days is the notice period for varying a default maintenance order.", null, "Incorrect: 60 days exceeds the statutory cap."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

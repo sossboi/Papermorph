@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Particulars of Claim: Parties to Breakdown" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "The Particulars of Claim: Parties to Breakdown", minutes: 11, language: 'en', next: '../ch03/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 2"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Particulars of Claim: Parties to Breakdown", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Particulars of Claim: Parties to Breakdown", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "The particulars of claim, from the parties to the breakdown.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['layout', 'Layout', (m) => {
+    const p = panel(0);
+    head(p, "Layout", 150, .2, { size: 34 });
+    row(m, p, 1, "Parties, jurisdiction, marriage, irretrievable breakdown, minor children, spousal maintenance, estates, prayers.", 'pjmmisep', 245);
+    row(m, p, 2, "Remember it as P-J-M-I-M-S-E-P.", 'mnemonic', 333);
+    row(m, p, 3, "Parties says who is involved; jurisdiction says which court and why; marriage gives the details of the marriage and the matrimonial property regime.", 'answers', 421);
+    row(m, p, 4, "Irretrievable breakdown says why this is the end; minor children covers parental responsibilities and rights; spousal maintenance asks whether it is needed; estates deals with assets and pension; prayers set out the order you ask for.", 'rest', 509);
+  }],
+  ['parties', 'Parties', (m) => {
+    const p = panel(0);
+    head(p, "Parties", 150, .2, { size: 34 });
+    row(m, p, 1, "Give each party's full name and surname, ID number and gender.", 'identify', 245);
+    row(m, p, 2, "Add the occupation, or state that the party is unemployed.", 'occupation', 333);
+    row(m, p, 3, "Give the residential address, which matters for service, and the work address if possible.", 'addresses', 421);
+    row(m, p, 4, "The court requires proof of residence before issuing: a municipal account, a lease or an affidavit.", 'proof', 509);
+    row(m, p, 5, "A certified copy of the plaintiff's ID document goes in as an annexure.", 'annexure', 597);
+    row(m, p, 6, "Where little is known of the defendant, the deck pleads the details as unknown and gives full and further particulars later.", 'unknown', 685);
+  }],
+  ['jurisdiction', 'Jurisdiction', (m) => {
+    const p = panel(0);
+    head(p, "Jurisdiction", 150, .2, { size: 34 });
+    row(m, p, 1, "Normally you follow the defendant, but divorce is an exception: never do anything to convenience the other person.", 'exception', 245);
+    row(m, p, 2, "Ask what is most convenient for us and our client, which court will get to trial quicker, and how complicated the matter is.", 'choose', 333);
+    row(m, p, 3, "The jurisdiction slide shows only a word graphic, so the deck does not state the exact test: look it up in the Act and the court rules before drafting.", 'test', 421);
+  }],
+  ['marriage', 'Marriage', (m) => {
+    const p = panel(0);
+    head(p, "Marriage", 150, .2, { size: 34 });
+    row(m, p, 1, "Plead the date and place of the marriage.", 'dateplace', 245);
+    row(m, p, 2, "Plead the matrimonial property regime: in community, out of community with accrual, or out of community without accrual.", 'regime', 333);
+    row(m, p, 3, "Plead that the parties are still married, that the marriage is in subsistence.", 'subsistence', 421);
+    row(m, p, 4, "Attach a certified copy of the marriage certificate; if the marriage is not registered, a certified copy of the lobola letter; and the antenuptial contract if the parties are out of community of property.", 'annexures', 509);
+    row(m, p, 5, "Failure to register a customary marriage does not make it invalid, but the validity must still be proved in court under section 3 of the Recognition of Customary Marriages Act.", 'customary', 597);
+  }],
+  ['breakdown', 'Breakdown', (m) => {
+    const p = panel(0);
+    head(p, "Breakdown", 150, .2, { size: 34 });
+    row(m, p, 1, "You must satisfy the court that the marriage has truly broken down.", 'must', 245);
+    row(m, p, 2, "It does not need to be a long essay: the go-to grounds are that the parties have not lived together since a date, that they have lost all love and respect for each other, and that there is no meaningful communication.", 'short', 333);
+    row(m, p, 3, "Go into detail only where you are setting out a forfeiture claim, where there are issues about parental responsibilities and rights, or where abuse, drugs or adultery are in issue.", 'long', 421);
+    row(m, p, 4, "A long accusatory paragraph is not needed in most divorces and can inflame the dispute.", 'trap', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["What is the correct order of a divorce particulars of claim?"],
+    build: choice(["Parties, marriage, jurisdiction, breakdown, prayers, estates", "Parties, jurisdiction, marriage, irretrievable breakdown, minor children, spousal maintenance, estates, prayers", "Jurisdiction, parties, breakdown, marriage, estates, prayers", "Parties, jurisdiction, breakdown, marriage, children, prayers"], 1,
+      "Correct: the deck's P-J-M-I-M-S-E-P order runs parties, jurisdiction, marriage, irretrievable breakdown, minor children, spousal maintenance, estates, prayers.",
+      ["Incorrect: that order puts marriage before jurisdiction and drops the children and maintenance paragraphs.", null, "Incorrect: jurisdiction comes after the parties, not before.", "Incorrect: the marriage paragraph precedes the breakdown, and spousal maintenance and estates are separate paragraphs."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["The irretrievable breakdown paragraph should\u2026"],
+    build: choice(["always set out every act of misconduct in detail", "be a short paragraph unless forfeiture, parental responsibilities and rights, or abuse, drugs or adultery are in issue", "be omitted where the parties have been separated for a year", "allege adultery in every case"], 1,
+      "Correct: the deck's go-to grounds are short, and detail is needed only for a forfeiture claim, PR&R issues, or abuse, drugs or adultery.",
+      ["Incorrect: a long accusatory paragraph can inflame the dispute and is not required.", null, "Incorrect: breakdown must always be pleaded.", "Incorrect: adultery is relevant only where it is actually in issue."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "A particulars of claim follows P-J-M-I-M-S-E-P: parties, jurisdiction, marriage, irretrievable breakdown, minor children, spousal maintenance, estates, prayers.", 'w1', 245);
+    row(m, p, 2, "The parties paragraph carries the identifying details and proof of residence, because residence drives service.", 'w2', 333);
+    row(m, p, 3, "Jurisdiction in divorce is an exception to following the defendant.", 'w3', 421);
+    row(m, p, 4, "The marriage paragraph pleads the date and place, the matrimonial property regime, subsistence and the annexures.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-residence', prompt: ["Why does the residential address in the parties paragraph matter so much?"],
+    build: choice(["It fixes the court's jurisdiction over the person", "It is needed for service and the court requires proof of residence before issuing", "It determines the matrimonial property regime", "It is where the marriage was concluded"], 1,
+      "Correct: the deck marks the residential address as important for purposes of service, and the court requires proof of residence, by municipal account, lease or affidavit, before issuing.",
+      ["Incorrect: jurisdiction in divorce is not fixed by the defendant's residence; it is an exception to following the defendant.", null, "Incorrect: the regime comes from the antenuptial contract or the default rule, not the address.", "Incorrect: the place of the marriage goes in the marriage paragraph."]),
+  },
+  {
+    id: 'p-customary', prompt: ["A customary marriage was never registered. What is its effect?"],
+    build: choice(["It is void and cannot be recognised", "It is valid, but its validity must still be proved in court under s 3 of the Recognition of Customary Marriages Act", "It is valid only if the parties later register it", "It is treated as a civil marriage"], 1,
+      "Correct: failure to register a customary marriage does not make it invalid, but the validity must still be proven in court under s 3 of the Recognition of Customary Marriages Act 120 of 1998.",
+      ["Incorrect: non-registration is not a ground of invalidity.", null, "Incorrect: registration is not a prerequisite for validity.", "Incorrect: it remains a customary marriage governed by the Recognition of Customary Marriages Act."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Discovery, Inspection, Experts and Subpoenas" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Discovery, Inspection, Experts and Subpoenas", minutes: 12, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 8"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Discovery, Inspection, Experts and Subpoenas", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Discovery, Inspection, Experts and Subpoenas", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Discovery, inspection, expert evidence and subpoenas.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['discovery', 'Discovery', (m) => {
+    const p = panel(0);
+    head(p, "Discovery", 150, .2, { size: 34 });
+    row(m, p, 1, "A party is entitled to knowledge of all the documentary evidence the opposing party possesses and which is relevant to the matter, before the hearing, in order to prepare adequately.", 'principle', 245);
+    row(m, p, 2, "A party may require another party to make discovery on oath of documents and recordings relating to the matter in question.", 'notice', 333);
+    row(m, p, 3, "Written notice must be given, and within 20 court days of that notice the discovery affidavit must be served.", 'twenty', 421);
+    row(m, p, 4, "Leave of a magistrate is required if discovery is requested before the close of pleadings.", 'leave', 509);
+    row(m, p, 5, "The affidavit must correspond substantially with Form 13 of Annexure 1, and documents must be specified separately, though a bundle with consecutive numbering is treated as specified.", 'form13', 597);
+    row(m, p, 6, "Witness statements taken for the proceedings, attorney-client and attorney-advocate communications, pleadings, affidavits and notices in the action should not be discovered.", 'privilege', 685);
+  }],
+  ['inspection', 'Inspection', (m) => {
+    const p = panel(0);
+    head(p, "Inspection", 150, .2, { size: 34 });
+    row(m, p, 1, "A party may request inspection of discovered documents by serving a notice corresponding substantially with Form 15 of Annexure 1.", 'form15', 245);
+    row(m, p, 2, "The other party must deliver a notice corresponding substantially with Form 15A within 5 court days, stating a time when the documents may be inspected.", 'fivea', 333);
+    row(m, p, 3, "The requesting party may inspect and take copies for a period of 5 court days during normal business hours, and that period must start within 5 court days of delivery of the notice.", 'fiveb', 421);
+    row(m, p, 4, "Failure to produce a document for inspection prevents its use at trial unless the court allows otherwise.", 'fail', 509);
+    row(m, p, 5, "If a party fails to comply with discovery or inspection, the other party may apply to court for compliance, and failing that the claim may be dismissed or the defence struck out.", 'remedy', 597);
+  }],
+  ['experts', 'Experts', (m) => {
+    const p = panel(0);
+    head(p, "Experts", 150, .2, { size: 34 });
+    row(m, p, 1, "Rule 24(9) requires compliance with its expert-witness provisions before a case can be certified trial-ready.", 'rule24', 245);
+    row(m, p, 2, "A party who intends to call an expert must give notice of that intention, and the expert's report or summary must be made available within the prescribed time.", 'notice2', 333);
+    row(m, p, 3, "The pre-trial conference may limit the number of expert witnesses, which is one of the eleven aspects the minutes must address.", 'limit', 421);
+    row(m, p, 4, "Where there are multiple professional reports, the court may direct joint expert meetings or reports.", 'joint', 509);
+  }],
+  ['subpoenas', 'Subpoenas', (m) => {
+    const p = panel(0);
+    head(p, "Subpoenas", 150, .2, { size: 34 });
+    row(m, p, 1, "Once a trial date is allocated, the registrar or clerk informs all parties of the date, usually by email.", 'inform', 245);
+    row(m, p, 2, "If a party has not yet made discovery, they must do so within 20 court days of receiving notice of the trial date.", 'discovery20', 333);
+    row(m, p, 3, "If minor children are involved, the Family Advocate must be informed of the hearing date.", 'fa', 421);
+    row(m, p, 4, "A witness who cannot be secured voluntarily is brought to trial by subpoena, and the witness is entitled to witness fees and travel costs.", 'subpoena', 509);
+    row(m, p, 5, "Failure to attend after being subpoenaed may result in a warrant, so diarise witnesses and confirm their attendance before the trial date.", 'attendance', 597);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A discovery affidavit must be served within\u2026"],
+    build: choice(["5 court days of the notice", "10 court days of the notice", "20 court days of the notice", "30 court days of the notice"], 2,
+      "Correct: written notice must be given and the discovery affidavit served within 20 court days of that notice.",
+      ["Incorrect: 5 court days is the inspection period.", "Incorrect: 10 court days is the period to state that no additional documents exist.", null, "Incorrect: 30 days is the CCMA referral period for unfair dismissal."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["Undisclosed documents or recordings\u2026"],
+    build: choice(["may be used at trial by either party", "cannot be used at trial by the party who failed to disclose them, unless the court permits it", "are automatically privileged", "must be struck from the court file"], 1,
+      "Correct: the party who failed to disclose cannot use them at trial without leave, but the other parties may use them.",
+      ["Incorrect: the defaulting party is barred from using them.", null, "Incorrect: non-disclosure is not a privilege.", "Incorrect: they are not struck out; they are simply unusable by the defaulter."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Discovery is on oath, on Form 13, within 20 court days of written notice, and privileged material is not discoverable.", 'w1', 245);
+    row(m, p, 2, "Inspection runs on Forms 15 and 15A, with 5 court days at each step, and non-compliance risks dismissal or striking out.", 'w2', 333);
+    row(m, p, 3, "Expert notices and reports must comply with rule 24 before the case can be certified trial-ready.", 'w3', 421);
+    row(m, p, 4, "A subpoena secures an unwilling witness, and the Family Advocate must be told of the hearing date where minor children are involved.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-inspect', prompt: ["Within how many court days must the party receiving a notice requesting inspection deliver a notice stating when the documents may be inspected?"],
+    build: choice(["5 court days", "10 court days", "15 court days", "20 court days"], 0,
+      "Correct: the notice corresponding with Form 15A must be delivered within 5 court days of delivery of the inspection notice.",
+      ["Incorrect: 10 court days is the period to state that no additional documents exist.", "Incorrect: 15 court days is the notice-of-trial period after the close of pleadings.", "Incorrect: 20 court days is the discovery affidavit period."]),
+  },
+  {
+    id: 'p-expert', prompt: ["What must be complied with before a case can be certified trial-ready?"],
+    build: choice(["Only the pleadings", "The discovery rule and the expert-witness rule", "Only the pre-trial conference", "Only the notice of trial"], 1,
+      "Correct: the judicial officer must be satisfied that the requirements of rule 23 on discovery and rule 24(9) on expert witnesses have been complied with, if applicable.",
+      ["Incorrect: the certification goes further than the pleadings.", null, "Incorrect: the pre-trial conference is an alternative route, not the only requirement.", "Incorrect: the notice of trial does not address experts."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

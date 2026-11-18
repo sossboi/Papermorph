@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Fairness, Remedies and the CCMA" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Fairness, Remedies and the CCMA", minutes: 13, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 11"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Fairness, Remedies and the CCMA", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Fairness, Remedies and the CCMA", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Fairness, remedies, and the road through the CCMA.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['unfair', 'Unfair', (m) => {
+    const p = panel(0);
+    head(p, "Unfair", 150, .2, { size: 34 });
+    row(m, p, 1, "If a dismissal is not automatically unfair, it is still unfair if the employer cannot prove two things: that there was a fair reason for the dismissal, and that the dismissal followed a fair procedure.", 'two', 245);
+    row(m, p, 2, "The fair reason must relate to the employee's conduct, the employee's capacity, or the employer's operational requirements.", 'reasons', 333);
+    row(m, p, 3, "Unfair reason plus unfair procedure equals unfair dismissal.", 'formula', 421);
+    row(m, p, 4, "The employee must first prove that a dismissal occurred; once that is proved, the employer must prove both substantive and procedural fairness.", 'burden', 509);
+    row(m, p, 5, "The Code of Good Practice on Dismissal gives guidance on misconduct, incapacity and operational requirements.", 'code', 597);
+  }],
+  ['misconduct', 'Misconduct', (m) => {
+    const p = panel(0);
+    head(p, "Misconduct", 150, .2, { size: 34 });
+    row(m, p, 1, "Misconduct occurs when an employee breaks a workplace rule or standard, and not every act of misconduct justifies dismissal.", 'occurs', 245);
+    row(m, p, 2, "The factors are whether the rule was valid and reasonable, whether the employee was aware or reasonably expected to be aware of it, the importance of the rule, the actual or potential harm caused, whether the rule was consistently applied, and whether dismissal is an appropriate sanction.", 'factors', 333);
+    row(m, p, 3, "In deciding whether to dismiss, consider the employee's length of service, previous disciplinary record and personal circumstances, the nature of the job, the nature and seriousness of the misconduct, any acknowledgement of wrongdoing, and whether progressive discipline might prevent recurrence.", 'appropriate', 421);
+    row(m, p, 4, "In the muffin case, the dismissal was substantively questionable because of twelve years' service, a clean record and permission to take unsold goods, and procedurally unfair because there was no notice of the charges and no hearing.", 'muffins', 509);
+  }],
+  ['incapacity', 'Incapacity', (m) => {
+    const p = panel(0);
+    head(p, "Incapacity", 150, .2, { size: 34 });
+    row(m, p, 1, "Incapacity means the employee is unable to perform the work properly, and it may relate to poor work performance or to ill health, injury or other inability.", 'meaning', 245);
+    row(m, p, 2, "Incapacity is different from misconduct because the employee is not being blamed for wrongdoing.", 'notblame', 333);
+    row(m, p, 3, "For poor work performance ask whether the employee failed to meet a standard, whether they were aware or could reasonably be expected to be aware of it, whether they were given a fair opportunity to meet it, and whether dismissal was appropriate.", 'poor', 421);
+    row(m, p, 4, "For ill health or injury, temporary incapacity turns on the nature of the job, the expected duration of the absence, the seriousness of the illness, whether a temporary replacement is possible and whether there are alternatives to dismissal; permanent incapacity turns on alternative employment, adapting the duties, and adjusting the work environment.", 'ill', 509);
+  }],
+  ['operational', 'Operational', (m) => {
+    const p = panel(0);
+    head(p, "Operational", 150, .2, { size: 34 });
+    row(m, p, 1, "Operational requirements dismissals are commonly called retrenchments, and they rest on the employer's business needs rather than the employee's fault.", 'retrenchment', 245);
+    row(m, p, 2, "Examples are financial difficulties, restructuring, technological changes and redundancy of a position.", 'examples', 333);
+    row(m, p, 3, "The employer must show a genuine operational need and that dismissal was not used as a disguised disciplinary measure.", 'genuine', 421);
+    row(m, p, 4, "The employer and consulting parties must engage in a meaningful joint consensus-seeking process and attempt to reach consensus on measures to avoid dismissals, to minimise their number, and on the method of selection, such as last in, first out.", 'consult', 509);
+  }],
+  ['remedies', 'Remedies', (m) => {
+    const p = panel(0);
+    head(p, "Remedies", 150, .2, { size: 34 });
+    row(m, p, 1, "If the Labour Court or an arbitrator finds a dismissal unfair, it may order reinstatement from any date not earlier than the dismissal, re-employment in the previous or other reasonably suitable work on any terms, or compensation.", 'three', 245);
+    row(m, p, 2, "It must order reinstatement or re-employment unless the employee does not wish it, the circumstances make a continued relationship intolerable, it is not reasonably practicable for the employer, or the dismissal is unfair only because of procedure.", 'must', 333);
+    row(m, p, 3, "An arbitrator may determine an unfair labour practice dispute on terms deemed reasonable, including reinstatement, re-employment or compensation.", 'ulp', 421);
+  }],
+  ['ccma', 'Ccma', (m) => {
+    const p = panel(0);
+    head(p, "Ccma", 150, .2, { size: 34 });
+    row(m, p, 1, "An unfair dismissal must be referred to the CCMA or a bargaining council within 30 calendar days of the dismissal or, if later, within 30 calendar days of the employer's final decision to dismiss or uphold the dismissal.", 'thirty', 245);
+    row(m, p, 2, "An unfair labour practice must be referred within 90 calendar days of the act or omission or, if later, within 90 calendar days of the employee becoming aware of it.", 'ninety', 333);
+    row(m, p, 3, "The employee usually completes CCMA Form 7.11, and a late referral needs a condonation application.", 'form', 421);
+    row(m, p, 4, "Approach a bargaining council where one has jurisdiction; councils have the same powers as the CCMA but only for their sector.", 'bc', 509);
+  }],
+  ['condonation', 'Condonation', (m) => {
+    const p = panel(0);
+    head(p, "Condonation", 150, .2, { size: 34 });
+    row(m, p, 1, "A condonation application is brought under Rule 31 when the referral is late, and it is heard as a point in limine.", 'rule9', 245);
+    row(m, p, 2, "The founding affidavit must state the degree of lateness, the reasons for lateness, the applicant's prospects of success, prejudice to the other party, and any other relevant factors.", 'found', 333);
+  }],
+  ['process', 'Process', (m) => {
+    const p = panel(0);
+    head(p, "Process", 150, .2, { size: 34 });
+    row(m, p, 1, "Conciliation is the first stage: a commissioner helps the parties try to settle, it is informal, the commissioner does not decide who is right or wrong, and legal representation is generally not allowed unless both parties consent or a point in limine is raised.", 'conc', 245);
+    row(m, p, 2, "If the referring party fails to attend, the commissioner may continue, adjourn within the 30-day period, or issue a certificate that the dispute remains unresolved, considering prior non-attendance, the reason, whether conciliation can proceed effectively, prejudice and any other factor.", 'nonattend', 333);
+    row(m, p, 3, "Con-arb is conciliation and arbitration on the same day, compulsory for unfair dismissal and probation-related unfair labour practice disputes, and parties must arrive prepared for both.", 'conarb', 421);
+    row(m, p, 4, "In arbitration the commissioner hears evidence and makes a binding decision, and the CCMA notifies the parties at least 21 days before the date.", 'arbitration', 509);
+    row(m, p, 5, "Rule 20 requires a signed pre-arbitration minute dealing with settlement, agreed and disputed facts, the issues, relief, the document bundle, evidence and the time estimate.", 'minute', 597);
+    row(m, p, 6, "Rule 25: in conciliation legal practitioners are generally not permitted, while in arbitration they are permitted in certain circumstances, and a commissioner may allow representation considering complexity, questions of law, public interest and the comparative ability of the parties.", 'rep', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Once the employee proves that a dismissal occurred, who must prove that it was fair?"],
+    build: choice(["The employee must prove both fairness and procedure", "The employer must prove a fair reason and a fair procedure", "The CCMA must investigate of its own accord", "Neither party; the court decides on the papers"], 1,
+      "Correct: the employee bears the burden of proving dismissal, and once that is proved the employer must prove substantive and procedural fairness.",
+      ["Incorrect: the employee's burden ends once dismissal is proved.", null, "Incorrect: the CCMA does not investigate fairness independently.", "Incorrect: the burden is allocated by the statute."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["An unfair dismissal dispute must be referred to the CCMA within\u2026"],
+    build: choice(["30 calendar days of the dismissal", "90 calendar days of the dismissal", "30 court days of the dismissal", "60 calendar days of the dismissal"], 0,
+      "Correct: an unfair dismissal must be referred within 30 calendar days of the dismissal or, if later, of the employer's final decision.",
+      ["Incorrect: 90 days is the period for an unfair labour practice.", "Incorrect: the period is counted in calendar days, not court days.", "Incorrect: 60 days is not the dismissal period."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Section 188 requires a fair reason and a fair procedure, and the employer bears the burden once dismissal is proved.", 'w1', 245);
+    row(m, p, 2, "Misconduct, incapacity and operational requirements each have their own factors, and retrenchment needs genuine need plus meaningful consultation.", 'w2', 333);
+    row(m, p, 3, "Reinstatement or re-employment is the default remedy unless one of the four exceptions applies.", 'w3', 421);
+    row(m, p, 4, "Refer within 30 days for dismissal and 90 for an unfair labour practice, with condonation under Rule 31 if late.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-remedy', prompt: ["When must a court or arbitrator order reinstatement or re-employment rather than compensation?"],
+    build: choice(["Never; compensation is always a matter of discretion", "As the default, unless the employee does not wish it, the relationship is intolerable, it is not reasonably practicable, or only the procedure was unfair", "Only where the employee asks for it", "Only in automatically unfair dismissals"], 1,
+      "Correct: the statute requires reinstatement or re-employment unless one of the four listed exceptions applies.",
+      ["Incorrect: the remedy is mandatory by default.", null, "Incorrect: the employee's wish is only one factor.", "Incorrect: the default applies to unfair dismissals generally."]),
+  },
+  {
+    id: 'p-condonation', prompt: ["What must a condonation founding affidavit state?"],
+    build: choice(["Only the reasons for the delay", "The degree of lateness, the reasons, prospects of success, prejudice to the other party and any other relevant factors", "Only the prospects of success", "Only the date of dismissal"], 1,
+      "Correct: Rule 31 requires the founding affidavit to cover those five matters.",
+      ["Incorrect: the affidavit must cover more than the reasons.", null, "Incorrect: prospects alone are insufficient.", "Incorrect: the date of dismissal is not the test."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

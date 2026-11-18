@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"The Action, the Court and the Pleadings" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 1, title: "The Action, the Court and the Pleadings", minutes: 12, language: 'en', next: '../ch02/' };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 2"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "The Action, the Court and the Pleadings", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "The Action, the Court and the Pleadings", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Divorce is always an action, never a motion.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['action', 'Action', (m) => {
+    const p = panel(0);
+    head(p, "Action", 150, .2, { size: 34 });
+    row(m, p, 1, "The parties are the plaintiff and the defendant, not an applicant and a respondent.", 'parties', 245);
+    row(m, p, 2, "It commences with a summons issued by the plaintiff, and the pleadings are exchanged: the plea and counterclaim, then the replication.", 'commences', 333);
+    row(m, p, 3, "It is used where there are substantial factual disputes.", 'dispute', 421);
+    row(m, p, 4, "After the close of pleadings, litis contestatio, comes preparation for trial, and then a trial court with oral evidence.", 'trial', 509);
+    row(m, p, 5, "A divorce is never brought by notice of motion.", 'never', 597);
+  }],
+  ['court', 'Court', (m) => {
+    const p = panel(0);
+    head(p, "Court", 150, .2, { size: 34 });
+    row(m, p, 1, "Section 1(1) of the Divorce Act defines the court as any High Court, or a court for a regional division which has jurisdiction in respect of a divorce action.", 'definition', 245);
+    row(m, p, 2, "So the choice is the High Court or the Regional Court.", 'so', 333);
+    row(m, p, 3, "The same section defines a divorce action, and it includes an application pendente lite for an interdict, for interim custody or access, or for maintenance.", 'actiondef', 421);
+    row(m, p, 4, "Those interim applications are therefore part of the divorce action itself, not a separate motion.", 'interim', 509);
+    row(m, p, 5, "Divorce jurisdiction is an exception to following the defendant: never do anything to convenience the other person.", 'jurisdiction', 597);
+  }],
+  ['timeline', 'Timeline', (m) => {
+    const p = panel(0);
+    head(p, "Timeline", 150, .2, { size: 34 });
+    row(m, p, 1, "The sheriff serves the combined summons on the defendant, together with the mediation form.", 'sheriff', 245);
+    row(m, p, 2, "The defendant serves a notice of intention to defend on the plaintiff within 10 court days.", 'nid', 333);
+    row(m, p, 3, "The defendant serves a plea and counterclaim within 20 court days.", 'plea', 421);
+    row(m, p, 4, "The plaintiff may serve a replication and a plea to the counterclaim within 15 court days.", 'replication', 509);
+    row(m, p, 5, "Then pleadings close, and preparation for trial begins.", 'close', 597);
+    row(m, p, 6, "If there is a notice of bar and no plea within 5 court days, the defendant is barred.", 'bar', 685);
+  }],
+  ['silence', 'Silence', (m) => {
+    const p = panel(0);
+    head(p, "Silence", 150, .2, { size: 34 });
+    row(m, p, 1, "If no notice of intention to defend is served and 10 court days pass, the plaintiff sets the matter down on the unopposed divorce roll.", 'ghosted', 245);
+    row(m, p, 2, "If a notice was served but no plea follows within 20 court days, the plaintiff serves a notice of bar.", 'noplea', 333);
+    row(m, p, 3, "If 5 court days pass after the bar with no plea, the defendant is ipso facto barred, and the plaintiff sets down on the unopposed roll.", 'fivedays', 421);
+    row(m, p, 4, "Silence always leads to the unopposed roll, never to a default judgment application.", 'trap', 509);
+  }],
+  ['pleading', 'Pleading', (m) => {
+    const p = panel(0);
+    head(p, "Pleading", 150, .2, { size: 34 });
+    row(m, p, 1, "A pleading is a court document, used in action proceedings, that contains the material facts pertaining to a litigant's claim or defence to a claim.", 'define', 245);
+    row(m, p, 2, "It informs the parties of the issues, defines the limits of the action, and places the issues on record.", 'purposes', 333);
+    row(m, p, 3, "The declaration, particulars of claim, plea, counterclaim, replication and further replies are all pleadings.", 'examples', 421);
+    row(m, p, 4, "The summons is Form 10 in the High Court and Form 2C in the Regional Court; the particulars of claim have no prescribed template.", 'form', 509);
+    row(m, p, 5, "An affidavit belongs to application proceedings, not to a divorce action.", 'affidavit', 597);
+  }],
+  ['mediation', 'Mediation', (m) => {
+    const p = panel(0);
+    head(p, "Mediation", 150, .2, { size: 34 });
+    row(m, p, 1, "In every new action or application the plaintiff or applicant serves, together with the summons, combined summons or notice of motion, a notice saying whether they agree to or oppose referral of the dispute to mediation.", 'rule', 245);
+    row(m, p, 2, "The defendant or respondent does the same with the notice of intention to defend or notice to oppose, but not later than the plea or answering affidavit.", 'respondent', 333);
+    row(m, p, 3, "In the High Court that is Rule 41A; in the Magistrates' Courts it is Rule 72, read with Rules 70 to 79.", 'highcourt', 421);
+    row(m, p, 4, "The notice must concisely give the reasons for believing the dispute is or is not capable of being mediated.", 'content', 509);
+    row(m, p, 5, "It is without prejudice, and it is served, never filed with the clerk or registrar.", 'status', 597);
+    row(m, p, 6, "The forms are Form 27 in the High Court and Forms 60A and 60B in the Regional Court.", 'forms', 685);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["Which statement about divorce proceedings is correct?"],
+    build: choice(["A divorce is brought by notice of motion and founding affidavit", "A divorce is always an action, and it ends in a trial court", "A divorce follows application procedure where facts are disputed", "A divorce is instituted by a combined summons only in the High Court"], 1,
+      "Correct: divorce is always action proceedings. The parties are plaintiff and defendant, and the matter ends in a trial court with oral evidence.",
+      ["Incorrect: a notice of motion and founding affidavit belong to application proceedings.", null, "Incorrect: application procedure is for disputes that can be dealt with on the papers.", "Incorrect: the combined summons is used in both the High Court (Form 10) and the Regional Court (Form 2C)."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["The mediation notice that accompanies the summons is\u2026"],
+    build: choice(["filed with the registrar before the summons is issued", "served with the summons, without prejudice, and never filed", "optional where the parties have already settled", "delivered only after the plea is filed"], 1,
+      "Correct: Rule 41A(2)(a) and Rule 72(1) require it to be served with the summons; it is without prejudice and is not filed with the clerk or registrar.",
+      ["Incorrect: it is served, not filed, and it is compulsory.", null, "Incorrect: it is compulsory in every new action or application.", "Incorrect: it travels with the summons, and the defendant's notice follows the NID but no later than the plea."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "Divorce is always action proceedings, with a plaintiff and a defendant, and it ends in a trial court.", 'w1', 245);
+    row(m, p, 2, "The court is the High Court or a Regional Court with jurisdiction under section 1(1) of the Divorce Act.", 'w2', 333);
+    row(m, p, 3, "The time limits are 10 court days for the notice of intention to defend, 20 for the plea, 15 for the replication, and 5 after a notice of bar.", 'w3', 421);
+    row(m, p, 4, "A pleading contains material facts, and the mediation notice is served with the summons and never filed.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-silence', prompt: ["A defendant is served with a combined summons and does nothing. What may the plaintiff do after 10 court days?"],
+    build: choice(["Apply for a default judgment", "Set the matter down on the unopposed divorce roll", "Serve a notice of bar immediately", "Apply to court to declare the defendant barred"], 1,
+      "Correct: where no notice of intention to defend is served within 10 court days, the plaintiff sets the matter down and applies for a date on the unopposed divorce roll.",
+      ["Incorrect: a default judgment is not the divorce route; the unopposed roll is.", null, "Incorrect: a notice of bar is used where an NID was served but no plea followed.", "Incorrect: the bar operates only after a notice of bar and 5 court days."]),
+  },
+  {
+    id: 'p-time', prompt: ["Within how many court days must the defendant serve a plea and counterclaim after serving a notice of intention to defend?"],
+    build: choice(["5 court days", "10 court days", "15 court days", "20 court days"], 3,
+      "Correct: the plea and counterclaim are due within 20 court days of service of the notice of intention to defend.",
+      ["Incorrect: 5 court days is the period after a notice of bar.", "Incorrect: 10 court days is the period for the notice of intention to defend.", "Incorrect: 15 court days is the plaintiff's period for a replication and plea to the counterclaim."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>

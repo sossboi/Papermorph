@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Orders, Default Orders and Enforcement" — PRR400</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render"><!-- hold the first frame until the player exists, so the page transition can run -->
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="audio/en/timings.js"></script>
+<script>
+'use strict';
+const CHAPTER = { number: 2, title: "Orders, Default Orders and Enforcement", minutes: 11, language: 'en', next: null };
+
+/* ---------- chapter drawing helpers ---------- */
+const text = (m, p, str, x, y, t0, { size = 30, fill = COL.chalk, anchor = 'start', weight = 500 } = {}) => { const e = T(p, str, { x, y, size, fill, anchor, weight, o: 0 }); show(e, t0); return e; };
+const row = (m, p, n, str, mark, y) => {
+  const g = G(p, { x: -16, y, o: 0 });
+  mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
+  T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
+  T(g, str, { x: 260, size: 32, weight: 600 });
+  tw(g, { o: 1, x: 0 }, m(mark), .6);
+  return g;
+};
+const head = (p, str, y, t0, { size = 34, fill = COL.task, weight = 700 } = {}) => { const e = T(p, str, { x: 800, y, size, fill, anchor: 'middle', weight, o: 0 }); show(e, t0); return e; };
+
+/* ---------- beats ---------- */
+const BEATS = [
+  ['intro', '"PRR400 \u00b7 Study Unit 4"', (m, D) => {
+    const g = G(scene, { o: 0, y: 24 });
+    T(g, "Orders, Default Orders and Enforcement", { x: 800, y: 330, size: 28, fill: COL.dim, anchor: 'middle' });
+    T(g, "Orders, Default Orders and Enforcement", { x: 800, y: 430, size: 54, weight: 600, anchor: 'middle' });
+    tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+    const r = text(m, scene, "Orders, default orders and enforcement.", 800, 600, m('sub'), { size: 32, fill: COL.dim, anchor: 'middle' });
+    tw(g, { o: 0, y: -24 }, D - .9, .8); hide(r, D - .9, .8);
+  }],
+  ['orders', 'Orders', (m) => {
+    const p = panel(0);
+    head(p, "Orders", 150, .2, { size: 34 });
+    row(m, p, 1, "The court makes an order under section 16 after the enquiry, and the order fixes the amount and how it is paid.", 'section16', 245);
+    row(m, p, 2, "Where the enquiry is postponed and hardship would result, the court may grant an interim order.", 'interim', 333);
+    row(m, p, 3, "The Act also provides for other orders, and the deck lists those sections by title only.", 'other', 421);
+    row(m, p, 4, "An existing order is dealt with by variation, not by a fresh complaint, so always check for an order first.", 'variation', 509);
+  }],
+  ['default', 'Default', (m) => {
+    const p = panel(0);
+    head(p, "Default", 150, .2, { size: 34 });
+    row(m, p, 1, "A default order is available where the person against whom it is sought was absent from the enquiry.", 'absent', 245);
+    row(m, p, 2, "Establish that the absent person had knowledge of a subpoena, or appeared at the enquiry and then failed to appear.", 'knowledge', 333);
+    row(m, p, 3, "The maintenance officer applies for an order by default, and the court calls on the person to show cause.", 'apply', 421);
+    row(m, p, 4, "That person may apply to vary or set the order aside, and must serve notice of the application on the complainant at least 14 days before the hearing.", 'vary', 509);
+    row(m, p, 5, "The court may confirm the default order, vary it for good cause, or set it aside.", 'confirm', 597);
+    row(m, p, 6, "The person in whose favour the default order was made may consent in writing to the variation.", 'consent', 685);
+  }],
+  ['enforcement', 'Enforcement', (m) => {
+    const p = panel(0);
+    head(p, "Enforcement", 150, .2, { size: 34 });
+    row(m, p, 1, "When an order is not paid, the Act provides enforcement mechanisms rather than leaving the claimant to a new claim.", 'notpaid', 245);
+    row(m, p, 2, "Failure to pay maintenance in accordance with an order may found contempt proceedings.", 'contempt', 333);
+    row(m, p, 3, "The Act creates offences for certain conduct, and the deck lists those provisions by title.", 'offences', 421);
+    row(m, p, 4, "Advise the client early that an order is only as good as its enforcement, and diarise the payment dates.", 'advise', 509);
+  }],
+  ['q1', 'Quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q1', prompt: ["A default order under section 18 may be made where\u2026"],
+    build: choice(["the respondent has not paid the maintenance ordered", "the person was absent from the enquiry despite knowledge of a subpoena or an appearance", "the complainant has withdrawn the complaint", "the maintenance officer recommends it"], 1,
+      "Correct: the deck requires that the absent person had knowledge of a subpoena, or appeared at the enquiry and then failed to appear.",
+      ["Incorrect: non-payment is an enforcement problem, not a ground for a default order.", null, "Incorrect: a withdrawn complaint ends the matter.", "Incorrect: the officer applies, but the ground is absence after knowledge."]),
+  }], done) }],
+  ['q2', 'Additional quick check', () => { panel(0); }, { dur: 12, ask: done => quiz(BAND, [{
+    id: 'c-q2', prompt: ["An application to vary or set aside a default order must be served on the complainant at least\u2026"],
+    build: choice(["5 days before the hearing", "10 days before the hearing", "14 days before the hearing", "20 days before the hearing"], 2,
+      "Correct: the deck sets at least 14 days' notice of the application on the complainant.",
+      ["Incorrect: 5 days is not the period for this application.", "Incorrect: 10 days is the replying affidavit period in application proceedings.", null, "Incorrect: 20 days is the plea period in an action."]),
+  }], done) }],
+  ['wrap', 'Summary', (m) => {
+    const p = panel(0);
+    head(p, "To sum up", 140, .2, { size: 34 });
+    row(m, p, 1, "The court makes an order under section 16 after the enquiry, and an interim order may be granted where there is hardship.", 'w1', 245);
+    row(m, p, 2, "A default order under section 18 is available where the person was absent after knowledge of a subpoena or appearance.", 'w2', 333);
+    row(m, p, 3, "That person may apply to vary or set it aside, on 14 days' notice to the complainant.", 'w3', 421);
+    row(m, p, 4, "Enforcement and the Act's offences are the answer to an order that is not paid.", 'w4', 509);
+    text(m, p, "Now try the chapter practice.", 800, 612, m('end'), { size: 30, fill: COL.dim, anchor: 'middle', weight: 500 });
+  }],
+  ['final1', 'Chapter practice', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  {
+    id: 'p-interim', prompt: ["When may the court grant an interim maintenance order?"],
+    build: choice(["Only after the section 10 enquiry is completed", "Where the enquiry is postponed and hardship would result", "Only where the respondent consents", "Only in the High Court"], 1,
+      "Correct: the deck provides for an interim order where the enquiry is postponed and hardship would result.",
+      ["Incorrect: an interim order precedes the enquiry.", null, "Incorrect: consent is not required for an interim order.", "Incorrect: interim maintenance is dealt with in the Maintenance Court."]),
+  },
+  {
+    id: 'p-default', prompt: ["What may the court do on an application to vary a default order?"],
+    build: choice(["Only confirm it", "Confirm it, vary it for good cause, or set it aside", "Only set it aside", "Refer the matter to mediation"], 1,
+      "Correct: the court may confirm the default order, vary it for good cause, or set it aside.",
+      ["Incorrect: confirmation is one of three options.", null, "Incorrect: setting aside is one of three options.", "Incorrect: the statute gives the court those three powers."]),
+  }
+  ], done, 'Chapter practice') }],
+  ['finish', 'Finished', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
