@@ -20,10 +20,10 @@ const row = (m, p, n, str, mark, y) => {
   const g = G(p, { x: -16, y, o: 0 });
   mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
   T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
-  // Wrap str into lines that fit within the stage's usable width
+  // Wrap str into lines that fit the stage's usable width, then centre the block on y
+  // so extra lines grow up and down instead of always spilling past the stage bottom.
   const size = 32;
-  const avail = 1240;
-  const lh = 36;
+  const avail = 1180;          // text starts at x=260 (group offset -16), so the right edge lands near 1424
   const words = str.split(' ');
   const lines = [];
   let line = '';
@@ -32,7 +32,9 @@ const row = (m, p, n, str, mark, y) => {
     if (line && uiW(testLine, size) > avail) { lines.push(line); line = w; } else { line = testLine; }
   }
   if (line) lines.push(line);
-  lines.forEach((l, i) => { T(g, l, { x: 260, y: y + i * lh, size, weight: 600 }); });
+  const lh = Math.min(36, 300 / Math.max(1, lines.length));   // keep the tallest row inside the stage
+  const top = y - ((lines.length - 1) * lh) / 2;
+  lines.forEach((l, i) => { T(g, l, { x: 260, y: top + i * lh, size, weight: 600 }); });
   tw(g, { o: 1, x: 0 }, m(mark), .6);
   return g;
 };
