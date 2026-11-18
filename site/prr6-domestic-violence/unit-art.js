@@ -9,7 +9,7 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    reset(C(400, 70, 34) + P('M400 104v40', 'a') + P('M330 140h140', 'a') + C(330, 140, 16, 'a') + C(470, 140, 16, 'a')) +
+    reset(C(400, 70, 34) + P('M400 104v40', 'a') + P('M330 140h140', 'a') + C(330, 140, 16, 'a') + C(470, 140, 16, 'a') +
       Tx(400, 36, "protection order", 20, 'a', 'middle') +
       Tx(400, 170, "safety", 22, '', 'middle')),
   ];

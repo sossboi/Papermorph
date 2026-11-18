@@ -9,7 +9,7 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    reset(C(400, 80, 40) + P('M400 120v40', 'a') + P('M300 160h200', 'a') + C(300, 160, 22, 'a') + C(500, 160, 22, 'a')) +
+    reset(C(400, 80, 40) + P('M400 120v40', 'a') + P('M300 160h200', 'a') + C(300, 160, 22, 'a') + C(500, 160, 22, 'a') +
       Tx(400, 40, "the child", 24, 'a', 'middle') +
       Tx(400, 180, "best interests", 22, '', 'middle')),
   ];

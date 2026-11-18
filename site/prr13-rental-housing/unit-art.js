@@ -9,7 +9,7 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    reset(P('M250 60h140v60h-140z') + P('M250 60v60', 'a') + ARW('M390 90h90') + P('M480 60h140v60h-140z') + P('M480 60v60', 'a') + P('M320 130h160', 'a')) +
+    reset(P('M250 60h140v60h-140z') + P('M250 60v60', 'a') + ARW('M390 90h90') + P('M480 60h140v60h-140z') + P('M480 60v60', 'a') + P('M320 130h160', 'a') +
       Tx(250, 140, "landlord", 20, 'a', 'middle') +
       Tx(480, 140, "tenant", 20, 'a', 'middle') +
       Tx(400, 172, "the lease", 22, '', 'middle')),

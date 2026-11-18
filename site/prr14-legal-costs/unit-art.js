@@ -9,7 +9,7 @@
   const reset = s => { k = 0; return s; };
 
   window.UNIT_ART = [
-    reset(P('M250 50h150v70h-150z') + P('M250 50v70', 'a') + ARW('M400 85h70') + P('M470 50h150v70h-150z') + P('M470 50v70', 'a') + P('M300 140h200', 'a')) +
+    reset(P('M250 50h150v70h-150z') + P('M250 50v70', 'a') + ARW('M400 85h70') + P('M470 50h150v70h-150z') + P('M470 50v70', 'a') + P('M300 140h200', 'a') +
       Tx(250, 140, "the bill", 22, 'a', 'middle') +
       Tx(470, 140, "the allocatur", 20, 'a', 'middle') +
       Tx(400, 172, "taxation", 22, '', 'middle')),
