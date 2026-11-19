@@ -20,21 +20,30 @@ const row = (m, p, n, str, mark, y) => {
   const g = G(p, { x: -16, y, o: 0 });
   mk('circle', { cx: 200, cy: -12, r: 26, fill: COL.task }, g);
   T(g, String(n), { x: 200, y: -1, size: 30, fill: COL.board, weight: 700, anchor: 'middle' });
-  // Wrap str into lines that fit the stage's usable width, then centre the block on y
-  // so extra lines grow up and down instead of always spilling past the stage bottom.
-  const size = 32;
-  const avail = 1180;          // text starts at x=260 (group offset -16), so the right edge lands near 1424
+  // Wrap to a fixed pixel budget, then shrink the type if the block would still be
+  // taller than one row pitch. The block is centred on y, and the line offsets are
+  // LOCAL to the group (which already sits at y), so they are emitted as top - y.
   const words = str.split(' ');
-  const lines = [];
-  let line = '';
-  for (const w of words) {
-    const testLine = line ? line + ' ' + w : w;
-    if (line && uiW(testLine, size) > avail) { lines.push(line); line = w; } else { line = testLine; }
+  const TOP = 200, BOT = 884, MAXH = 84, AVAIL = 1000;
+  const wrapAt = (size) => {
+    const out = []; let line = '';
+    for (const w of words) {
+      const t = line ? line + ' ' + w : w;
+      if (line && uiW(t, size) > AVAIL) { out.push(line); line = w; } else { line = t; }
+    }
+    if (line) out.push(line);
+    return out;
+  };
+  let size = 21, lines = wrapAt(21);
+  for (const s of [32, 28, 24]) {
+    const cand = wrapAt(s);
+    if ((cand.length - 1) * 30 <= MAXH) { size = s; lines = cand; break; }
   }
-  if (line) lines.push(line);
-  const lh = Math.min(36, 300 / Math.max(1, lines.length));   // keep the tallest row inside the stage
-  const top = y - ((lines.length - 1) * lh) / 2;
-  lines.forEach((l, i) => { T(g, l, { x: 260, y: top + i * lh, size, weight: 600 }); });
+  const lh = Math.min(30, MAXH / Math.max(1, lines.length - 1));
+  let top = y - ((lines.length - 1) * lh) / 2;
+  if (top < TOP) top = TOP;
+  if (top + (lines.length - 1) * lh > BOT) top = BOT - (lines.length - 1) * lh;
+  lines.forEach((l, i) => { T(g, l, { x: 260, y: top + i * lh - y, size, weight: 600 }); });
   tw(g, { o: 1, x: 0 }, m(mark), .6);
   return g;
 };
