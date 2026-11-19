@@ -18,23 +18,26 @@ Dockerfile
 .dockerignore
 compose.yaml
 
-# The published image ships the PRR-only bookshelf: the 11 PRR400 study-unit
-# books plus the shared infra (root files, lib/, assets/). Everything else
-# under site/ belongs to other modules / upstream sample books and is excluded.
+# The published image ships the PRR-only bookshelf: the 7 in-scope PRR400
+# study-unit books (units 2-6, 12 and 14) plus the shared infra (root files,
+# lib/, assets/). Everything else under site/ belongs to other modules or
+# upstream sample books and is excluded.
 site/*
 !site/index.html
 !site/404.html
 !site/_redirects
 !site/lib/
-!site/assets/
+!site/assets/covers/prr2-divorce.webp
+!site/assets/covers/prr3-application-proceedings.webp
+!site/assets/covers/prr4-maintenance.webp
+!site/assets/covers/prr5-child-law.webp
+!site/assets/covers/prr6-domestic-violence.webp
+!site/assets/covers/prr12-ethics.webp
+!site/assets/covers/prr14-legal-costs.webp
 !site/prr2-divorce/
 !site/prr3-application-proceedings/
 !site/prr4-maintenance/
 !site/prr5-child-law/
 !site/prr6-domestic-violence/
-!site/prr8-preparation-trial/
-!site/prr10-execution/
-!site/prr11-labour-law/
 !site/prr12-ethics/
-!site/prr13-rental-housing/
 !site/prr14-legal-costs/
